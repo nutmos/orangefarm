@@ -7,10 +7,19 @@
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
+    <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
 </head>
 <body>
-    This is the first web page of orange farm.
+    <div class="row">
+        <div class="large-12 columns" align="center">
+            <h1>This is the first web page of orange farm.</h1>
+
     <div id="content"></div>
+    <div id="button1"></div>
+    </div>
+    </div>
 </body>
 <script src={% static "testreact.js" %} type="text/babel"></script>
+<script src={% static "button1.js" %} type="text/babel"></script>
 </html>
