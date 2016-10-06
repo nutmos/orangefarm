@@ -1,4 +1,4 @@
-{% load static %}
+{% loaatic %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +9,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
     <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
 </head>
 <body>
-    <div class="row">
-        <div class="large-12 columns" align="center">
-            <h1>This is the first web page of orange farm.</h1>
-
-    <div id="content"></div>
-    <div id="button1"></div>
-    </div>
+    <div class="large-10 columns small-centered">
+        <div class="fixed hide-for-small contain-to-grid">
+        <nav class="top-bar" role="navigation">
+            <img src={% static "orange-farm-logo.jpg" %} alt="">
+            Travel Finder
+        </nav>
+        </div>
+        <section class="search-background-full" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "sao-ching-cha.jpg" %})">
+            <div class="row">
+                <div class="large-10 columns small-centered" align="center">
+                    <div id="search-button"></div>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
-<script src={% static "testreact.js" %} type="text/babel"></script>
-<script src={% static "button1.js" %} type="text/babel"></script>
+<script src={% static "js/searchbutton.js" %} type="text/babel"></script>
 </html>

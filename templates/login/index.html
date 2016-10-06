@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
+    <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
+</head>
+<style>
+div.image1{
+    content:url({% static "sao-ching-cha.jpg" %});
+}
+</style>
+<body>
+    <div class="row">
+        <div class="large-12 columns" align="center"><h1>Login</h1></div>
+    </div>
+    <div class="row">
+        <div class="large-4 columns"><div class="row"></div></div>
+            <div class="large-4 small-centered columns" align="center">
+                <div class="row">Test Login</div>
+                <div class="row">
+                <a class="small expand button">Login</a>
+                </div>
+        </div>
+        <div class="large-4 columns"><div class="row"></div></div>
+    </div>
+</body>
+</html>

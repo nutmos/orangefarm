@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.row .row:before, .row .row:after {
+    content: " ";
+    display: table;
+}
+
+.search-background-full {
+    height: 30vw;
+    padding-top: 10%;
+    padding-bottom: 15%;
+}
