@@ -1,4 +1,4 @@
-{% loaatic %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,21 +12,38 @@
     <link rel="stylesheet" href={% static "css/styles.css" %}>
 </head>
 <body>
-    <div class="large-10 columns small-centered">
         <div class="fixed hide-for-small contain-to-grid">
-        <nav class="top-bar" role="navigation">
-            <img src={% static "orange-farm-logo.jpg" %} alt="">
-            Travel Finder
+        <nav class="top-bar" style="background-color: orange;" role="navigation">
+            <div class="top-bar-left">
+                <div style="color: white; font-size: 30px">
+                    <img src={% static "orange-farm-logo.jpg" %} alt="">
+                        Travel Finder
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <ul class="dropdown menu" style="background-color: orange;" data-dropdown-menu>
+                    <li><a href="#">item 1</a></li>
+                    <li><a href="#">item 1</a></li>
+                    <li><a href="#">item 1</a></li>
+                    <li><a href="#">item 1</a></li>
+                </ul>
+            </div>
         </nav>
         </div>
-        <section class="search-background-full" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "sao-ching-cha.jpg" %})">
+        <section class="section-background" style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "sao-ching-cha.jpg" %})">
             <div class="row">
-                <div class="large-10 columns small-centered" align="center">
+                <div class="section-background" align="center">
                     <div id="search-button"></div>
                 </div>
             </div>
         </section>
-    </div>
+        <a class="exit-off-canvas" href="#"></a>
+        <section class="section-background" style="display: block; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({% static "sathorn-web.jpg" %})">
+            <h1 style="color: white;">Popular</h1>
+        </section>
+        <footer class="footer" style="background-color: orange;" >
+            <img src={% static "orange-farm-logo.jpg" %} />
+        </footer>
 </body>
 <script src={% static "js/searchbutton.js" %} type="text/babel"></script>
 </html>

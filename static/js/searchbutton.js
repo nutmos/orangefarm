@@ -1,24 +1,43 @@
-var SearchButton = React.createClass({
+var query = '';
+var SearchBox = React.createClass ({
     getInitialState: function() {
         return {query: ''};
     },
     queryChange: function(evt) {
         this.setState({query: evt.target.value});
+        query = evt.target.value;
+        //console.log(query);
     },
-    _buildLink: function() {
-        console.log(this.state.query);
-        return this.state.query;
+    handleKeyPress: function(e) {
+        if (e.charCode == 13) {
+            console.log('enter press');
+            window.location = query;
+        }
+    },
+    render: function() {
+        return <input onKeyPress={this.handleKeyPress} type="text" value={this.state.query} onChange={this.queryChange} placeholder="Search Site" />;
+    }
+});
+
+var SearchButton = React.createClass({
+    getInitialState: function() {
+        return {};
+    },
+    handleSearch: function(e) {
+        if (/\S/.test(query)) {
+            window.location = query;
+        }
     },
     render: function() {
         return (<div>
-            <input type="text" value={this.state.query} onChange={this.queryChange} placeholder="Search Site" />
-            <a href={this._buildLink()} className="success hollow button" >Search</a>;
-            </div>
-        );
+            <SearchBox />
+            <button onClick={this.handleSearch} className="large success hollow button">Search</button>
+            </div>);
     }
 });
+
 ReactDOM.render(
-    React.createElement(SearchButton, {query: ''}),
+    React.createElement(SearchButton, {}),
     document.getElementById('search-button')
 );
 
