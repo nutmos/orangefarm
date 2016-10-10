@@ -16,8 +16,8 @@
         <nav class="top-bar" style="background-color: orange;" role="navigation">
             <div class="top-bar-left">
                 <div style="color: white; font-size: 30px">
-                    <img src={% static "orange-farm-logo.jpg" %} alt="">
-                        Travel Finder
+                    <img src={% static "orange-farm-logo.png" %} alt="">
+                        Trip Finder
                 </div>
             </div>
             <div class="top-bar-right">
@@ -30,19 +30,33 @@
             </div>
         </nav>
         </div>
-        <section class="section-background" style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "sao-ching-cha.jpg" %})">
+        <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "sao-ching-cha.jpg" %})">
             <div class="row">
-                <div class="section-background" align="center">
-                    <div id="search-button"></div>
+                <div class="large-10 columns small-centered">
+                    <div class="section-background" align="center">
+                        <div id="search-button"></div>
+                    </div>
                 </div>
             </div>
         </section>
-        <a class="exit-off-canvas" href="#"></a>
-        <section class="section-background" style="display: block; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({% static "sathorn-web.jpg" %})">
-            <h1 style="color: white;">Popular</h1>
+        <section style="display: block; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({% static "sathorn-web.jpg" %})">
+            <div class="large-10 columns small-centered section-background">
+                <h1 style="color: white;">Popular</h1>
+                <div class="row large-up-3 project-overlay-inset">
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                </div>
+            </div>
         </section>
         <footer class="footer" style="background-color: orange;" >
-            <img src={% static "orange-farm-logo.jpg" %} />
+            <img src={% static "orange-farm-logo.png" %} />
         </footer>
 </body>
 <script src={% static "js/searchbutton.js" %} type="text/babel"></script>
