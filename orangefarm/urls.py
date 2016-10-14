@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^login/', include('login.urls')),
     url(r'^register/', include('register.urls')),
     url(r'^career/', include('career.urls')),
+    url(r'^search/', include('search.urls')),
+    url(r'^trip/', include('trip.urls')),
 ]
