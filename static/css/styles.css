@@ -8,6 +8,10 @@
     order: 1
 }
 
+a, a:hover {
+    color: white;
+}
+
 .section-background {
     background-repeat: no-repeat;
     background-size: cover;
@@ -15,10 +19,6 @@
     padding-bottom: 10%;
 }
 
-img.popular-image:hover {
-    filter: blur(5px) brightness(50%);
-    transition: 0.5s;
-}
 
 .signup-panel {
   border-radius: 5px;
@@ -46,4 +46,19 @@ img.popular-image:hover {
 }
 .signup-panel .button {
   margin-left: 35%;
+}
+
+.popular-image {
+    filter: brightness(100%);
+}
+
+.popular-image-button {
+    padding: 5%;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    right: 10%;
+    font-weight: bold;
+}
+.popular-image-button:hover {
 }

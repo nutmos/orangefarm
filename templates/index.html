@@ -10,27 +10,30 @@
     <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
     <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
     <link rel="stylesheet" href={% static "css/styles.css" %}>
+    <script src={% static "js/navbar.js" %} type="text/babel"></script>
 </head>
 <body>
         <div class="fixed hide-for-small contain-to-grid">
         <nav class="top-bar" style="background-color: orange;" role="navigation">
-            <div class="top-bar-left">
-                <div style="color: white; font-size: 30px">
-                    <img src={% static "orange-farm-logo.png" %} alt="">
-                        Trip Finder
+            <div class="top-bar-left align-self-middle">
+                <div class="section-background" style="color: white; font-size: 30px">
+                        <a href="/">
+                            <img src={% static "pictures/orange-farm-logo-2.png" %} alt="" style="width: 60px; height: auto;" />
+                            Trip Finder
+                        </a>
                 </div>
             </div>
             <div class="top-bar-right">
-                <ul class="dropdown menu" style="background-color: orange;" data-dropdown-menu>
-                    <li><a href="#">item 1</a></li>
-                    <li><a href="#">item 1</a></li>
-                    <li><a href="#">item 1</a></li>
-                    <li><a href="#">item 1</a></li>
+                <ul class="dropdown menu section-background" style="background-color: orange;" data-dropdown-menu>
+                    <li><a href="#">Program Tour</a></li>
+                    <li><a href="#">Item1</a></li>
+                    <li><a href="#">Item1</a></li>
+                    <li><a href="#">Sign In</a></li>
                 </ul>
             </div>
         </nav>
         </div>
-        <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "sao-ching-cha.jpg" %})">
+        <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),  url({% static "pictures/sao-ching-cha.jpg" %})">
             <div class="row">
                 <div class="large-10 columns small-centered">
                     <div class="section-background" align="center">
@@ -39,24 +42,24 @@
                 </div>
             </div>
         </section>
-        <section style="display: block; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({% static "sathorn-web.jpg" %})">
+        <section style="background-color: #D6D6D6">
             <div class="large-10 columns small-centered section-background">
-                <h1 style="color: white;">Popular</h1>
+                <h1>Popular</h1>
                 <div class="row large-up-3 project-overlay-inset">
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><img class="thumbnail popular-image" src={% static "wat-jd-eiang.jpg" %} /></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
                 </div>
             </div>
         </section>
         <footer class="footer" style="background-color: orange;" >
-            <img src={% static "orange-farm-logo.png" %} />
+            <img src={% static "pictures/orange-farm-logo.png" %} />
         </footer>
 </body>
 <script src={% static "js/searchbutton.js" %} type="text/babel"></script>
