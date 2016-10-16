@@ -12,3 +12,14 @@ def index(request):
     #a.save()
     return HttpResponse(template.render({'foo': 'bar'}, request))
     #return HttpResponse("<h1>Success!</h1>")
+
+def login_status(request):
+    if request.method == "POST":
+        username = request.POST.get("username","")
+        password = request.POST.get("password", "")
+        user1 = User.objects.get(username=username)
+        if user1.check_password(password):
+            return HttpResponse("True")
+        else:
+            return HttpResponse("False")
+    return HttpResponse("No Response")
