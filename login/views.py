@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.template import loader
 from mongoengine.django.auth import User
 from django.contrib.sessions.models import Session
+from django.contrib.auth import authenticate, login
 import requests
 import uuid
 import cookielib
@@ -26,8 +27,9 @@ def login_status(request):
         password = request.POST.get("password", "")
         user1 = User.objects.get(username=username)
         if user1.check_password(password):
-            #request.session['user_id'] = user1.id
-            #print user1.id
+            request.session['user_id'] = str(user1.id)
+            print user1.id
+            #login(request, user1)
             #s = requests.session()
             #s.auth = (username, password)
             #session_id = uuid.uuid5(uuid.NAMESPACE_DNS, username)
@@ -37,16 +39,15 @@ def login_status(request):
             #print request.session
             #template = loader.get_template('index.html')
             #return HttpResponse(template.render({'foo':'bar'}, request))
-            return HttpResponse("True")
+            return HttpResponse('True<a href="/login/logout/">Logout</a>')
         else:
             return HttpResponse("False")
     return HttpResponse("No Response")
 
-def get_cookie(request):
-    expiration = datetime.datetime.now() + datetime.timedelta(days=60)
-    cookie = Cookie.SimpleCookie()
-    cookie["session"] = uuid.uuid5(uuid.NAMESPACE_DNS, username)
-    cookie["session"]["domain"] = ".128.199.215.223:8000"
-    cookie["session"]["path"] = "/"
-    cookie["session"]["expires"] = expiration.strftime("%a, %d-%b-%Y %H:%M:%S PST")
-
+def logout(request):
+    print request.session['user_id']
+    try:
+        del request.session['user_id']
+    except KeyError:
+        return HttpResponse('You are not logged in')
+    return HttpResponse('Logout')
