@@ -35,10 +35,13 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    #"django.contrib.sessions.backends.file",
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
 ]
+
+SESSION_FILE_PATH = ('%s/session' % BASE_DIR)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
