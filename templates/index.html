@@ -10,46 +10,12 @@
     <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
     <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
     <link rel="stylesheet" href={% static "css/styles.css" %}>
-<<<<<<< HEAD
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+    <script src={% static "js/navbar.js" %} type="text/babel"></script>
 </head>
 <body>
     <div id="navbar"></div>
     <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),  url({% static "pictures/sao-ching-cha.jpg" %})">
-=======
-    <script src={% static "js/navbar.js" %} type="text/babel"></script>
-    
-
-    <div class="fixed hide-for-small contain-to-grid">
-        <nav class="top-bar" style="background-color: orange;" role="navigation">
-            <div class="top-bar-left align-self-middle">
-                <div style="color: white; font-size: 20px">
-                        <a href="/">
-                            <img src={% static "pictures/LOGO-Transparent-white.png" %} alt="" style="width: 60px; height: auto;" />
-                            Trip Finder
-                        </a>
-                </div>
-            </div>
-            <div class="top-bar-right align-self-middle">
-                <ul class="dropdown menu" style="background-color: orange" data-dropdown-menu>
-                    <li><a href="#">Program Tour</a></li>
-                    <li><a href="#">Item1</a></li>
-                    <li><a href="#">Item1</a></li>
-                    {% if request.session.user_id %}
-                    <li><a href="/profile">View Profile</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                    {% else %}
-                    <li><a href="/login">Login</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </div>
-</head>
-
-<body>
-        <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "pictures/pic1.jpg" %})">
->>>>>>> cb5ee58c3f01e8e52f858ed869ff0e0f476b8cb2
             <div class="row">
                 <div class="large-10 columns small-centered">
                     <div class="section-background" align="center">
@@ -71,13 +37,8 @@
                 </div>
             </div>
         </section>
-<<<<<<< HEAD
         <footer class="footer" style="background-color: orange;" >
             <img style="width: 60px; height: auto" src={% static "logo/orange-farm-logo-white-transparent.png" %} />
-=======
-        <footer class="footer" style="background-color: orange;padding: 10px;" >
-            <img src={% static "pictures/LOGO-Transparent-white.png" %} alt="" style="width: 60px; height: auto;" />
->>>>>>> cb5ee58c3f01e8e52f858ed869ff0e0f476b8cb2
         </footer>
 </body>
 
