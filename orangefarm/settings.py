@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+    'firstpage',
 ]
 
 SESSION_FILE_PATH = ('%s/session' % BASE_DIR)
