@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^career/', include('career.urls')),
     url(r'^search/', include('search.urls')),
     url(r'^trip/', include('trip.urls')),
+    url(r'^logout/', include('logout.urls')),
+    url(r'^profile/', include('user_profile.urls')),
 ]

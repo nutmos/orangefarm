@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
+    <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
+    <link rel="stylesheet" href={% static "foundation-icons/foundation-icons.css" %}>
+    <link rel="stylesheet" href={% static "css/login/styles.css" %}>
+    <title>Logout</title>
+</head>
+<body>
+    <h1 style="text-align: center;">You are now logged out</h1>
+    <div style="text-align: center;">If you are not redirect <a href="/">click here</a></div>
+    <script>
+function redirect() {
+    window.location.href = "/";
+}
+setTimeout(redirect, 2000);
+    </script>
+</body>
+</html>

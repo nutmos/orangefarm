@@ -18,7 +18,7 @@
             <div class="top-bar-left align-self-middle">
                 <div class="section-background" style="color: white; font-size: 30px">
                         <a href="/">
-                            <img src={% static "pictures/orange-farm-logo-2.png" %} alt="" style="width: 60px; height: auto;" />
+                            <img src={% static "pictures/orange-farm-logo-transparent.png" %} alt="" style="width: 60px; height: auto;" />
                             Trip Finder
                         </a>
                 </div>
@@ -28,7 +28,12 @@
                     <li><a href="#">Program Tour</a></li>
                     <li><a href="#">Item1</a></li>
                     <li><a href="#">Item1</a></li>
+                    {% if request.session.user_id %}
+                    <li><a href="/profile">View Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    {% else %}
                     <li><a href="/login">Login</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -46,15 +51,12 @@
             <div class="large-10 columns small-centered section-background">
                 <h1>Popular</h1>
                 <div class="row large-up-3 project-overlay-inset">
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
-                    <div class="column" style="position: relative;"><a href="#" row="button" aria-label="Thumbnail"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="thumbnail popular-image"/><button class="popular-image-button large success hollow button">Wat JD Eiang</button></a></div>
+                    <div class="column" style="margin-bottom: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Grand Palace<br>Bangkok, Thailand</div></div></div></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
                 </div>
             </div>
         </section>

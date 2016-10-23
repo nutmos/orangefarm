@@ -8,6 +8,23 @@
     order: 1
 }
 
+.overlay {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    position: absolute;
+    text-align: right;
+    background: linear-gradient(to bottom , rgba(0,0,0,0) 60%, rgba(0,0,0,1));
+}
+
+.overlay-text {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
 a, a:hover {
     color: white;
 }
@@ -18,6 +35,8 @@ a, a:hover {
     padding-top: 10%;
     padding-bottom: 10%;
 }
+
+.overlay
 
 
 .signup-panel {
