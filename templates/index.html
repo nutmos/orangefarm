@@ -10,35 +10,11 @@
     <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
     <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
     <link rel="stylesheet" href={% static "css/styles.css" %}>
-    <script src={% static "js/navbar.js" %} type="text/babel"></script>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
 <body>
-        <div class="fixed hide-for-small contain-to-grid">
-        <nav class="top-bar" style="background-color: orange;" role="navigation">
-            <div class="top-bar-left align-self-middle">
-                <div class="section-background" style="color: white; font-size: 30px">
-                        <a href="/">
-                            <img src={% static "pictures/orange-farm-logo-transparent.png" %} alt="" style="width: 60px; height: auto;" />
-                            Trip Finder
-                        </a>
-                </div>
-            </div>
-            <div class="top-bar-right">
-                <ul class="dropdown menu section-background" style="background-color: orange;" data-dropdown-menu>
-                    <li><a href="#">Program Tour</a></li>
-                    <li><a href="#">Item1</a></li>
-                    <li><a href="#">Item1</a></li>
-                    {% if request.session.user_id %}
-                    <li><a href="/profile">View Profile</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                    {% else %}
-                    <li><a href="/login">Login</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-        </div>
-        <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),  url({% static "pictures/sao-ching-cha.jpg" %})">
+    <div id="navbar"></div>
+    <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),  url({% static "pictures/sao-ching-cha.jpg" %})">
             <div class="row">
                 <div class="large-10 columns small-centered">
                     <div class="section-background" align="center">
@@ -61,8 +37,16 @@
             </div>
         </section>
         <footer class="footer" style="background-color: orange;" >
-            <img src={% static "pictures/orange-farm-logo.png" %} />
+            <img style="width: 60px; height: auto" src={% static "logo/orange-farm-logo-white-transparent.png" %} />
         </footer>
 </body>
+
+<script>
+var data = { user_id: "{{ request.session.user_id }}",
+logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
+};
+//window.alert(userInfo.user_id);
+</script>
+<script src={% static "js/navbar.js" %} type="text/babel"></script>
 <script src={% static "js/searchbutton.js" %} type="text/babel"></script>
 </html>

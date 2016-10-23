@@ -1,0 +1,80 @@
+@charset "UTF-8";
+.row:before, .row:after {
+    content: ' ';
+    display: table;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-order: 1;
+    order: 1
+}
+
+.overlay {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    position: absolute;
+    text-align: right;
+    background: linear-gradient(to bottom , rgba(0,0,0,0) 60%, rgba(0,0,0,1));
+}
+
+.overlay-text {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
+a, a:hover {
+    color: white;
+}
+
+.section-background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.signup-panel {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-top: 30px;
+}
+.signup-panel i {
+  font-size: 30px;
+  line-height: 50px;
+  color: #999;
+}
+.signup-panel form input, .signup-panel form span {
+  height: 50px;
+}
+.signup-panel .welcome {
+  font-size: 26px;
+  text-align: center;
+  margin-left: 0;
+}
+.signup-panel p {
+  font-size: 13px;
+  font-weight: 200;
+  margin-left: 25%;
+}
+.signup-panel .button {
+  margin-left: 35%;
+}
+
+.popular-image {
+    filter: brightness(100%);
+}
+
+.popular-image-button {
+    padding: 5%;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    right: 10%;
+    font-weight: bold;
+}
+.popular-image-button:hover {
+}

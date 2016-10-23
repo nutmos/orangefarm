@@ -11,8 +11,14 @@
     <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
     <link rel="stylesheet" href={% static "foundation-icons/foundation-icons.css" %}>
     <link rel="stylesheet" href={% static "css/login/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
 </head>
 <body>
+    <div class="row text-centered">
+        <a href="/">
+            <img style="height: 100px;" src={% static "logo/orange-farm-transparent.png" %} />
+        </a>
+    </div>
     <div class="row">
         <body class="iframe-body">
           <div class="row">
@@ -37,8 +43,8 @@
                       <input type="password" name="password" placeholder="password">
                     </div>
                   </div>
-                <p class="footer">Don't have an account? <a href="#">Register</a></p>
-                <input type="submit" class="button" value="Login">
+                <p class="footer">Don't have an account? <a href="/register">Register</a></p>
+                <input type="submit" class="button" value="Register">
               </form>
               </div>
             </div>

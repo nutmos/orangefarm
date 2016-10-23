@@ -14,21 +14,12 @@
 </head>
 <body>
     <div class="row">
-        <div class="large-12 columns" align="center"><h1>Login</h1></div>
-    </div>
-    <div class="row">
-        <div class="large-4 columns"><div class="row"></div></div>
-            <div class="large-4 small-centered columns" align="center">
-                <div class="row">Test Login</div>
-                <div class="row">
-                </div>
-        </div>
         <div class="large-4 columns"><div class="row"></div></div>
         <body class="iframe-body">
           <div class="row">
             <div class="large-6 columns small-centered">
               <div class="signup-panel">
-                <p class="welcome">Login</p>
+                <p class="welcome">Register</p>
                 <form method="post" name="submit_form" id="submit_form" action="/register/complete-register/">
                   {% csrf_token %}
                   <div class="row collapse">
@@ -54,7 +45,7 @@
                       <input type="password" name="password" placeholder="password">
                     </div>
                   </div>
-                <p class="footer">Don't have an account? <a href="#">Register</a></p>
+                <p class="footer">Have an account? <a href="/login">Login</a></p>
                 <input type="submit" class="button" value="Login">
               </form>
               </div>
