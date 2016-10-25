@@ -16,36 +16,34 @@
 <body>
     <div id="navbar"></div>
     <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),  url({% static "pictures/sao-ching-cha.jpg" %})">
-            <div class="row">
-                <div class="large-10 columns small-centered">
-                    <div class="section-background" align="center">
-                        <div id="search-button"></div>
-                    </div>
+        <div class="row">
+            <div class="large-10 columns small-centered">
+                <div class="section-background" align="right">
+                    <div id="search-button"></div>
                 </div>
             </div>
-        </section>
-        <section style="background-color: #D6D6D6">
-            <div class="large-10 columns small-centered section-background">
-                <h1>Popular</h1>
-                <div class="row large-up-3 project-overlay-inset">
-                    <div class="column" style="margin-bottom: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Grand Palace<br>Bangkok, Thailand</div></div></div></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
-                    <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
-                </div>
+        </div>
+    </section>
+    <section style="background-color: #D6D6D6;">
+        <div class="large-10 columns small-centered section-background">
+            <h1>Popular</h1>
+            <div class="row large-up-3 project-overlay-inset">
+                <div class="column" style="margin-bottom: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Grand Palace<br>Bangkok, Thailand</div></div></div></a></div>
+                <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
+                <div class="column"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image"/><div class="overlay"><div class="overlay-text">Wat JD Eiang</div></div></div></a></div>
             </div>
-        </section>
-        <footer class="footer" style="background-color: orange;" >
-            <img style="width: 60px; height: auto" src={% static "logo/orange-farm-logo-white-transparent.png" %} />
-        </footer>
+        </div>
+    </section>
+    <footer class="footer" style="background-color: orange;" >
+        <img style="width: 60px; height: auto" src={% static "logo/orange-farm-logo-white-transparent.png" %} />
+    </footer>
 </body>
 
 <script>
-var data = { user_id: "{{ request.session.user_id }}",
-logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
-};
+    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
 //window.alert(userInfo.user_id);
 </script>
 <script src={% static "js/navbar.js" %} type="text/babel"></script>

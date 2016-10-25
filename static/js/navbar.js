@@ -36,7 +36,7 @@ var NavBar = React.createClass({
         <div className="fixed hide-for-small contain-to-grid">
         <nav className="top-bar" style={orange_background} role="navigation">
             <div className="top-bar-left align-self-middle">
-                <div className="section-background" style={white_color}>
+                <div style={white_color}>
                         <a href="/">
                             <img src={data.logo} alt="" style={logo_size} />
                             Trip Finder
