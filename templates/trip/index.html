@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, World!</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
+    <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+    <script src={% static "js/navbar.js" %} type="text/babel"></script>
+</head>
+
+<style>
+th, td {
+    border: 1px solid black;
+}
+</style>
+
+<body>
+    <div id="navbar"></div>
+
+    <section>
+        <div class="row" style="padding:30px">
+            <h3 style="color:#A34E"> Grand Palace Bangkok, Thailand</h3>
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image"/>
+            </div>
+            <div class="large-8 columns" style="padding:10px">
+                <h6>Highlight</h6>
+                <p>-</p>
+                <p>-</p>
+                <p>-</p>
+            </div>
+            <div class="small-20 columns"style="padding:30px">
+                <table>
+                    <tr>
+                        <th>Booking</th>
+                        <th>Seat Available</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr>
+                        <td>link-to-Book</td>
+                        <td>15</td>
+                        <td>17-21 Dec 2016</td>
+                        <td>9,999</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </section>
+
+    <footer class="footer" style="background-color: orange; padding: 8px" >
+        <img style="width: 60px; height: auto" src={% static "logo/orange-farm-logo-white-transparent.png" %} />
+    </footer>
+</body>
+
+<script>
+    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
+//window.alert(userInfo.user_id);
+</script>
+<script src={% static "js/navbar.js" %} type="text/babel"></script>
+<script src={% static "js/searchbutton.js" %} type="text/babel"></script>
+</html>

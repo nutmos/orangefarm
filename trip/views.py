@@ -6,7 +6,7 @@ from django.template import loader
 # Create your views here.
 
 def index(request):
-    template = loader.get_template('login/index.html')
+    template = loader.get_template('trip/index.html')
     #a = User.objects.create(
     #    username="Nutmos", password="111")
     #a.save()
