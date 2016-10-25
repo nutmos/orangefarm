@@ -23,3 +23,22 @@
 1. ใช้คำสั่ง ```git mergetool``` จากนั้นก็ทำตามขั้นตอน และเลือกไฟล์ที่ต้องการใช้งานจริง ๆ (อีกไฟล์จะถูกทิ้ง)
 2. จากนั้นก็ pull > add > commit > push ตามปกติ
 
+
+#guideline การทำเว็บ, การใช้ไฟล์ และการวางไฟล์
+
+1. แท็กทั้งหมดนี้ต้องแปะไว้ในแท็ก head
+```
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
+    <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+```
+2. เหนือสุดของไฟล์จะต้องมี ```{% load static %}```
+3. ถ้าจะใส่ไฟล์ JavaScript เพิ่ม หรือจะเขียน script เอง ให้ใส่ไว้ท้ายเว็บก่อนปิดแท็ก html
+4. ถ้าจะใส่ไฟล์ CSS เพิ่ม ให้ใส่ไว้ต้นเว็บในแท็ก head
+5. ไฟล์ HTML ให้ใส่ไว้ใน template/[ชื่อแอพ] อย่าเอาไปปนกับแอพอื่น โดยใน template จะมีไฟล์เดียวเท่านั้นคือ index.html สำหรับหน้า firstpage นอกนั้นให้แยกใส่โฟลเดอร์ให้หมด
+6. ไฟล์ JavaScript ให้ใส่ไว้ใน static/js ไฟล์ JavaScript จากแอพทั้งหมดจะรวมกันที่เดียว
+7. ไฟล์ CSS ให้ใส่ไว้ใน static/css/[ชื่อแอพ] อย่าเอาไปปนกับแอพอื่น โดยใน static/css จะมีไฟล์เดียวเท่านั้นคือ styles.css สำหรับเป็น CSS ใช้โดยรวม นอกนั้นแยกใส่โฟลเดอร์ให้หมด
+

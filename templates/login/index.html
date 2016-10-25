@@ -20,14 +20,10 @@
           <div class="row">
             <div class="large-6 columns small-centered">
               <div class="signup-panel">
-                <p class="welcome">Login</p>
+                <div class="welcome" style="font-size: 40px; ">Login</div>
                 <div class="text-centered" style="margin-bottom: 1em;">
-                    {% if user_not_exist %}
-                    <div style="color: red">Username not found.</div>
-                    {% else %}
-                        {% if wrong_password %}
-                            <div style="color: red;">Your password does not match.</div>
-                        {% endif %}
+                    {% if alert %}
+                    <div style="color: red;">{{ alert }}</div>
                     {% endif %}
                 </div>
                 <form method="post" name="submit_form" id="submit_form" action="/login/login-status/">
@@ -48,8 +44,8 @@
                             <input type="password" name="password" placeholder="password">
                         </div>
                     </div>
-                    <p class="footer">Don't have an account? <a href="/register">Register</a></p>
-                    <input type="submit" class="button" value="Register">
+                    <div class="footer" style="margin-bottom: 1em;">Don't have an account? <a href="/register">Register</a></div>
+                    <div><input type="submit" class="button" value="Register"></div>
                 </form>
               </div>
             </div>
