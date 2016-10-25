@@ -14,42 +14,52 @@
     <link rel="stylesheet" href={% static "css/styles.css" %}>
 </head>
 <body>
-    <div class="row text-centered">
-        <a href="/">
-            <img style="height: 100px;" src={% static "logo/orange-farm-transparent.png" %} />
-        </a>
-    </div>
+    <div id="orange-farm-big"></div>
     <div class="row">
         <body class="iframe-body">
           <div class="row">
             <div class="large-6 columns small-centered">
               <div class="signup-panel">
                 <p class="welcome">Login</p>
+                <div class="text-centered" style="margin-bottom: 1em;">
+                    {% if user_not_exist %}
+                    <div style="color: red">Username not found.</div>
+                    {% else %}
+                        {% if wrong_password %}
+                            <div style="color: red;">Your password does not match.</div>
+                        {% endif %}
+                    {% endif %}
+                </div>
                 <form method="post" name="submit_form" id="submit_form" action="/login/login-status/">
-                  {% csrf_token %}
-                  <div class="row collapse">
-                    <div class="small-1  columns">
-                      <span class="prefix"><i class="fi-torso-female"></i></span>
+                    {% csrf_token %}
+                    <div class="row collapse">
+                        <div class="small-1 columns">
+                            <span class="prefix"><i class="fi-torso-female"></i></span>
+                        </div>
+                        <div class="small-11  columns">
+                            <input type="text" name="username" placeholder="username">
+                        </div>
                     </div>
-                    <div class="small-11  columns">
-                      <input type="text" name="username" placeholder="username">
+                    <div class="row collapse">
+                        <div class="small-1 columns">
+                            <span class="prefix"><i class="fi-lock"></i></span>
+                        </div>
+                        <div class="small-11 columns ">
+                            <input type="password" name="password" placeholder="password">
+                        </div>
                     </div>
-                  </div>
-                  <div class="row collapse">
-                    <div class="small-1 columns ">
-                      <span class="prefix"><i class="fi-lock"></i></span>
-                    </div>
-                    <div class="small-11 columns ">
-                      <input type="password" name="password" placeholder="password">
-                    </div>
-                  </div>
-                <p class="footer">Don't have an account? <a href="/register">Register</a></p>
-                <input type="submit" class="button" value="Register">
-              </form>
+                    <p class="footer">Don't have an account? <a href="/register">Register</a></p>
+                    <input type="submit" class="button" value="Register">
+                </form>
               </div>
             </div>
           </div>
         </body>
     </div>
 </body>
+<script>
+var data = {logo: "{% static 'logo/orange-farm-transparent.png' %}"
+};
+</script>
+<script src={% static "js/orange-farm-big.js" %} type="text/babel"></script>
 </html>

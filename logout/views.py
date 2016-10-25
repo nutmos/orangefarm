@@ -18,6 +18,7 @@ def logout(request):
     try:
         del request.session['user_id']
     except KeyError:
-        return HttpResponse('You are not logged in')
+        template = loader.get_template('notlogin.html')
+        return HttpResponse(template.render({}, request))
     template = loader.get_template('logout/index.html')
     return HttpResponse(template.render({'foo': 'bar'}, request))

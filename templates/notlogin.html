@@ -3,28 +3,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
+    <title>{{ username }}</title>
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
     <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
-    <link rel="stylesheet" href={% static "css/login/styles.css" %}>
     <link rel="stylesheet" href={% static "css/styles.css" %}>
-    <title>Logout</title>
 </head>
 <body>
     <div id="orange-farm-big"></div>
-    <h1 class="text-centered">You are now logged out</h1>
-    <div class="text-centered">If you are not redirect automatically <a href="/">click here</a></div>
-    <script>
-//function redirect() {
-//    window.location.href = "/";
-//}
-//setTimeout(redirect, 1000);
+    <div class="row text-centered" style="margin-top: 2em;">
+        <div class="large-5 columns small-centered">
+            <div class="row" style="font-size: 50px;">
+                You are not logged in.
+            </div>
+            <div class="row">
+                If you want to access this page, please login <a href="/login">here</a>.
+            </div>
+        </div>
+    </div>
+</body>
+<script>
 var data = {logo: "{% static 'logo/orange-farm-transparent.png' %}"
 };
-    </script>
+</script>
 <script src={% static "js/orange-farm-big.js" %} type="text/babel"></script>
-</body>
 </html>
