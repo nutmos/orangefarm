@@ -29,19 +29,18 @@ def login_status(request):
     if request.method == "POST":
         username = request.POST.get("username","")
         password = request.POST.get("password", "")
-        user1 = User.objects.get(username=username)
-        if user1.check_password(password):
-            request.session['user_id'] = str(user1.id)
-            print user1.id
-            return HttpResponseRedirect('/')
-        else:
-            return HttpResponse("False")
+        template = loader.get_template('login/index.html')
+        try:
+            user1 = User.objects.get(username=username)
+            if user1.check_password(password):
+                request.session['user_id'] = str(user1.id)
+                request.session.set_expiry(3600)
+                print user1.id
+                return HttpResponseRedirect('/')
+            else:
+                return HttpResponse(template.render({'wrong_password': 'True'}, request))
+        except DoesNotExist:
+            return HttpResponse(template.render({'user_not_exist': 'True'}, request))
+            #return HttpResponse("This user does not exists. Please try again.")
     return HttpResponse("No Response")
 
-def logout(request):
-    print request.session['user_id']
-    try:
-        del request.session['user_id']
-    except KeyError:
-        return HttpResponse('You are not logged in')
-    return HttpResponse('Logout')

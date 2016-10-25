@@ -21,9 +21,10 @@ def index(request):
     is_login = True
     try:
         a = request.session['user_id']
-        print 'user_id = ' + a
+        #print 'user_id = ' + a
+        request.session.set_expiry(3600)
     except KeyError:
-        print "KeyError"
+        #print "KeyError"
         is_login = False
-    print 'is_login = ' + str(is_login)
+    #print 'is_login = ' + str(is_login)
     return HttpResponse(template.render({'foo':'bar'}, request))

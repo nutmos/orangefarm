@@ -53,6 +53,6 @@ var NavBar = React.createClass({
 });
 
 ReactDOM.render(
-    <NavBar />,
+    React.createElement(NavBar, {}),
     document.getElementById("navbar")
 );
