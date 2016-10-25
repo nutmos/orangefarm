@@ -20,7 +20,7 @@ var SearchButton = React.createClass({
         }
     },
     render: function() {
-        return (<div>
+        return (<div className="text-centered">
             <input onKeyPress={this.handleKeyPress} type="text" value={this.state.query} onChange={this.queryChange} placeholder="Search Site" />;
             <button onClick={this.handleSearch} className="large success hollow button">Search</button>
             </div>);
