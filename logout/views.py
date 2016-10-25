@@ -14,7 +14,6 @@ import Cookie
 # Create your views here.
 
 def logout(request):
-    #print request.session['user_id']
     try:
         del request.session['user_id']
     except KeyError:
