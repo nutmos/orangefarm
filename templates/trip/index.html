@@ -11,50 +11,89 @@
     <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
     <link rel="stylesheet" href={% static "css/styles.css" %}>
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/trip/styles.css" %}>
     <script src={% static "js/navbar.js" %} type="text/babel"></script>
 </head>
 
 <style>
-th, td {
-    border: 1px solid black;
-}
+    th, td {
+        border: 1px solid black;
+        text-align: center;
+        table-layout: auto;
+    }
+    .getDetail {display:none;}
 </style>
 
 <body>
-    <div id="navbar"></div>
+    <div id="navbar" style="color:white"></div>
 
     <section>
         <div class="row" style="padding:30px">
-            <h3 style="color:#A34E"> Grand Palace Bangkok, Thailand</h3>
+            <h2 style="color:#A34E24"> 3DAYS 2NIGHTS HONGKONG PACKAGE </h2>
         </div>
         <div class="row">
             <div class="large-4 columns">
-                <img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image"/>
+                <img src={% static "pictures/boat-harbor-hong-kong-china-1_main.jpg" %} class="popular-image"/>
             </div>
             <div class="large-8 columns" style="padding:10px">
-                <h6>Highlight</h6>
-                <p>-</p>
-                <p>-</p>
-                <p>-</p>
+                <h4>Highlight:</h4>
+               
+                <div class="large-13 columns">
+                    <p>- Shopping at Ocean Termonal and Harbour City</p>
+                    <p>- Looking down at the city from Victoria Peak</p>
+                    <p>- Disneyland Tour</p>
+                </div>
             </div>
-            <div class="small-20 columns"style="padding:30px">
-                <table>
-                    <tr>
+        </div>    
+        <div class="row"style="padding:30px">
+            <div class="large-11 column">
+                <h4 style="text-align:left">Booking:</h4>
+                <table align="center">
+                    <tr style="background-color:#6B7A8F;color:white">
                         <th>Booking</th>
                         <th>Seat Available</th>
                         <th>Date</th>
+                        <th>Airline</th>
                         <th>Price</th>
                     </tr>
                     <tr>
                         <td>link-to-Book</td>
                         <td>15</td>
-                        <td>17-21 Dec 2016</td>
-                        <td>9,999</td>
+                        <td>17-19 Dec 2016</td>
+                        <td>Emirates airlines</td>
+                        <td>9,999 THB</td>
                     </tr>
                 </table>
             </div>
+        </div>    
+        <div class="row" style="padding:30px">
+            <div class="large-11 column">
+                <h4 style="text-align:left">More Details</h4>
+                <div class="w3-container">
+                    <ul class="w3-navbar" style="background-color:#6B7A8F;color:white">
+                        <li><a href="javascript:void(0)" class="tablink" onclick="openDetail(event, 'Details');">Details</a></li>
+                        <li><a href="javascript:void(0)" class="tablink" onclick="openDetail(event, 'Conditions');">Conditions</a></li>
+                    </ul>
+
+                    <div id="Details" class="w3-container w3-border getDetail">
+                        <h4 style="text-align:center">Details</h4>
+                        <p>Day 1: Shopping at Ocean Termonal and Harbour City</p>
+                        <p>Day 2: go to Disneyland</p>
+                        <p>Day 3: </p>
+                    </div>
+
+                    <div id="Conditions" class="w3-container w3-border getDetail">
+                        <h4 style="text-align:center">Conditions</h4>
+                        <h6>INCLUSIONS</h6>
+                        <p>- Hotel Accommodation with Breakfast</p>
+                        <p>- Roundtrip Airport Transfer</p>
+                        <p>- Halfday City tour</p>
+                        <p>- Compulsory Halfday City tour then proceed to Ocean Park</p>
+                        <p>- Compulsory Halfday City tour then proceed to Disneyland Tou</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
     </section>
 
     <footer class="footer" style="background-color: orange; padding: 8px" >
@@ -65,6 +104,21 @@ th, td {
 <script>
     var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
 //window.alert(userInfo.user_id);
+</script>
+<script>
+    function openDetail(evt, detail) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("getDetail");
+      for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" w3-orange", "");
+      }
+      document.getElementById(detail).style.display = "block";
+      evt.currentTarget.className += " w3-orange";
+    }
 </script>
 <script src={% static "js/navbar.js" %} type="text/babel"></script>
 <script src={% static "js/searchbutton.js" %} type="text/babel"></script>
