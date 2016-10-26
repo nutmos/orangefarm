@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Trip Finder</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
+    <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+
+
+
+</head>
+<body>
+    <div id="navbar"></div>
+
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+        <header class="header">
+        	<h1 class="main-header">About Us!</h1>
+        	<ul class="header-subnav">
+    			<li><a href="#mag1" class="is-active">Who we are</a></li>
+    			<li><a href="#mag2">What we do</a></li>
+    			<li><a href="#mag3">Contact Us</a></li>
+  			</ul>
+		</header>
+
+
+    	<main>
+  		<div class="row">
+    	<div id="sec2" class="small-9 columns">
+      	<section id="mag1" data-magellan-target="mag1">
+        	<h1>Who we are</h1>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam earum, perferendis quos necessitatibus veritatis a, quia quaerat mollitia in, omnis at cum esse dolorum rem assumenda vitae minus repellendus voluptate.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores dicta dolorum illo voluptates ipsam, placeat temporibus perspiciatis harum. Rem magni quibusdam fugit non minus odit soluta ullam reprehenderit reiciendis expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis soluta ullam nisi enim veritatis ipsum expedita ratione, laudantium sint modi vero, natus dicta cupiditate ipsam repellat, reiciendis maxime magni praesentium.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam atque quaerat ad veniam enim ut. Consequatur odio voluptatem fuga nisi ex, qui dicta, assumenda, eligendi repudiandae maiores vitae fugiat nam!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi non eveniet odio excepturi culpa cumque provident quaerat. Cupiditate ipsa facere temporibus, illum est, distinctio cum, nihil ab eveniet explicabo dolore.</p>
+      	</section>
+
+      	<section id="mag2" data-magellan-target="mag2">
+        	<h1>What we do</h1>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam earum, perferendis quos necessitatibus veritatis a, quia quaerat mollitia in, omnis at cum esse dolorum rem assumenda vitae minus repellendus voluptate.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores dicta dolorum illo voluptates ipsam, placeat temporibus perspiciatis harum. Rem magni quibusdam fugit non minus odit soluta ullam reprehenderit reiciendis expedita.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis soluta ullam nisi enim veritatis ipsum expedita ratione, laudantium sint modi vero, natus dicta cupiditate ipsam repellat, reiciendis maxime magni praesentium.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam atque quaerat ad veniam enim ut. Consequatur odio voluptatem fuga nisi ex, qui dicta, assumenda, eligendi repudiandae maiores vitae fugiat nam!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi non eveniet odio excepturi culpa cumque provident quaerat. Cupiditate ipsa facere temporibus, illum est, distinctio cum, nihil ab eveniet explicabo dolore.</p>
+      	</section>
+
+      	<section id="mag3" data-magellan-target="mag3">
+        	<h1>Contact Us</h1>
+    		<header class="hero">
+  				<h1></h1>
+  				<h2 class="subheader"></h2>
+			</header>
+			<footer class="footer">
+  				<div class="row">
+    			<div class="small-12 medium-6 medium-push-6 columns">
+      				<p class="logo show-for-small-only"><i class="fi-target"></i>Orange Farm</p> 
+     			<form class="footer-form">
+        			<div class="row">
+          			<div class="medium-9 medium-push-3 columns">
+            			<label>
+              				<label for="email" class="contact">Contact Us</label>
+              				<input type="email" id="email" placeholder="Email Address" />
+            			</label>
+          			</div>
+        			</div>
+        		<div class="row">
+          		<div class="medium-9 medium-push-3 columns">
+            	<label>
+              		<textarea rows="5" id="message" placeholder="Message"></textarea>
+            	</label>
+          		</div>
+          		<div class="row">
+            	<div class="medium-9 medium-push-3 columns">
+              		<button class="submit" type="submit" value="Submit">Send</button>
+            	</div>
+          		</div>
+        		</div>
+      			</form>
+    			</div>
+    			<div class="small-12 medium-6 medium-pull-6 columns">
+      				<p>Orange Farm Co,.</p> 
+      				<ul class="contact">
+        				<p><i class="fi-marker"></i>1595 Spring Street New Britain, CT 06051</p>
+        				<p><i class="fi-telephone"></i>+1-656-453-9966</p>
+        				<p><i class="fi-mail"></i>contact@emperor.com</p>
+      				</ul>
+       				<ul class="inline-list social">
+        				<a href="#"><i class="fi-social-facebook"></i></a>
+        				<a href="#"><i class="fi-social-twitter"></i></a>
+        				<a href="#"><i class="fi-social-linkedin"></i></a>
+        				<a href="#"><i class="fi-social-github"></i></a>
+     		 		</ul>
+    			</div>
+    			</div>
+  		</div>
+		</footer>      
+    	</section>
+  		
+	</main>
+    
+    <div id="footer-bar"></div>
+</body>
+
+<script>
+    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
+//window.alert(userInfo.user_id);
+</script>
+<script src={% static "js/footerbar.js" %} type="text/babel"></script>
+<script src={% static "js/navbar.js" %} type="text/babel"></script>
+<script src={% static "js/searchbutton.js" %} type="text/babel"></script>
+
+<style>
+.header {
+  text-align: center;
+  background: url("https://static.pexels.com/photos/6894/summer-photographer-pier-adventure-large.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 4rem; }
+  .header .main-header {
+    color: #641E16; }
+.header-subnav {
+  float: none;
+  position: relative;
+  top: 4rem;
+  text-align: center;
+  margin-bottom: 0; }
+  .header-subnav li {
+    float: none;
+    display: inline-block; }
+    .header-subnav li a {
+      padding: 0.9rem 1rem 0.75rem;
+      font-size: 0.875rem;
+      color: #fff;
+      text-transform: uppercase;
+      display: block;
+      font-weight: bold;
+      letter-spacing: 1px; }
+      .header-subnav li a.is-active {
+        background: linear-gradient(45deg, #9370db, #ffa241);
+        color: #fff; }
+      .header-subnav li a:hover {
+        background: linear-gradient(45deg, #9370db, #ffa241);
+        color: #fff;
+        transition: all .25s ease-in-out; }
+</style>
+
+</html>
