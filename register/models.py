@@ -6,8 +6,8 @@ from mongoengine.django.auth import User
 
 # Create your models here.
 
-class User(User):
-    email = StringField(max_length=100)
+#class User(User):
+    #email = StringField(max_length=100)
 
 #class Users(Document):
 #    firstName = StringField(max_length=30)

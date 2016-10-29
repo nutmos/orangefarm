@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.views.generic import TemplateView
+from django.conf.urls import handler400, handler403, handler404, handler500
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,3 +31,4 @@ urlpatterns = [
     url(r'^profile/', include('user_profile.urls')),
     url(r'^aboutus/', include('aboutus.urls')),
 ]
+

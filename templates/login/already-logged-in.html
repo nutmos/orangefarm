@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ username }}</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <link rel="stylesheet" href={% static "foundation-6/css/foundation.css" %}>
+    <link rel="stylesheet" href={% static "foundation-6/css/app.css" %}>
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+</head>
+<body>
+    <div id="orange-farm-big"></div>
+    <div class="row text-centered" style="margin-top: 2em;">
+        <div class="large-8 columns small-centered">
+            <div class="row" style="font-size: 50px;">
+                You are already logged in.
+            </div>
+            <div class="row">
+                Now you are logged in as {{ username }}. If you want to login with other account, please <a href="/logout">logout</a> first.
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+var data = {logo: "{% static 'logo/orange-farm-transparent.png' %}"
+};
+</script>
+<script src={% static "js/orange-farm-big.js" %} type="text/babel"></script>
+</html>

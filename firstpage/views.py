@@ -28,3 +28,4 @@ def index(request):
         is_login = False
     #print 'is_login = ' + str(is_login)
     return HttpResponse(template.render({'foo':'bar'}, request))
+
