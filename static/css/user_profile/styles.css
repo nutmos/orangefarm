@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+.alert-panel {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
 a, a:hover {
     color: white;
 }

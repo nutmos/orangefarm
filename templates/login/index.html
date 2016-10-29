@@ -16,8 +16,6 @@
 <body>
     <div id="orange-farm-big"></div>
     <div class="row">
-        <body class="iframe-body">
-          <div class="row">
             <div class="large-6 columns small-centered">
               <div class="signup-panel">
                 <div class="welcome" style="font-size: 40px; ">Login</div>
@@ -28,29 +26,23 @@
                 </div>
                 <form method="post" name="submit_form" id="submit_form" action="/login/login-status/">
                     {% csrf_token %}
-                    <div class="row collapse">
-                        <div class="small-1 columns">
-                            <span class="prefix"><i class="fi-torso-female"></i></span>
-                        </div>
-                        <div class="small-11  columns">
-                            <input type="text" name="username" placeholder="username">
-                        </div>
+                    <div class="input-group">
+                        <span class="input-group-label"><i class="fi-torso-female"></i></span>
+                        <input class="input-group-field" type="text" name="username" placeholder="Username">
                     </div>
-                    <div class="row collapse">
-                        <div class="small-1 columns">
-                            <span class="prefix"><i class="fi-lock"></i></span>
-                        </div>
-                        <div class="small-11 columns ">
-                            <input type="password" name="password" placeholder="password">
-                        </div>
+                    <div class="input-group">
+                        <span class="input-group-label"><i class="fi-lock"></i></span>
+                        <input class="input-group-field" type="password" name="password" placeholder="Password">
                     </div>
-                    <div class="footer" style="margin-bottom: 1em;">Don't have an account? <a href="/register">Register</a></div>
-                    <div><input type="submit" class="button" value="Login"></div>
+                    <div class="footer" style="margin-bottom: 1em;">
+                        Don't have an account? <a href="/register">Register</a><br>
+                    </div>
+                    <div class="footer">
+                        <input type="submit" class="button" value="Login">
+                    </div>
                 </form>
               </div>
             </div>
-          </div>
-        </body>
     </div>
 </body>
 <script>

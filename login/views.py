@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from login.models import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from mongoengine.django.auth import User
+from mongoengine.django.auth import User as MongoUser
 from django.contrib.sessions.models import Session
 from django.contrib.auth import authenticate, login
 import requests
@@ -10,13 +9,16 @@ import uuid
 import cookielib
 import urllib2
 import Cookie
+from user_profile.models import User
 
 # Create your views here.
 
 def index(request):
     try:
-        a = request.session['user_id']
-        return HttpResponse("You are now logged in")
+        user_id = request.session['user_id']
+        template = loader.get_template('login/already-logged-in.html')
+        user1 = User.objects.get(id=user_id)
+        return HttpResponse(template.render({'username':user1.username}, request))
     except KeyError:
         template = loader.get_template('login/index.html')
         #a = User.objects.create(

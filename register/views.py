@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from login.models import *
 from django.http import HttpResponse
 from django.template import loader
-from mongoengine.django.auth import User
-from . import models
+from mongoengine.django.auth import User as MongoUser
+from register.models import *
+from user_profile.models import User
 
 def index(request):
     template = loader.get_template('register/index.html')

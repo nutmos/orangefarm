@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from login.models import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from mongoengine.django.auth import User
+from mongoengine.django.auth import User as MongoUser
 from django.contrib.sessions.models import Session
 from django.contrib.auth import authenticate, login
 import requests
@@ -10,6 +9,7 @@ import uuid
 import cookielib
 import urllib2
 import Cookie
+from user_profile.models import *
 
 # Create your views here.
 
