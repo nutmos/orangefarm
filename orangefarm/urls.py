@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^trip/', include('trip.urls')),
     url(r'^logout/', include('logout.urls')),
     url(r'^profile/', include('user_profile.urls')),
+    url(r'^aboutus/', include('aboutus.urls')),
 ]
 
