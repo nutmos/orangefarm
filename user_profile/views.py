@@ -27,6 +27,7 @@ def index(request):
 def show_image(request):
     if request.method == 'GET':
         user_id = request.GET.get('user_id', '')
+        print user_id
         user1 = User.objects.get(id=user_id)
         binary_img = user1.photo.read()
         return HttpResponse(binary_img, 'image/png')
