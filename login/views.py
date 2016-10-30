@@ -32,7 +32,8 @@ def login_status(request):
         username = request.POST.get("username","")
         password = request.POST.get("password", "")
         template = loader.get_template('login/index.html')
-        try:
+        print username
+	try:
             user1 = User.objects.get(username=username)
             if user1.check_password(password):
                 request.session['user_id'] = str(user1.id)
