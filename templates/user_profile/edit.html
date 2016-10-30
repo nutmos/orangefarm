@@ -20,13 +20,13 @@
         <form action="/profile/edit/" method="post">
             {% csrf_token %}
             <label for="">Name
-                <input name="name" type="text" placeholder="Name" id="name" value={{ name }}>
+                <input name="name" type="text" placeholder="Name" id="name" value="{{ name }}">
             </label>
             <label for="">Email Address
-                <input name="email" id="email" type="email" placeholder="Email Address" value={{ email }}>
+                <input name="email" id="email" type="email" placeholder="Email Address" value="{{ email }}">
             </label>
             <label for="">Bio
-                <input name="bio" id="bio" type="text" placeholder="Tell about yourself" value={{ bio }}>
+                <textarea name="bio" id="bio" type="text" placeholder="Tell about yourself">{{ bio }}</textarea>
             </label>
             <div class="footer text-centered">
                 <input class="button" type="submit" value="Save Change">

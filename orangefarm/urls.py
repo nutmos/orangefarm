@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^logout/', include('logout.urls')),
     url(r'^profile/', include('user_profile.urls')),
     url(r'^aboutus/', include('aboutus.urls')),
+    url(r'^company/', include('company_profile.urls')),
 ]
 

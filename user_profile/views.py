@@ -10,7 +10,7 @@ def index(request):
     try:
         user1 = User.objects.get(id=request.session['user_id'])
         request.session.set_expiry(3600)
-        print user1.username
+        print user1.photo
         template = loader.get_template('user_profile/index.html')
         pass_data = {'username': user1.username,
             'email': user1.email,
@@ -24,6 +24,14 @@ def index(request):
         template = loader.get_template('notlogin.html')
         return HttpResponse(template.render({}, request))
 
+def show_image(request):
+    if request.method == 'GET':
+        user_id = request.GET.get('user_id', '')
+        user1 = User.objects.get(id=user_id)
+        binary_img = user1.photo.read()
+        return HttpResponse(binary_img, 'image/png')
+    return HttpResponse('This page not complete')
+
 def edit_profile(request):
     if request.method == 'POST':
         user1 = User.objects.get(id=request.session['user_id'])
@@ -34,7 +42,7 @@ def edit_profile(request):
         print user1.bio
         print user1.email
         user1.save()
-        return HttpResponse('Your profile is now changed')
+        return HttpResponseRedirect('/profile/')
     else:
         try:
             print request.session['user_id']
@@ -43,7 +51,9 @@ def edit_profile(request):
             template = loader.get_template('user_profile/edit.html')
             pass_data = {'username': user1.username,
                 'email': user1.email,
-                'bio': user1.bio}
+                'bio': user1.bio,
+                'name': user1.name}
+            print "Bio = " + user1.bio
             if user1.email == None:
                 pass_data['email'] = ""
             if user1.bio == None:
@@ -73,7 +83,7 @@ def change_password(request):
                 print password2
                 print password3
                 return HttpResponse('New password and verify password does not match')
-        except:
+        except DoesNotExist:
             template = loader.get_template('notlogin.html')
             return HttpResponse(template.render({}, request))
     else:
