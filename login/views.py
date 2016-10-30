@@ -41,7 +41,7 @@ def login_status(request):
                 return HttpResponseRedirect('/')
             else:
                 return HttpResponse(template.render({'alert': 'Wrong Password', 'username': username}, request))
-        except DoesNotExist:
+        except:
             return HttpResponse(template.render({'alert': 'User not found', 'username': username}, request))
             #return HttpResponse("This user does not exists. Please try again.")
     return HttpResponse("No Response")
