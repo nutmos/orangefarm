@@ -12,3 +12,15 @@
 a, a:hover {
     color: white;
 }
+
+.profile-image {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 2em; 
+}
+.profile-image img {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0)
+}
