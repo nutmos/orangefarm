@@ -30,8 +30,10 @@ def show_image(request):
         print user_id
         user1 = User.objects.get(id=user_id)
         binary_img = user1.photo.read()
+        if binary_img == None:
+            return HttpResponseRedirect('http://placehold.it/300x300/')
         return HttpResponse(binary_img, 'image/png')
-    return HttpResponse('This page not complete')
+    return HttpResponseRedirect('http://placehold.it/300x300/')
 
 def edit_profile(request):
     if request.method == 'POST':
