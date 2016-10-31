@@ -27,9 +27,10 @@ def index(request):
 def show_image(request):
     if request.method == 'GET':
         user_id = request.GET.get('user_id', '')
-        print user_id
+        #print user_id
         user1 = User.objects.get(id=user_id)
         binary_img = user1.photo.read()
+        #print binary_img
         if binary_img == None:
             return HttpResponseRedirect('http://placehold.it/300x300/')
         return HttpResponse(binary_img, 'image/png')
@@ -97,3 +98,21 @@ def change_password(request):
         except DoesNotExist:
             template = loader.get_template('notlogin.html')
             return HttpResponse(template.render({}, request))
+
+def change_picture(request):
+    user1 = User.objects.get(id=request.session['user_id'])
+    template = loader.get_template('user_profile/change-picture.html')
+    return HttpResponse(template.render({}, request))
+    
+def handle_change_picture(request):
+    #print 'handle_change'
+    if request.method == 'POST':
+        user1 = User.objects.get(id=request.session['user_id'])
+        user1.photo.delete()
+        #print request.POST
+        image = request.FILES.get('profile-upload', '')
+        #print image
+        user1.photo.put(image, content_type='image/png')
+        user1.save()
+        return HttpResponseRedirect('/profile/')
+    return HttpResponse('Not Complete')
