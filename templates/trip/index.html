@@ -12,6 +12,11 @@
     <link rel="stylesheet" href={% static "css/styles.css" %}>
     <link rel="stylesheet" href={% static "css/trip/styles.css" %}>
     <script src={% static "js/navbar.js" %} type="text/babel"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.tabs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.keyboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/plugins/foundation.util.timerAndImageLoader.js"></script>
 </head>
 
 <style>
@@ -20,21 +25,20 @@
         text-align: center;
         table-layout: auto;
     }
-    .getDetail {display:none;}
 </style>
 
 <body>
     <div id="navbar" style="color:white"></div>
 
     <section>
-        <div class="row" style="padding:30px">
+        <div id="tripname" class="row" style="padding:30px">
             <h2 style="color:#A34E24"> 3DAYS 2NIGHTS HONGKONG PACKAGE </h2>
         </div>
         <div class="row">
-            <div class="large-4 columns">
+            <div id="picture" class="large-4 columns">
                 <img src={% static "pictures/boat-harbor-hong-kong-china-1_main.jpg" %} class="popular-image"/>
             </div>
-            <div class="large-8 columns" style="padding:10px">
+            <div id="highlight" class="large-8 columns" style="padding:10px">
                 <h4>Highlight:</h4>
                
                 <div class="large-13 columns">
@@ -45,7 +49,7 @@
             </div>
         </div>    
         <div class="row"style="padding:30px">
-            <div class="large-11 column">
+            <div class="column">
                 <h4 style="text-align:left">Booking:</h4>
                 <table align="center">
                     <tr style="background-color:#6B7A8F;color:white">
@@ -66,23 +70,20 @@
             </div>
         </div>    
         <div class="row" style="padding:30px">
-            <div class="large-11 column">
+            <div class="column">
                 <h4 style="text-align:left">More Details</h4>
-                <div class="w3-container">
-                    <ul class="w3-navbar" style="background-color:#6B7A8F;color:white">
-                        <li><a href="javascript:void(0)" class="tablink" onclick="openDetail(event, 'Details');">Details</a></li>
-                        <li><a href="javascript:void(0)" class="tablink" onclick="openDetail(event, 'Conditions');">Conditions</a></li>
-                    </ul>
-
-                    <div id="Details" class="w3-container w3-border getDetail">
+                <ul class="tabs" data-tabs id="example-tabs" style="background-color:#6B7A8F">
+                    <li class="tabs-title is-active"><a href="#Details" aria-selected="true">Details</a></li>
+                    <li class="tabs-title"><a href="#Conditions">Conditions</a></li>
+                </ul>
+                <div class="tabs-content" data-tabs-content="example-tabs">
+                    <div class="tabs-panel is-active" id="Details">
                         <h4 style="text-align:center">Details</h4>
                         <p>Day 1: Shopping at Ocean Termonal and Harbour City</p>
                         <p>Day 2: go to Disneyland</p>
                         <p>Day 3: </p>
                     </div>
-
-                    <div id="Conditions" class="w3-container w3-border getDetail">
-                        <h4 style="text-align:center">Conditions</h4>
+                    <div class="tabs-panel" id="Conditions">
                         <h6>INCLUSIONS</h6>
                         <p>- Hotel Accommodation with Breakfast</p>
                         <p>- Roundtrip Airport Transfer</p>
@@ -101,23 +102,11 @@
 </body>
 
 <script>
-    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
-//window.alert(userInfo.user_id);
+  $(document).foundation();
 </script>
 <script>
-    function openDetail(evt, detail) {
-      var i, x, tablinks;
-      x = document.getElementsByClassName("getDetail");
-      for (i = 0; i < x.length; i++) {
-          x[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablink");
-      for (i = 0; i < x.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" w3-orange", "");
-      }
-      document.getElementById(detail).style.display = "block";
-      evt.currentTarget.className += " w3-orange";
-    }
+    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
+//window.alert(userInfo.user_id);
 </script>
 <script src={% static "js/navbar.js" %} type="text/babel"></script>
 <script src={% static "js/searchbutton.js" %} type="text/babel"></script>
