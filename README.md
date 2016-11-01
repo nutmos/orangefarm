@@ -34,6 +34,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css">
 ```
+2. ถ้าจะใช้ jQuery ร่วมกับ Foundation ต้องใส่แท็กทั้งหมดนี้ไว้ใน head
+```
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
+```
 2. เหนือสุดของไฟล์จะต้องมี ```{% load static %}```
 3. ถ้าจะใส่ไฟล์ JavaScript เพิ่ม หรือจะเขียน script เอง ให้ใส่ไว้ท้ายเว็บก่อนปิดแท็ก html
 4. ถ้าจะใส่ไฟล์ CSS เพิ่ม ให้ใส่ไว้ต้นเว็บในแท็ก head
