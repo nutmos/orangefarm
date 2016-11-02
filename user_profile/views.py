@@ -10,12 +10,12 @@ def index(request):
     try:
         user1 = User.objects.get(id=request.session['user_id'])
         request.session.set_expiry(3600)
-        print user1.photo
         template = loader.get_template('user_profile/index.html')
         pass_data = {'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
-            'name': user1.name}
+            'name': user1.name,
+            'alert': alert}
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
@@ -84,8 +84,6 @@ def change_password(request):
                 else:
                     return HttpResponse('The current password was not correct')
             else:
-                print password2
-                print password3
                 return HttpResponse('New password and verify password does not match')
         except DoesNotExist:
             template = loader.get_template('notlogin.html')

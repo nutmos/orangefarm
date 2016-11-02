@@ -6,5 +6,5 @@ from mongoengine import *
 # Create your models here.
 
 class Country(Document):
-    name = StringField()
+    name = StringField(unique=True, required=True)
     description = StringField()
