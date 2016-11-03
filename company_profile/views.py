@@ -7,7 +7,7 @@ from models import *
 
 def index(request):
     if request.method == 'GET':
-        com_id = request.GET.get('id', '')
+        com_id = request.GET.get('company_id', '')
         com1 = Company.objects.get(id=com_id)
         print com_id
         template = loader.get_template('company_profile/index.html')
