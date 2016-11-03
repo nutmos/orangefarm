@@ -17,12 +17,12 @@ def process_add(request):
         description = request.GET.get('description','')
         c1 = Country(name=name, description=description)
         c1.save()
-        return HttpResponseRedirect('/country?country-id=' + str(c1.id))
+        return HttpResponseRedirect('/country?country_id=' + str(c1.id))
     return HttpResponse('No GET Request')
 
 def index(request):
     if request.method == 'GET':
-        country_id = request.GET.get('country-id', '')
+        country_id = request.GET.get('country_id', '')
         try:
             c1 = Country.objects.get(id=country_id)
             template = loader.get_template('country/index.html')
@@ -37,7 +37,7 @@ def index(request):
 
 def edit(request):
     if request.method == 'GET':
-        country_id = request.GET.get('country-id', '')
+        country_id = request.GET.get('country_id', '')
         print country_id
         try:
             c1 = Country.objects.get(id=country_id)
@@ -54,17 +54,17 @@ def edit(request):
 def process_edit(request):
     if request.method == 'GET':
         desc = request.GET.get('description', '')
-        country_id = request.GET.get('country-id', '')
+        country_id = request.GET.get('country_id', '')
         c1 = Country.objects.get(id=country_id)
         c1.description = request.GET.get('description', '')
         c1.save()
         pass_data = {'country_id': country_id};
-        return HttpResponseRedirect('/country?country-id=' + str(c1.id))
+        return HttpResponseRedirect('/country?country_id=' + str(c1.id))
     return HttpResponse('No Request')
 
 def delete(request):
     if request.method == 'GET':
-        country_id = request.GET.get('country-id', '')
+        country_id = request.GET.get('country_id', '')
         try:
             c1 = Country.objects.get(id=country_id)
             c1.delete()
