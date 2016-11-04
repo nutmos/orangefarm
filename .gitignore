@@ -1,2 +1,2 @@
-~/orangefarm/session/
-~/orangefarm/*/*.pyc
+session/
+*/*.pyc
