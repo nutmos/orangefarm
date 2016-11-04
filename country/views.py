@@ -7,6 +7,10 @@ from django.template import loader
 
 # Create your views here.
 
+def index(request):
+    template = loader.get_template('country/index.html')
+    return HttpResponse(template.render({'foo': 'bar'}, request))
+
 def add_country(request):
     if request.method == 'GET':
         name = request.GET.get('name','')

@@ -1,3 +1,6 @@
+### connect mongodb
+1. ใช้คำสั่ง ```use orangefarm``` จากนั้นใช้คำสั่ง ```db.createUser({ user: "orangefarm", pwd: "orangefarm", roles: ["readWrite","dbAdmin"]})```
+
 # How to use Git
 
 วิธีใช้งาน Git
