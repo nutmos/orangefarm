@@ -15,16 +15,27 @@
 <body>
     <div id="navbar"></div>
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
-    <div class="large-6 columns small-centered">
+    <div class="large-10 columns small-centered">
     <div class="row">
-        <form action="/country/process-edit" method="get">
-            <input type="hidden" name="country-id" value="{{ country_id }}">
-            <label for="">Country Name: {{ name }}
-            </label>
-            <label for="">Description
-                <input name="description" id="description" type="text" placeholder="Description" value="{{ description }}">
-            </label>
-            <div class="footer text-centered">
+    	<div class="large-6 columns">
+            <div class="profile-image">
+                <img src="/profile/image/?user_id={{ request.session.user_id }}" />
+            </div>
+            <div class="small-11 columns">
+            	<a class="button" href="/profile/change-picture">Change Country Picture</a>
+            </div>
+        </div>
+        <div class="large-6 columns">
+        	<form action="/country/process-edit" method="get">
+            	<input type="hidden" name="country-id" value="{{ country_id }}">
+            	<label for="">Country Name
+            		<input name="name" id="name" type="text" placeholder="name" value="{{ name }}">
+            	</label>
+            	<label for="">Description
+                	<input name="description" id="description" type="text" placeholder="Description" value="{{ description }}">
+            	</label>
+        </div>
+        <div class="footer text-centered">
                 <input class="button" type="submit" value="Save Change">
             </div>
         </form>
