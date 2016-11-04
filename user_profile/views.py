@@ -8,29 +8,30 @@ from django.template import loader
 
 def index(request):
     try:
-        user1 = User.objects.get(id=request.session['user_id'])
+        user_id = request.session['user_id']
+        print user_id
+        user1 = User.objects.get(id=user_id)
         request.session.set_expiry(3600)
         template = loader.get_template('user_profile/index.html')
         pass_data = {'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
-            'name': user1.name,
-            'alert': alert}
+            'name': user1.name}
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
         #return HttpResponse("AAA")
-    except:
+    except KeyError:
         template = loader.get_template('notlogin.html')
         return HttpResponse(template.render({}, request))
+    except DoesNotExist:
+        return HttpResponse('User Not Found')
 
 def show_image(request):
     if request.method == 'GET':
         user_id = request.GET.get('user_id', '')
-        #print user_id
         user1 = User.objects.get(id=user_id)
         binary_img = user1.photo.read()
-        #print binary_img
         if binary_img == None:
             return HttpResponseRedirect('http://placehold.it/300x300/')
         return HttpResponse(binary_img, 'image/png')

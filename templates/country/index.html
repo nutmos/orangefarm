@@ -23,21 +23,26 @@
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
             <div class="row">
+                <div class="row" style="font-size: 50px">
+                    {{ name }}
+                </div>
+            </div>
+            <div class="row">
                 <div class="large-6 columns">
                     <div class="profile-image">
                         <img src="http://placehold.it/300x300" />
                     </div>
                 </div>
                 <div class="large-6 columns">
-                    <div class="row" style="font-size: 50px">
-                        {{ name }}
-                    </div>
                     <div style="color: gray;" class="row">
                         {{ description }}
                     </div>
                     <div class="row">
                         <div class="large-6 columns">
-                            <a class="expanded button" href="/country/edit?country-id={{ country_id }}">Edit Country</a>
+                            <a class="expanded button" href="/country/edit?country_id={{ country_id }}">Edit Country</a>
+                        </div>
+                        <div class="large-6 columns">
+                            <a class="expanded button" href="/country/delete?country_id={{ country_id }}">Delete Country</a>
                         </div>
                     </div>
                 </div>
