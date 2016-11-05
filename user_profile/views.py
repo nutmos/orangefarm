@@ -6,8 +6,7 @@ from django.template import loader
 
 # Create your views here.
 
-def index(request, user=""):
-    print "index method"
+def index(request):
     try:
         user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
@@ -30,10 +29,9 @@ def index(request, user=""):
 def other_user_profile(request, user=""):
     try:
         user_id = request.session['user_id']
-        print user_id
         user1 = User.objects.get(username=user)
         if str(user1.id) == user_id:
-            return index(request)
+            return HttpResponseRedirect('/profile/')
         request.session.set_expiry(3600)
         template = loader.get_template('user_profile/index.html')
         pass_data = {'username': user1.username,
