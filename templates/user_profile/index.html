@@ -25,9 +25,11 @@
             <div class="row">
                 <div class="large-6 columns">
                     <div class="profile-image">
-                        <img src="/profile/image/?user_id={{ request.session.user_id }}" />
+                        <img src="/profile/image/?user_id={{ user_id }}" />
                     </div>
+                    {% if user_id == request.session.user_id %}
                     <a class="expanded button" href="/profile/change-picture">Change Profile Picture</a>
+                    {% endif %}
                 </div>
                 <div class="large-6 columns">
                     <div class="row" style="font-size: 50px">
@@ -46,6 +48,7 @@
                         {% endif %}
                     </div>
                     <div style="margin-bottom: 1em;" class="row">{{ email }}</div>
+                    {% if request.session.user_id == user_id %}
                     <div class="row">
                         <div class="large-6 columns">
                             <a class="expanded button" href="/profile/edit">Edit Profile</a>
@@ -54,6 +57,7 @@
                             <a class="expanded button" href="/profile/change-password">Change Password</a>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

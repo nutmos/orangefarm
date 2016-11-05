@@ -15,7 +15,8 @@ def index(request):
         pass_data = {'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
-            'name': user1.name}
+            'name': user1.name,
+            'user_id': user_id}
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
@@ -37,7 +38,8 @@ def other_user_profile(request, user=""):
         pass_data = {'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
-            'name': user1.name}
+            'name': user1.name,
+            'user_id': str(user1.id)}
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
