@@ -17,8 +17,8 @@
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
     <div class="large-6 columns small-centered">
     <div class="row">
-        <form action="/profile/edit/" method="post">
-            {% csrf_token %}
+        <form action="/company/process-edit/" method="get">
+            <input type="hidden" name="company_id" value="{{ company_id }}">
             <label for="">Name
                 <input name="name" type="text" placeholder="Name" id="name" value="{{ name }}">
             </label>
