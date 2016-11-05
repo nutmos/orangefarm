@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Trip Finder</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css">
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+
+
+</head>
+
+<body>
+    <div id="navbar"></div>
+    
+    <section>
+        <br>
+        <br>
+        <div class="large-10 columns small-centered">
+            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="100 percent" aria-valuemax="100">
+            <span class="progress-meter" style="width: 25%">
+                <p class="progress-meter-text">Step 3</p>
+            </span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <br>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:#D5DBDB">
+                <h4 style="text-align:left">Payment</h4>
+            <div style="background-color:white">
+                <h5 style="text-align:left">Name of Package Tour:</h5>
+                <h5 style="text-align:left">Package Tour ID:</h5>
+                <h5 style="text-align:left">Total Price:</h5>
+                <h5 style="text-align:left">Booking Fee:</h5>
+            </div>
+            </div>
+        </div>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:#D5DBDB">
+                <h4 style="text-align:left">ช่องทาง: ชำระโดยการตัดบัตรเครดิต/เดบิต</h4>
+            <div style="background-color:white">
+                <div class="large-6 columns small-centered">
+                    <a class="expanded button" href="">Pay Total Price</a>
+                    <a class="expanded button" href="">Pay Booking Fee</a>
+                </div>
+                <p style="text-align:center">*การชำระบัตรผ่าน Payment Gateway จะมีค่าธรรมเนี่ยม 2.5% (ปัดเศษสตางค์ขึ้น)</p>
+                <p style="text-align:center">*รายการจะเสร็จสิ้นการชำระเงินจนกระทั่งทาง Payment Gateway ทำการ Redirect กลับมาที่ Wonderfulpackage.com</p>
+            </div>
+            </div>
+        </div>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:#D5DBDB">
+                <h4 style="text-align:left">ช่องทาง: LINE Pay</h4>
+            <div style="background-color:white">
+                 <div class="large-6 columns small-centered">
+                    <a class="expanded button" href="">Pay Total Price</a>
+                    <a class="expanded button" href="">Pay Booking Fee</a>
+                </div>
+                <p style="text-align:center">*การชำระบัตรผ่าน LINE Pay จะมีค่าธรรมเนี่ยม 2.5% (ปัดเศษสตางค์ขึ้น)</p>
+            </div>
+            </div>
+        </div>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:#D5DBDB">
+                <h4 style="text-align:left">ช่องทาง: ชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล</h4>
+            <div style="background-color:white">
+                <div class="large-6 columns small-centered">
+                    <a class="expanded button" href="">ชำระ โดยการโอนเงิน/Bill PAYMENT ทุกช่องทาง</a>
+                    <a class="expanded button" href="">ชำระ โดยการชำระที่ธนาคารโดยตรง</a>
+                    <a class="expanded button" href="">Pay Booking Fee</a>
+                </div>
+                <p style="text-align:center">*การชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล จะมีการส่งคำสั่งไปยังทางเจ้าหน้าที่เพื่อยืนยันการสั่งซื้อและจะติดต่อกลับภายใน 24-48 ชม. ในเวลาทำการเพื่อเป็นการยืนยันการสั่งซื้อ</p>
+            </div>
+            </div>
+        </div>
+        <br>
+    </section>
+
+    <div class="row">
+        <div class="large-10 columns small-centered">
+            <a class="expanded button" href="/booking/step2">Back</a>
+        </div>
+  
+    </div>
+
+    <div id="footer-bar"></div>
+
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
+<script>
+    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
+//window.alert(userInfo.user_id);
+</script>
+<script src={% static "js/footerbar.js" %} type="text/babel"></script>
+<script src={% static "js/navbar.js" %} type="text/babel"></script>
+</html>

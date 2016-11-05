@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^company/', include('company_profile.urls')),
     url(r'^country/', include('country.urls')),
     url(r'^province/', include('province.urls')),
+    url(r'^booking/', include('booking.urls')),
 ]
 
