@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Trip Finder</title>
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css">
+    <link rel="stylesheet" href={% static "css/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+
+
+</head>
+
+<body>
+    <div id="navbar"></div>
+    
+    <section>
+        <br>
+        <br>
+        <div class="large-10 columns small-centered">
+            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="25" aria-valuemin="0" aria-valuetext="100 percent" aria-valuemax="100">
+            <span class="progress-meter" style="width: 25%">
+                <p class="progress-meter-text">Step 2</p>
+            </span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <br>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:#D5DBDB">
+                <h3 style="text-align:left">Checking</h3>
+            <div style="background-color:white">
+                <h4 style="text-align:left">Package Tour</h4>
+                <h5 style="text-align:left">Name of Package Tour:</h5>
+                <h5 style="text-align:left">Package Tour ID:</h5>
+                <h5 style="text-align:left">Depart date:</h5>
+                <h5 style="text-align:left">Return date:</h5>
+                <h5 style="text-align:left">Airline:</h5>
+                <h5 style="text-align:left">Flight:</h5>
+            </div>
+            </div>
+        </div>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:white">
+                <h4 style="text-align:left">Traveller Detail</h4>
+                <h5 style="text-align:left">Seat Available:</h5>
+                <h5 style="text-align:left">Adult: {{ selAdult }}</h5>
+                <h5 style="text-align:left">Children: {{ selChild }}</h5>
+                <p style="text-align:center">*Passenger age less than 12 years old is children</p>
+                <p style="text-align:center">*If you have a baby please information 02-792-9292</p>
+                <h5 style="text-align:left">Depart date:</h5>
+                <h5 style="text-align:left">Return date:</h5>
+            </div>
+        </div>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:white">
+                <h4 style="text-align:left">Room Detail</h4>
+                <h5 style="text-align:left">Total guest: </h5>
+                <h5 style="text-align:left">twin bedroom: {{ selTwin }}</h5>
+                <h5 style="text-align:left">single bedroom: {{ selSingle }}</h5>
+                <p style="text-align:center">*single bedroom increase price 10,000 baht</p>
+            </div>
+        </div>
+        <div class="large-10 columns small-centered">
+            <div style="background-color:white">
+                <h4 style="text-align:left">Food Detail</h4>
+                <h5 style="text-align:left">Vegetarian: {{ selVet }}</h5>
+                <h5 style="text-align:left">Muslim: {{ selMus }}</h5>
+                <h5 style="text-align:left">Seafood Allergy: {{ selSea }}</h5>   
+                <h5 style="text-align:left">Allergy:</h5>
+            </div>
+        </div>
+        <br>
+    </section>
+
+    <section>
+        <br>
+        <div class="large-10 columns small-centered">
+        <div style="background-color:white">
+                <h4 style="text-align:left;background-color:#D5DBDB">Price(Bath)</h4>
+                <table align="center">
+                    <tr style="background-color:#D5DBDB">
+                        <th>Package Tour ID</th>
+                        <th>Name of Package Tour</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Total Price</th>
+                    </tr>
+                    <tr style="background-color:white">
+                        <td>PackageTour_ID</td>
+                        <td>name</td>
+                        <td>9,999 THB</td>
+                        <td>1</td>
+                        <td>9,999 THB</td>
+                    </tr>
+                </table>
+        </div>
+        </div>
+    </section>
+
+    <div class="row">
+        <div class="large-6 columns">
+            <a class="expanded button" href="/booking">Back</a>
+        </div>
+        <div class="large-6 columns">
+            <a class="expanded button" href="/booking/step3">Next</a>
+        </div>
+    </div>
+
+    <div id="footer-bar"></div>
+
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+
+<script>
+    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
+//window.alert(userInfo.user_id);
+</script>
+<script src={% static "js/footerbar.js" %} type="text/babel"></script>
+<script src={% static "js/navbar.js" %} type="text/babel"></script>
+</html>
