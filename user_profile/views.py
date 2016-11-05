@@ -6,10 +6,10 @@ from django.template import loader
 
 # Create your views here.
 
-def index(request):
+def index(request, user=""):
+    print "index method"
     try:
         user_id = request.session['user_id']
-        print user_id
         user1 = User.objects.get(id=user_id)
         request.session.set_expiry(3600)
         template = loader.get_template('user_profile/index.html')
@@ -26,6 +26,31 @@ def index(request):
         return HttpResponse(template.render({}, request))
     except DoesNotExist:
         return HttpResponse('User Not Found')
+
+def other_user_profile(request, user=""):
+    try:
+        user_id = request.session['user_id']
+        print user_id
+        user1 = User.objects.get(username=user)
+        if str(user1.id) == user_id:
+            return index(request)
+        request.session.set_expiry(3600)
+        template = loader.get_template('user_profile/index.html')
+        pass_data = {'username': user1.username,
+            'email': user1.email,
+            'bio': user1.bio,
+            'name': user1.name}
+        if user1.email == None:
+            pass_data['email'] = ''
+        return HttpResponse(template.render(pass_data, request))
+        #return HttpResponse("AAA")
+    except KeyError:
+        template = loader.get_template('notlogin.html')
+        return HttpResponse(template.render({}, request))
+    except DoesNotExist:
+        return HttpResponse('User Not Found')
+
+    
 
 def show_image(request):
     if request.method == 'GET':
