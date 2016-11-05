@@ -5,7 +5,7 @@ from mongoengine import *
 
 # Create your models here.
 
-class Province(Document):
+class Place(Document):
     name = StringField()
     description = StringField()
-    country = StringField()
+    city = StringField()
