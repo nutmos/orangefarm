@@ -7,5 +7,5 @@ from mongoengine import *
 
 class City(Document):
     name = StringField()
-    country = StringField()
+    country_id = StringField()
     description = StringField()

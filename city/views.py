@@ -20,7 +20,7 @@ def process_add(request):
         name = request.GET.get('name', '')
         country = request.GET.get('country', '')
         description = request.GET.get('description', '')
-        c1 = City(name=name, country=country, description=description)
+        c1 = City(name=name, country_id=country, description=description)
         c1.save()
         return HttpResponseRedirect('/city?city_id=' + str(c1.id))
     return HttpResponse('No GET Request')

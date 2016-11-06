@@ -42,3 +42,17 @@ def process_edit(request):
         com1.save()
         return HttpResponseRedirect('/company?company_id=' + str(com_id))
     return HttpResponse('The page is not complete')
+
+def add_photo(request):
+    if request.method == 'POST':
+        com_id = request.POST.get('company_id', '')
+        newpic = Company_Picture(company_id=com_id)
+        photo = request.FILES.get('upload','')
+        #print request.POST
+        image = request.FILES.get('profile-upload', '')
+        #print image
+        newpic.photo.put(photo, content_type='image/*')
+        newpic.save()
+        return HttpResponse('Complete')
+    return HttpResponse('Not Complete')
+        

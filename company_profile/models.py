@@ -11,3 +11,7 @@ class Company(Document):
     location = StringField(max_length=200)
     picture = FileField()
     geolocation = GeoPointField()
+
+class Company_Picture(Document):
+    company_id = StringField()
+    photo = FileField()
