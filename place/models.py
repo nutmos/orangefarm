@@ -8,4 +8,4 @@ from mongoengine import *
 class Place(Document):
     name = StringField()
     description = StringField()
-    city = StringField()
+    city_id = StringField()

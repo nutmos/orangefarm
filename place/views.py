@@ -18,9 +18,9 @@ def add_place(request):
 def process_add(request):
     if request.method == 'GET':
         name = request.GET.get('name', '')
-        city = request.GET.get('city', '')
+        city_id = request.GET.get('city_id', '')
         description = request.GET.get('description', '')
-        c1 = Place(name=name, city=city, description=description)
+        c1 = Place(name=name, city_id=city_id, description=description)
         c1.save()
         return HttpResponseRedirect('/place?place_id=' + str(c1.id))
     return HttpResponse('No GET Request')
@@ -33,7 +33,7 @@ def index(request):
             template = loader.get_template('place/index.html')
             pass_data = {
                 'name': c1.name,
-                'city': c1.city,
+                'city_id': c1.city_id,
                 'description': c1.description,
                 'place_id': place_id}
             return HttpResponse(template.render(pass_data, request))
@@ -50,7 +50,7 @@ def edit(request):
             template = loader.get_template('place/edit.html')
             pass_data = {
                 'name': c1.name,
-                'city': c1.city,
+                'city_id': c1.city_id,
                 'description': c1.description,
                 'place_id': place_id}
             return HttpResponse(template.render(pass_data, request))
@@ -61,10 +61,10 @@ def edit(request):
 def process_edit(request):
     if request.method == 'GET':
         #desc = request.GET.get('description', '')
-	    #Ecity = request.GET.get('city', '')
+	    #Ecity_id = request.GET.get('city_id', '')
         place_id = request.GET.get('place_id', '')
         c1 = Place.objects.get(id=place_id)
-        c1.city = request.GET.get('city', '')
+        c1.city_id = request.GET.get('city_id', '')
         c1.description = request.GET.get('description', '')
         c1.save()
         pass_data = {'place_id': place_id};
