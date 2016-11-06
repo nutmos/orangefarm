@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Country</title>
+    <title>Country</title>
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -78,6 +78,9 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <h4>Popular city</h4>
+            </div>
         </div>
     </div>
     <div id="footer-bar"></div>
@@ -87,7 +90,8 @@
     </script>
 </body>
 <script>
-var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
+var data = { user_id: "{{ request.session.user_id }}",
+logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
 };
 //window.alert(userInfo.user_id);
 </script>
