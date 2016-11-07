@@ -9,5 +9,5 @@ from mongoengine.django.auth import User as MongoUser
 class User(MongoUser):
     #email = StringField(max_length=100)
     bio = StringField(max_length=200)
-    photo = FileField()
+    photo = ImageField()
     name = StringField(max_length=100)

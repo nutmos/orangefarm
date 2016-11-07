@@ -68,14 +68,10 @@ def edit_profile(request):
         user1.email = request.POST.get('email', '')
         user1.bio = request.POST.get('bio', '')
         user1.name = request.POST.get('name', '')
-        print user1.name
-        print user1.bio
-        print user1.email
         user1.save()
         return HttpResponseRedirect('/profile/')
     else:
         try:
-            print request.session['user_id']
             user1 = User.objects.get(id=request.session['user_id'])
             request.session.set_expiry(3600)
             template = loader.get_template('user_profile/edit.html')
@@ -83,7 +79,6 @@ def edit_profile(request):
                 'email': user1.email,
                 'bio': user1.bio,
                 'name': user1.name}
-            print "Bio = " + user1.bio
             if user1.email == None:
                 pass_data['email'] = ""
             if user1.bio == None:
@@ -136,7 +131,7 @@ def handle_change_picture(request):
         #print request.POST
         image = request.FILES.get('profile-upload', '')
         #print image
-        user1.photo.put(image, content_type='image/png')
+        user1.photo.put(image, content_type='image/*')
         user1.save()
         return HttpResponseRedirect('/profile/')
     return HttpResponse('Not Complete')
