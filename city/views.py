@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine import *
 from models import *
+from country.models import *
 from django.template import loader
 
 
@@ -13,14 +14,15 @@ def index(request):
 
 def add_city(request):
     template = loader.get_template('city/add.html')
-    return HttpResponse(template.render({}, request))
+    country_list = Country.objects.order_by('name')
+    return HttpResponse(template.render({'country_list': country_list}, request))
 
 def process_add(request):
     if request.method == 'GET':
         name = request.GET.get('name', '')
-        country = request.GET.get('country', '')
+        country_id = request.GET.get('country-id', '')
         description = request.GET.get('description', '')
-        c1 = City(name=name, country_id=country, description=description)
+        c1 = City(name=name, country_id=country_id, description=description)
         c1.save()
         return HttpResponseRedirect('/city?city_id=' + str(c1.id))
     return HttpResponse('No GET Request')
@@ -31,9 +33,10 @@ def index(request):
         try:
             c1 = City.objects.get(id=city_id)
             template = loader.get_template('city/index.html')
+            country1 = Country.objects.get(id=c1.country_id)
             pass_data = {
                 'name': c1.name,
-                'country': c1.country,
+                'country': country1.name,
                 'description': c1.description,
                 'city_id': city_id}
             return HttpResponse(template.render(pass_data, request))
@@ -48,11 +51,15 @@ def edit(request):
         try:
             c1 = City.objects.get(id=city_id)
             template = loader.get_template('city/edit.html')
+            country_list = Country.objects()
+            c1country = Country.objects.get(id=c1.country_id)
+            print country_list
             pass_data = {
                 'name': c1.name,
-                'country': c1.country,
+                'selected_country_name': c1country.name,
                 'description': c1.description,
-                'city_id': city_id}
+                'city_id': city_id,
+                'country_list': country_list}
             return HttpResponse(template.render(pass_data, request))
         except DoesNotExist:
             return HttpResponse('Key error')
