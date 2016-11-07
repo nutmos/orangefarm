@@ -16,7 +16,11 @@
 </head>
 
 <body>
+    {% if country_photo_id %}
     <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "pictures/Airplane-Wallpaper.jpg" %}); background-size:100%">
+    {% else %}
+    <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url({% static "pictures/Airplane-Wallpaper.jpg" %}); background-size:100%">
+    {% endif %}
         <div id="navbar"></div>
         {% if alert %}
         <div class="alert-panel text-centered">
@@ -27,7 +31,7 @@
         {% endif %}
         <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
             <div class="large-10 columns small-centered">
-                <div class="row" style="font-size: 50px; color:white">
+                <div class="row text-centered" style="font-size: 50px; color:white">
                     {{ name }}
                 </div>
                 <div class="row" style="color: white;">
@@ -58,12 +62,13 @@
         </div>
     </div>
     <div class="row">
-                    <div class="large-6 columns">
+                    <div class="large-4 columns">
                         <a class="expanded button" href="/country/edit?country_id={{ country_id }}">Edit Country</a>
                     </div>
-                    <div class="large-6 columns">
+                    <div class="large-4 columns">
                         <a class="expanded button" href="/country/delete?country_id={{ country_id }}">Delete Country</a>
                     </div>
+                    <div class="large-4 columns"><a class="expanded button" href="/country/change-image?country_id={{ country_id }}">Edit Image</a></div>
                 </div>
     <div id="footer-bar"></div>
 

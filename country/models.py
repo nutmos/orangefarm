@@ -8,3 +8,4 @@ from mongoengine import *
 class Country(Document):
     name = StringField(unique=True, required=True)
     description = StringField()
+    photo = ImageField()
