@@ -33,8 +33,8 @@ var NavBar = React.createClass({
             );
         }
         return (
-        <div className="fixed hide-for-small contain-to-grid">
-        <nav className="top-bar" style={orange_background} role="navigation">
+        <div className="hide-for-small contain-to-grid">
+        <nav className="top-bar fixed" style={orange_background} role="navigation">
             <div className="top-bar-left align-self-middle">
                 <div style={white_color}>
                         <a href="/">

@@ -25,6 +25,7 @@
             </label>
             <label for="">Country
                 <select id="country-id" name="country-id" form="city-form">
+                    <option value="">Select Country</option>
                     {% for i in country_list %}
                     <option value="{{ i.id }}">{{ i.name }}</option>
                     {% endfor %}
