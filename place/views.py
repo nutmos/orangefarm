@@ -7,10 +7,6 @@ from django.template import loader
 
 # Create your views here.
 
-def index(request):
-    template = loader.get_template('place/index.html')
-    return HttpResponse(template.render({'foo': 'bar'}, request))
-
 def add_place(request):
     template = loader.get_template('place/add.html')
     return HttpResponse(template.render({}, request))
@@ -44,7 +40,6 @@ def index(request):
 def edit(request):
     if request.method == 'GET':
         place_id = request.GET.get('place_id', '')
-        print place_id
         try:
             c1 = Place.objects.get(id=place_id)
             template = loader.get_template('place/edit.html')

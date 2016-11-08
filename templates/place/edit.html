@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Profile</title>
+    <title>Edit Place</title>
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -26,14 +26,32 @@
             </div>
         </div>
         <div class="large-6 columns">
-        	<form action="/country/process-edit" method="get">
-            	<input type="hidden" name="country-id" value="{{ country_id }}">
-            	<label for="">Country Name
+        	<form action="/country/process-edit" method="get" name="place-form">
+            	<input type="hidden" name="city-id" value="{{ city_id }}">
+            	<label for="">Place Name
             		<input name="name" id="name" type="text" placeholder="name" value="{{ name }}">
             	</label>
             	<label for="">Description
                 	<input name="description" id="description" type="text" placeholder="Description" value="{{ description }}">
             	</label>
+                <label for="">Country
+                    <select id="" name="country-list" form="city-from">
+                        {% for i in country_list %}
+                            {% if i.name == selected_country_name %}
+                            <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+                            {% else %}
+                            <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </label>
+                <label for="">City
+                    <select id="city-list" name="city-list" form="place-form">
+                        {% for i in city_list %}
+                        <option value="{{ i.id}}">{{ i.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
         </div>
         <div class="footer text-centered">
                 <input class="button" type="submit" value="Save Change">

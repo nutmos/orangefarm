@@ -4,7 +4,7 @@ from mongoengine import *
 from models import *
 from country.models import *
 from django.template import loader
-
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -89,3 +89,15 @@ def delete(request):
             return HttpResponse('Wrong Key')
     return HttpResponse('No Request GET')
 
+def get_city_by_country(request):
+    if request.method == 'GET':
+        city_id = request.GET.get('country_id', '')
+        try:
+            c1 = City.objects.get(country_id=country_id)
+            c_json = {}
+            for c in c1:
+                c_json[c.name] = str(c.id)
+            return JsonResponse(c_json)
+        except:
+            pass
+    return HttpResponse("Error")
