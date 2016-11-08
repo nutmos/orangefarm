@@ -3,13 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine import *
 from models import *
 from django.template import loader
-
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 # Create your views here.
 
-def index(request):
-    template = loader.get_template('country/index.html')
-    return HttpResponse(template.render({'foo': 'bar'}, request))
 
 def add_country(request):
     template = loader.get_template('country/add.html')
@@ -76,3 +73,35 @@ def delete(request):
         except DoesNotExist:
             return HttpResponse('Wrong Key')
     return HttpResponse('No Request GET')
+
+def change_picture(request):
+    if request.method == 'GET':
+        country_id = request.GET.get('country_id', '')
+        c1 = Country.objects.get(id=country_id)
+        template = loader.get_template('country/change-picture.html')
+        return HttpResponse(template.render({'country_id': country_id}, request))
+    return HttpResponse("Error")
+
+def handle_change_picture(request):
+    if request.method == 'POST':
+        country_id = request.POST.get('country_id', '')
+        c1 = Country.objects.get(id=country_id)
+        c1.photo.delete()
+        image = request.FILES.get('image-upload', '')
+        c1.photo.put(image, content_type='image/*')
+        c1.save()
+        return HttpResponseRedirect('/country?country_id=' + country_id)
+    return HttpResponse("Error")
+
+def show_image(request):
+    if request.method == 'GET':
+        country_id = request.GET.get('country_id', '')
+        try:
+            c1 = Country.objects.get(id=country_id)
+            binary_img = c1.photo.read()
+            if binary_img == None:
+                return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+            return HttpResponse(binary_img, 'image/*')
+        except:
+            return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+    return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))

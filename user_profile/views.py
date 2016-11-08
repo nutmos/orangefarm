@@ -50,8 +50,6 @@ def other_user_profile(request, user=""):
     except DoesNotExist:
         return HttpResponse('User Not Found')
 
-    
-
 def show_image(request):
     if request.method == 'GET':
         user_id = request.GET.get('user_id', '')
@@ -124,13 +122,10 @@ def change_picture(request):
     return HttpResponse(template.render({}, request))
     
 def handle_change_picture(request):
-    #print 'handle_change'
     if request.method == 'POST':
         user1 = User.objects.get(id=request.session['user_id'])
         user1.photo.delete()
-        #print request.POST
         image = request.FILES.get('profile-upload', '')
-        #print image
         user1.photo.put(image, content_type='image/*')
         user1.save()
         return HttpResponseRedirect('/profile/')
