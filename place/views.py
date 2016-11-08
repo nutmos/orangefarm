@@ -77,3 +77,34 @@ def delete(request):
             return HttpResponse('Wrong Key')
     return HttpResponse('No Request GET')
 
+def change_picture(request):
+    if request.method == 'GET':
+        place_id = request.GET.get('place_id', '')
+        c1 = Place.objects.get(id=country_id)
+        template = loader.get_template('place/change-picture.html')
+        return HttpResponse(template.render({'place_id': place_id}, request))
+    return HttpResponse("Error")
+
+def handle_change_picture(request):
+    if request.method == 'POST':
+        place_id = request.POST.get('place_id', '')
+        c1 = Place.objects.get(id=place_id)
+        c1.photo.delete()
+        image = request.FILES.get('image-upload', '')
+        c1.photo.put(image, content_type='image/*')
+        c1.save()
+        return HttpResponseRedirect('/place?place_id=' + place_id)
+    return HttpResponse("Error")
+
+def show_image(request):
+    if request.method == 'GET':
+        place_id = request.GET.get('place_id', '')
+        try:
+            c1 = Place.objects.get(id=place_id)
+            binary_img = c1.photo.read()
+            if binary_img == None:
+                return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+            return HttpResponse(binary_img, 'image/*')
+        except:
+            return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+    return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))

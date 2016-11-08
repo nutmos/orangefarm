@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Country</title>
+    <title>{{ name }}</title>
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -16,78 +16,58 @@
 </head>
 
 <body>
-    <div id="navbar"></div>
-    {% if alert %}
-    <div class="alert-panel text-centered">
-        <div id="alert" class="row" style="">
-            {{ alert }}
+    <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url('/country/picture?country_id={{ country_id }}'); background-size:100%; width: 100%; height: 100%">
+        <div id="navbar"></div>
+        {% if alert %}
+        <div class="alert-panel text-centered">
+            <div id="alert" class="row" style="">
+                {{ alert }}
+            </div>
         </div>
-    </div>
-    {% endif %}
-    <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
-        <div class="large-10 columns small-centered">
-            <div class="row">
-                <div class="row" style="font-size: 50px; color:#A34E24">
+        {% endif %}
+        <div class="row" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%); position: absolute;">
+            <div class="large-12 columns small-centered">
+                <div class="row text-centered" style="font-size: 50px; color:white">
                     {{ name }}
                 </div>
-            </div>
-            <div class="row">
-                <div class="large-6 columns">
-                    <div class="profile-image">
-                        <div class="orbit" role="region" aria-label="Country Pictures" data-orbit>
-                            <ul class="orbit-container">
-                                <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                                <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-                                <li class="is-active orbit-slide">
-                                    <img class="orbit-image" src={% static "pictures/thailand-grand-palace.jpg" %} alt="Space">
-                                    <figcaption class="orbit-caption">Grand Palace.</figcaption>
-                                </li>
-                                <li class="orbit-slide">
-                                    <img class="orbit-image" src={% static "pictures/pattaya.jpg" %}>
-                                     <figcaption class="orbit-caption">Pattaya</figcaption>
-                                </li>
-                                <li class="orbit-slide">
-                                    <img class="orbit-image" src={% static "pictures/pai.jpg" %} alt="Space">
-                                    <figcaption class="orbit-caption">Pai</figcaption>
-                                </li>
-                                <li class="orbit-slide">
-                                    <img class="orbit-image" src={% static "pictures/plearn-wan.jpg" %} alt="Space">
-                                    <figcaption class="orbit-caption">Plearn Wan</figcaption>
-                                </li>
-                            </ul>
-                            <nav class="orbit-bullets">
-                                <button class="is-active" data-slide="0" ><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-                                <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-                                <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
-                                <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-                <div class="large-6 columns">
-                    <div style="color: gray;" class="row">
+                <div class="row text-centered" style="color: white;">
+                    <div class="large-12 columns small-centered" style="padding:30px">
                         {{ description }}
                     </div>
-                    <div class="row">
-                        <div class="large-6 columns">
-                            <a class="expanded button" href="/country/edit?country_id={{ country_id }}">Edit Country</a>
-                        </div>
-                        <div class="large-6 columns">
-                            <a class="expanded button" href="/country/delete?country_id={{ country_id }}">Delete Country</a>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="row">
-                <h4>Popular city</h4>
+        </div>
+    </section>
+    <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
+        <div class="large-10 columns small-centered">
+            <h3>Popular city</h3>
+            <div class="row large-up-3 project-overlay-inset">
+                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Grand Palace<br>Bangkok, Thailand</div></div></div></a></div>
+                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/pattaya.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Pattaya,<br>Chonburi, Thailand</div></div></div></a></div>
+                <div class="column" style="margin-top: 2em;"><a href="/trip/" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/hong-kong.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Hong Kong</div></div></div></a></div>
             </div>
+            <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
+
+            <h3>Popular Place</h3>
+            <div class="row large-up-3 project-overlay-inset">
+                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/plearn-wan.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Plearn Wan<br>Hua Hin, Thailand</div></div></div></a></div>
+                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/pai.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Pai<br>Mae Hongson, Thailand</div></div></div></a></div>
+                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Wat Poramaiyikawas<br>Nonthaburi, Thailand</div></div></div></a></div>
+            </div>
+            <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
         </div>
     </div>
+    <div class="row">
+                    <div class="large-4 columns">
+                        <a class="expanded button" href="/country/edit?country_id={{ country_id }}">Edit Place</a>
+                    </div>
+                    <div class="large-4 columns">
+                        <a class="expanded button" href="/country/delete?country_id={{ country_id }}">Delete Place</a>
+                    </div>
+                    <div class="large-4 columns"><a class="expanded button" href="/country/change-picture?country_id={{ country_id }}">Edit Image</a></div>
+                </div>
     <div id="footer-bar"></div>
 
-    <script>
-        $(document).foundation();
-    </script>
 </body>
 <script>
 var data = { user_id: "{{ request.session.user_id }}",
