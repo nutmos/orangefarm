@@ -3,13 +3,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine import *
 from models import *
 from django.template import loader
+from country.models import *
 
 
 # Create your views here.
 
 def add_place(request):
     template = loader.get_template('place/add.html')
-    return HttpResponse(template.render({}, request))
+    country_list = Country.objects.order_by('name')
+    return HttpResponse(template.render({'country_list': country_list}, request))
 
 def process_add(request):
     if request.method == 'GET':

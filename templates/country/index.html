@@ -57,6 +57,7 @@
             <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
         </div>
     </div>
+    {% if access_edit %}
     <div class="row">
                     <div class="large-4 columns">
                         <a class="expanded button" href="/country/edit?country_id={{ country_id }}">Edit Country</a>
@@ -66,6 +67,7 @@
                     </div>
                     <div class="large-4 columns"><a class="expanded button" href="/country/change-picture?country_id={{ country_id }}">Edit Image</a></div>
                 </div>
+    {% endif %}
     <div id="footer-bar"></div>
 
 </body>

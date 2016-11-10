@@ -9,3 +9,4 @@ class City(Document):
     name = StringField()
     country_id = StringField()
     description = StringField()
+    photo = ImageField()

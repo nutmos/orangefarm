@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Country</title>
+    <title>{{ name }}</title>
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -14,32 +14,23 @@
 </head>
 <body>
     <div id="navbar"></div>
+    {% if alert %}
+    <div class="alert-panel text-centered">
+        <div id="alert" class="row" style="">
+            {{ alert }}
+        </div>
+    </div>
+    {% endif %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
-    <div class="large-10 columns small-centered">
-    <div class="row">
-    	<div class="large-6 columns">
-            <div class="profile-image">
-                <img src='/country/picture?country_id={{ country_id }}' />
-            </div>
-            <div class="small-11 columns">
-            	<a class="button" href="/country/change-picture?country_id={{ country_id }}">Change Country Picture</a>
-            </div>
-        </div>
-        <div class="large-6 columns">
-        	<form action="/country/process-edit" method="get">
-            	<input type="hidden" name="country_id" value="{{ country_id }}">
-                <label for="" class="text-center" style="font-size: 30px;">{{ name }} 
-            	</label>
-            	<label for="">Description
-                    <textarea name="bio" id="bio" type="text" placeholder="Tell about yourself" rows="4">{{ description }}</textarea>
-            	</label>
-        </div>
-        <div class="footer text-centered">
+        <form action="/city/handle-change-picture/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input id="city_id" type="hidden" name="city_id" value="{{ city_id }}">
+            <label class="button" for="image-upload">Upload File</label>
+            <input type="file" id="image-upload" name="image-upload" class="show-for-sr" accept="image/*">
+            <div class="footer text-centered">
                 <input class="button" type="submit" value="Save Change">
             </div>
         </form>
-    </div>
-    </div>
     </div>
     <div id="footer-bar"></div>
 </body>

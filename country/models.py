@@ -9,3 +9,4 @@ class Country(Document):
     name = StringField(unique=True, required=True)
     description = StringField()
     photo = ImageField()
+    url_point_to = StringField(unique=True, required=True)

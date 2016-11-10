@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^change-picture/', views.change_picture, name='change-picture'),
     url(r'^handle-change-picture/', views.handle_change_picture, name='handle-change-picture'),
     url(r'^picture/', views.show_image, name='picture'),
+    url(r'^c/(?P<country_name>\w+)/', views.country_name, name='user'),
 ]

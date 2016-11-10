@@ -28,11 +28,10 @@
         <div class="large-6 columns">
         	<form action="/city/process-edit" method="get" id="city-form">
             	<input type="hidden" name="city_id" value="{{ city_id }}">
-            	<label for="">City Name
-            		<input name="name" id="name" type="text" placeholder="name" value="{{ name }}">
+                <label for="" class="text-center" style="font-size: 30px;">{{ name }} 
             	</label>
             	<label for="">Description
-                	<input name="description" id="description" type="text" placeholder="Description" value="{{ description }}">
+                    <textarea name="bio" id="bio" type="text" placeholder="Tell about yourself" rows="4">{{ description }}</textarea>
             	</label>
                 <label for="">Country
                     <select id="" name="country-list" form="city-from">
