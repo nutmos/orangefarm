@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'firstpage',
+    'mongoengine.django.mongo_auth',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 ]
 
 SESSION_FILE_PATH = ('%s/session' % BASE_DIR)
@@ -77,16 +79,27 @@ WSGI_APPLICATION = 'orangefarm.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.dummy',
         'NAME': 'mongo'
+        #'ENGINE': 'django_mongodb_engine',
+        #'NAME': 'orangefarm',  
+        #'USER': 'orangefarm',
+        #'PASSWORD': 'orangefarm',  
+        #'HOST': 'localhost',  
+        #'PORT': '27017',  
+        #'SUPPORTS_TRANSACTIONS': False,  
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    #'default': {
+    #    'ENGINE': 'django_mongo_engine',
+    #    'NAME': 'mongo',
+    #    'USER': 'orangefarm',
+    #    'PASSWORD': 'orangefarm',
+    #}
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -133,11 +146,13 @@ STATICFILES_DIRS = (
 from mongoengine import connect
 connect('orangefarm', username='orangefarm', password='orangefarm')
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.file'
-SESSION_FILE_PATH = ('%s/session' % BASE_DIR)
-#SESSION_ENGINE = 'mongoengine.django.sessions'
+#SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+#SESSION_FILE_PATH = ('%s/session' % BASE_DIR)
+SESSION_ENGINE = 'mongoengine.django.sessions'
 #SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
+#AUTH_USER_MODEL = 'mongo_auth.MongoUser'
+#MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
 #
-#AUTHENTICATION_BACKENDS = (
-#    'mongoengine.django.auth.MongoEngineBackend',
-#)
+AUTHENTICATION_BACKENDS = (
+    'mongoengine.django.auth.MongoEngineBackend',
+)
