@@ -1,7 +1,8 @@
 var FooterBar = React.createClass({
     render: function() {
         var footerStyle = {
-            backgroundColor: 'orange'
+            backgroundColor: 'orange',
+            padding: '7px'
         };
         var imgStyle = {
             width: '60px',
