@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Profile</title>
+    <title>New Place</title>
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -16,15 +16,16 @@
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
     <div class="large-6 columns small-centered">
     <div class="row">
-        <form action="/place/process-add" method="get">
+        <form action="/place/process-add" method="get" name="place-form" id="place-form">
             <label for="">Name
                 <input id="name" type="text" name="name" placeholder="name">
             </label>
             <label for="">Description
-                <input name="description" id="description" type="text" placeholder="Description">
+
+                <textarea name="description" id="description" type="text" rows="4"></textarea>
             </label>
             <label for="">Country
-                <select id="country-list" name="country-list" onchange="updateCity()">
+                <select id="country-id" name="country-id" onchange="updateCity()">
                     <option value="">Select Country</option>
                     {% for i in country_list %}
                     <option value="{{ i.id }}">{{ i.name }}</option>
@@ -32,7 +33,7 @@
                 </select>
             </label>
             <label for="">City
-                <select id="city-list" name="city-list">
+                <select id="city-id" name="city-id" form="place-form">
                     <option value="">Select City</option>
                 </select>
             </label>
@@ -51,7 +52,7 @@ logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
 };
 
 function updateCity() {
-    var e = document.getElementById("country-list");
+    var e = document.getElementById("country-id");
     var country_id = e.options[e.selectedIndex].value;
     if (country_id === "") {
         var city_e = document.getElementById("city-list");
@@ -68,7 +69,7 @@ function updateCity() {
     xmlHttp.send();
     var jsonObject = xmlHttp.responseText;
     var obj = JSON.parse(jsonObject);
-    var city_e = document.getElementById("city-list");
+    var city_e = document.getElementById("city-id");
     city_e.innerHTML = "";
     var opt1 = document.createElement('option');
     opt1.value = "";

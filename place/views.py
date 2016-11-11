@@ -16,7 +16,7 @@ def add_place(request):
 def process_add(request):
     if request.method == 'GET':
         name = request.GET.get('name', '')
-        city_id = request.GET.get('city_id', '')
+        city_id = request.GET.get('city-id', '')
         description = request.GET.get('description', '')
         c1 = Place(name=name, city_id=city_id, description=description)
         c1.save()
