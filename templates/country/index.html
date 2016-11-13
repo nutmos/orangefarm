@@ -40,11 +40,11 @@
     </section>
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
-            <h3>Popular city</h3>
+            <h3>Popular City</h3>
             <div class="row large-up-3 project-overlay-inset">
-                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Grand Palace<br>Bangkok, Thailand</div></div></div></a></div>
-                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/pattaya.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Pattaya,<br>Chonburi, Thailand</div></div></div></a></div>
-                <div class="column" style="margin-top: 2em;"><a href="/trip/" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/hong-kong.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Hong Kong</div></div></div></a></div>
+            {% for c1 in city_list %}
+            <div class="column" style="margin-top: 2em;"><a href="/city?city_id={{ c1.id }}" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src="/city/picture?city_id={{ c1.id }}" class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">{{ c1.name }}</div></div></div></a></div>
+            {% endfor %}
             </div>
             <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
 

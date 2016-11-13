@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine import *
 from models import *
+from city.models import *
 from user_profile.models import *
 from django.template import loader
 from django.contrib.staticfiles.templatetags.staticfiles import static
@@ -52,26 +53,25 @@ def index(request):
     return HttpResponse('This page is not complete')
 
 def country_name(request, country_name):
+    access_edit = True
     try:
-        access_edit = True
-        try:
-            user_id = request.session['user_id']
-            user1 = User.objects.get(id=user_id)
-            if user1.is_staff == False:
-                access_edit = False
-                print user1.name
-        except:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
             access_edit = False
-        c1 = Country.objects.get(url_point_to=country_name)
-        template = loader.get_template('country/index.html')
-        pass_data = {
-            'name': c1.name, 
-            'description': c1.description,
-            'country_id': str(c1.id),
-            'access_edit': access_edit}
-        return HttpResponse(template.render(pass_data, request))
+            print user1.name
     except:
-        return HttpResponse('Error')
+        access_edit = False
+    c1 = Country.objects.get(url_point_to=country_name)
+    template = loader.get_template('country/index.html')
+    city_list = City.objects(country_id=str(c1.id))
+    pass_data = {
+        'name': c1.name, 
+        'description': c1.description,
+        'country_id': str(c1.id),
+        'access_edit': access_edit,
+        'city_list': city_list}
+    return HttpResponse(template.render(pass_data, request))
 
 def edit(request):
     user_id = request.session['user_id']

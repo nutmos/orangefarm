@@ -4,17 +4,33 @@ from mongoengine import *
 from models import *
 from django.template import loader
 from country.models import *
-
+from user_profile.models import *
 
 # Create your views here.
 
 def add_place(request):
+    try:
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
     template = loader.get_template('place/add.html')
     country_list = Country.objects.order_by('name')
     return HttpResponse(template.render({'country_list': country_list}, request))
 
 def process_add(request):
     if request.method == 'GET':
+        try:
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
         name = request.GET.get('name', '')
         city_id = request.GET.get('city-id', '')
         description = request.GET.get('description', '')
@@ -26,6 +42,16 @@ def process_add(request):
 def index(request):
     if request.method == 'GET':
         place_id = request.GET.get('place_id', '')
+        access_edit = True
+        try:
+            user_id = request.session['user_id']
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                access_edit = False
+                print user1.name
+        except:
+            print "except"
+            access_edit = False
         try:
             c1 = Place.objects.get(id=place_id)
             template = loader.get_template('place/index.html')
@@ -33,7 +59,8 @@ def index(request):
                 'name': c1.name,
                 'city_id': c1.city_id,
                 'description': c1.description,
-                'place_id': place_id}
+                'place_id': place_id,
+                'access_edit': access_edit}
             return HttpResponse(template.render(pass_data, request))
         except ValidationError:
             return HttpResponse('place id is not correct')
@@ -41,6 +68,14 @@ def index(request):
 
 def edit(request):
     if request.method == 'GET':
+        try:
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
         try:
             c1 = Place.objects.get(id=place_id)
@@ -57,6 +92,14 @@ def edit(request):
 
 def process_edit(request):
     if request.method == 'GET':
+        try:
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
         #desc = request.GET.get('description', '')
 	    #Ecity_id = request.GET.get('city_id', '')
         place_id = request.GET.get('place_id', '')
@@ -70,6 +113,14 @@ def process_edit(request):
 
 def delete(request):
     if request.method == 'GET':
+        try:
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
         try:
             c1 = Place.objects.get(id=place_id)
@@ -81,6 +132,14 @@ def delete(request):
 
 def change_picture(request):
     if request.method == 'GET':
+        try:
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
         c1 = Place.objects.get(id=country_id)
         template = loader.get_template('place/change-picture.html')
@@ -89,6 +148,14 @@ def change_picture(request):
 
 def handle_change_picture(request):
     if request.method == 'POST':
+        try:
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
         place_id = request.POST.get('place_id', '')
         c1 = Place.objects.get(id=place_id)
         c1.photo.delete()
@@ -100,6 +167,14 @@ def handle_change_picture(request):
 
 def show_image(request):
     if request.method == 'GET':
+        try:
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
         try:
             c1 = Place.objects.get(id=place_id)
