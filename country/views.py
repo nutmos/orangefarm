@@ -66,12 +66,19 @@ def country_name(request, country_name):
     c1 = Country.objects.get(url_point_to=country_name)
     template = loader.get_template('country/index.html')
     city_list = City.objects(country_id=str(c1.id))
+    show_more_city = False
+    if len(city_list) > 3:
+        import random
+        num_list = random.sample(range(len(city_list)), 3)
+        print num_list
+        city_list = [city_list[num_list[i]] for i in range(3)]
+        show_more_city = True
     pass_data = {
         'name': c1.name, 
         'description': c1.description,
         'country_id': str(c1.id),
         'access_edit': access_edit,
-        'city_list': city_list[:3]}
+        'city_list': city_list}
     return HttpResponse(template.render(pass_data, request))
 
 def edit(request):

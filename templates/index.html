@@ -12,7 +12,7 @@
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
 <body>
-    <div id="navbar"></div>
+    {% include 'navbar.html' %}
     <section style="display: block; background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),  url({% static "pictures/sao-ching-cha.jpg" %});background-size:cover">
         <div class="row">
             <div class="large-10 columns small-centered">
@@ -32,14 +32,8 @@
             </div>
         </div>
     </section>
-    <div id="footer-bar"></div>
+    {% include 'footerbar.html' %}
 </body>
 
-<script>
-    var data = { user_id: "{{ request.session.user_id }}",logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
-//window.alert(userInfo.user_id);
-</script>
-<script src={% static "js/footerbar.js" %} type="text/babel"></script>
-<script src={% static "js/navbar.js" %} type="text/babel"></script>
 <script src={% static "js/searchbutton.js" %} type="text/babel"></script>
 </html>

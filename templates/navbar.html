@@ -1,0 +1,27 @@
+{% load static %}
+<div class="hide-for-small contain-to-grid">
+<nav class="top-bar fixed" style="background-color: orange;" role="navigation">
+    <div class="top-bar-left align-self-middle">
+        <div style="color: white;">
+                <a href="/">
+                    <img src={% static 'logo/orange-farm-logo-white-transparent.png' %} alt="" style="width: 60px; height: auto;" />
+                    Trip Finder
+                </a>
+        </div>
+    </div>
+    <div class="top-bar-right">
+        <ul class="dropdown menu" style="background-color: orange;" data-dropdown-menu>
+            <li><a href="#">Program Tour</a></li>
+            <li><a href="#">Item1</a></li>
+            <li><a href="#">Item1</a></li>
+            {% if request.session.user_id %}
+            <li><a href="/profile">View Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+</div>

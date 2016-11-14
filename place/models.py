@@ -5,11 +5,12 @@ from mongoengine import *
 
 # Create your models here.
 
-class Photo(Document):
+class PlacePicture(Document):
     photo = ImageField()
 
 class Place(Document):
     name = StringField()
     description = StringField()
     city_id = StringField()
-    photos = ListField(ReferenceField(Photo))
+    photos = ListField(ReferenceField('PlacePicture'))
+    related = ListField(ReferenceField('self'))
