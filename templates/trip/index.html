@@ -31,7 +31,7 @@
     }
 </style>
 <body>
-    <div id="navbar"></div>
+    {% include 'navbar.html' %}
     <section>
         {% if alert %}
         <div class="alert-panel text-centered">
@@ -93,7 +93,7 @@
                         <th>Booking</th>
                         <th>Seat Available</th>
                         <th>Date</th>
-                        <th>Airline</th>
+                        <th>Travel by</th>
                         <th>Price</th>
                     </tr>
                     <tr>
@@ -137,18 +137,11 @@
                     </div>
                 </div>
     {% endif %}
-    <div id="footer-bar"></div>
+
+    {% include 'footerbar.html' %} 
 
     <script>
         $(document).foundation();
     </script>
 </body>
-
-<script>
-    var data = { user_id: "{{ request.session.user_id }}",
-    logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"};
-//window.alert(userInfo.user_id);
-</script>
-<script src={% static "js/footerbar.js" %} type="text/babel"></script>
-<script src={% static "js/navbar.js" %} type="text/babel"></script>
 </html>

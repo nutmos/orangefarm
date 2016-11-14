@@ -26,12 +26,12 @@
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
-                <div class="circle active">
-                    <span class="label">1</span>
+                <div class="circle done">
+                    <span class="label">&#10003</span>
                     <span class="title">Detail</span>
                 </div>
-                <span class="bar"></span>
-                <div class="circle">
+                <span class="bar active"></span>
+                <div class="circle active">
                     <span class="label">2</span>
                     <span class="title">Infomation</span>
                 </div>
@@ -139,16 +139,16 @@
         <br>
         <br>
     </section>
-
     <div class="row">
         <div class="large-6 columns small-centered">
             <div class="large-4 columns">
+                <a class="expanded button" href="/booking">back</a>
             </div>
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/info">Next</a>
+                <a class="expanded button" href="/booking/checking">Next</a>
             </div>
-        </div>
+        </div> 
     </div>
-    {% include 'footerbar.html' %}   
+    {% include 'footerbar.html' %}
 </body>
 </html>

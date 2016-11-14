@@ -11,10 +11,14 @@ def index(request):
     template = loader.get_template('booking/index.html')
     return HttpResponse(template.render({'foo': 'bar'}, request))
 
-def step2(request):
-    template = loader.get_template('booking/step2.html')
+def info(request):
+    template = loader.get_template('booking/info.html')
     return HttpResponse(template.render({'foo': 'bar'}, request))
 
-def step3(request):
-    template = loader.get_template('booking/step3.html')
+def checking(request):
+    template = loader.get_template('booking/checking.html')
+    return HttpResponse(template.render({'foo': 'bar'}, request))
+
+def payment(request):
+    template = loader.get_template('booking/payment.html')
     return HttpResponse(template.render({'foo': 'bar'}, request))

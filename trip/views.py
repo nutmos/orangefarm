@@ -80,13 +80,14 @@ def index(request):
                 'price': c1.price,
                 'start_date': c1.start_date,
                 'end_date': c1.end_date,
-                'max_people': c1.description,
-                'remaining_people': c1.description,
+                'max_people': c1.max_people,
+                'remaining_people': c1.remaining_people,
                 'highlight': c1.highlight,
                 'description': c1.description,
                 'travel_by': c1.travel_by,
                 'conditions': c1.conditions,
-                'access_edit': access_edit}
+                'access_edit': access_edit,
+                'trip_id': str(c1.id)}
             return HttpResponse(template.render(pass_data, request))
         except ValidationError:
             return HttpResponse('trip id is not correct')
