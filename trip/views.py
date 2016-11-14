@@ -67,7 +67,7 @@ def index(request):
             access_edit = False
         try:
             c1 = Trip.objects.get(id=trip_id)
-            if c1.active == False
+            if c1.active == False:
                 return HttpResponse('trip is not available')
             template = loader.get_template('city/index.html')
             company1 = Company.objects.get(id=c1.company_id)
