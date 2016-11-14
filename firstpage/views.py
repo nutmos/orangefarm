@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from country.models import *
 
 is_login = True
 
@@ -10,22 +11,23 @@ def get_is_login():
 # Create your views here.
 def index(request):
     template = loader.get_template('index.html')
-    #a = User.objects.create(
-    #    username="Nutmos", password="111")
-    #a.save()
-    #if (request.session['username'] == 'nutmos'):
-    #    return HttpResponse("True")
-    #else:
-    #    return HttpResponse(template.render({'foo': 'bar'}, request))
-    #return HttpResponse("<h1>Success!</h1>")
     is_login = True
     try:
         a = request.session['user_id']
-        #print 'user_id = ' + a
         request.session.set_expiry(3600)
     except KeyError:
-        #print "KeyError"
         is_login = False
-    #print 'is_login = ' + str(is_login)
-    return HttpResponse(template.render({'foo':'bar'}, request))
+    all_country = Country.objects()
+    show_more_country = False
+    if len(all_country) > 6:
+        import random
+        num_list = random.sample(range(len(all_country)), 6)
+        print num_list
+        all_country = [all_country[num_list[i]] for i in range(6)]
+        show_more_country = True
+    pass_data = {
+        'all_country': all_country,
+        'show_more_country': show_more_country
+    }
+    return HttpResponse(template.render(pass_data, request))
 

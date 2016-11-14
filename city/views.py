@@ -63,13 +63,24 @@ def index(request):
         try:
             c1 = City.objects.get(id=city_id)
             template = loader.get_template('city/index.html')
+            city_num = City.objects(country_id=c1.country_id).count()
             country1 = Country.objects.get(id=c1.country_id)
+            other_city = City.objects(country_id=c1.country_id)
+            show_more_city = False
+            if len(other_city) > 3:
+                import random
+                num_list = random.sample(range(len(other_city)), 3)
+                print num_list
+                other_city = [other_city[num_list[i]] for i in range(3)]
+                show_more_city = True
             pass_data = {
                 'name': c1.name,
-                'country': country1.name,
+                'country_name': country1.name,
                 'description': c1.description,
                 'city_id': city_id,
-                'access_edit': access_edit}
+                'other_city': other_city,
+                'access_edit': access_edit,
+                'show_more_city': show_more_city}
             return HttpResponse(template.render(pass_data, request))
         except ValidationError:
             return HttpResponse('city id is not correct')

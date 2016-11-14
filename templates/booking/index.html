@@ -51,11 +51,10 @@
                 <h4 style="text-align:left">Package Tour</h4>
             <div style="background-color:white">
                 <h5 style="text-align:left">Name of Package Tour:</h5>
-                <h5 style="text-align:left">Package Tour ID:</h5>
+                <h5 style="text-align:left">Company:</h5>
                 <h5 style="text-align:left">Depart date:</h5>
                 <h5 style="text-align:left">Return date:</h5>
-                <h5 style="text-align:left">Airline:</h5>
-                <h5 style="text-align:left">Flight:</h5>
+                <h5 style="text-align:left">Travel by:</h5>
             </div>
             </div>
         </div>
@@ -67,32 +66,9 @@
             <div style="background-color:white">
                 <h5 style="text-align:left">Seat Available:</h5>
                 <h5 style="text-align:left">Adult:</h5>
-                    <select class="form-control" id="selAdult">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
+                    <input type="number" id="adult-num" value="1">
                 <h5 style="text-align:left">Children:</h5>
-                    <select class="form-control" id="selChild">
-                        <option>--</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
+                    <input type="number" id="children-num" value="0">
                 <p style="text-align:center">*Passenger age less than 12 years old is children</p>
                 <p style="text-align:center">*If you have a baby please information 02-792-9292</p>
                 <h5 style="text-align:left">Depart date:</h5>
@@ -108,23 +84,9 @@
             <div style="background-color:white">
                 <h5 style="text-align:left">Total guest:</h5>
                 <h5 style="text-align:left">twin bedroom:</h5>
-                    <select class="form-control" id="selTwin">
-                        <option>--</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    <input type="number" id="twin-bed-num" value="1">
                 <h5 style="text-align:left">single bedroom:</h5>
-                    <select class="form-control" id="selSingle">
-                        <option>--</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
+                    <input type="number" id="single-bed-num" value="1">
                 <p style="text-align:center">*single bedroom increase price 10,000 baht</p>
             </div>
             </div>
@@ -135,47 +97,8 @@
             <div style="background-color:#D5DBDB">
                 <h4 style="text-align:left">Food Detail</h4>
             <div style="background-color:white">
-                <h5 style="text-align:left">Vegetarian:</h5>
-                    <select class="form-control" id="selVet">
-                        <option>--</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
-                <h5 style="text-align:left">Muslim:</h5>
-                    <select class="form-control" id="selMus">
-                        <option>--</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
-                <h5 style="text-align:left">Seafood Allergy:</h5>
-                    <select class="form-control" id="selSea">
-                        <option>--</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
-                <h5 style="text-align:left">Allergy:</h5>
+                <h5>Special Requirement for Food:</h5>
+                <textarea id="special-requirement" name="special-requirement" rows="3"></textarea>
             </div>
             </div>
         </div>

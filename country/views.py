@@ -35,7 +35,7 @@ def process_add(request):
         return HttpResponse(template.render({}, request))
     if request.method == 'GET':
         name = request.GET.get('name','')
-        url = name.lower().replace(' ', '-')
+        url = name.lower().replace(' ', '_')
         description = request.GET.get('description','')
         c1 = Country(name=name, description=description, url_point_to=url)
         c1.save()
@@ -53,6 +53,7 @@ def index(request):
     return HttpResponse('This page is not complete')
 
 def country_name(request, country_name):
+    print "country_name = " + country_name
     access_edit = True
     try:
         user_id = request.session['user_id']
@@ -70,7 +71,7 @@ def country_name(request, country_name):
         'description': c1.description,
         'country_id': str(c1.id),
         'access_edit': access_edit,
-        'city_list': city_list}
+        'city_list': city_list[:3]}
     return HttpResponse(template.render(pass_data, request))
 
 def edit(request):
