@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to Trip Finder</title>
+    <title>{{ name }}</title>
     <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
     <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -33,8 +33,16 @@
 <body>
     <div id="navbar"></div>
     <section>
+        {% if alert %}
+        <div class="alert-panel text-centered">
+            <div id="alert" class="row" style="">
+                {{ alert }}
+            </div>
+        </div>
+        {% endif %}
         <div class="row" style="padding:30px">
             <h2 style="color:#A34E24"> {{ name }} </h2>
+            <p>    by {{ company_name }}</p>
         </div>
         <div class="row">
             <div class="large-4 columns">
@@ -119,7 +127,16 @@
             </div>
         </div>
     </section>
-
+    {% if access_edit %}
+    <div class="row">
+                    <div class="large-4 columns">
+                        <a class="expanded button" href="/trip/edit?trip_id={{ trip_id }}">Edit Trip</a>
+                    </div>
+                    <div class="large-4 columns">
+                        <a class="expanded button" href="/trip/delete?trip_id={{ trip_id }}">Delete Trip</a>
+                    </div>
+                </div>
+    {% endif %}
     <div id="footer-bar"></div>
 
     <script>

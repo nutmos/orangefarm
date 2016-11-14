@@ -23,7 +23,8 @@ def add_trip(request):
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     template = loader.get_template('trip/add.html')
-    return HttpResponse(template.render({}, request))
+    company_list = Company_profile.objects.order_by('name')
+    return HttpResponse(template.render({'company_list': company_list}, request))
 
 def process_add(request):
     if request.method == 'GET':
@@ -69,7 +70,7 @@ def index(request):
             c1 = Trip.objects.get(id=trip_id)
             if c1.active == False:
                 return HttpResponse('trip is not available')
-            template = loader.get_template('city/index.html')
+            template = loader.get_template('trip/index.html')
             company1 = Company.objects.get(id=c1.company_id)
             pass_data = {
                 'name': c1.name,
