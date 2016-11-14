@@ -14,7 +14,13 @@
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
     <link rel="stylesheet" href={% static "css/progress_bar/styles.css"%}>
 </head>
-
+<style>
+    td {
+        text-align: left;
+        background-color: white;
+        table-layout: auto;
+    }
+</style>
 <body>
     <div id="navbar"></div>
 
@@ -44,64 +50,89 @@
             <br><br>
         </div>
     </section>
+
     <section>
         <br>
         <div class="large-6 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">Package Tour</h4>
-            <div style="background-color:white">
-                <h5 style="text-align:left">Name of Package Tour:</h5>
-                <h5 style="text-align:left">Company:</h5>
-                <h5 style="text-align:left">Depart date:</h5>
-                <h5 style="text-align:left">Return date:</h5>
-                <h5 style="text-align:left">Travel by:</h5>
-            </div>
-            </div>
+            <table>
+                <thead style="background-color:#6B7A8F; color:white">
+                    <tr>
+                        <th colspan="3">Package Tour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="20%"></td>
+                        <td>Name of Package Tour:</td>
+                        <td width="40%">Hong kong</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Company:</td>
+                        <td>Orange farm</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Depart date:</td>
+                        <td>dd/mm/yy</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Return date:</td>
+                        <td>dd/mm/yy</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Travel by:</td>
+                        <td>plane</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <br>
         <br>
         <div class="large-6 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">Traveller Detail</h4>
-            <div style="background-color:white">
-                <h5 style="text-align:left">Seat Available:</h5>
-                <h5 style="text-align:left">Adult:</h5>
-                    <input type="number" id="adult-num" value="1">
-                <h5 style="text-align:left">Children:</h5>
-                    <input type="number" id="children-num" value="0">
-                <p style="text-align:center">*Passenger age less than 12 years old is children</p>
-                <p style="text-align:center">*If you have a baby please information 02-792-9292</p>
-                <h5 style="text-align:left">Depart date:</h5>
-                <h5 style="text-align:left">Return date:</h5>
-            </div>
-            </div>
-        </div>
+            <table>
+                <thead style="background-color:#6B7A8F; color:white">
+                    <tr>
+                        <th colspan="3">Traveller Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="20%"></td>
+                        <td>Seat Available:</td>
+                        <td width="40%">15</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Adult:</td>
+                        <td><select style="height:35px; width:80px">
+                            <option value="1" selected="selected">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Children:</td>
+                        <td><select style="height:35px; width:80px">
+                            <option value="0">-</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="color:red;">*Passenger age less than 12 years old is children</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="color:red;">**If you have a baby please information 02-792-9292</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>        
         <br>
-        <br>
-        <div class="large-6 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">Room Detail</h4>
-            <div style="background-color:white">
-                <h5 style="text-align:left">Total guest:</h5>
-                <h5 style="text-align:left">twin bedroom:</h5>
-                    <input type="number" id="twin-bed-num" value="1">
-                <h5 style="text-align:left">single bedroom:</h5>
-                    <input type="number" id="single-bed-num" value="1">
-                <p style="text-align:center">*single bedroom increase price 10,000 baht</p>
-            </div>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="large-6 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">Food Detail</h4>
-            <div style="background-color:white">
-                <h5>Special Requirement for Food:</h5>
-                <textarea id="special-requirement" name="special-requirement" rows="3"></textarea>
-            </div>
-            </div>
-        </div>
         <br>
     </section>
 
