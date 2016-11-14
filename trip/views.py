@@ -7,6 +7,7 @@ from country.models import *
 from city.models import *
 from place.models import *
 from user_profile.models import *
+from company_profile.models import *
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
@@ -23,7 +24,7 @@ def add_trip(request):
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     template = loader.get_template('trip/add.html')
-    company_list = Company_profile.objects.order_by('name')
+    company_list = Company.objects.order_by('name')
     return HttpResponse(template.render({'company_list': company_list}, request))
 
 def process_add(request):
