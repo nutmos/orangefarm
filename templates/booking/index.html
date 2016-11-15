@@ -19,6 +19,10 @@
         background-color: white;
         table-layout: auto;
     }
+    th {
+        background-color: #6B7A8F;
+        color: white
+    }
 </style>
 <body>
     {% include 'navbar.html' %}
@@ -57,18 +61,18 @@
 
     <section>
         <br>
-        <div class="large-6 columns small-centered">
+        <div class="large-7 columns small-centered">
             <table>
-                <thead style="background-color:#6B7A8F; color:white">
+                <thead>
                     <tr>
                         <th colspan="3">Package Tour</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td width="20%"></td>
+                        <td width="10%"></td>
                         <td>Name of Package Tour:</td>
-                        <td width="40%">Hong kong</td>
+                        <td width="50%">Hong kong</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -93,20 +97,19 @@
                 </tbody>
             </table>
         </div>
-        <br>
-        <br>
-        <div class="large-6 columns small-centered">
+        <br><br>
+        <div class="large-7 columns small-centered">
             <table>
-                <thead style="background-color:#6B7A8F; color:white">
+                <thead>
                     <tr>
                         <th colspan="3">Traveller Detail</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td width="20%"></td>
+                        <td width="10%"></td>
                         <td>Seat Available:</td>
-                        <td width="40%">15</td>
+                        <td width="50%">15</td>
                     </tr>
                     <tr>
                         <td></td>
@@ -128,22 +131,18 @@
                         </select></td>
                     </tr>
                     <tr>
-                        <td colspan="3" style="color:red;">*Passenger age less than 12 years old is children</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="color:red;">**If you have a baby please information 02-792-9292</td>
+                        <td></td><td></td>
+                        <td style="color:red;"><font size="2">*Passenger age less than 12 years old is children</font></td>
                     </tr>
                 </tbody>
             </table>
         </div>        
-        <br>
-        <br>
+        <br><br>
     </section>
 
     <div class="row">
-        <div class="large-6 columns small-centered">
-            <div class="large-4 columns">
-            </div>
+        <div class="large-7 columns small-centered">
+            <div class="large-4 columns"></div>
             <div class="large-4 columns">
                 <a class="expanded button" href="/booking/info">Next</a>
             </div>

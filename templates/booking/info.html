@@ -19,6 +19,10 @@
         background-color: white;
         table-layout: auto;
     }
+    th {
+        background-color: #6B7A8F;
+        color: white
+    }
 </style>
 <body>
     {% include 'navbar.html' %}
@@ -57,22 +61,24 @@
 
     <section>
         <br>
-        <div class="large-7 columns small-centered">
+        <div class="large-8 columns small-centered">
             <table>
-                <thead style="background-color:#6B7A8F; color:white">
+                <thead>
                     <tr>
-                        <th colspan="3">The first person information</th>
+                        <th colspan="6">The first person information</th>
                     </tr>
                 </thead>
                 <tbody>
                 	<tr>
-                		<td width="20%">Full Name</td>
+                		<td width="5%"></td>
+                        <td>Full Name</td>
                 		<td>Title</td>
                 		<td>Firstname</td>
                 	 	<td>Lastname</td>
+                        <td width="5%"></td>
                 	</tr>
                     <tr>
-                       	<td></td>
+                       	<td></td><td></td>
                         <td>
                         	<select style="height:35px; width:80px">
                             	<option value="mr." selected="selected">Mr.</option>
@@ -88,16 +94,16 @@
                         	<form action="action_page.php"><input type="text" name="lastname" placeholder="Last Name" required>
 							</form>
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
-                    	<td></td>
-                    	<td></td>
+                    	<td></td><td></td><td></td>
                     	<td>Firstname(Thai)</td>
                     	<td>Lastname(Thai)</td>
+                        <td></td>
                     </tr>
                     <tr>
-                    	<td></td>
-                    	<td></td>
+                    	<td></td><td></td><td></td>
                     	<td>
                         	<form action="action_page.php"><input type="text" name="firstname" placeholder="ชื่อภาษาไทย" required>
 							</form>
@@ -106,60 +112,57 @@
                         	<form action="action_page.php"><input type="text" name="lastname" placeholder="นามสกุลภาษาไทย" required>
 							</form>
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Gender</td>
                         <td>
                         	<select style="height:35px; width:90px">
-                            	<option value="female" selected="selected">Female</option>
-                            	<option value="male">Male</option>             
+                            	<option value="female">Female</option>
+                            	<option value="male" selected="selected" >Male</option>             
                         	</select>
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td>
                     </tr>
-                </tbody>
-            </table>
-            <table>
                     <tr>
-                        <td width="20%">Date of Birth</td>
-                        <td width="15%">
+                        <td></td>
+                        <td>Date of Birth</td>
+                        <td>
                         	<input type="date" name="bday" min="1916-01-01" max="2015-01-01"></td>
-                        <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td>
                     </tr>
                     <tr>
-                        <td width="20%">Nationality</td>
-                        <td width="15%">
+                        <td></td>
+                        <td>Nationality</td>
+                        <td>
                         	<select style="height:35px; width:200px">
                             	<option value="thai" selected="selected">Thai</option>
                             	<option value="american">American</option>
                             	<option value="korean">Korean</option>
                         	</select>
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Thai Citizen ID (Thai only)</td>
                         <td>
                         	<form action="action_page.php">
                         		<input type="text" name="firstname" placeholder="Thai Citizen ID" required>
 							</form>
 						</td>
-                        <td></td>
-                        <td></td>
+                        <td></td><td></td><td></td>
                     </tr>
-                </tbody>
-            </table>
-            <table>
-            	<tr>
-                		<td width="20%">Passport Info</td>
+            	    <tr>
+                        <td></td>
+                		<td>Passport Info</td>
                 		<td>Passport No.</td>
                 		<td>Issuing Authority</td>
-                </tr>
-               	<tr>
-                    	<td></td>
+                        <td></td><td></td>
+                    </tr>
+               	    <tr>
+                    	<td></td><td></td>
                     	<td>
                         	<form action="action_page.php"><input type="text" name="passportNo" placeholder="Passport No." required>
 							</form>
@@ -168,30 +171,35 @@
                         	<form action="action_page.php"><input type="text" name="issue" placeholder="Issuing Authority" required>
 							</form>
                         </td>
+                        <td></td><td></td>
                     </tr>
-                   <tr>
-                		<td></td>
+                    <tr>
+                		<td></td><td></td>
                 		<td>Date of Issue</td>
                 		<td>Date of Expiry</td>
+                        <td></td><td></td>
                 	</tr>
                    	<tr>
-                    	<td></td>
+                    	<td></td><td></td>
                     	<td>
-                        	<form action="action_page.php"><input type="text" name="dateIssue" placeholder="mm-dd-yyyy" required>
+                        	<form action="action_page.php"><input type="text" name="dateIssue" placeholder="dd-mm-yyyy" required>
 							</form>
                         </td>
                         <td>
-                        	<form action="action_page.php"><input type="text" name="dateExpire" placeholder="mm-dd-yyyy" required>
+                        	<form action="action_page.php"><input type="text" name="dateExpire" placeholder="dd-mm-yyyy" required>
 							</form>
                         </td>
+                        <td></td><td></td>
                     </tr>
                     <tr>
+                        <td></td>
                 		<td>VISA Info</td>
                 		<td>VISA No.</td>
                 		<td>Date of Expiry</td>
+                        <td></td><td></td>
                 	</tr>
                 	<tr>
-                    	<td></td>
+                    	<td></td><td></td>
                     	<td>
                         	<form action="action_page.php"><input type="text" name="visaNo" placeholder="VISA No." required>
 							</form>
@@ -200,17 +208,18 @@
                         	<form action="action_page.php"><input type="text" name="dateExpireVisa" placeholder="mm-dd-yyyy" required>
 							</form>
                         </td>
+                        <td></td><td></td>
                     </tr>
-            </table>
-            <table>
-            	<tr>
-                		<td width="20%">Contact Info</td>
+            	    <tr>
+                        <td></td>
+                		<td>Contact Info</td>
                 		<td>Telephone</td>
                 		<td>Mobile</td>
                 	 	<td>Email</td>
-                </tr>
-               	<tr>
-               			<td></td>
+                        <td></td>
+                    </tr>
+               	    <tr>
+               			<td></td><td></td>
                     	<td>
                     		<form action="action_page.php"><input type="text" name="tel" placeholder="02-xxx-xxxx" required>
 							</form>
@@ -223,15 +232,16 @@
                         	<form action="action_page.php"><input type="text" name="email" placeholder="john@abc.com" required>
 							</form>
                         </td>
+                        <td></td>
                     </tr>
+                </tbody>
             </table>
         </div>
-        <br>
-        <br>
-        
+        <br><br>
     </section>
+
     <div class="row">
-        <div class="large-6 columns small-centered">
+        <div class="large-7 columns small-centered">
             <div class="large-4 columns">
                 <a class="expanded button" href="/booking">back</a>
             </div>

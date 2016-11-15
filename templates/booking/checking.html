@@ -13,10 +13,20 @@
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
     <link rel="stylesheet" href={% static "css/progress_bar/styles.css"%}>
 </head>
-
+<style>
+    td {
+        text-align: left;
+        background-color: white;
+        table-layout: auto;
+    }
+    th {
+        background-color: #6B7A8F;
+        color: white
+    }
+</style>
 <body>
     {% include 'navbar.html' %}
-    
+
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -51,85 +61,102 @@
 
     <section>
         <br>
-        <div class="large-6 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h3 style="text-align:left">Checking</h3>
-            <div style="background-color:white">
-                <h4 style="text-align:left">Package Tour</h4>
-                <h5 style="text-align:left">Name of Package Tour:</h5>
-                <h5 style="text-align:left">Package Tour ID:</h5>
-                <h5 style="text-align:left">Depart date:</h5>
-                <h5 style="text-align:left">Return date:</h5>
-                <h5 style="text-align:left">Airline:</h5>
-                <h5 style="text-align:left">Flight:</h5>
-            </div>
-            </div>
+        <div class="large-7 columns small-centered">
+            <h4>Checking</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3">Package Tour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>Name of Package Tour:</td>
+                        <td width="50%">Hong kong</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Company:</td>
+                        <td>Orange farm</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Depart date:</td>
+                        <td>dd/mm/yy</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Return date:</td>
+                        <td>dd/mm/yy</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Travel by:</td>
+                        <td>plane</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="large-6 columns small-centered">
-            <div style="background-color:white">
-                <h4 style="text-align:left">Traveller Detail</h4>
-                <h5 style="text-align:left">Seat Available:</h5>
-                <h5 style="text-align:left">Adult: {{ selAdult }}</h5>
-                <h5 style="text-align:left">Children: {{ selChild }}</h5>
-                <p style="text-align:center">*Passenger age less than 12 years old is children</p>
-                <p style="text-align:center">*If you have a baby please information 02-792-9292</p>
-                <h5 style="text-align:left">Depart date:</h5>
-                <h5 style="text-align:left">Return date:</h5>
-            </div>
-        </div>
-        <div class="large-6 columns small-centered">
-            <div style="background-color:white">
-                <h4 style="text-align:left">Room Detail</h4>
-                <h5 style="text-align:left">Total guest: </h5>
-                <h5 style="text-align:left">twin bedroom: {{ selTwin }}</h5>
-                <h5 style="text-align:left">single bedroom: {{ selSingle }}</h5>
-                <p style="text-align:center">*single bedroom increase price 10,000 baht</p>
-            </div>
-        </div>
-        <div class="large-6 columns small-centered">
-            <div style="background-color:white">
-                <h4 style="text-align:left">Food Detail</h4>
-                <h5 style="text-align:left">Vegetarian: {{ selVet }}</h5>
-                <h5 style="text-align:left">Muslim: {{ selMus }}</h5>
-                <h5 style="text-align:left">Seafood Allergy: {{ selSea }}</h5>   
-                <h5 style="text-align:left">Allergy:</h5>
-            </div>
-        </div>
-        <br>
+        <br><br>
+        <div class="large-7 columns small-centered">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3">Traveller Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="10%"></td>
+                        <td>Adult:</td>
+                        <td width="50%">1</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Children:</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>        
+        <br><br>
     </section>
 
+
+
     <section>
-        <br>
-        <div class="large-6 columns small-centered">
-        <div style="background-color:white">
-                <h4 style="text-align:left;background-color:#D5DBDB">Price(Bath)</h4>
-                <table align="center">
-                    <tr style="background-color:#D5DBDB">
-                        <th>Package Tour ID</th>
-                        <th>Name of Package Tour</th>
-                        <th>Price</th>
-                        <th>Amount</th>
-                        <th>Total Price</th>
-                    </tr>
-                    <tr style="background-color:white">
-                        <td>PackageTour_ID</td>
-                        <td>name</td>
-                        <td>9,999 THB</td>
-                        <td>1</td>
-                        <td>9,999 THB</td>
-                    </tr>
-                </table>
+        <div class="large-7 columns small-centered">
+            <h4>Price(Bath)</h4>
+            <table text-align="center">
+                <tr>
+                    <th>Package Tour ID</th>
+                    <th>Name of Package Tour</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Total Price</th>
+                </tr>
+                <tr text-align="center">
+                    <td style="text-align:center">PackageTour_ID</td>
+                    <td style="text-align:center">name</td>
+                    <td style="text-align:center">9,999 THB</td>
+                    <td style="text-align:center">1</td>
+                    <td style="text-align:center">9,999 THB</td>
+                </tr>
+            </table>
         </div>
-        </div>
+        <br><br>
     </section>
 
     <div class="row">
-        <div class="large-6 columns small-centered">
-            <a class="expanded button" href="/booking/info">Back</a>
-        </div>
-        <div class="large-6 columns small-centered">
-            <a class="expanded button" href="/booking/payment">Next</a>
-        </div>
+        <div class="large-7 columns small-centered">
+            <div class="large-4 columns">
+                <a class="expanded button" href="/booking/info">back</a>
+            </div>
+            <div class="large-4 columns">
+                <a class="expanded button" href="/booking/payment">Next</a>
+            </div>
+        </div> 
     </div>
 
     {% include 'footerbar.html' %}
