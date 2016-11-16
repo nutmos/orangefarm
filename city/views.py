@@ -160,7 +160,6 @@ def delete(request):
     return HttpResponse('No Request GET')
 
 def get_city_by_country(request):
-    print "get city by country"
     if request.method == 'GET':
         country_id = request.GET.get('country_id', '')
         try:

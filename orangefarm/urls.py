@@ -32,7 +32,6 @@ urlpatterns = [
     url(r'^aboutus/', include('aboutus.urls')),
     url(r'^company/', include('company_profile.urls')),
     url(r'^country/', include('country.urls')),
-    url(r'^province/', include('province.urls')),
     url(r'^booking/', include('booking.urls')),
     url(r'^catalog/', include('catalog.urls')),
     url(r'^place/', include('place.urls')),

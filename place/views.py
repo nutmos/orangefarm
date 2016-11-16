@@ -241,3 +241,18 @@ def show_image(request):
         except:
             return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+
+def get_place_by_city(request):
+    if request.method == 'GET':
+        country_id = request.GET.get('country_id', '')
+        try:
+            c1 = City.objects(country_id=country_id).order_by('name')
+            c_json = {}
+            for c in c1:
+                c_json[c.name] = str(c.id)
+            print c_json
+            return JsonResponse(c_json)
+        except:
+            print "except"
+            pass
+    return HttpResponse("Error")

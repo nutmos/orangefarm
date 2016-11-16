@@ -148,8 +148,8 @@ def delete(request):
     return HttpResponse('No Request GET')
 
 def change_picture(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -165,8 +165,8 @@ def change_picture(request):
     return HttpResponse("Error")
 
 def handle_change_picture(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')

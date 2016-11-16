@@ -140,7 +140,7 @@ def handle_change_picture(request):
     if request.method == 'POST':
         user1 = User.objects.get(id=request.session['user_id'])
         user1.photo.delete()
-        image = request.FILES.get('profile-upload', '')
+        image = request.FILES.get('image-upload', '')
         user1.photo.put(image, content_type='image/*')
         user1.save()
         return HttpResponseRedirect('/profile/')

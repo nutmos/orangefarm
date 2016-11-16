@@ -13,33 +13,8 @@
     <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
 </head>
 <body>
-    <div id="navbar"></div>
-    {% if alert %}
-    <div class="alert-panel text-centered">
-        <div id="alert" class="row" style="">
-            {{ alert }}
-        </div>
-    </div>
-    {% endif %}
-    <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
-        <form action="/city/handle-change-picture/" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input id="city_id" type="hidden" name="city_id" value="{{ city_id }}">
-            <label class="button" for="image-upload">Upload File</label>
-            <input type="file" id="image-upload" name="image-upload" class="show-for-sr" accept="image/*">
-            <div class="footer text-centered">
-                <input class="button" type="submit" value="Save Change">
-            </div>
-        </form>
-    </div>
-    <div id="footer-bar"></div>
+    {% include 'navbar.html' %}
+    {% include 'upload-image-template.html' with form_action="/city/handle-change-picture/" type="city_id" type_id=city_id %}
+    {% include 'footerbar.html' %}
 </body>
-<script>
-var data = { user_id: "{{ request.session.user_id }}",
-logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
-};
-//window.alert(userInfo.user_id);
-</script>
-<script src={% static "js/navbar.js" %} type="text/babel"></script>
-<script src={% static "js/footerbar.js" %} type="text/babel"></script>
 </html>

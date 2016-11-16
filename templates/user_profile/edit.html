@@ -13,7 +13,7 @@
     <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
 </head>
 <body>
-    <div id="navbar"></div>
+    {% include 'navbar.html' %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
     <div class="large-6 columns small-centered">
     <div class="row">
@@ -35,14 +35,6 @@
     </div>
     </div>
     </div>
-    <div id="footer-bar"></div>
+    {% include 'footerbar.html' %}
 </body>
-<script>
-var data = { user_id: "{{ request.session.user_id }}",
-logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
-};
-//window.alert(userInfo.user_id);
-</script>
-<script src={% static "js/navbar.js" %} type="text/babel"></script>
-<script src={% static "js/footerbar.js" %} type="text/babel"></script>
 </html>
