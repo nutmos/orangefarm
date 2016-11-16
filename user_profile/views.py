@@ -22,11 +22,8 @@ def index(request):
         return HttpResponse(template.render(pass_data, request))
         #return HttpResponse("AAA")
     except KeyError:
-        template = loader.get_template('alerttemplate.html')
-        return HttpResponse(template.render({
-            'header': 'Not Login',
-            'message': 'You are not logged in',
-            'submessage': "If you have existing account, please login <a href='/login'>here</a>."}, request))
+        template = loader.get_template('notlogin.html')
+        return HttpResponse(template.render({}, request))
     except DoesNotExist:
         return HttpResponse('User Not Found')
 
@@ -48,11 +45,8 @@ def other_user_profile(request, user=""):
         return HttpResponse(template.render(pass_data, request))
         #return HttpResponse("AAA")
     except KeyError:
-        template = loader.get_template('alerttemplate.html')
-        return HttpResponse(template.render({
-            'header': 'Not Login',
-            'message': 'You are not logged in',
-            'submessage': "If you have existing account, please login <a href='/login'>here</a>."}, request))
+        template = loader.get_template('notlogin.html')
+        return HttpResponse(template.render({}, request))
     except DoesNotExist:
         return HttpResponse('User Not Found')
 
@@ -91,11 +85,8 @@ def edit_profile(request):
                 pass_data['name'] = ""
             return HttpResponse(template.render(pass_data, request))
         except DoesNotExist:
-            template = loader.get_template('alerttemplate.html')
-            return HttpResponse(template.render({
-                'header': 'Not Login',
-                'message': 'You are not logged in',
-                'submessage': "If you have existing account, please login <a href='/login'>here</a>."}, request))
+            template = loader.get_template('notlogin.html')
+            return HttpResponse(template.render({}, request))
 
 def change_password(request):
     if request.method == 'POST':
@@ -114,22 +105,16 @@ def change_password(request):
             else:
                 return HttpResponse('New password and verify password does not match')
         except DoesNotExist:
-            template = loader.get_template('alerttemplate.html')
-            return HttpResponse(template.render({
-                'header': 'Not Login',
-                'message': 'You are not logged in',
-                'submessage': "If you have existing account, please login <a href='/login'>here</a>."}, request))
+            template = loader.get_template('notlogin.html')
+            return HttpResponse(template.render({}, request))
     else:
         try:
             user1 = User.objects.get(id=request.session['user_id'])
             template = loader.get_template('user_profile/change-password.html')
             return HttpResponse(template.render({}, request))
         except DoesNotExist:
-            template = loader.get_template('alerttemplate.html')
-            return HttpResponse(template.render({
-                'header': 'Not Login',
-                'message': 'You are not logged in',
-                'submessage': "If you have existing account, please login <a href='/login'>here</a>."}, request))
+            template = loader.get_template('notlogin.html')
+            return HttpResponse(template.render({}, request))
 
 def change_picture(request):
     user1 = User.objects.get(id=request.session['user_id'])

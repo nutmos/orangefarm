@@ -15,7 +15,7 @@
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
 <body>
-    <div id="navbar"></div>
+    {% include "navbar.html" %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
             <div class="row text-centered" style="color:#A34E24">
@@ -73,8 +73,7 @@
             </div>
         </div>
     </div>
-    <div id="footer-bar"></div>
-
+    {% include "footerbar.html" %}
     <script>
         $(document).foundation();
     </script>

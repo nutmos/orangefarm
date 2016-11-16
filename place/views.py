@@ -4,6 +4,7 @@ from mongoengine import *
 from models import *
 from django.template import loader
 from country.models import *
+from city.models import *
 from user_profile.models import *
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
@@ -17,7 +18,6 @@ def add_place(request):
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
     except:
-        print "except"
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     template = loader.get_template('place/add.html')
@@ -40,36 +40,48 @@ def process_add(request):
         description = request.GET.get('description', '')
         c1 = Place(name=name, city_id=city_id, description=description)
         c1.save()
+        c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_')
+        c1.save()
         return HttpResponseRedirect('/place?place_id=' + str(c1.id))
     return HttpResponse('No GET Request')
 
 def index(request):
     if request.method == 'GET':
         place_id = request.GET.get('place_id', '')
-        access_edit = True
-        try:
-            user_id = request.session['user_id']
-            user1 = User.objects.get(id=user_id)
-            if user1.is_staff == False:
-                access_edit = False
-                print user1.name
-        except:
-            print "except"
-            access_edit = False
         try:
             c1 = Place.objects.get(id=place_id)
-            template = loader.get_template('place/index.html')
-            pass_data = {
-                'name': c1.name,
-                'city_id': c1.city_id,
-                'description': c1.description,
-                'place_id': place_id,
-                'access_edit': access_edit,
-                'place_picture': c1.photos}
-            return HttpResponse(template.render(pass_data, request))
+            return HttpResponseRedirect("/place/c/" + c1.url_point_to)
         except ValidationError, DoesNotExist:
             return HttpResponse('place id is not correct')
     return HttpResponse('This page is not complete')
+
+def place_name(request, place_name):
+    access_edit = True
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            access_edit = False
+            print user1.name
+    except:
+        access_edit = False
+    try:
+        c1 = Place.objects.get(url_point_to=place_name)
+        template = loader.get_template('place/index.html')
+        city1 = City.objects.get(id=c1.city_id)
+        popular_place_list = Place.objects(city_id=str(city1.id))
+        pass_data = {
+            'name': c1.name,
+            'city_id': c1.city_id,
+            'city_name': city1.name,
+            'description': c1.description,
+            'place_id': str(c1.id),
+            'access_edit': access_edit,
+            'place_picture': c1.photos,
+            'popular_place_list': popular_place_list}
+        return HttpResponse(template.render(pass_data, request))
+    except ValidationError, DoesNotExist:
+        return HttpResponse('place id is not correct')
 
 def edit(request):
     if request.method == 'GET':
@@ -86,11 +98,18 @@ def edit(request):
         try:
             c1 = Place.objects.get(id=place_id)
             template = loader.get_template('place/edit.html')
+            country_list = Country.objects()
+            city1 = City.objects.get(id=c1.city_id)
+            country_id = Country.objects.get(id=city1.country_id)
+            city_list = City.objects(country_id=city1.country_id)
             pass_data = {
                 'name': c1.name,
                 'city_id': c1.city_id,
                 'description': c1.description,
-                'place_id': place_id}
+                'place_id': place_id,
+                'country_list': country_list,
+                'country_id': country_id,
+                'city_list': city_list}
             return HttpResponse(template.render(pass_data, request))
         except DoesNotExist:
             return HttpResponse('Key error')
@@ -239,7 +258,16 @@ def show_image(request):
                 return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
             return HttpResponse(binary_img, 'image/*')
         except:
-            return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+            try:
+                place_id = request.GET.get('place_id', '')
+                c1 = Place.objects.get(id=place_id)
+                if len (c1.photos) != 0:
+                    p1 = c1.photos[0]
+                    binary_img = p1.photo.read()
+                    if binary_img != None:
+                        return HttpResponse(binary_img, 'image/*')
+            except:
+                pass
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
 
 def get_place_by_city(request):

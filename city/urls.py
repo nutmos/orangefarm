@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^change-picture/', views.change_picture, name='change-picture'),
     url(r'^handle-change-picture/', views.handle_change_picture, name='handle-change-picture'),
     url(r'^get-city-by-country/',views.get_city_by_country, name='get-city-by-country'),
+    url(r'^c/(?P<city_name>\w+)/', views.city_name, name='city_name'),
 ]

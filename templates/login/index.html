@@ -13,7 +13,7 @@
     <link rel="stylesheet" href={% static "css/login/styles.css" %}>
 </head>
 <body>
-    <div id="orange-farm-big"></div>
+    {% include 'orange-farm-big.html' %}
     <div class="row">
             <div class="large-6 columns small-centered">
               <div class="signup-panel">
@@ -44,9 +44,4 @@
             </div>
     </div>
 </body>
-<script>
-var data = {logo: "{% static 'logo/orange-farm-transparent.png' %}"
-};
-</script>
-<script src={% static "js/orange-farm-big.js" %} type="text/babel"></script>
 </html>

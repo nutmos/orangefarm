@@ -4,14 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ name }}</title>
-    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css">
+    {% include 'essential.html' %}
+    {% include 'jquery-essential.html' %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.2/motion-ui.min.css">
-    <link rel="stylesheet" href={% static "css/styles.css" %}>
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
 
@@ -47,15 +42,22 @@
     </div>
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
-            <h3>Popular city</h3>
+            <h3>Popular Place in {{ city_name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
-                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/thailand-grand-palace.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Grand Palace<br>Bangkok, Thailand</div></div></div></a></div>
-                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/pattaya.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Pattaya,<br>Chonburi, Thailand</div></div></div></a></div>
-                <div class="column" style="margin-top: 2em;"><a href="/trip/" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/hong-kong.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Hong Kong</div></div></div></a></div>
+                {% for p in popular_place_list %}
+                <div class="column" style="margin-top: 2em;">
+                    <a href="#" row="button" aria-label="Thumbnail">
+                        <div style="position: relative;">
+                            <img src="/place/picture/?place_id={{ p.id }}" class="popular-image" style="width: 100%; height: 200px" />
+                            <div class="overlay"><div class="overlay-text">{{ p.name }}</div></div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
             <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
 
-            <h3>Popular Place</h3>
+            <h3 style="margin-top: 2em;">Related to This Place</h3>
             <div class="row large-up-3 project-overlay-inset">
                 <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/plearn-wan.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Plearn Wan<br>Hua Hin, Thailand</div></div></div></a></div>
                 <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/pai.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Pai<br>Mae Hongson, Thailand</div></div></div></a></div>

@@ -4,7 +4,7 @@
         {% csrf_token %}
         <input id="{{ type }}" type="hidden" name="{{ type }}" value="{{ type_id }}">
         <label class="button" for="image-upload">Upload File</label>
-        <input type="file" id="image-upload" name="image-upload" class="show-for-sr" accept="image/*" onchange="uploadOnChange()">
+        <input type="file" id="image-upload" name="image-upload" class="show-for-sr" accept="image/*">
         <div class="footer text-centered">
             <input class="button" type="submit" value="Save Change">
         </div>

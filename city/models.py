@@ -10,3 +10,4 @@ class City(Document):
     country_id = StringField()
     description = StringField()
     photo = ImageField()
+    url_point_to = StringField()

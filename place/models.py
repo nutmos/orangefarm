@@ -14,3 +14,4 @@ class Place(Document):
     city_id = StringField()
     photos = ListField(ReferenceField('PlacePicture'))
     related = ListField(ReferenceField('self'))
+    url_point_to = StringField()

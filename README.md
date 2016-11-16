@@ -29,23 +29,18 @@
 
 #guideline การทำเว็บ, การใช้ไฟล์ และการวางไฟล์
 
-1. แท็กทั้งหมดนี้ต้องแปะไว้ในแท็ก head
-```
-    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css">
-```
+1. ปกติแล้วไฟล์ HTML ทุกไฟล์ จะต้องใส่ ```{% include 'essential.html' %}``` เพื่อเป็นการดึงไฟล์ของ Foundation CSS
+2. ถ้าจะใช้งาน React จะต้องใส่ ```{% include 'react-essential.html' %}```
+3. ถ้าจะใช้งาน jQuery จะต้องใส่ ```{% include 'jquery-essential.html' %}```
 2. ถ้าจะใช้ jQuery ร่วมกับ Foundation ต้องใส่แท็กทั้งหมดนี้ไว้ใน head
 ```
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
 ```
-2. เหนือสุดของไฟล์จะต้องมี ```{% load static %}```
-3. ถ้าจะใส่ไฟล์ JavaScript เพิ่ม หรือจะเขียน script เอง ให้ใส่ไว้ท้ายเว็บก่อนปิดแท็ก html
-4. ถ้าจะใส่ไฟล์ CSS เพิ่ม ให้ใส่ไว้ต้นเว็บในแท็ก head
-5. ไฟล์ HTML ให้ใส่ไว้ใน template/[ชื่อแอพ] อย่าเอาไปปนกับแอพอื่น โดยใน template จะมีไฟล์เดียวเท่านั้นคือ index.html สำหรับหน้า firstpage นอกนั้นให้แยกใส่โฟลเดอร์ให้หมด
-6. ไฟล์ JavaScript ให้ใส่ไว้ใน static/js ไฟล์ JavaScript จากแอพทั้งหมดจะรวมกันที่เดียว
-7. ไฟล์ CSS ให้ใส่ไว้ใน static/css/[ชื่อแอพ] อย่าเอาไปปนกับแอพอื่น โดยใน static/css จะมีไฟล์เดียวเท่านั้นคือ styles.css สำหรับเป็น CSS ใช้โดยรวม นอกนั้นแยกใส่โฟลเดอร์ให้หมด
+3. เหนือสุดของไฟล์จะต้องมี ```{% load static %}```
+4. ถ้าจะใส่ไฟล์ JavaScript เพิ่ม หรือจะเขียน script เอง ให้ใส่ไว้ท้ายเว็บก่อนปิดแท็ก html
+5. ถ้าจะใส่ไฟล์ CSS เพิ่ม ให้ใส่ไว้ต้นเว็บในแท็ก head
+6. ไฟล์ HTML ให้ใส่ไว้ใน template/[ชื่อแอพ] อย่าเอาไปปนกับแอพอื่น โดยใน template จะมีไฟล์เดียวเท่านั้นคือ index.html สำหรับหน้า firstpage นอกนั้นให้แยกใส่โฟลเดอร์ให้หมด
+7. ไฟล์ JavaScript ให้ใส่ไว้ใน static/js ไฟล์ JavaScript จากแอพทั้งหมดจะรวมกันที่เดียว
+8. ไฟล์ CSS ให้ใส่ไว้ใน static/css/[ชื่อแอพ] อย่าเอาไปปนกับแอพอื่น โดยใน static/css จะมีไฟล์เดียวเท่านั้นคือ styles.css สำหรับเป็น CSS ใช้โดยรวม นอกนั้นแยกใส่โฟลเดอร์ให้หมด
 

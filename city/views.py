@@ -12,8 +12,8 @@ from user_profile.models import User
 
 
 def add_city(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -26,8 +26,8 @@ def add_city(request):
     return HttpResponse(template.render({'country_list': country_list}, request))
 
 def process_add(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -45,51 +45,56 @@ def process_add(request):
         description = request.GET.get('description', '')
         c1 = City(name=name, country_id=country_id, description=description)
         c1.save()
+        c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_')
+        c1.save()
         return HttpResponseRedirect('/city?city_id=' + str(c1.id))
     return HttpResponse('No GET Request')
 
+def city_name(request,city_name):
+    access_edit = True
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            access_edit = False
+    except:
+        access_edit = False
+    try:
+        c1 = City.objects.get(url_point_to=city_name)
+        template = loader.get_template('city/index.html')
+        country1 = Country.objects.get(id=c1.country_id)
+        other_city = City.objects(country_id=c1.country_id)
+        show_more_city = False
+        if len(other_city) > 3:
+            import random
+            num_list = random.sample(range(len(other_city)), 3)
+            other_city = [other_city[num_list[i]] for i in range(3)]
+            show_more_city = True
+        pass_data = {
+            'name': c1.name,
+            'country_name': country1.name,
+            'description': c1.description,
+            'city_id': str(c1.id),
+            'other_city': other_city,
+            'access_edit': access_edit,
+            'show_more_city': show_more_city}
+        return HttpResponse(template.render(pass_data, request))
+    except:
+        return HttpResponse('city id is not correct')
+
 def index(request):
     if request.method == 'GET':
-        access_edit = True
         try:
-            user_id = request.session['user_id']
-            user1 = User.objects.get(id=user_id)
-            if user1.is_staff == False:
-                access_edit = False
-                print user1.name
-        except:
-            access_edit = False
-        city_id = request.GET.get('city_id', '')
-        try:
+            city_id = request.GET.get('city_id', '')
             c1 = City.objects.get(id=city_id)
-            template = loader.get_template('city/index.html')
-            city_num = City.objects(country_id=c1.country_id).count()
-            country1 = Country.objects.get(id=c1.country_id)
-            other_city = City.objects(country_id=c1.country_id)
-            show_more_city = False
-            if len(other_city) > 3:
-                import random
-                num_list = random.sample(range(len(other_city)), 3)
-                print num_list
-                other_city = [other_city[num_list[i]] for i in range(3)]
-                show_more_city = True
-            pass_data = {
-                'name': c1.name,
-                'country_name': country1.name,
-                'description': c1.description,
-                'city_id': city_id,
-                'other_city': other_city,
-                'access_edit': access_edit,
-                'show_more_city': show_more_city}
-            return HttpResponse(template.render(pass_data, request))
-        except ValidationError:
-            return HttpResponse('city id is not correct')
+            return HttpResponseRedirect('/city/c/'+c1.url_point_to)
+        except:
+            return HttpResponse('1city id is not correct')
     return HttpResponse('This page is not complete')
 
 def edit(request):
-    user_id = request.session['user_id']
-    print user_id
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -118,8 +123,8 @@ def edit(request):
     return HttpResponse('No request')
 
 def process_edit(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -140,8 +145,8 @@ def process_edit(request):
     return HttpResponse('No Request')
 
 def delete(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -187,8 +192,8 @@ def show_image(request):
             return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
 def change_picture(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -204,8 +209,8 @@ def change_picture(request):
     return HttpResponse("Error")
 
 def handle_change_picture(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')

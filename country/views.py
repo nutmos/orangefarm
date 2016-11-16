@@ -24,8 +24,8 @@ def add_country(request):
     return HttpResponse(template.render({}, request))
 
 def process_add(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -48,12 +48,11 @@ def index(request):
         try:
             c1 = Country.objects.get(id=country_id)
             return HttpResponseRedirect('/country/c/' + c1.url_point_to)
-        except ValidationError:
+        except:
             return HttpResponse('country id is not correct')
     return HttpResponse('This page is not complete')
 
 def country_name(request, country_name):
-    print "country_name = " + country_name
     access_edit = True
     try:
         user_id = request.session['user_id']

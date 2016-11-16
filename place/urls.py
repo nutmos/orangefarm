@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^delete-picture/', views.delete_picture, name='delete-picture'),
     url(r'^handle-delete-picture/', views.handle_delete_picture, name='handle-delete-picture'),
     url(r'^picture/', views.show_image, name='picture'),
+    url(r'^c/(?P<place_name>\w+)/', views.place_name, name='place_name'),
 ]
 
