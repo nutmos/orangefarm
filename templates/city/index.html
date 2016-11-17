@@ -15,20 +15,36 @@
             <h3>Popular City in {{ country_name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for c in other_city %}
-                <div class="column" style="margin-top: 2em;"><a href="/city/?city_id={{ c.id }}" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src="/city/picture?city_id={{ c.id }}" class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">{{ c.name }}</div></div></div></a></div>
+                <div class="column" style="margin-top: 2em;">
+                    <a href="/city/?city_id={{ c.id }}" row="button" aria-label="Thumbnail">
+                        <div style="position: relative;">
+                            <img src="/city/picture?city_id={{ c.id }}" class="popular-image" style="width: 100%; height: 200px" />
+                            <div class="overlay"><div class="overlay-text">{{ c.name }}</div></div>
+                        </div>
+                    </a>
+                </div>
                 {% endfor %}
             </div>
             {% if show_more_city %}
             <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
             {% endif %}
 
-            <h3 style="margin-top: 2em;">Popular Place</h3>
+            <h3 style="margin-top: 2em;">Popular Place in {{ name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
-                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/plearn-wan.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Plearn Wan<br>Hua Hin, Thailand</div></div></div></a></div>
-                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/pai.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Pai<br>Mae Hongson, Thailand</div></div></div></a></div>
-                <div class="column" style="margin-top: 2em;"><a href="#" row="button" aria-label="Thumbnail"><div style="position: relative;"><img src={% static "pictures/wat-jd-eiang.jpg" %} class="popular-image" style="width: 100%; height: 200px" /><div class="overlay"><div class="overlay-text">Wat Poramaiyikawas<br>Nonthaburi, Thailand</div></div></div></a></div>
+                {% for p in popular_place %}
+                <div class="column" style="margin-top: 2em;">
+                    <a href="/place/?place_id={{ p.id }}" row="button" aria-label="Thumbnail">
+                        <div style="position: relative;">
+                            <img src="/place/picture?place_id={{ p.id }}" class="popular-image" style="width: 100%; height: 200px" />
+                            <div class="overlay"><div class="overlay-text">{{ p.name }}</div></div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
+            {% if show_more_place %}
             <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
+            {% endif %}
         </div>
     </div>
     {% if access_edit %}

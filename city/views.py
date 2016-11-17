@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine import *
 from models import *
 from country.models import *
+from place.models import *
 from django.template import loader
 from django.http import JsonResponse
 from mongoengine.django.auth import User as MongoUser
@@ -70,6 +71,13 @@ def city_name(request,city_name):
             num_list = random.sample(range(len(other_city)), 3)
             other_city = [other_city[num_list[i]] for i in range(3)]
             show_more_city = True
+        popular_place = Place.objects(city_id=str(c1.id))
+        show_more_place = False
+        if len(other_city) > 3:
+            import random
+            num_list = random.sample(range(len(popular_place)), 3)
+            popular_place = [popular_place[num_list[i]] for i in range(3)]
+            show_more_place = True
         pass_data = {
             'name': c1.name,
             'country_name': country1.name,
@@ -77,7 +85,9 @@ def city_name(request,city_name):
             'city_id': str(c1.id),
             'other_city': other_city,
             'access_edit': access_edit,
-            'show_more_city': show_more_city}
+            'show_more_city': show_more_city,
+            'popular_place': popular_place,
+            'show_more_place': show_more_place}
         return HttpResponse(template.render(pass_data, request))
     except:
         return HttpResponse('city id is not correct')
@@ -100,7 +110,6 @@ def edit(request):
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
     except:
-        print "except"
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     if request.method == 'GET':
