@@ -73,7 +73,7 @@ def city_name(request,city_name):
             show_more_city = True
         popular_place = Place.objects(city_id=str(c1.id))
         show_more_place = False
-        if len(other_city) > 3:
+        if len(popular_place) > 3:
             import random
             num_list = random.sample(range(len(popular_place)), 3)
             popular_place = [popular_place[num_list[i]] for i in range(3)]
@@ -87,7 +87,9 @@ def city_name(request,city_name):
             'access_edit': access_edit,
             'show_more_city': show_more_city,
             'popular_place': popular_place,
-            'show_more_place': show_more_place}
+            'show_more_place': show_more_place,
+            'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> ' + c1.name,
+            }
         return HttpResponse(template.render(pass_data, request))
     except:
         return HttpResponse('city id is not correct')

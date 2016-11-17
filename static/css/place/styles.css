@@ -1,0 +1,11 @@
+
+.nav a {
+    color: black;
+}
+.nav a:hover {
+    color: black;
+    text-decoration: underline;
+}
+a, a:hover {
+    color: white;
+}

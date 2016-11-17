@@ -62,14 +62,19 @@ def place_name(request, place_name):
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             access_edit = False
-            print user1.name
     except:
         access_edit = False
     try:
         c1 = Place.objects.get(url_point_to=place_name)
         template = loader.get_template('place/index.html')
         city1 = City.objects.get(id=c1.city_id)
+        country1 = Country.objects.get(id=city1.country_id)
         popular_place_list = Place.objects(city_id=str(city1.id))
+        show_related = c1.related
+        if len(show_related) > 3:
+            import random
+            num_list = random.sample(range(len(show_related)), 3)
+            show_related = [show_related[num_list[i]] for i in range(3)]
         pass_data = {
             'name': c1.name,
             'city_id': c1.city_id,
@@ -78,7 +83,11 @@ def place_name(request, place_name):
             'place_id': str(c1.id),
             'access_edit': access_edit,
             'place_picture': c1.photos,
-            'popular_place_list': popular_place_list}
+            'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> ' + c1.name,
+            'popular_place_list': popular_place_list,
+            'background_url': '/place/picture/?place_id=' + str(c1.id),
+            'related_place': show_related,
+            }
         return HttpResponse(template.render(pass_data, request))
     except ValidationError, DoesNotExist:
         return HttpResponse('place id is not correct')
@@ -128,7 +137,10 @@ def process_edit(request):
             return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
         c1 = Place.objects.get(id=place_id)
-        c1.city_id = request.GET.get('city_id', '')
+        new_city_id = request.GET.get('city_id', '')
+        if new_city_id != c1.city_id:
+            del c1.related[:]
+        c1.city_id = new_city_id
         c1.description = request.GET.get('description', '')
         c1.save()
         pass_data = {'place_id': place_id};
@@ -169,7 +181,11 @@ def add_picture(request):
         place_id = request.GET.get('place_id', '')
         c1 = Place.objects.get(id=place_id)
         if len(c1.photos) >= 4:
-            return HttpResponse("This place has too many image. Please remove before add the new one.")
+            template = loader.get_template('alerttemplate.html')
+            return HttpResponse(template.render({
+                'header': 'Too Many Image',
+                'message': 'Too Many Image',
+                'submessage': 'The image is limited to 4 per place.<br>If you want to upload new image, please delete the current one'}, request))
         template = loader.get_template('place/add-picture.html')
         return HttpResponse(template.render({'place_id': place_id}, request))
     return HttpResponse("Error")
@@ -211,14 +227,14 @@ def delete_picture(request):
         try:
             p1 = Place.objects.get(id=place_id)
             template = loader.get_template('place/delete-image.html')
-            print "test1"
             pass_data = {
                 'place_id': place_id,
-                'place_picture': p1.photos
+                'place_picture': p1.photos,
+                'name': p1.name,
+                'url_point_to': p1.url_point_to,
             }
             return HttpResponse(template.render(pass_data, request))
         except:
-            print "except"
             pass
     return HttpResponse("Error")
 
@@ -243,7 +259,7 @@ def handle_delete_picture(request):
                     del p1.photos[i]
             pic1.delete()
             p1.save()
-            return HttpResponse("Success")
+            return HttpResponseRedirect('/place/delete-picture/?place_id=' + place_id)
         except:
             pass
     return HttpResponse("Error")
@@ -270,17 +286,91 @@ def show_image(request):
                 pass
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
 
-def get_place_by_city(request):
+def show_related(request, place_name):
+    template = loader.get_template('place/related.html')
+    c1 = Place.objects.get(url_point_to=place_name)
+    city1 = City.objects.get(id=c1.city_id)
+    country1 = Country.objects.get(id=city1.country_id)
+    pass_data = {
+        'place_list': c1.related,
+        'name': c1.name,
+        'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> <a href="/place/?place_id=' + str(c1.id) + '">' + c1.name + '</a> -> related',
+    }
+    return HttpResponse(template.render(pass_data, request))
+
+def delete_related(request, place_name):
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
+    c1 = Place.objects.get(url_point_to=place_name)
+    place_list = c1.related
+    template = loader.get_template('place/delete-related.html')
+    pass_data = {
+        'place_list': place_list,
+        'name': c1.name,
+        'url_point_to': place_name,
+        }
+    return HttpResponse(template.render(pass_data, request))
+
+def process_delete_related(request, place_name):
     if request.method == 'GET':
-        country_id = request.GET.get('country_id', '')
         try:
-            c1 = City.objects(country_id=country_id).order_by('name')
-            c_json = {}
-            for c in c1:
-                c_json[c.name] = str(c.id)
-            print c_json
-            return JsonResponse(c_json)
+            user_id = request.session['user_id']
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
         except:
-            print "except"
-            pass
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+        c1 = Place.objects.get(url_point_to=place_name)
+        del_id = request.GET.get('related_id', '')
+        for i in range(len(c1.related)):
+            if str(c1.related[i].id) == del_id:
+                del c1.related[i]
+                c1.save()
+                return HttpResponseRedirect("/place/c/" + place_name + "/related/delete")
+        return HttpResponse("Not found")
     return HttpResponse("Error")
+        
+
+def add_related(request, place_name):
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
+    c1 = Place.objects.get(url_point_to=place_name)
+    place_list = Place.objects(city_id=c1.city_id)
+    template = loader.get_template('place/add-related.html')
+    pass_data = {
+        'place_list': place_list,
+        'url_point_to': place_name,
+        }
+    return HttpResponse(template.render(pass_data, request))
+
+def process_add_related(request, place_name):
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
+    c1 = Place.objects.get(url_point_to=place_name)
+    related_place_id = request.GET.get('place-id', '')
+    c1.related.append(Place.objects.get(id=related_place_id))
+    c1.save()
+    return HttpResponseRedirect('/place/c/'+place_name+'/related/')

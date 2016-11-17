@@ -7,9 +7,13 @@
     {% include 'essential.html' %}
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
-
+<style>
+a:hover {
+    text-decoration: underline;
+}
+</style>
 <body>
-    {% include 'place-info.html' with background_url="/city/picture?city_id="|add:city_id name=name description=description %}
+    {% include 'place-info.html' with background_url="/city/picture?city_id="|add:city_id name=name description=description navigation=nav|safe %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
             <h3>Popular City in {{ country_name }}</h3>

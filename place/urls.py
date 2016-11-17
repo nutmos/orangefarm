@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from . import views
 
@@ -14,6 +14,15 @@ urlpatterns = [
     url(r'^delete-picture/', views.delete_picture, name='delete-picture'),
     url(r'^handle-delete-picture/', views.handle_delete_picture, name='handle-delete-picture'),
     url(r'^picture/', views.show_image, name='picture'),
-    url(r'^c/(?P<place_name>\w+)/', views.place_name, name='place_name'),
+    url(r'^c/(?P<place_name>\w+)/', include([
+        url(r'^related/', include([
+            url(r'^delete/', views.delete_related, name="delete-related"),
+            url(r'^process-delete/', views.process_delete_related, name="process-delete-related"),
+            url(r'^add/', views.add_related, name="add-related"),
+            url(r'^process-add-related/', views.process_add_related, name="process-add-related"),
+            url(r'^$', views.show_related, name="related"),
+        ])),
+        url(r'^$', views.place_name, name='place_name'),
+    ])),
 ]
 
