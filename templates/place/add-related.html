@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Place</title>
+    {% include 'essential.html' %}
+    <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
+    <div class="large-10 columns small-centered">
+    <div class="row">
+    	<div class="large-6 columns">
+            <div class="profile-image">
+                <img src="http://placehold.it/300x300" />
+            </div>
+            <div class="small-11 columns">
+            	<a class="button" href="/profile/change-picture">Change Place Picture</a>
+            </div>
+        </div>
+        <div class="large-6 columns">
+        	<form action="/place/process-edit" method="get" name="place-form">
+            	<input type="hidden" name="city-id" value="{{ city_id }}">
+                <label for="" class="text-center" style="font-size: 30px;">{{ name }} 
+            	</label>
+            	<label for="">Description
+                    <textarea name="description" id="description" type="text" rows="4">{{ description }}</textarea>
+            	</label>
+            <label for="">Country
+                <select id="country-id" name="country-id" onchange="updateCity()" form="place-form">
+                    {% for i in country_list %}
+                    {% if i.id == country_id %}    
+                    <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+                    {% else %}
+                    <option value="{{ i.id }}">{{ i.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <label for="">City
+                <select id="city-id" name="city-id" form="place-form">
+                    {% for i in city_list %}
+                    {% if i.id == city_id %} 
+                    <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+                    {% else %}
+                    <option value="{{ i.id }}">{{ i.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+        <div class="footer text-centered">
+                <input class="button" type="submit" value="Save Change">
+            </div>
+        </form>
+    </div>
+    </div>
+    </div>
+    {% include 'footerbar.html' %}
+</body>
+<script>
+function updateCity() {
+    var e = document.getElementById("country-id");
+    var country_id = e.options[e.selectedIndex].value;
+    if (country_id === "") {
+        var city_e = document.getElementById("city-list");
+        city_e.innerHTML = "";
+        var opt1 = document.createElement('option');
+        opt1.value = "";
+        opt1.text = "Select City";
+        city_e.appendChild(opt1);
+        return;
+    }
+    var getUrl = "/city/get-city-by-country?country_id=".concat(country_id);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", getUrl, false ); // false for synchronous request
+    xmlHttp.send();
+    var jsonObject = xmlHttp.responseText;
+    var obj = JSON.parse(jsonObject);
+    var city_e = document.getElementById("city-id");
+    city_e.innerHTML = "";
+    var opt1 = document.createElement('option');
+    opt1.value = "";
+    opt1.text = "Select City";
+    city_e.appendChild(opt1);
+    for (var key in obj) {
+        var op = document.createElement('option');
+        op.value = obj[key];
+        op.text = key;
+        city_e.appendChild(op);
+    }
+}
+//window.alert(userInfo.user_id);
+</script>
+</html>

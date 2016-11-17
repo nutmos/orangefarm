@@ -11,8 +11,8 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
 def add_country(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -81,8 +81,8 @@ def country_name(request, country_name):
     return HttpResponse(template.render(pass_data, request))
 
 def edit(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -106,8 +106,8 @@ def edit(request):
     return HttpResponse('No request')
 
 def process_edit(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
@@ -127,8 +127,8 @@ def process_edit(request):
     return HttpResponse('No Request')
 
 def delete(request):
-    user_id = request.session['user_id']
     try:
+        user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
