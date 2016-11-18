@@ -4,12 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Booking</title>
-    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css">
-    <link rel="stylesheet" href={% static "css/styles.css" %}>
+    {% include 'essential.html' %}    
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
     <link rel="stylesheet" href={% static "css/progress_bar/styles.css"%}>
 </head>
@@ -26,7 +21,6 @@
 </style>
 <body>
     {% include 'navbar.html' %}
-
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -72,27 +66,27 @@
                     <tr>
                         <td width="10%"></td>
                         <td>Name of Package Tour:</td>
-                        <td width="50%">Hong kong</td>
+                        <td width="50%">{{ name }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Company:</td>
-                        <td>Orange farm</td>
+                        <td>{{ company_name }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Depart date:</td>
-                        <td>dd/mm/yy</td>
+                        <td>{{ start_date }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Return date:</td>
-                        <td>dd/mm/yy</td>
+                        <td>{{ end_date }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Travel by:</td>
-                        <td>plane</td>
+                        <td>{{ travel_by }}</td>
                     </tr>
                 </tbody>
             </table>
