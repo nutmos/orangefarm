@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Company</title>
+    <title>New Company</title>
     {% include 'essential.html' %}
     <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
 </head>
@@ -12,16 +12,15 @@
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
     <div class="large-6 columns small-centered">
     <div class="row">
-        <form action="/company/process-edit/" method="get">
-            <input type="hidden" name="company_id" value="{{ company_id }}">
+        <form action="/company/process-add/" method="get">
             <label for="">Name
-                <input name="name" type="text" placeholder="Name" id="name" value="{{ name }}">
+                <input name="name" type="text" placeholder="Name" id="name">
             </label>
             <label for="">Description
-                <textarea id="description" name="description" placeholder="description" rows="4">{{description}}</textarea>
+                <textarea id="description" name="description" rows="4" placeholder="Description"></textarea>
             </label>
             <label for="">Location
-                <input name="location" id="location" type="text" placeholder="Location" value="{{ location }}">
+                <input name="location" id="location" type="text" placeholder="Location">
             </label>
             <div class="footer text-centered">
                 <input class="button" type="submit" value="Save Change">
@@ -32,10 +31,4 @@
     </div>
     {% include 'footerbar.html' %}
 </body>
-<script>
-var data = { user_id: "{{ request.session.user_id }}",
-logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
-};
-//window.alert(userInfo.user_id);
-</script>
 </html>

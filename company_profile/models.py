@@ -4,7 +4,7 @@ from django.db import models
 from mongoengine import *
 
 # Create your models here.
-class Photo(Document):
+class CompanyPicture(Document):
     photo = ImageField()
 class Company(Document):
     #email = StringField(max_length=100)
@@ -12,6 +12,6 @@ class Company(Document):
     description = StringField(max_length=400)
     location = StringField(max_length=200)
     logo = ImageField()
-    photo = ListField(ReferenceField(Photo))
+    photos = ListField(ReferenceField('CompanyPicture'))
     geolocation = GeoPointField()
 
