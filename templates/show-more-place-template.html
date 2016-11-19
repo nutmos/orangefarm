@@ -1,0 +1,17 @@
+{% load static %}
+    {% include 'place-header.html' with background_url_path=background_url_path object=the_place %}
+    <div class="row nav" style="margin-top: 1em; margin-left: 2em;">{{ nav|safe }}</div>
+        <div class="row" style="margin-bottom: 2em;" >
+        <div class="large-10 columns small-centered">
+            <div class="row" style="margin-top: 2em">
+                <h1>{{ header }}</h1>
+            </div>
+            <div class="row large-up-3 project-overlay-inset">
+                {% for p in place_list %}
+                {% include 'thumbnail-template.html' with link_to=list_link_to object=p link_img=list_link_img %}
+                {% empty %}
+                {{ empty_message }}
+                {% endfor %}
+            </div>
+        </div>
+        </div>

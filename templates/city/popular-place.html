@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'essential.html' %}
+    <title>Places in {{ the_place.name }}</title>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/place/styles.css" %}>
+</head>
+<body>
+    {% include 'show-more-place-template.html' with background_url_path="/city/picture/?city_id=" background_point_to="/city/?city_id=" object=the_place place_list=place_list empty_message="No related place found." list_link_to="/place/?place_id=" list_link_img="/place/picture/?place_id=" header="Places" %}
+    {% include 'footerbar.html' %}
+</body>
+</html>

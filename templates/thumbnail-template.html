@@ -1,9 +1,9 @@
 {% load static %}
 <div class="column" style="margin-top: 2em;">
-    <a href="{{ link_to }}" row="button" aria-label="Thumbnail">
-        <div style="position: relative;"><img src="{{ link_img }}" class="popular-image" style="width: 100%; height: 200px" />
+    <a href="{{ link_to }}{{ object.id }}" row="button" aria-label="Thumbnail">
+        <div style="position: relative;"><img src="{{ link_img }}{{ object.id }}" class="popular-image" style="width: 100%; height: 200px" />
             <div class="overlay">
-                <div class="overlay-text">{{ name }}</div>
+                <div class="overlay-text">{{ object.name }}</div>
             </div>
         </div>
     </a>

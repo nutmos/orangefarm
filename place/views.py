@@ -293,7 +293,7 @@ def show_related(request, place_name):
     country1 = Country.objects.get(id=city1.country_id)
     pass_data = {
         'place_list': c1.related,
-        'name': c1.name,
+        'the_place': c1,
         'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> <a href="/place/?place_id=' + str(c1.id) + '">' + c1.name + '</a> -> related',
     }
     return HttpResponse(template.render(pass_data, request))

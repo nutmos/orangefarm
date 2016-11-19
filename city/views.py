@@ -65,29 +65,22 @@ def city_name(request,city_name):
         template = loader.get_template('city/index.html')
         country1 = Country.objects.get(id=c1.country_id)
         other_city = City.objects(country_id=c1.country_id)
-        show_more_city = False
         if len(other_city) > 3:
             import random
             num_list = random.sample(range(len(other_city)), 3)
             other_city = [other_city[num_list[i]] for i in range(3)]
-            show_more_city = True
         popular_place = Place.objects(city_id=str(c1.id))
-        show_more_place = False
         if len(popular_place) > 3:
             import random
             num_list = random.sample(range(len(popular_place)), 3)
             popular_place = [popular_place[num_list[i]] for i in range(3)]
-            show_more_place = True
         pass_data = {
-            'name': c1.name,
-            'country_name': country1.name,
-            'description': c1.description,
+            'this_city': c1,
             'city_id': str(c1.id),
+            'country_name': country1.name,
             'other_city': other_city,
             'access_edit': access_edit,
-            'show_more_city': show_more_city,
             'popular_place': popular_place,
-            'show_more_place': show_more_place,
             'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> ' + c1.name,
             }
         return HttpResponse(template.render(pass_data, request))
@@ -238,3 +231,15 @@ def handle_change_picture(request):
         c1.save()
         return HttpResponseRedirect('/city?city_id=' + city_id)
     return HttpResponse("Error")
+
+def popular_place(request, city_name):
+    c1 = City.objects.get(url_point_to=city_name)
+    place_list = Place.objects(city_id=str(c1.id))
+    country1 = Country.objects.get(id=c1.country_id)
+    template = loader.get_template("city/popular-place.html")
+    pass_data = {
+            'the_place': c1,
+            'place_list': place_list,
+            'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(c1.id) + '">' +c1.name + '</a> -> Popular', 
+            }
+    return HttpResponse(template.render(pass_data, request))

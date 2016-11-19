@@ -31,34 +31,19 @@
             <h3>Popular Place in {{ city_name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in popular_place_list %}
-                <div class="column" style="margin-top: 2em;">
-                    <a href="/place/?place_id={{ p.id }}" row="button" aria-label="Thumbnail">
-                        <div style="position: relative;">
-                            <img src="/place/picture/?place_id={{ p.id }}" class="popular-image" style="width: 100%; height: 200px" />
-                            <div class="overlay"><div class="overlay-text">{{ p.name }}</div></div>
-                        </div>
-                    </a>
-                </div>
+                {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p %}
                 {% endfor %}
             </div>
-            <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
-
+            <a href="/country/c/{{ url_point_to }}/popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
+            {% if related_place %}
             <h3 style="margin-top: 2em;">Related</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in related_place %}
-                <div class="column" style="margin-top: 2em;">
-                    <a href="/place/?place_id={{ p.id }}" row="button" aria-label="Thumbnail">
-                        <div style="position: relative;">
-                            <img src="/place/picture/?place_id={{ p.id }}" class="popular-image" style="width: 100%; height: 200px" />
-                            <div class="overlay"><div class="overlay-text">{{ p.name }}</div></div>
-                        </div>
-                    </a>
-                </div>
-                {% empty %}
-                <div class="text-centered">No related place found.</div>
+                {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p %}
                 {% endfor %}
             </div>
             <a href="related" style="color:black"><p style="text-align: right;">Show more</p></a>
+            {% endif %}
         </div>
     </div>
     {% if access_edit %}
