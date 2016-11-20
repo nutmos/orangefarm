@@ -4,16 +4,23 @@
 <head>
     <meta charset="UTF-8">
     {% include 'essential.html' %}
+    {% include 'react-essential.html' %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/firstpage/styles.css' %}">
     <title>Search Result</title>
 </head>
 <body>
     {% include 'navbar.html' %}
+    <div class="row">
+    <div class="large-10 columns small-centered">
+        <div id="search-button" style="margin-top: 2em; margin-bottom: 2em;"></div>
+    </div>
+    </div>
+    {% if country_list %}
     <div class="row" style="margin-bottom: 2em;">
     <div class="large-10 columns small-centered">
     <div class="row" style="margin-top: 2em;">
-        <h1>Country</h1>
+        <h3>Country</h3>
     </div>
         <div class="row large-up-3">
             {% for i in country_list %}
@@ -22,6 +29,36 @@
         </div>
     </div>
     </div>
+    {% endif %}
+    {% if city_list %}
+    <div class="row" style="margin-bottom: 2em;">
+    <div class="large-10 columns small-centered">
+    <div class="row" style="margin-top: 2em;">
+        <h3>City</h3>
+    </div>
+        <div class="row large-up-3">
+            {% for i in city_list %}
+        {% include 'thumbnail-template.html' with object=i link_to="/city/?city_id=" link_img="/city/picture/?city_id=" %}
+        {% endfor %}
+        </div>
+    </div>
+    </div>
+    {% endif %}
+    {% if place_list %}
+    <div class="row" style="margin-bottom: 2em;">
+    <div class="large-10 columns small-centered">
+    <div class="row" style="margin-top: 2em;">
+        <h3>Place</h3>
+    </div>
+        <div class="row large-up-3">
+            {% for i in place_list %}
+        {% include 'thumbnail-template.html' with object=i link_to="/place/?place_id=" link_img="/place/picture/?place_id=" %}
+        {% endfor %}
+        </div>
+    </div>
+    </div>
+    {% endif %}
     {% include 'footerbar.html' %}
 </body>
+<script src="{% static 'js/searchbutton.js' %}" type="text/babel"></script>
 </html>

@@ -19,17 +19,31 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="large-10 columns small-centered section-background">
-           <h1>Popular Country</h1>
-            <div class="row large-up-3 project-overlay-inset">
-                {% for c in all_country %}
-                {% include 'thumbnail-template.html' with link_to="/country/?country_id=" object=c link_img="/country/picture/?country_id=" %}
-                {% endfor %}
-            </div>
-            <a href="/country/all/" style="color:black"><p style="text-align: right;">Show more</p></a>
+    <div class="large-10 columns small-centered" style="margin-top: 2em; margin-bottom: 2em;">
+       <h3>Country</h3>
+        <div class="row large-up-3 project-overlay-inset">
+            {% for c in country_list %}
+            {% include 'thumbnail-template.html' with link_to="/country/?country_id=" object=c link_img="/country/picture/?country_id=" %}
+            {% endfor %}
         </div>
-    </section>
+        <a href="/country/all/" style="color:black"><p style="text-align: right;">Show more</p></a>
+    </div>
+    <div class="large-10 columns small-centered" style="margin-top: 2em; margin-bottom: 2em;">
+        <h3>City</h3>
+        <div class="row large-up-3 project-overlay-inset">
+            {% for c in city_list %}
+            {% include 'thumbnail-template.html' with link_to="/city/?city_id=" object=c link_img="/city/picture/?city_id=" %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="large-10 columns small-centered" style="margin-top: 2em; margin-bottom: 2em;">
+        <h3>Place</h3>
+        <div class="row large-up-3 project-overlay-inset">
+            {% for c in place_list %}
+            {% include 'thumbnail-template.html' with link_to="/place/?place_id=" object=c link_img="/place/picture/?place_id=" %}
+            {% endfor %}
+        </div>
+    </div>
     {% include 'footerbar.html' %}
 </body>
 

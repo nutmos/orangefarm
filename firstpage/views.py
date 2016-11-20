@@ -2,11 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from country.models import *
-
-is_login = True
-
-def get_is_login():
-    return is_login
+from city.models import *
+from place.models import *
 
 # Create your views here.
 def index(request):
@@ -17,17 +14,22 @@ def index(request):
         request.session.set_expiry(3600)
     except KeyError:
         is_login = False
-    all_country = Country.objects()
-    show_more_country = False
-    if len(all_country) > 6:
-        import random
-        num_list = random.sample(range(len(all_country)), 6)
-        print num_list
-        all_country = [all_country[num_list[i]] for i in range(6)]
-        show_more_country = True
+    country_list = Country._get_collection().aggregate([{
+        '$sample': {'size': 6},
+        }])['result']
+    for c in country_list: c['id'] = c.pop('_id')
+    city_list = City._get_collection().aggregate([{
+        '$sample': {'size': 6},
+        }])['result']
+    for c in city_list: c['id'] = c.pop('_id')
+    place_list = Place._get_collection().aggregate([{
+        '$sample': {'size': 6},
+        }])['result']
+    for p in place_list: p['id'] = p.pop('_id')
     pass_data = {
-        'all_country': all_country,
-        'show_more_country': show_more_country
+        'country_list': country_list,
+        'city_list': city_list,
+        'place_list': place_list,
     }
     return HttpResponse(template.render(pass_data, request))
 

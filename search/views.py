@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from django.template import loader
 import urllib
 from country.models import *
+from city.models import *
+from place.models import *
+from company_profile.models import *
 
 # Create your views here.
 
@@ -11,28 +14,16 @@ def index(request):
     if request.method == 'GET':
         query = request.GET.get('query', '')
         query_unquote =  urllib.unquote(query)
-        print query
         country_list = Country.objects(__raw__={'name': {'$regex': query_unquote, '$options': 'i' }})
-        #country_list = Country.objects.exec_js("""
-        #        function() {
-        #            var country = [];
-        #            db[collection].find(query).forEach(function(doc) {
-        #                if (doc.name.search('""" + query_unquote + """')) {
-        #                    country.push(doc)
-        #                }
-        #            })
-        #            country.forEach(function(object) {
-        #                object['id'] = object['_id'];
-        #                delete object['_id'];
-        #            })
-        #            return country;
-        #            }
-        #            """
-        #        )
-        print country_list
+        place_list = Place.objects(__raw__={'name': {'$regex': query_unquote, '$options': 'i' }})
+        city_list = City.objects(__raw__={'name': {'$regex': query_unquote, '$options': 'i' }})
+        company_list = Company.objects(__raw__={'name': {'$regex': query_unquote, '$options': 'i'}})
         pass_data = {
             'query': query_unquote,
             'country_list': country_list,
+            'city_list': city_list,
+            'place_list': place_list,
+            'company_list': company_list,
         }
         template = loader.get_template('search/index.html')
         return HttpResponse(template.render(pass_data, request))
