@@ -11,23 +11,24 @@ def index(request):
     if request.method == 'GET':
         query = request.GET.get('query', '')
         query_unquote =  urllib.unquote(query)
-        country_list = Country.objects.exec_js("""
-                function() {
-                    var country = [];
-                    db[collection].find(query).forEach(function(doc) {
-                        if (doc.name.search('""" + query_unquote + """')) {
-                            country.push(doc)
-                        }
-                    })
-                    country.forEach(function(object) {
-                        object['id'] = object['_id'];
-                        delete object['_id'];
-                    })
-                    return country;
-                    }
-                    """
-                )
-        print country_list[0]["name"]
+        print query
+        country_list = Country.objects(__raw__={'name': {'$regex': query_unquote, '$options': 'i' }})
+        #country_list = Country.objects.exec_js("""
+        #        function() {
+        #            var country = [];
+        #            db[collection].find(query).forEach(function(doc) {
+        #                if (doc.name.search('""" + query_unquote + """')) {
+        #                    country.push(doc)
+        #                }
+        #            })
+        #            country.forEach(function(object) {
+        #                object['id'] = object['_id'];
+        #                delete object['_id'];
+        #            })
+        #            return country;
+        #            }
+        #            """
+        #        )
         print country_list
         pass_data = {
             'query': query_unquote,

@@ -285,6 +285,14 @@ def show_image(request):
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
 
 def show_related(request, place_name):
+    access_edit = True
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            access_edit = False
+    except:
+        access_edit = False
     template = loader.get_template('place/related.html')
     c1 = Place.objects.get(url_point_to=place_name)
     city1 = City.objects.get(id=c1.city_id)
@@ -292,6 +300,7 @@ def show_related(request, place_name):
     pass_data = {
         'place_list': c1.related,
         'the_place': c1,
+        'access_edit': access_edit,
         'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> <a href="/place/?place_id=' + str(c1.id) + '">' + c1.name + '</a> -> related',
     }
     return HttpResponse(template.render(pass_data, request))

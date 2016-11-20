@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ name }}</title>
+    <title>{{ this_place.name }}</title>
     {% include 'essential.html' %}
     {% include 'jquery-essential.html' %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.2/motion-ui.min.css">
@@ -32,7 +32,7 @@
     </div>
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
-            <h3>Popular Place in {{ city_name }}</h3>
+            <h3>Popular Place in {{ host_city.name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in popular_place_list %}
                 {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p %}
@@ -53,13 +53,13 @@
     {% if access_edit %}
     <div class="row">
         <div class="large-3 columns">
-            <a class="expanded button" href="/place/edit?place_id={{ place_id }}">Edit Place</a>
+            <a class="expanded button" href="/place/edit?place_id={{ this_place.id }}">Edit Place</a>
         </div>
         <div class="large-3 columns">
-            <a class="expanded button" href="/place/delete?place_id={{ place_id }}">Delete Place</a>
+            <a class="expanded button" href="/place/delete?place_id={{ this_place.id }}">Delete Place</a>
         </div>
         <div class="large-3 columns">
-            <a class="expanded button" href="/place/add-picture?place_id={{ place_id }}">Add Image</a>
+            <a class="expanded button" href="/place/add-picture?place_id={{ this_place.id }}">Add Image</a>
         </div>
         <div class="large-3 columns">
             <a class="expanded button" href="/place/delete-picture?place_id={{ place_id }}">Edit Image</a>

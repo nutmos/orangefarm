@@ -64,16 +64,14 @@ def city_name(request,city_name):
         c1 = City.objects.get(url_point_to=city_name)
         template = loader.get_template('city/index.html')
         country1 = Country.objects.get(id=c1.country_id)
-        other_city = City.objects(country_id=c1.country_id)
-        if len(other_city) > 3:
-            import random
-            num_list = random.sample(range(len(other_city)), 3)
-            other_city = [other_city[num_list[i]] for i in range(3)]
-        popular_place = Place.objects(city_id=str(c1.id))
-        if len(popular_place) > 3:
-            import random
-            num_list = random.sample(range(len(popular_place)), 3)
-            popular_place = [popular_place[num_list[i]] for i in range(3)]
+        other_city = City._get_collection().aggregate([{
+            '$sample': {'size': 3}
+            }])['result']
+        for c in other_city: c['id'] = c.pop('_id')
+        popular_place = Place._get_collection().aggregate([{
+            '$sample': {'size': 3}
+            }])['result']
+        for p in popular_place: p['id'] = p.pop('_id')
         pass_data = {
             'this_city': c1,
             'host_country': country1,

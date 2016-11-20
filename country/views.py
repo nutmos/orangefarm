@@ -66,17 +66,32 @@ def country_name(request, country_name):
     c1 = Country.objects.get(url_point_to=country_name)
     template = loader.get_template('country/index.html')
     city_list = City.objects(country_id=str(c1.id))
-    show_more_city = False
-    if len(city_list) > 3:
-        import random
-        num_list = random.sample(range(len(city_list)), 3)
-        print num_list
-        city_list = [city_list[num_list[i]] for i in range(3)]
-        show_more_city = True
+    city_list_id = [str(i.id) for i in city_list]
+    place_list= Place._get_collection().aggregate([
+        {'$match': {
+            'city_id': {'$in': city_list_id},
+            }},
+        {'$sample': {'size': 3}},
+    ])['result']
+    for p in place_list: p['id'] = p.pop('_id')
+    city_list = City._get_collection().aggregate([{
+        '$sample': {'size': 3},
+        },
+        {'$match': {'country_id': str(c1.id)}
+            }
+        ])['result']
+    print city_list
+    for c in city_list: c['id'] = c.pop('_id')
+    country_list = Country._get_collection().aggregate([{
+        '$sample': {'size': 3},
+        }])['result']
+    for c in country_list: c['id'] = c.pop('_id')
     pass_data = {
             'this_country': c1,
         'access_edit': access_edit,
-        'city_list': city_list}
+        'city_list': city_list,
+        'country_list': country_list,
+        'place_list': place_list}
     return HttpResponse(template.render(pass_data, request))
 
 def edit(request):

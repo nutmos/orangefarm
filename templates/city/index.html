@@ -16,32 +16,32 @@
     {% include 'place-info.html' with background_url_path="/city/picture/?city_id=" object=this_city navigation=nav|safe %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
-            <h3>Popular City in {{ host_country.name }}</h3>
-            <div class="row large-up-3 project-overlay-inset">
-                {% for c in other_city %}
-                {% include 'thumbnail-template.html' with object=c link_to="/city/?city_id=" link_img="/city/picture/?city_id=" %}
-                {% endfor %}
-            </div>
-            <a href="/country/c/{{ host_country.url_point_to }}/city" style="color:black"><p style="text-align: right;">Show more</p></a>
 
-            <h3 style="margin-top: 2em;">Popular Place in {{ this_city.name }}</h3>
+            <h3 style="margin-top: 2em;">Popular Place</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in popular_place %}
                 {% include 'thumbnail-template.html' with object=p link_to="/place/?place_id=" link_img="/place/picture/?place_id=" %}
                 {% endfor %}
             </div>
             <a href="popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
+            <h3>Other City in {{ host_country.name }}</h3>
+            <div class="row large-up-3 project-overlay-inset">
+                {% for c in other_city %}
+                {% include 'thumbnail-template.html' with object=c link_to="/city/?city_id=" link_img="/city/picture/?city_id=" %}
+                {% endfor %}
+            </div>
+            <a href="/country/c/{{ host_country.url_point_to }}/city" style="color:black"><p style="text-align: right;">Show more</p></a>
         </div>
     </div>
     {% if access_edit %}
     <div class="row">
                     <div class="large-4 columns">
-                        <a class="expanded button" href="/city/edit?city_id={{ city_id }}">Edit City</a>
+                        <a class="expanded button" href="/city/edit?city_id={{ this_city.id }}">Edit City</a>
                     </div>
                     <div class="large-4 columns">
-                        <a class="expanded button" href="/city/delete?city_id={{ city_id }}">Delete City</a>
+                        <a class="expanded button" href="/city/delete?city_id={{ this_city.id }}">Delete City</a>
                     </div>
-                    <div class="large-4 columns"><a class="expanded button" href="/city/change-picture?city_id={{ city_id }}">Edit Image</a></div>
+                    <div class="large-4 columns"><a class="expanded button" href="/city/change-picture?city_id={{ this_city.id }}">Edit Image</a></div>
                 </div>
     {% endif %}
     {% include 'footerbar.html' %}

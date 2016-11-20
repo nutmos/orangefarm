@@ -10,12 +10,14 @@
 </head>
 <body>
     {% include 'show-more-place-template.html' with background_url_path="/place/picture/?place_id=" object=the_place place_list=place_list empty_message="No related place found." list_link_to="/place/?place_id=" list_link_img="/place/picture/?place_id=" header="Related" background_url_point_to="/place/?place_id=" %}
+    {% if access_edit %}
             <div class="row" style="margin-top: 2em;" >
                 <div class="large-6 columns">
                     <a class="expanded button" href="delete">Delete Related</a>
                 </div>
                 <div class="large-6 columns"><a class="expanded button" href="add">Add Related</a></div>
             </div>
+    {% endif %}
     {% include 'footerbar.html' %}
 </body>
 </html>
