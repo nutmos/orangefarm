@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'essential.html' %}
+    <title>All Countries</title>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/place/styles.css" %}>
+</head>
+<body>
+    {% include 'show-more-place-template.html' with background_url_path="/place/picture/?place_id=" object=the_place place_list=place_list empty_message="No country found." list_link_to="/country/?country_id=" list_link_img="/country/picture/?country_id=" header="All Countries" background_url_point_to="/place/?place_id=" not_show_header=True %}
+    {% include 'footerbar.html' %}
+</body>
+</html>

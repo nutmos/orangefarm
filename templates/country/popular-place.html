@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'essential.html' %}
+    <title>Place in {{ the_place.name }}</title>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/place/styles.css" %}>
+</head>
+<body>
+    {% include 'show-more-place-template.html' with background_url_path="/country/picture/?country_id=" object=the_place place_list=place_list empty_message="No place found." list_link_to="/place/?place_id=" list_link_img="/place/picture/?place_id=" header="Place" background_url_point_to="/country/?country_id=" nav=nav %}
+    {% include 'footerbar.html' %}
+</body>
+</html>

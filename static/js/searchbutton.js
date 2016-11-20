@@ -5,7 +5,7 @@ var SearchButton = React.createClass({
     },
     handleSearch: function(e) {
         if (/\S/.test(query)) {
-            window.location = query;
+            window.location = '/search/'.concat(encodeURI(query));
         }
     },
     queryChange: function(e) {

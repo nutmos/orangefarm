@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.2/motion-ui.min.css">
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
-
+<style>
+.nav a:hover {
+    text-decoration: underline;
+}
+</style>
 <body>
-    {% include 'place-info.html' with background_url=background_url name=name description=description navigation=nav|safe %}
+    {% include 'place-info.html' with background_url_path="/place/picture/?place_id=" object=this_place navigation=nav|safe %}
     <div class="large-5 columns small-centered">
         <br><br>
         <div class="orbit" role="region" aria-label="Country Pictures" data-orbit>
@@ -34,7 +38,7 @@
                 {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p %}
                 {% endfor %}
             </div>
-            <a href="/country/c/{{ url_point_to }}/popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
+            <a href="/city/c/{{ host_city.url_point_to }}/popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
             {% if related_place %}
             <h3 style="margin-top: 2em;">Related</h3>
             <div class="row large-up-3 project-overlay-inset">

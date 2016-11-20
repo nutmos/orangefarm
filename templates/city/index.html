@@ -13,16 +13,16 @@
 }
 </style>
 <body>
-    {% include 'place-info.html' with background_url="/city/picture?city_id="|add:city_id name=this_city.name description=this_city.description navigation=nav|safe %}
+    {% include 'place-info.html' with background_url_path="/city/picture/?city_id=" object=this_city navigation=nav|safe %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
-            <h3>Popular City in {{ country_name }}</h3>
+            <h3>Popular City in {{ host_country.name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for c in other_city %}
                 {% include 'thumbnail-template.html' with object=c link_to="/city/?city_id=" link_img="/city/picture/?city_id=" %}
                 {% endfor %}
             </div>
-            <a href="/city/c/{{ this_city.url_point_to }}/popular-city" style="color:black"><p style="text-align: right;">Show more</p></a>
+            <a href="/country/c/{{ host_country.url_point_to }}/city" style="color:black"><p style="text-align: right;">Show more</p></a>
 
             <h3 style="margin-top: 2em;">Popular Place in {{ this_city.name }}</h3>
             <div class="row large-up-3 project-overlay-inset">

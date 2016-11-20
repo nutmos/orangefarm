@@ -76,11 +76,9 @@ def place_name(request, place_name):
             num_list = random.sample(range(len(show_related)), 3)
             show_related = [show_related[num_list[i]] for i in range(3)]
         pass_data = {
-            'name': c1.name,
-            'city_id': c1.city_id,
-            'city_name': city1.name,
-            'description': c1.description,
-            'place_id': str(c1.id),
+            'this_place': c1,
+            'host_city': city1,
+            'host_country': country1,
             'access_edit': access_edit,
             'place_picture': c1.photos,
             'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> ' + c1.name,

@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ name }}</title>
+    <title>{{ this_country.name }}</title>
     {% include 'essential.html' %}
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
 
 <body>
-    {% include 'place-info.html' with background_url="/country/picture?country_id="|add:country_id name=name description=description navigation=""%}
+    {% include 'place-info.html' with background_url_path="/country/picture?country_id=" object=this_country navigation=""%}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
             <h3>Popular City</h3>
@@ -18,7 +18,7 @@
             {% include 'thumbnail-template.html' with object=c link_to="/city/?city_id=" link_img="/city/picture/?city_id=" %}
             {% endfor %}
             </div>
-            <a href="#" style="color:black"><p style="text-align: right;">Show more</p></a>
+            <a href="city" style="color:black"><p style="text-align: right;">Show more</p></a>
 
             <h3 style="margin-top: 2em;">Popular Place</h3>
             <div class="row large-up-3 project-overlay-inset">

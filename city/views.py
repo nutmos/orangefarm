@@ -76,8 +76,7 @@ def city_name(request,city_name):
             popular_place = [popular_place[num_list[i]] for i in range(3)]
         pass_data = {
             'this_city': c1,
-            'city_id': str(c1.id),
-            'country_name': country1.name,
+            'host_country': country1,
             'other_city': other_city,
             'access_edit': access_edit,
             'popular_place': popular_place,
@@ -234,7 +233,7 @@ def handle_change_picture(request):
 
 def popular_place(request, city_name):
     c1 = City.objects.get(url_point_to=city_name)
-    place_list = Place.objects(city_id=str(c1.id))
+    place_list = Place.objects(city_id=str(c1.id)).order_by('-rating', 'name')
     country1 = Country.objects.get(id=c1.country_id)
     template = loader.get_template("city/popular-place.html")
     pass_data = {

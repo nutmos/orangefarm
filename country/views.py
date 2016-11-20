@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine import *
 from models import *
 from city.models import *
+from place.models import *
 from user_profile.models import *
 from django.template import loader
 from django.contrib.staticfiles.templatetags.staticfiles import static
@@ -73,9 +74,7 @@ def country_name(request, country_name):
         city_list = [city_list[num_list[i]] for i in range(3)]
         show_more_city = True
     pass_data = {
-        'name': c1.name, 
-        'description': c1.description,
-        'country_id': str(c1.id),
+            'this_country': c1,
         'access_edit': access_edit,
         'city_list': city_list}
     return HttpResponse(template.render(pass_data, request))
@@ -195,3 +194,39 @@ def show_image(request):
         except:
             return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+
+def show_city(request, country_name):
+    c1 = Country.objects.get(url_point_to=country_name)
+    template = loader.get_template('country/city.html')
+    place_list = City.objects(country_id=str(c1.id))
+    pass_data = {
+            'the_place': c1,
+            'place_list': place_list,
+            'nav': '<a href="/country/?country_id=' + str(c1.id) + '">' + c1.name + '</a> -> City',
+        }
+    return HttpResponse(template.render(pass_data, request))
+
+def all_country(request):
+    c1 = Country.objects.order_by('name')
+    template = loader.get_template('country/all-country.html')
+    pass_data = {
+            'place_list': c1,
+            }
+    return HttpResponse(template.render(pass_data, request))
+
+def popular_place(request, country_name):
+    c1 = Country.objects.get(url_point_to=country_name)
+    city_list = City.objects(country_id=str(c1.id))
+    city_list_id = [str(i.id) for i in city_list]
+    print city_list_id
+    place_list = []
+    all_place = Place.objects()
+    for p in all_place:
+        if p.city_id in city_list_id:
+            place_list.append(p)
+    pass_data = {
+            'the_place': c1,
+            'place_list': place_list,
+            }
+    template = loader.get_template('country/popular-place.html')
+    return HttpResponse(template.render(pass_data, request))

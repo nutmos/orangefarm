@@ -1,5 +1,9 @@
 {% load static %}
+    {% if not_show_header %}
+    {% include 'navbar.html' %}
+    {% else %}
     {% include 'place-header.html' with background_url_path=background_url_path object=the_place %}
+    {% endif %}
     <div class="row nav" style="margin-top: 1em; margin-left: 2em;">{{ nav|safe }}</div>
         <div class="row" style="margin-bottom: 2em;" >
         <div class="large-10 columns small-centered">
