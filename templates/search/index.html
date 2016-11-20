@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'essential.html' %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/firstpage/styles.css' %}">
+    <title>Search Result</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="row" style="margin-bottom: 2em;">
+    <div class="large-10 columns small-centered">
+    <div class="row" style="margin-top: 2em;">
+        <h1>Country</h1>
+    </div>
+        <div class="row large-up-3">
+            {% for i in country_list %}
+        {% include 'thumbnail-template.html' with object=i link_to="/country/?country_id=" link_img="/country/picture/?country_id=" %}
+        {% endfor %}
+        </div>
+    </div>
+    </div>
+    {% include 'footerbar.html' %}
+</body>
+</html>

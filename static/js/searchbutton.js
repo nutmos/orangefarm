@@ -5,7 +5,7 @@ var SearchButton = React.createClass({
     },
     handleSearch: function(e) {
         if (/\S/.test(query)) {
-            window.location = '/search/'.concat(encodeURI(query));
+            window.location = '/search/?query='.concat(encodeURI(query));
         }
     },
     queryChange: function(e) {
@@ -15,7 +15,7 @@ var SearchButton = React.createClass({
     handleKeyPress: function(e) {
         if (e.charCode == 13) {
             if (/\S/.test(query)) {
-                window.location = query;
+                window.location = '/search/?query='.concat(encodeURI(query));
             }
         }
     },
