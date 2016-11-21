@@ -9,6 +9,7 @@ from place.models import *
 from user_profile.models import *
 from company_profile.models import *
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -188,14 +189,13 @@ def get_place_by_city(request):
         city_id = request.GET.get('city_id', '')
         try:
             c1 = Place.objects(city_id=city_id).order_by('name')
-            print c1
             c_json = {}
             for c in c1:
                 c_json[c.name] = str(c.id)
             print c_json
             return JsonResponse(c_json)
         except:
-            print "except"
+            print "in except"
             pass
     return HttpResponse("Error")
 
@@ -235,7 +235,7 @@ def process_add_place(request):
         except:
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
-        trip_id = request.GET.get('trip_id', '')
+        trip_id = request.GET.get('trip-id', '')
         c1 = Trip.objects.get(id=trip_id)
         place_id = request.GET.get('place-id', '')
         c1.conditions = request.GET.get('conditions', '')
@@ -268,6 +268,7 @@ def delete_place(request):
         return HttpResponse('Key error')
 
 def process_delete_place(request):
+    print "in"
     if request.method == 'GET':
         try:
             user_id = request.session['user_id']

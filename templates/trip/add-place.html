@@ -13,7 +13,7 @@
     <div class="large-10 columns small-centered">
     <div class="row">
         <div class="large-10 columns small-centered">
-            <form action="/trip/process-add-place/" method="get" name="trip-place-form" id="trip-place-form">
+            <form action="/trip/process-add-place/?trip_id={{trip_id}}" method="get" name="trip-place-form" id="trip-place-form">
                 <input type="hidden" name="city-id" value="{{ city_id }}">
                 <input type="hidden" name="place-id" value="{{ place_id }}">
                 <input type="hidden" name="trip-id" value="{{ trip_id }}">

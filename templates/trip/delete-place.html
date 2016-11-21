@@ -44,7 +44,7 @@ a, a:hover {
 <script>
 function handle_delete(str_a) {
     var a = confirm("Are you sure to delete this image?");
-    if (a == true) {
+    if (a === true) {
         var Url = "/trip/process-delete-place/?trip_id=".concat(trip_id);
         var Url2 = "&place_id=".concat(str_a);
         window.location.href = Url.concat(Url2);

@@ -95,12 +95,13 @@
         <br><br>
     </section>
 
-    <form action="/booking/process-index/" method="get">
+    <form action="/booking/process-index" method="get">
+        <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
         <div class="large-7 columns small-centered">
             <table>
                 <thead>
                     <tr>
-                        <th colspan="3">Traveller Detail</th>
+                        <th colspan="3">Traveller Detail </th>
                     </tr>
                 </thead>
                 <tbody>
