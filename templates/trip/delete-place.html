@@ -22,6 +22,7 @@ a, a:hover {
                 <h1>Place in Trip {{ name }}</h1>
             </div>
             <div class="row large-up-3 project-overlay-inset">
+                <input type="hidden" name="trip_id" value="{{ trip_id }}">
                 {% for p in place_list %}
                 <div class="column" style="margin-bottom: 2em;">
                     <a onclick="handle_delete('{{ p.id }}')" row="button" aria-label="Thumbnail">
@@ -44,10 +45,8 @@ a, a:hover {
 <script>
 function handle_delete(str_a) {
     var a = confirm("Are you sure to delete this image?");
-    if (a === true) {
-        var Url = "/trip/process-delete-place/?trip_id=".concat(trip_id);
-        var Url2 = "&place_id=".concat(str_a);
-        window.location.href = Url.concat(Url2);
+    if (a == true) {
+        window.location.href = "/trip/process-delete-place/?trip_id={{trip_id}}&place_id=".concat(str_a);
     }
 }
 </script>

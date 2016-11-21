@@ -241,7 +241,7 @@ def process_add_place(request):
         c1.conditions = request.GET.get('conditions', '')
         c1.placelist.append(Place.objects.get(id=place_id))
         c1.save()
-        return HttpResponseRedirect('/trip?trip_id=' + str(c1.id))
+        return HttpResponseRedirect('/trip/show-place?trip_id=' + str(c1.id))
     return HttpResponse('No GET Request')
 
 def delete_place(request):
@@ -279,12 +279,13 @@ def process_delete_place(request):
         except:
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
+        trip_id = request.GET.get('trip_id','')
         c1 = Trip.objects.get(id=trip_id)
         del_id = request.GET.get('place_id', '')
         for i in range(len(c1.placelist)):
             if str(c1.placelist[i].id) == del_id:
-                del c1.related[i]
+                del c1.placelist[i]
                 c1.save()
-                return HttpResponseRedirect('/trip?trip_id=' + str(c1.id))
+                return HttpResponseRedirect('/trip/show-place?trip_id=' + str(c1.id))
         return HttpResponse("Not found")
     return HttpResponse("Error")
