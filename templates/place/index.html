@@ -32,6 +32,7 @@
     </div>
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
+            {% if popular_place_list %}
             <h3>Popular Place in {{ host_city.name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in popular_place_list %}
@@ -39,6 +40,7 @@
                 {% endfor %}
             </div>
             <a href="/city/c/{{ host_city.url_point_to }}/popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
+            {% endif %}
             {% if related_place %}
             <h3 style="margin-top: 2em;">Related</h3>
             <div class="row large-up-3 project-overlay-inset">
