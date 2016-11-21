@@ -188,6 +188,7 @@ def get_place_by_city(request):
         city_id = request.GET.get('city_id', '')
         try:
             c1 = Place.objects(city_id=city_id).order_by('name')
+            print c1
             c_json = {}
             for c in c1:
                 c_json[c.name] = str(c.id)

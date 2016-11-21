@@ -13,6 +13,6 @@ urlpatterns = [
     url(r'^get-place-by-city/',views.get_place_by_city, name='get-place-by-city'),
     url(r'^add-place/', views.add_place, name='add-place'),
     url(r'^process-add-place/', views.process_add_place, name='process-add-place'),
-    url(r'^delete-place/', views.delete_place name='delete-place'),
+    url(r'^delete-place/', views.delete_place, name='delete-place'),
     url(r'^process-delete-place/', views.process_delete_place, name='process-delete-place'),
 ]
