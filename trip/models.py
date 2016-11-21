@@ -7,9 +7,13 @@ from place.models import *
 
 # Create your models here.
 
+class TripPlace(Document):
+    place = ReferenceField('Place')
+    trip = ReferenceField('Trip')
+
 class Trip(Document):
     name = StringField()
-    company_id = StringField()
+    company_id = StringField(max_length=24, min_length=24)
     price = IntField()
     start_date = DateTimeField(default=datetime.now())
     end_date = DateTimeField(default=datetime.now())
@@ -20,4 +24,4 @@ class Trip(Document):
     travel_by = StringField()
     conditions = StringField()
     active = BooleanField()
-    placelist = ListField(ReferenceField('Place'))
+    placelist = ListField(ReferenceField('TripPlace'))

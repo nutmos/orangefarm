@@ -4,12 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ name }}</title>
-    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.4/foundation.min.css">
+    {% include 'essential.html' %}
+    {% include 'jquery-essential.html' %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.2/motion-ui.min.css">
     <link rel="stylesheet" href={% static "css/styles.css" %}>
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
@@ -32,113 +28,103 @@
 </style>
 <body>
     {% include 'navbar.html' %}
-    <section>
-        {% if alert %}
-        <div class="alert-panel text-centered">
-            <div id="alert" class="row" style="">
-                {{ alert }}
-            </div>
-        </div>
-        {% endif %}
-        <div class="row" style="padding:30px">
-            <h2 style="color:#A34E24"> {{ name }} </h2>
-            <p><a href="/company_profile?company_id={{ company_id }}" style="color: black">by {{ company_name }}</a></p>
-        </div>
-        <div class="row">
-            <div class="large-4 columns">
-                <div class="orbit" role="region" aria-label="Country Pictures" data-orbit>
-                        <ul class="orbit-container">
-                            <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                            <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-                            <li class="is-active orbit-slide">
-                                <img class="orbit-image" src={% static "pictures/boat-harbor-hong-kong-china-1_main.jpg" %} alt="Space">
-                                <figcaption class="orbit-caption">Harbor</figcaption>
-                            </li>
-                            <li class="orbit-slide">
-                                <img class="orbit-image" src={% static "pictures/pattaya.jpg" %}>
-                                 <figcaption class="orbit-caption">Pattaya</figcaption>
-                            </li>
-                            <li class="orbit-slide">
-                                <img class="orbit-image" src={% static "pictures/pai.jpg" %} alt="Space">
-                                <figcaption class="orbit-caption">Pai</figcaption>
-                            </li>
-                            <li class="orbit-slide">
-                                <img class="orbit-image" src={% static "pictures/plearn-wan.jpg" %} alt="Space">
-                                <figcaption class="orbit-caption">Plearn Wan</figcaption>
-                            </li>
-                        </ul>
-                        <nav class="orbit-bullets">
-                            <button class="is-active" data-slide="0" ><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-                            <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-                            <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
-                            <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
-                        </nav>
-                    </div>
-            </div>
-            <div class="large-8 columns" style="padding:10px">
-                <h4>Highlight:</h4>
-               
-                <div class="large-13 columns">
-                    <p>{{ highlight }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>    
-        <div class="row"style="padding:30px">
-            <div class="column">
-                <h4 style="text-align:left">Booking:</h4>
-                <table align="center">
-                    <tr style="background-color:#6B7A8F;color:white">
-                        <th>Booking</th>
-                        <th>Seat Available</th>
-                        <th>Date</th>
-                        <th>Travel by</th>
-                        <th>Price</th>
-                    </tr>
-                    <tr>
-                        <td><a href="/booking?trip_id={{ trip_id }}" style="color: black">book</a></td>
-                        <td>{{ remaining_people }}</td>
-                        <td>{{ start_date }} - {{ end_date }}</td>
-                        <td>{{ travel_by }}</td>
-                        <td>{{ price }} THB</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="row" style="padding:30px">
-            <div class="column">
-                <h4 style="text-align:left">More Details</h4>
-
-                <ul class="tabs" data-tabs id="example-tabs" style="background-color:#6B7A8F">
-                    <li class="tabs-title is-active"><a href="#details" aria-selected="true"><font size="3">Details</font></a></li>
-                    <li class="tabs-title"><a href="#conditions"><font size="3">Conditions</font></a></li>
-                </ul>
-                <div class="tabs-content" data-tabs-content="example-tabs">
-                    <div class="tabs-panel is-active" id="details">
-                        <p>{{ description }}</p>
-                    </div>
-                    <div class="tabs-panel" id="conditions">
-                        <p>{{ conditions }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <div class="row">
+        <div class="large-10 columns small-centered">
+            <section>
+                <div class="row" style="padding:30px">
+                    <h2 style="color:#A34E24"> {{ this_trip.name }} </h2>
+                    <p><a href="/company_profile?company_id={{ this_trip.company_id }}" style="color: black">by {{ company_name }}</a></p>
+                </div>
+                <div class="row">
+                    <div class="large-4 columns">
+                        <div class="orbit" role="region" aria-label="Country Pictures" data-orbit>
+                                <ul class="orbit-container">
+                                    <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+                                    <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+                                    <li class="is-active orbit-slide">
+                                        <img class="orbit-image" src={% static "pictures/boat-harbor-hong-kong-china-1_main.jpg" %} alt="Space">
+                                        <figcaption class="orbit-caption">Harbor</figcaption>
+                                    </li>
+                                    <li class="orbit-slide">
+                                        <img class="orbit-image" src={% static "pictures/pattaya.jpg" %}>
+                                         <figcaption class="orbit-caption">Pattaya</figcaption>
+                                    </li>
+                                    <li class="orbit-slide">
+                                        <img class="orbit-image" src={% static "pictures/pai.jpg" %} alt="Space">
+                                        <figcaption class="orbit-caption">Pai</figcaption>
+                                    </li>
+                                    <li class="orbit-slide">
+                                        <img class="orbit-image" src={% static "pictures/plearn-wan.jpg" %} alt="Space">
+                                        <figcaption class="orbit-caption">Plearn Wan</figcaption>
+                                    </li>
+                                </ul>
+                                <nav class="orbit-bullets">
+                                    <button class="is-active" data-slide="0" ><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+                                    <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+                                    <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+                                    <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+                                </nav>
+                            </div>
+                    </div>
+                    <div class="large-8 columns" style="padding:10px">
+                        <h4>Highlight:</h4>
+                       
+                        <div class="large-13 columns">
+                            <p>{{ this_trip.highlight }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="row"style="padding:30px">
+                <div class="column">
+                    <h4 style="text-align:left">Booking:</h4>
+                    <table align="center">
+                        <tr style="background-color:#6B7A8F;color:white">
+                            <th>Booking</th>
+                            <th>Seat Available</th>
+                            <th>Date</th>
+                            <th>Travel by</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td><a href="/booking?trip_id={{ this_trip.id }}" style="color: black">book</a></td>
+                            <td>{{ this_trip.remaining_people }}</td>
+                            <td>{{ this_trip.start_date }} - {{ this_trip.end_date }}</td>
+                            <td>{{ this_trip.travel_by }}</td>
+                            <td>{{ this_trip.price }} THB</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row" style="padding:30px">
+                <div class="column">
+                    <h4 style="text-align:left">More Details</h4>
+                    <ul class="tabs" data-tabs id="example-tabs" style="background-color:#6B7A8F">
+                        <li class="tabs-title is-active"><a href="#details" aria-selected="true"><font size="3">Details</font></a></li>
+                        <li class="tabs-title"><a href="#conditions"><font size="3">Conditions</font></a></li>
+                    </ul>
+                    <div class="tabs-content" data-tabs-content="example-tabs">
+                        <div class="tabs-panel is-active" id="details">
+                            <p>{{ this_trip.description }}</p>
+                        </div>
+                        <div class="tabs-panel" id="conditions">
+                            <p>{{ this_trip.conditions }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-4 columns">
+            <a class="expanded button" href="/trip/show-place?trip_id={{ this_trip.id }}">Trip Place</a>
+        </div>
         {% if access_edit %}
         <div class="large-4 columns">
-            <a class="expanded button" href="/trip/edit?trip_id={{ trip_id }}">Edit Trip</a>
+            <a class="expanded button" href="/trip/edit?trip_id={{ this_trip.id }}">Edit Trip</a>
         </div>
-        {% endif %}
         <div class="large-4 columns">
-            <a class="expanded button" href="/trip/show-place?trip_id={{ trip_id }}">Trip Place</a>
-        </div>
-        {% if access_edit %}
-        <div class="large-4 columns">
-            <a class="expanded button" href="/trip/delete?trip_id={{ trip_id }}">Delete Trip</a>
+            <a class="expanded button" href="/trip/delete?trip_id={{ this_trip.id }}">Delete Trip</a>
         </div>
         {% endif %}
     </div>

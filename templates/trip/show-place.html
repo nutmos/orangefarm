@@ -9,6 +9,7 @@
     <link rel="stylesheet" href={% static "css/place/styles.css" %}>
 </head>
 <body>
+    {% include 'navbar.html' %}
      <div class="row" style="margin-bottom: 2em;" >
         <div class="large-10 columns small-centered">
             <div class="row" style="margin-top: 2em">
@@ -37,7 +38,7 @@
                     <a class="expanded button" href="/trip/add-place?trip_id={{ trip_id }}">Add Place</a>
                 </div>
                 <div class="large-6 columns">
-                    <a class="expanded button" href="/trip/delete-place?trip_id={{ trip_id }}">delele Place</a>
+                    <a class="expanded button" href="/trip/delete-place?trip_id={{ trip_id }}">Delele Place</a>
                 </div>
             </div>
     {% endif %}

@@ -74,10 +74,10 @@ def country_name(request, country_name):
         {'$sample': {'size': 3}},
     ])['result']
     for p in place_list: p['id'] = p.pop('_id')
-    city_list = City._get_collection().aggregate([{
-        '$sample': {'size': 3},
-        },
+    city_list = City._get_collection().aggregate([
         {'$match': {'country_id': str(c1.id)}
+        },
+        {'$sample': {'size': 3},
             }
         ])['result']
     print city_list
