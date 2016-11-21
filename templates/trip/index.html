@@ -127,16 +127,22 @@
             </div>
         </div>
     </section>
-    {% if access_edit %}
     <div class="row">
-                    <div class="large-4 columns">
-                        <a class="expanded button" href="/trip/edit?trip_id={{ trip_id }}">Edit Trip</a>
-                    </div>
-                    <div class="large-4 columns">
-                        <a class="expanded button" href="/trip/delete?trip_id={{ trip_id }}">Delete Trip</a>
-                    </div>
-                </div>
-    {% endif %}
+        {% if access_edit %}
+        <div class="large-4 columns">
+            <a class="expanded button" href="/trip/edit?trip_id={{ trip_id }}">Edit Trip</a>
+        </div>
+        {% endif %}
+        <div class="large-4 columns">
+            <a class="expanded button" href="/trip/show-place?trip_id={{ trip_id }}">Trip Place</a>
+        </div>
+        {% if access_edit %}
+        <div class="large-4 columns">
+            <a class="expanded button" href="/trip/delete?trip_id={{ trip_id }}">Delete Trip</a>
+        </div>
+        {% endif %}
+    </div>
+
 
     {% include 'footerbar.html' %} 
 
