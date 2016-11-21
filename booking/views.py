@@ -37,6 +37,8 @@ def process_index(request):
       try:
          trip_id = request.GET.get('trip_id', '')
          trip1 = Trip.objects.get(id=trip_id)
+         adult =request.GET.get('adult','')
+         children = request.GET.get('children','')
          return HttpResponseRedirect('/booking/info?trip_id=' + str(trip1.id))
       except:
          return HttpResponse(' id is not correct')

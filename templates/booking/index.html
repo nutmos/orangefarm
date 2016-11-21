@@ -95,8 +95,8 @@
         <br><br>
     </section>
 
-    <form action="/booking/process-index" method="get">
         <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
+        <input type="hidden" name="remind_people" value="{{ remind_people }}">
         <div class="large-7 columns small-centered">
             <table>
                 <thead>
@@ -113,13 +113,13 @@
                     <tr>
                         <td></td>
                         <td>Adult:</td>
-                        <td><select name="adult" style="height:35px; width:80px">
+                        <td><select name="adult" id="adult"style="height:35px; width:80px">
                         </select></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Children:</td>
-                        <td><select name="children" style="height:35px; width:80px">
+                        <td><select name="children" id="children"style="height:35px; width:80px">
                     </tr>
                     <tr>
                         <td></td><td></td>
@@ -134,13 +134,26 @@
             <div class="large-7 columns small-centered">
                 <div class="large-4 columns"></div>
                 <div class="large-4 columns">
-                    <input class="expanded button" type="submit" value="Next">
+                    <input class="expanded button" type="submit" value="Next" onclick="handle_click()">
                 </div>
             </div>
         </div>
-    </form>
     {% include 'footerbar.html' %}   
     <script>
+        function handle_click() {
+                var a = parseInt(document.getElementById("adult").value);
+                var b = parseInt(document.getElementById("children").value);
+                var c = parseInt({{remaining_people}});
+                if(a+b > c ){
+                    alert("Over Seat Available");
+                }
+                else{
+                    var url = "/booking/process-index?trip_id={{trip_id}}&remaining_people={{remaining_people}}&adult=".concat(a);
+                    var url2 = "&children=".concat(b);
+                    window.location.href = url.concat(url2);
+                }
+        }
+
         var AdultSelect = "";
         var ChildrenSelect = "<option value='0'> - </option>";
         for(var i = 1; i <= {{ remaining_people }}; i++) {
