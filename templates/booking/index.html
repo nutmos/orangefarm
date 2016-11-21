@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Booking</title>
-    {% include 'essential.html' %}    
+    {% include 'essential.html' %}
+    {% include 'jquery-essential.html' %}
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
     <link rel="stylesheet" href={% static "css/progress_bar/styles.css"%}>
 </head>
@@ -92,6 +93,9 @@
             </table>
         </div>
         <br><br>
+    </section>
+
+    <form action="/booking/process-index/" method="get">
         <div class="large-7 columns small-centered">
             <table>
                 <thead>
@@ -103,26 +107,18 @@
                     <tr>
                         <td width="10%"></td>
                         <td>Seat Available:</td>
-                        <td width="50%">15</td>
+                        <td width="50%">{{ remaining_people }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Adult:</td>
-                        <td><select style="height:35px; width:80px">
-                            <option value="1" selected="selected">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                        <td><select name="adult" style="height:35px; width:80px">
                         </select></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Children:</td>
-                        <td><select style="height:35px; width:80px">
-                            <option value="0">-</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select></td>
+                        <td><select name="children" style="height:35px; width:80px">
                     </tr>
                     <tr>
                         <td></td><td></td>
@@ -132,16 +128,26 @@
             </table>
         </div>        
         <br><br>
-    </section>
 
-    <div class="row">
-        <div class="large-7 columns small-centered">
-            <div class="large-4 columns"></div>
-            <div class="large-4 columns">
-                <a class="expanded button" href="/booking/info">Next</a>
+        <div class="row">
+            <div class="large-7 columns small-centered">
+                <div class="large-4 columns"></div>
+                <div class="large-4 columns">
+                    <input class="expanded button" type="submit" value="Next">
+                </div>
             </div>
         </div>
-    </div>
+    </form>
     {% include 'footerbar.html' %}   
+    <script>
+        var AdultSelect = "";
+        var ChildrenSelect = "<option value='0'> - </option>";
+        for(var i = 1; i <= {{ remaining_people }}; i++) {
+            AdultSelect += "<option value='" + i + "'>" + i + "</option>";
+            ChildrenSelect += "<option value='" + i + "'>" + i + "</option>";
+        }
+        $( 'select[name="adult"]' ).append( AdultSelect );
+        $( 'select[name="children"]' ).append( ChildrenSelect );
+    </script>
 </body>
 </html>

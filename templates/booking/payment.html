@@ -26,7 +26,7 @@
 </style>
 <body>
     {% include 'navbar.html' %}
-    
+    <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -115,7 +115,7 @@
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/checking">Back</a>
+                <a class="expanded button" href="/booking/checking?trip_id={{ trip_id }}">Back</a>
             </div>
             <div class="large-4 columns"></div>
         </div>
