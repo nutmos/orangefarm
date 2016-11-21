@@ -8,42 +8,21 @@
     <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
 </head>
 <body>
-    <div id="navbar"></div>
+    {% include 'navbar.html' %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
-    <div class="large-10 columns small-centered">
-    <div class="row">
-    	<div class="large-6 columns">
-            <div class="profile-image">
-                <img src='/country/picture?country_id={{ country_id }}' />
-            </div>
-            <div class="small-11 columns">
-            	<a class="button" href="/country/change-picture?country_id={{ country_id }}">Change Country Picture</a>
-            </div>
+        <div class="large-6 columns small-centered">
+            <form action="/country/process-edit" method="get">
+                <input type="hidden" name="country_id" value="{{ this_country.id }}">
+                <label for="" class="text-center" style="font-size: 30px;">{{ this_country.name }}</label>
+                <label for="">Description
+                    <textarea name="description" id="description" type="text" rows="4">{{ this_country.description }}</textarea>
+                </label>
+                <div class="footer text-centered">
+                    <input class="button" type="submit" value="Save Change">
+                </div>
+            </form>
         </div>
-        <div class="large-6 columns">
-        	<form action="/country/process-edit" method="get">
-            	<input type="hidden" name="country_id" value="{{ country_id }}">
-                <label for="" class="text-center" style="font-size: 30px;">{{ name }} 
-            	</label>
-            	<label for="">Description
-                    <textarea name="description" id="description" type="text" rows="4">{{ description }}</textarea>
-            	</label>
-        </div>
-        <div class="footer text-centered">
-                <input class="button" type="submit" value="Save Change">
-            </div>
-        </form>
     </div>
-    </div>
-    </div>
-    <div id="footer-bar"></div>
+    {% include 'footerbar.html' %}
 </body>
-<script>
-var data = { user_id: "{{ request.session.user_id }}",
-logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
-};
-//window.alert(userInfo.user_id);
-</script>
-<script src={% static "js/navbar.js" %} type="text/babel"></script>
-<script src={% static "js/footerbar.js" %} type="text/babel"></script>
 </html>

@@ -12,6 +12,7 @@
     {% include 'place-info.html' with background_url_path="/country/picture?country_id=" object=this_country navigation=""%}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
+            {% if city_list %}
             <h3>City</h3>
             <div class="row large-up-3 project-overlay-inset">
             {% for c in city_list %}
@@ -19,7 +20,8 @@
             {% endfor %}
             </div>
             <a href="city" style="color:black"><p style="text-align: right;">Show more</p></a>
-
+            {% endif %}
+            {% if place_list %}
             <h3 style="margin-top: 2em;">Popular Place</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in place_list %}
@@ -27,6 +29,8 @@
                 {% endfor %}
             </div>
             <a href="popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
+            {% endif %}
+            {% if country_list %}
             <h3 style="margin-top: 2em;">Other Country</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for c in country_list %}
@@ -34,6 +38,7 @@
                 {% endfor %}
             </div>
             <a href="/country/all" style="color:black"><p style="text-align: right;">Show more</p></a>
+            {% endif %}
         </div>
     </div>
     {% if access_edit %}

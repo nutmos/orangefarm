@@ -111,9 +111,8 @@ def edit(request):
             c1 = Country.objects.get(id=country_id)
             template = loader.get_template('country/edit.html')
             pass_data = {
-                'name': c1.name,
-                'description': c1.description,
-                'country_id': country_id}
+                'this_country': c1,
+                }
             return HttpResponse(template.render(pass_data, request))
         except DoesNotExist:
             return HttpResponse('Key error')
