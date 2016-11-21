@@ -17,11 +17,10 @@
                 <input id="name" type="text" name="name" placeholder="name">
             </label>
             <label for="">Description
-
                 <textarea name="description" id="description" type="text" rows="4"></textarea>
             </label>
             <label for="">Country
-                <select id="country-id" name="country-id" onchange="updateCity()">
+                <select id="country_id" name="country_id" onchange="updateCity()">
                     <option value="">Select Country</option>
                     {% for i in country_list %}
                     <option value="{{ i.id }}">{{ i.name }}</option>
@@ -29,7 +28,7 @@
                 </select>
             </label>
             <label for="">City
-                <select id="city-id" name="city-id" form="place-form">
+                <select id="city_id" name="city_id" form="place-form">
                     <option value="">Select City</option>
                 </select>
             </label>
@@ -44,10 +43,10 @@
 </body>
 <script>
 function updateCity() {
-    var e = document.getElementById("country-id");
+    var e = document.getElementById("country_id");
     var country_id = e.options[e.selectedIndex].value;
     if (country_id === "") {
-        var city_e = document.getElementById("city-list");
+        var city_e = document.getElementById("city_id");
         city_e.innerHTML = "";
         var opt1 = document.createElement('option');
         opt1.value = "";
@@ -61,7 +60,7 @@ function updateCity() {
     xmlHttp.send();
     var jsonObject = xmlHttp.responseText;
     var obj = JSON.parse(jsonObject);
-    var city_e = document.getElementById("city-id");
+    var city_e = document.getElementById("city_id");
     city_e.innerHTML = "";
     var opt1 = document.createElement('option');
     opt1.value = "";

@@ -36,7 +36,7 @@ def process_add(request):
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
         name = request.GET.get('name', '')
-        city_id = request.GET.get('city-id', '')
+        city_id = request.GET.get('city_id', '')
         description = request.GET.get('description', '')
         c1 = Place(name=name, city_id=city_id, description=description)
         c1.save()
@@ -107,15 +107,13 @@ def edit(request):
             template = loader.get_template('place/edit.html')
             country_list = Country.objects()
             city1 = City.objects.get(id=c1.city_id)
-            country_id = Country.objects.get(id=city1.country_id)
+            country1 = Country.objects.get(id=city1.country_id)
             city_list = City.objects(country_id=city1.country_id)
             pass_data = {
-                'name': c1.name,
-                'city_id': c1.city_id,
-                'description': c1.description,
-                'place_id': place_id,
+                'this_place': c1,
+                'host_city': city1,
+                'host_country': country1,
                 'country_list': country_list,
-                'country_id': country_id,
                 'city_list': city_list}
             return HttpResponse(template.render(pass_data, request))
         except DoesNotExist:
@@ -134,14 +132,15 @@ def process_edit(request):
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
+        print "place_id = " + place_id
         c1 = Place.objects.get(id=place_id)
         new_city_id = request.GET.get('city_id', '')
+        print "test city_id=" + new_city_id
         if new_city_id != c1.city_id:
+            c1.city_id = new_city_id
             del c1.related[:]
-        c1.city_id = new_city_id
         c1.description = request.GET.get('description', '')
         c1.save()
-        pass_data = {'place_id': place_id};
         return HttpResponseRedirect('/place?place_id=' + str(c1.id))
     return HttpResponse('No Request')
 
