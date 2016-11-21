@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from mongoengine import *
 from datetime import datetime
+from place.models import *
 
 # Create your models here.
 
@@ -19,3 +20,4 @@ class Trip(Document):
     travel_by = StringField()
     conditions = StringField()
     active = BooleanField()
+    placelist = ListField(ReferenceField('Place'))

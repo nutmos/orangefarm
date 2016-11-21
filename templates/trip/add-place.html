@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Place in Trip {{ name }}</title>
+    {% include 'essential.html' %}
+    <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
+    <div class="large-10 columns small-centered">
+    <div class="row">
+        <div class="large-10 columns small-centered">
+            <form action="/place/c/{{ url_point_to }}/related/process-add-related" method="get" name="related-form" id="related-form">
+                    <label for="">Add Related Place to {{ name }}
+                        <select id="place-id" name="place-id" form="related-form">
+                        <option value="" selected="selected">Select Related Place</option>
+                        {% for i in place_list %}
+                        <option value="{{ i.id }}">{{ i.name }}</option>
+                        {% endfor %}
+                        </select>
+                    </label>
+                    <div class="footer text-centered">
+                        <input class="button" type="submit" value="Add Related">
+                    </div>
+                </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    {% include 'footerbar.html' %}
+</body>
+</html>

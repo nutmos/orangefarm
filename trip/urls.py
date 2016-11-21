@@ -9,5 +9,9 @@ urlpatterns = [
     url(r'^process-add/', views.process_add, name='process-add'),
     url(r'^process-edit/', views.process_edit, name='process-edit'),
     url(r'^delete/', views.delete, name='delete'),
-    #url(r'^picture/', views.show_image, name='picture'),
+    #url(r'^show-place/', views.show_place, name='edit-place'),
+    #url(r'^add-place/', views.add_place, name='add-place'),
+    #url(r'^process-add-place/', views.process_add_place, name='process-add-place'),
+    #url(r'^delete-place/', views.delete_place name='delete-place'),
+    #url(r'^process-delete-place/', views.process_delete_place, name='process-delete-place'),
 ]

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'essential.html' %}
+    <title>Place in Trip {{ trip_name }}</title>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+    <link rel="stylesheet" href={% static "css/place/styles.css" %}>
+</head>
+<body>
+     <div class="row" style="margin-bottom: 2em;" >
+        <div class="large-10 columns small-centered">
+            <div class="row" style="margin-top: 2em">
+                <h3>Place in Trip "{{ trip_name }}"</h3>
+            </div>
+            <div class="row large-up-3 project-overlay-inset">
+                {% for p in place_list %}
+                <div class="column" style="margin-top: 2em;">
+                    <a href="/place/?place_id={{ p.id }}" row="button" aria-label="Thumbnail">
+                        <div style="position: relative;"><img src="/place/picture/?place_id={{ p.id }}" class="popular-image" style="width: 100%; height: 200px" />
+                            <div class="overlay">
+                                <div class="overlay-text">{{ p.name }}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div>No place found.</div>
+                {% endfor %}
+            </div>
+        </div>
+     </div>
+    {% if access_edit %}
+            <div class="row" style="margin-top: 2em;" >
+                <div class="large-6 columns">
+                    <a class="expanded button" href="/trip/add-place?trip_id={{ trip_id }}">Add Place</a>
+                </div>
+                <div class="large-6 columns">
+                    <a class="expanded button" href="/trip/delete-place?trip_id={{ trip_id }}">delele Place</a>
+                </div>
+            </div>
+    {% endif %}
+    {% include 'footerbar.html' %}
+</body>
+</html>

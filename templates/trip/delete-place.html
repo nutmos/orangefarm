@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'jquery-essential.html' %}
+    {% include 'essential.html' %}
+    <title>Delete Place in Trip {{ name }}</title>
+    <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
+</head>
+
+<style>
+a, a:hover {
+    color: white;
+}
+</style>
+<body>
+    {% include 'navbar.html' %}
+        <div class="row">
+        <div class="large-10 columns" style="margin-bottom: 2em;" >
+            <div class="row" style="margin-top: 2em">
+                <h1>Place in Trip {{ name }}</h1>
+            </div>
+            <div class="row large-up-3 project-overlay-inset">
+                {% for p in place_list %}
+                <div class="column" style="margin-bottom: 2em;">
+                    <a onclick="handle_delete('{{ p.id }}')" row="button" aria-label="Thumbnail">
+                        <div style="position: relative;">
+                            <img src="/place/picture/?place_id={{ p.id }}" class="popular-image" style="width: 100%; height: 200px" />
+                            <div class="overlay">
+                                <div class="overlay-text">{{ p.name }}</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div>No place found.</div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+    {% include 'footerbar.html' %}
+</body>
+<script>
+function handle_delete(str_a) {
+    var a = confirm("Are you sure to delete this image?");
+    if (a == true) {
+        var Url = "/trip/process-delete-place/?trip_id=".concat(trip_id);
+        var Url2 = "&place_id=".concat(str_a);
+        window.location.href = Url.concat(Url2);
+    }
+}
+</script>
+</html>

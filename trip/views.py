@@ -113,7 +113,7 @@ def edit(request):
                 'description': c1.description,
                 'travel_by': c1.travel_by,
                 'conditions': c1.conditions,
-                'trip_id': trip_id}
+                'trip_id': c1.id}
             return HttpResponse(template.render(pass_data, request))
         except DoesNotExist:
             return HttpResponse('Key error')
@@ -161,23 +161,110 @@ def delete(request):
             return HttpResponse('Wrong Key')
     return HttpResponse('No Request GET')
 
-#def show_image(request):
-#    if request.method == 'GET':
-#        try:
-#            user1 = User.objects.get(id=user_id)
-#            if user1.is_staff == False:
-#                template = loader.get_template('notpermitted.html')
-#                return HttpResponse(template.render({}, request))
-#        except:
-#            template = loader.get_template('notpermitted.html')
-#            return HttpResponse(template.render({}, request))
-#        trip_id = request.GET.get('trip_id', '')
-#        try:
-#            c1 = Trip.objects.get(id=trip_id)
-#            binary_img = c1.photo.read()
-#            if binary_img == None:
-#                return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
-#            return HttpResponse(binary_img, 'image/*')
-#        except:
-#            return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
-#    return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+def show_place(request):
+    access_edit = True
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            access_edit = False
+    except:
+        access_edit = False
+    template = loader.get_template('trip/show-place.html')
+    c1 = Place.objects.get(url_point_to=place_name)
+    pass_data = {
+        'trip_id': c1.id,
+        'trip_name': c1.name,
+        'place_list': c1.placelist,
+        'access_edit': access_edit,
+    }
+    return HttpResponse(template.render(pass_data, request))
+
+def add_place(request):
+    if request.method == 'GET':
+        try:
+            user_id = request.session['user_id']
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+        trip_id = request.GET.get('trip_id', '')
+        try:
+            c1 = Trip.objects.get(id=trip_id)
+            template = loader.get_template('trip/add-place.html')
+            country_list = Country.objects.order_by('name')
+            pass_data = {
+                'country_list': country_list,
+                'name': c1.name,
+                'trip_id': c1.id}
+            return HttpResponse(template.render(pass_data, request))
+        except DoesNotExist:
+            return HttpResponse('Key error')
+    return HttpResponse('No request')
+
+def process_add_place(request):
+    if request.method == 'GET':
+        try:
+            user_id = request.session['user_id']
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+        trip_id = request.GET.get('trip_id', '')
+        c1 = Trip.objects.get(id=trip_id)
+        place_id = request.GET.get('place-id', '')
+        c1.conditions = request.GET.get('conditions', '')
+        c1.placelist.append(Place.objects.get(id=place_id))
+        c1.save()
+        return HttpResponseRedirect('/trip?trip_id=' + str(c1.id))
+    return HttpResponse('No GET Request')
+
+def delete_place(request):
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
+    try:
+        trip_id = request.GET.get('trip_id', '')
+        c1 = Trip.objects.get(id=trip_id)
+        place_list = c1.placelist
+        template = loader.get_template('trip/delete-place.html')
+        pass_data = {
+            'place_list': place_list,
+            'name': c1.name,
+            'trip_id': c1.id}
+        return HttpResponse(template.render(pass_data, request))
+    except DoesNotExist:
+        return HttpResponse('Key error')
+
+def process_delete_place(request):
+    if request.method == 'GET':
+        try:
+            user_id = request.session['user_id']
+            user1 = User.objects.get(id=user_id)
+            if user1.is_staff == False:
+                template = loader.get_template('notpermitted.html')
+                return HttpResponse(template.render({}, request))
+        except:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+        c1 = Trip.objects.get(id=trip_id)
+        del_id = request.GET.get('place_id', '')
+        for i in range(len(c1.placelist)):
+            if str(c1.placelist[i].id) == del_id:
+                del c1.related[i]
+                c1.save()
+                return HttpResponseRedirect('/trip?trip_id=' + str(c1.id))
+        return HttpResponse("Not found")
+    return HttpResponse("Error")
