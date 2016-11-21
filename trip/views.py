@@ -173,7 +173,8 @@ def show_place(request):
     except:
         access_edit = False
     template = loader.get_template('trip/show-place.html')
-    c1 = Place.objects.get(url_point_to=place_name)
+    trip_id = request.GET.get('trip_id', '')
+    c1 = Trip.objects.get(id=trip_id)
     pass_data = {
         'trip_id': c1.id,
         'trip_name': c1.name,
@@ -181,6 +182,21 @@ def show_place(request):
         'access_edit': access_edit,
     }
     return HttpResponse(template.render(pass_data, request))
+
+def get_place_by_city(request):
+    if request.method == 'GET':
+        city_id = request.GET.get('city_id', '')
+        try:
+            c1 = Place.objects(city_id=city_id).order_by('name')
+            c_json = {}
+            for c in c1:
+                c_json[c.name] = str(c.id)
+            print c_json
+            return JsonResponse(c_json)
+        except:
+            print "except"
+            pass
+    return HttpResponse("Error")
 
 def add_place(request):
     if request.method == 'GET':

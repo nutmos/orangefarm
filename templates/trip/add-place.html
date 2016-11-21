@@ -13,17 +13,32 @@
     <div class="large-10 columns small-centered">
     <div class="row">
         <div class="large-10 columns small-centered">
-            <form action="/place/c/{{ url_point_to }}/related/process-add-related" method="get" name="related-form" id="related-form">
-                    <label for="">Add Related Place to {{ name }}
-                        <select id="place-id" name="place-id" form="related-form">
-                        <option value="" selected="selected">Select Related Place</option>
-                        {% for i in place_list %}
-                        <option value="{{ i.id }}">{{ i.name }}</option>
-                        {% endfor %}
-                        </select>
+            <form action="/trip/process-add-place/?trip_id={{trip_id}}" method="get" name="trip-place-form" id="trip-place-form">
+                <input type="hidden" name="city-id" value="{{ city_id }}">
+                    <label for="">Add Place in Trip {{ name }}
+                        <label for="">Country
+                            <select id="country-id" name="country-id" onchange="updateCity()">
+                                <option value="">Select Country</option>
+                                {% for i in country_list %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+
+                        <label for="">City
+                            <select id="city-id" name="city-id" form="trip-place-form" onchange="updatePlace()">
+                                <option value="">Select City</option>
+                            </select>
+                        </label>
+
+                        <label for="">Place
+                            <select id="place-id" name="place-id" form="trip-place-form">
+                                <option value="">Select Place</option>
+                            </select>
+                        </label>
                     </label>
                     <div class="footer text-centered">
-                        <input class="button" type="submit" value="Add Related">
+                        <input class="button" type="submit" value="Add Place">
                     </div>
                 </form>
         </div>
@@ -32,4 +47,70 @@
     </div>
     {% include 'footerbar.html' %}
 </body>
+<script>
+function updateCity() {
+    var e = document.getElementById("country-id");
+    var country_id = e.options[e.selectedIndex].value;
+    if (country_id === "") {
+        var city_e = document.getElementById("city-list");
+        city_e.innerHTML = "";
+        var opt1 = document.createElement('option');
+        opt1.value = "";
+        opt1.text = "Select City";
+        city_e.appendChild(opt1);
+        return;
+    }
+    var getUrl = "/city/get-city-by-country?country_id=".concat(country_id);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", getUrl, false ); // false for synchronous request
+    xmlHttp.send();
+    var jsonObject = xmlHttp.responseText;
+    var obj = JSON.parse(jsonObject);
+    var city_e = document.getElementById("city-id");
+    city_e.innerHTML = "";
+    var opt1 = document.createElement('option');
+    opt1.value = "";
+    opt1.text = "Select City";
+    city_e.appendChild(opt1);
+    for (var key in obj) {
+        var op = document.createElement('option');
+        op.value = obj[key];
+        op.text = key;
+        city_e.appendChild(op);
+    }
+}
+
+function updatePlace() {
+    var e = document.getElementById("city-id");
+    var city_id = e.options[e.selectedIndex].value;
+    if (city_id === "") {
+        var place_e = document.getElementById("place-list");
+        place_e.innerHTML = "";
+        var opt1 = document.createElement('option');
+        opt1.value = "";
+        opt1.text = "Select Place";
+        place_e.appendChild(opt1);
+        return;
+    }
+    var getUrl = "/trip/get-place-by-city?city_id=".concat(city_id);
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", getUrl, false ); // false for synchronous request
+    xmlHttp.send();
+    var jsonObject = xmlHttp.responseText;
+    var obj = JSON.parse(jsonObject);
+    var place_e = document.getElementById("place-id");
+    place_e.innerHTML = "";
+    var opt1 = document.createElement('option');
+    opt1.value = "";
+    opt1.text = "Select Place";
+    place_e.appendChild(opt1);
+    for (var key in obj) {
+        var op = document.createElement('option');
+        op.value = obj[key];
+        op.text = key;
+        place_e.appendChild(op);
+    }
+}
+//window.alert(userInfo.user_id);
+</script>
 </html>
