@@ -3,48 +3,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit City</title>
+    <title>Edit Place</title>
     {% include 'essential.html' %}
     <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
 </head>
 <body>
     {% include 'navbar.html' %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
-    <div class="large-10 columns small-centered">
-    <div class="row">
-    	<div class="large-6 columns">
-            <div class="profile-image">
-                <img src="http://placehold.it/300x300" />
-            </div>
-            <div class="small-11 columns">
-            	<a class="button" href="/profile/change-picture">Change City Picture</a>
-            </div>
-        </div>
-        <div class="large-6 columns">
-        	<form action="/city/process-edit" method="get" id="city-form">
-            	<input type="hidden" name="city_id" value="{{ city_id }}">
-                <label for="" class="text-center" style="font-size: 30px;">{{ name }} 
-            	</label>
-            	<label for="">Description
-                    <textarea name="description" id="description" type="text" rows="4">{{ description }}</textarea>
-            	</label>
-                <label for="">Country
-                    <select id="" name="country-list" form="city-from">
-                        {% for i in country_list %}
-                            {% if i.name == selected_country_name %}
-                            <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
-                            {% else %}
-                            <option value="{{ i.id }}">{{ i.name }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </label>
-        </div>
-        <div class="footer text-centered">
+    <div class="large-6 columns small-centered">
+        <form action="/city/process-edit/" method="get" name="city-form" id="city-form">
+            <input type="hidden" name="city_id" value="{{ this_city.id }}">
+            <label for="" class="text-center" style="font-size: 30px;">{{ this_city.name }}</label>
+            <label for="">Description
+                <textarea name="description" id="description" type="text" rows="4">{{ this_city.description }}</textarea>
+            </label>
+            <label for="">Country
+                <select id="country_id" name="country_id" form="city-form">
+                    {% for i in country_list %}
+                    {% if i.id == host_country.id %}    
+                    <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+                    {% else %}
+                    <option value="{{ i.id }}">{{ i.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            <div class="footer text-centered">
                 <input class="button" type="submit" value="Save Change">
             </div>
         </form>
-    </div>
     </div>
     </div>
     {% include 'footerbar.html' %}

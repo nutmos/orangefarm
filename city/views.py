@@ -38,7 +38,7 @@ def process_add(request):
         return HttpResponse(template.render({}, request))
     if request.method == 'GET':
         name = request.GET.get('name', '')
-        country_id = request.GET.get('country-id', '')
+        country_id = request.GET.get('country_id', '')
         try:
             co1 = Country.objects.get(id=country_id)
         except:
@@ -113,10 +113,8 @@ def edit(request):
             c1country = Country.objects.get(id=c1.country_id)
             print country_list
             pass_data = {
-                'name': c1.name,
-                'selected_country_name': c1country.name,
-                'description': c1.description,
-                'city_id': city_id,
+                'this_city': c1,
+                'host_country': c1country,
                 'country_list': country_list}
             return HttpResponse(template.render(pass_data, request))
         except DoesNotExist:
@@ -134,14 +132,15 @@ def process_edit(request):
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     if request.method == 'GET':
-        #desc = request.GET.get('description', '')
-	    #Ecountry = request.GET.get('country', '')
         city_id = request.GET.get('city_id', '')
         c1 = City.objects.get(id=city_id)
-        c1.country = request.GET.get('country', '')
+        if (c1.id == ''):
+            return HttpResponseRedirect('/city/edit/?city_id=' + city_id)
+        country_id = request.GET.get('country_id', '')
+        print "country_id = " + country_id
+        c1.country_id = country_id
         c1.description = request.GET.get('description', '')
         c1.save()
-        pass_data = {'city_id': city_id};
         return HttpResponseRedirect('/city?city_id=' + str(c1.id))
     return HttpResponse('No Request')
 
