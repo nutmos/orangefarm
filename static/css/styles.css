@@ -14,16 +14,25 @@ body {
     background-color: #f2f2f2;
 }
 
-a, a:hover {
+nav a, nav a:hover, footer a, footer a:hover {
     color: white;
 }
 
-.nav a:hover {
+.nav a, .nav a:visited {
+    text-decoration: none;
+    color: black;
+}
+.nav a:hover, .nav a:active {
     text-decoration: underline;
     color: black;
 }
 
-.nav-on-background a:hover {
+.nav-on-background a:hover, .nav-on-background a:active {
     text-decoration: underline;
+    color: white;
+}
+
+.nav-on-background a, .nav-on-background a:visited {
+    text-decoration: none;
     color: white;
 }

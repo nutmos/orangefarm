@@ -24,7 +24,7 @@
                         <img src="/profile/image/?user_id={{ user_id }}" />
                     </div>
                     {% if user_id == request.session.user_id %}
-                    <a class="expanded button" href="/profile/change-picture">Change Profile Picture</a>
+                    {% include 'upload-image-template.html' with form_action="/profile/handle-change-picture/" type="" type_id="" %}
                     {% endif %}
                 </div>
                 <div class="large-6 columns">

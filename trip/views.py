@@ -269,3 +269,9 @@ def process_delete_place(request):
                 return HttpResponseRedirect('/trip/show-place?trip_id=' + str(c1.id))
         return HttpResponse("Not found")
     return HttpResponse("Error")
+
+def featured_trip(request):
+    all_trip = Trip.objects(active=True)
+    pass_data = {
+            'trip_list': all_trip,
+            }

@@ -20,7 +20,6 @@ def index(request):
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
-        #return HttpResponse("AAA")
     except KeyError:
         template = loader.get_template('notlogin.html')
         return HttpResponse(template.render({}, request))
@@ -43,7 +42,6 @@ def other_user_profile(request, user=""):
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
-        #return HttpResponse("AAA")
     except KeyError:
         template = loader.get_template('notlogin.html')
         return HttpResponse(template.render({}, request))
@@ -116,11 +114,6 @@ def change_password(request):
             template = loader.get_template('notlogin.html')
             return HttpResponse(template.render({}, request))
 
-def change_picture(request):
-    user1 = User.objects.get(id=request.session['user_id'])
-    template = loader.get_template('user_profile/change-picture.html')
-    return HttpResponse(template.render({}, request))
-    
 def handle_change_picture(request):
     if request.method == 'POST':
         user1 = User.objects.get(id=request.session['user_id'])
