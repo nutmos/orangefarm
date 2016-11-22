@@ -144,7 +144,7 @@ STATICFILES_DIRS = (
 )
 
 from mongoengine import connect
-connect('orangefarm', username='orangefarm', password='orangefarm')
+connect('orangefarm', username='orangefarm', password='orangefarm', port=27017, host="128.199.215.223")
 
 #SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 #SESSION_FILE_PATH = ('%s/session' % BASE_DIR)

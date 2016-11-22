@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from mongoengine import *
 from models import *
 from django.template import loader
 from country.models import *
 from city.models import *
+from trip.models import *
 from user_profile.models import *
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
@@ -75,6 +76,7 @@ def place_name(request, place_name):
             import random
             num_list = random.sample(range(len(show_related)), 3)
             show_related = [show_related[num_list[i]] for i in range(3)]
+        related_trip = TripPlace.objects(place=c1)
         pass_data = {
             'this_place': c1,
             'host_city': city1,
@@ -85,6 +87,7 @@ def place_name(request, place_name):
             'popular_place_list': popular_place_list,
             'background_url': '/place/picture/?place_id=' + str(c1.id),
             'related_place': show_related,
+            'related_trip': related_trip,
             }
         return HttpResponse(template.render(pass_data, request))
     except ValidationError, DoesNotExist:
@@ -132,10 +135,8 @@ def process_edit(request):
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
-        print "place_id = " + place_id
         c1 = Place.objects.get(id=place_id)
         new_city_id = request.GET.get('city_id', '')
-        print "test city_id=" + new_city_id
         if new_city_id != c1.city_id:
             c1.city_id = new_city_id
             del c1.related[:]
@@ -380,3 +381,17 @@ def process_add_related(request, place_name):
     c1.related.append(Place.objects.get(id=related_place_id))
     c1.save()
     return HttpResponseRedirect('/place/c/'+place_name+'/related/')
+
+def get_place_by_city(request):
+    if request.method == 'GET':
+        city_id = request.GET.get('city_id', '')
+        try:
+            c1 = Place.objects(city_id=city_id).order_by('name')
+            c_json = {}
+            for c in c1:
+                c_json[c.name] = str(c.id)
+            print c_json
+            return JsonResponse(c_json)
+        except:
+            pass
+    return HttpResponse("Error")

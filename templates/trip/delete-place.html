@@ -17,9 +17,9 @@ a, a:hover {
 <body>
     {% include 'navbar.html' %}
         <div class="row">
-        <div class="large-10 columns" style="margin-bottom: 2em;" >
+        <div class="large-10 columns small-centered" style="margin-bottom: 2em;" >
             <div class="row" style="margin-top: 2em">
-                <h1>Place in Trip {{ name }}</h1>
+                <h1>Place in {{ name }}</h1>
             </div>
             <div class="row large-up-3 project-overlay-inset">
                 <input type="hidden" name="trip_id" value="{{ trip_id }}">
@@ -27,9 +27,9 @@ a, a:hover {
                 <div class="column" style="margin-bottom: 2em;">
                     <a onclick="handle_delete('{{ p.id }}')" row="button" aria-label="Thumbnail">
                         <div style="position: relative;">
-                            <img src="/place/picture/?place_id={{ p.id }}" class="popular-image" style="width: 100%; height: 200px" />
+                            <img src="/place/picture/?place_id={{ p.place.id }}" class="popular-image" style="width: 100%; height: 200px" />
                             <div class="overlay">
-                                <div class="overlay-text">{{ p.name }}</div>
+                                <div class="overlay-text">{{ p.place.name }}</div>
                             </div>
                         </div>
                     </a>
@@ -44,7 +44,7 @@ a, a:hover {
 </body>
 <script>
 function handle_delete(str_a) {
-    var a = confirm("Are you sure to delete this image?");
+    var a = confirm("Are you sure to delete this place?");
     if (a == true) {
         window.location.href = "/trip/process-delete-place/?trip_id={{trip_id}}&place_id=".concat(str_a);
     }

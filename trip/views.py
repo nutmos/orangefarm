@@ -66,9 +66,7 @@ def index(request):
             user1 = User.objects.get(id=user_id)
             if user1.is_staff == False:
                 access_edit = False
-                print user1.name
         except:
-            print "except"
             access_edit = False
         try:
             c1 = Trip.objects.get(id=trip_id)
@@ -79,6 +77,7 @@ def index(request):
             pass_data = {
                 'this_trip': c1,
                 'company_name': company1.name,
+                'access_edit': access_edit,
                 }
             return HttpResponse(template.render(pass_data, request))
         except ValidationError:
@@ -170,27 +169,14 @@ def show_place(request):
     for p in tripplace_list:
         place_list.append(p.place)
     pass_data = {
-        'trip_id': c1.id,
+        'trip_id': str(c1.id),
         'trip_name': c1.name,
         'place_list': place_list,
         'access_edit': access_edit,
+        'nav': '<a href="/trip/?trip_id=' + str(c1.id) + '">' + c1.name + '</a> -> Place',
     }
     return HttpResponse(template.render(pass_data, request))
 
-def get_place_by_city(request):
-    if request.method == 'GET':
-        city_id = request.GET.get('city_id', '')
-        try:
-            c1 = Place.objects(city_id=city_id).order_by('name')
-            c_json = {}
-            for c in c1:
-                c_json[c.name] = str(c.id)
-            print c_json
-            return JsonResponse(c_json)
-        except:
-            print "in except"
-            pass
-    return HttpResponse("Error")
 
 def add_place(request):
     if request.method == 'GET':

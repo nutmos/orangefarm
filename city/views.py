@@ -1,11 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from mongoengine import *
 from models import *
 from country.models import *
 from place.models import *
 from django.template import loader
-from django.http import JsonResponse
 from mongoengine.django.auth import User as MongoUser
 from user_profile.models import User
 
@@ -175,7 +174,6 @@ def get_city_by_country(request):
             print c_json
             return JsonResponse(c_json)
         except:
-            print "except"
             pass
     return HttpResponse("Error")
 

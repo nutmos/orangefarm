@@ -44,6 +44,14 @@
             {% endfor %}
         </div>
     </div>
+    <div class="large-10 columns small-centered" style="margin-top: 2em; margin-bottom: 2em;">
+        <h3>Featured Trip</h3>
+        <div class="row large-up-3 project-overlay-inset">
+            {% for c in trip_list %}
+            {% include 'thumbnail-template.html' with link_to="/trip/?trip_id=" object=c link_img="/trip/picture/?trip_id=" %}
+            {% endfor %}
+        </div>
+    </div>
     {% include 'footerbar.html' %}
 </body>
 

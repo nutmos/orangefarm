@@ -54,7 +54,7 @@ function updateCity() {
     var e = document.getElementById("country-id");
     var country_id = e.options[e.selectedIndex].value;
     if (country_id === "") {
-        var city_e = document.getElementById("city-list");
+        var city_e = document.getElementById("city-id");
         city_e.innerHTML = "";
         var opt1 = document.createElement('option');
         opt1.value = "";
@@ -86,7 +86,7 @@ function updatePlace() {
     var e = document.getElementById("city-id");
     var city_id = e.options[e.selectedIndex].value;
     if (city_id === "") {
-        var place_e = document.getElementById("place-list");
+        var place_e = document.getElementById("place-id");
         place_e.innerHTML = "";
         var opt1 = document.createElement('option');
         opt1.value = "";
@@ -94,7 +94,7 @@ function updatePlace() {
         place_e.appendChild(opt1);
         return;
     }
-    var getUrl = "/trip/get-place-by-city?city_id=".concat(city_id);
+    var getUrl = "/place/get-place-by-city?city_id=".concat(city_id);
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", getUrl, false ); // false for synchronous request
     xmlHttp.send();

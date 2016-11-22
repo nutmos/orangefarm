@@ -4,6 +4,8 @@ from django.template import loader
 from country.models import *
 from city.models import *
 from place.models import *
+from trip.models import *
+from mongoengine import *
 
 # Create your views here.
 def index(request):
@@ -26,10 +28,15 @@ def index(request):
         '$sample': {'size': 6},
         }])['result']
     for p in place_list: p['id'] = p.pop('_id')
+    trip_list = Trip._get_collection().aggregate([{
+        '$sample': {'size': 6},
+        }])['result']
+    for t in trip_list: t['id'] = t.pop('_id')
     pass_data = {
         'country_list': country_list,
         'city_list': city_list,
         'place_list': place_list,
+        'trip_list': trip_list,
     }
     return HttpResponse(template.render(pass_data, request))
 
