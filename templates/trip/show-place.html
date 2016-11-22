@@ -10,9 +10,9 @@
 </head>
 <body>
     {% include 'navbar.html' %}
+    <div class="nav row" style="color: black; margin-top: 1em; margin-left: 2em;">{{ nav|safe }}</div>
      <div class="row" style="margin-bottom: 2em;" >
         <div class="large-10 columns small-centered">
-            <div class="row" style="color: black">{{ nav|safe }}</div>
             <div class="row" style="margin-top: 2em">
                 <h3>Place in Trip "{{ trip_name }}"</h3>
             </div>

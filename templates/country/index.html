@@ -7,11 +7,13 @@
     {% include 'essential.html' %}
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
-
 <body>
     {% include 'place-info.html' with background_url_path="/country/picture?country_id=" object=this_country navigation=""%}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
+            {% if access_edit %}
+            {% include 'upload-image-template.html' with form_action="/country/handle-change-picture/" type="country_id" type_id=this_country.id %}
+            {% endif %}
             {% if city_list %}
             <h3>City</h3>
             <div class="row large-up-3 project-overlay-inset">
@@ -43,14 +45,13 @@
     </div>
     {% if access_edit %}
     <div class="row">
-                    <div class="large-4 columns">
-                        <a class="expanded button" href="/country/edit?country_id={{ this_country.id }}">Edit Country</a>
-                    </div>
-                    <div class="large-4 columns">
-                        <a class="expanded button" href="/country/delete?country_id={{ this_country.id }}">Delete Country</a>
-                    </div>
-                    <div class="large-4 columns"><a class="expanded button" href="/country/change-picture?country_id={{ this_country.id }}">Edit Image</a></div>
-                </div>
+        <div class="large-6 columns">
+             <a class="expanded button" href="/country/edit?country_id={{ this_country.id }}">Edit Country</a>
+        </div>
+        <div class="large-6 columns">
+             <a class="expanded button" href="/country/delete?country_id={{ this_country.id }}">Delete Country</a>
+        </div>
+    </div>
     {% endif %}
     {% include 'footerbar.html' %}
 </body>

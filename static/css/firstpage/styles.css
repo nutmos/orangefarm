@@ -17,10 +17,6 @@
     position: absolute;
 }
 
-a, a:hover {
-    color: white;
-}
-
 .section-background {
     background-repeat: no-repeat;
     background-size: cover;

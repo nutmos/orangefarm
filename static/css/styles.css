@@ -13,3 +13,17 @@
 body {
     background-color: #f2f2f2;
 }
+
+a, a:hover {
+    color: white;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+.nav-on-background a:hover {
+    text-decoration: underline;
+    color: white;
+}

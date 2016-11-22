@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^add/', views.add, name='add'),
     url(r'^process-add/', views.process_add, name='process-add'),
     url(r'^picture/', views.show_image, name='picture'),
+    url(r'^logo/', views.show_logo, name='logo'),
+    url(r'^edit-logo/', views.process_edit_logo, name='process-edit-logo'),
 ]

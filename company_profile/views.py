@@ -143,4 +143,36 @@ def show_image(request):
             except:
                 pass
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
-    
+
+def process_edit_logo(request):
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
+    if request.method == 'POST':
+        company_id = request.POST.get('company_id', '')
+        c1 = Company.objects.get(id=company_id)
+        c1.photo.delete()
+        image = request.FILES.get('image-upload', '')
+        c1.photo.put(image, content_type='image/*')
+        c1.save()
+        return HttpResponseRedirect('/company/?company_id=' + city_id)
+    return HttpResponse("Error")
+
+def show_logo(request):
+    if request.method == 'GET':
+        try:
+            company_id = request.GET.get('company_id', '')
+            c1 = Company.objects.get(id=company_id)
+            binary_img = c1.photo.read()
+            if binary_img == None:
+                return HttpResponseRedirect('http://placehold.it/300x300')
+            return HttpResponse(binary_img, 'image/*')
+        except:
+            pass
+    return HttpResponseRedirect('http://placehold.it/300x300')

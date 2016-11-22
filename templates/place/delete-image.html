@@ -16,7 +16,7 @@
         <a style="color: black;" href="/place/c/{{ url_point_to }}">{{ name }}</a>
     </div>
     <div class="row" style="margin-top: 2em">
-        <h1>Select Image To Delete</h1>
+        <h3>Select Image To Delete</h3>
     </div>
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
         <div class="large-10 columns small-centered">
@@ -24,7 +24,7 @@
                 {% for i in place_picture %}
                 <div class="column" style="margin-top: 2em;" ><a onclick="handle_delete('{{ i.id }}')"><img src="/place/picture/?place_picture_id={{ i.id }}"  style="width: 100%; height: 200px" /></a></div>
                 {% empty %}
-                <h1>There is no photo for this place.</h1>
+                <div>There is no photo for this place.</div>
                 {% endfor %}
             </div>
         </div>

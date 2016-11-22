@@ -21,7 +21,10 @@
             </div>
             <div class="row">
                 <div class="large-6 columns">
-                    <img src="http://placehold.it/300x300/" />
+                    <img src="/company/logo/?company_id={{ com1.id }}" />
+            {% if allow_edit %}
+            {% include 'upload-image-template.html' with form_action="/company/process-add-photo/" type="company_id" type_id=com1.id %}
+            {% endif %}
                 </div>
                 <div class="large-6 columns">
                     <div style="color: gray;" class="row">

@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.2/motion-ui.min.css">
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
-<style>
-.nav a:hover {
-    text-decoration: underline;
-}
-</style>
 <body>
     {% include 'place-info.html' with background_url_path="/place/picture/?place_id=" object=this_place navigation=nav|safe %}
     <div class="large-5 columns small-centered">

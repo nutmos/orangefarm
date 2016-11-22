@@ -7,6 +7,7 @@ from place.models import *
 from django.template import loader
 from mongoengine.django.auth import User as MongoUser
 from user_profile.models import User
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 # Create your views here.
 
@@ -189,22 +190,6 @@ def show_image(request):
         except:
             return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
-def change_picture(request):
-    try:
-        user_id = request.session['user_id']
-        user1 = User.objects.get(id=user_id)
-        if user1.is_staff == False:
-            template = loader.get_template('notpermitted.html')
-            return HttpResponse(template.render({}, request))
-    except:
-        template = loader.get_template('notpermitted.html')
-        return HttpResponse(template.render({}, request))
-    if request.method == 'GET':
-        city_id = request.GET.get('city_id', '')
-        c1 = City.objects.get(id=city_id)
-        template = loader.get_template('city/change-picture.html')
-        return HttpResponse(template.render({'city_id': city_id}, request))
-    return HttpResponse("Error")
 
 def handle_change_picture(request):
     try:

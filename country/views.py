@@ -159,23 +159,6 @@ def delete(request):
             return HttpResponse('Wrong Key')
     return HttpResponse('No Request GET')
 
-def change_picture(request):
-    try:
-        user_id = request.session['user_id']
-        user1 = User.objects.get(id=user_id)
-        if user1.is_staff == False:
-            template = loader.get_template('notpermitted.html')
-            return HttpResponse(template.render({}, request))
-    except:
-        template = loader.get_template('notpermitted.html')
-        return HttpResponse(template.render({}, request))
-    if request.method == 'GET':
-        country_id = request.GET.get('country_id', '')
-        c1 = Country.objects.get(id=country_id)
-        template = loader.get_template('country/change-picture.html')
-        return HttpResponse(template.render({'country_id': country_id}, request))
-    return HttpResponse("Error")
-
 def handle_change_picture(request):
     try:
         user_id = request.session['user_id']

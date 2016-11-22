@@ -70,7 +70,9 @@ def place_name(request, place_name):
         template = loader.get_template('place/index.html')
         city1 = City.objects.get(id=c1.city_id)
         country1 = Country.objects.get(id=city1.country_id)
-        popular_place_list = Place.objects(city_id=str(city1.id))
+        #popular_place_list = Place.objects(city_id=str(city1.id))
+        popular_place_list = list(Place.objects.aggregate({'$match': {'city_id': str(city1.id)}}, {'$sample': {'size': 3}}))
+        for p in popular_place_list : p['id'] = p.pop('_id')
         show_related = c1.related
         if len(show_related) > 3:
             import random
