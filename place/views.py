@@ -212,7 +212,7 @@ def handle_add_picture(request):
         return HttpResponseRedirect('/place?place_id=' + place_id)
     return HttpResponse("Error")
 
-def delete_picture(request):
+def edit_picture(request):
     if request.method == 'GET':
         try:
             user_id = request.session['user_id']
@@ -226,12 +226,13 @@ def delete_picture(request):
         place_id = request.GET.get('place_id', '')
         try:
             p1 = Place.objects.get(id=place_id)
-            template = loader.get_template('place/delete-image.html')
+            template = loader.get_template('place/edit-image.html')
             pass_data = {
                 'place_id': place_id,
                 'place_picture': p1.photos,
                 'name': p1.name,
                 'url_point_to': p1.url_point_to,
+                'show_upload_button': len(p1.photos),
             }
             return HttpResponse(template.render(pass_data, request))
         except:

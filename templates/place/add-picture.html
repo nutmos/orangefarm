@@ -9,13 +9,6 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    {% if alert %}
-    <div class="alert-panel text-centered">
-        <div id="alert" class="row" style="">
-            {{ alert }}
-        </div>
-    </div>
-    {% endif %}
     {% include 'upload-image-template.html' with form_action="/place/handle-add-picture/" type="place_id" type_id=place_id %}
     {% include 'footerbar.html' %}
 </body>

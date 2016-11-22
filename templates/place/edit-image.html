@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Image</title>
+    <title>Edit Image</title>
     {% include 'essential.html' %}
     {% include 'jquery-essential.html' %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.2.2/motion-ui.min.css">
@@ -29,6 +29,11 @@
             </div>
         </div>
     </div>
+    {% if show_upload_button %}
+    {% include 'upload-image-template.html' with form_action="/place/handle-add-picture/" type="place_id" type_id=place_id %}
+    {% else %}
+    <div>Too many image. Please remove to upload the new one.</div>
+    {% endif %}
     {% include 'footerbar.html' %}
 </body>
 <script>

@@ -58,17 +58,14 @@
     </div>
     {% if access_edit %}
     <div class="row">
-        <div class="large-3 columns">
+        <div class="large-4 columns">
             <a class="expanded button" href="/place/edit?place_id={{ this_place.id }}">Edit Place</a>
         </div>
-        <div class="large-3 columns">
+        <div class="large-4 columns">
             <a class="expanded button" href="/place/delete?place_id={{ this_place.id }}">Delete Place</a>
         </div>
-        <div class="large-3 columns">
-            <a class="expanded button" href="/place/add-picture?place_id={{ this_place.id }}">Add Image</a>
-        </div>
-        <div class="large-3 columns">
-            <a class="expanded button" href="/place/delete-picture?place_id={{ this_place.id }}">Edit Image</a>
+        <div class="large-4 columns">
+            <a class="expanded button" href="/place/edit-picture?place_id={{ this_place.id }}">Edit Image</a>
         </div>
     </div>
     {% endif %}
