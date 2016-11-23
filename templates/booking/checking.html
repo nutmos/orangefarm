@@ -60,6 +60,9 @@
     </section>
 
     <section>
+        <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
+        <input type="hidden" name="adult" id="adult" value="{{ adult }}">
+        <input type="hidden" name="children" id="children" value="{{ children }}">
         <br>
         <div class="large-7 columns small-centered">
             <h4>Checking</h4>
@@ -71,29 +74,29 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
+                        <td width="10%"></td>
                         <td>Name of Package Tour:</td>
-                        <td width="50%">Hong kong</td>
+                        <td width="50%">{{ name }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Company:</td>
-                        <td>Orange farm</td>
+                        <td>{{ company_name }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Depart date:</td>
-                        <td>dd/mm/yy</td>
+                        <td>{{ start_date }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Return date:</td>
-                        <td>dd/mm/yy</td>
+                        <td>{{ end_date }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Travel by:</td>
-                        <td>plane</td>
+                        <td>{{ travel_by }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -110,12 +113,12 @@
                     <tr>
                         <td width="10%"></td>
                         <td>Adult:</td>
-                        <td width="50%">1</td>
+                        <td width="50%">{{ adult }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Children:</td>
-                        <td>-</td>
+                        <td>{{ children }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -130,18 +133,16 @@
             <h4>Price(Bath)</h4>
             <table text-align="center">
                 <tr>
-                    <th>Package Tour ID</th>
                     <th>Name of Package Tour</th>
                     <th>Price</th>
                     <th>Amount</th>
                     <th>Total Price</th>
                 </tr>
                 <tr text-align="center">
-                    <td style="text-align:center">PackageTour_ID</td>
-                    <td style="text-align:center">name</td>
-                    <td style="text-align:center">9,999 THB</td>
-                    <td style="text-align:center">1</td>
-                    <td style="text-align:center">9,999 THB</td>
+                    <td style="text-align:center">{{ name }}</td>
+                    <td style="text-align:center">{{ price }} THB</td>
+                    <td style="text-align:center">{{ people }}</td>
+                    <td style="text-align:center">{{ total_price }} THB</td>
                 </tr>
             </table>
         </div>
@@ -151,10 +152,10 @@
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/info?trip_id={{ trip_id }}">back</a>
+                <a class="expanded button" href="/booking/info?trip_id={{trip_id}}&adult={{ adult }}&children={{children}}&people={{people}}">back</a>
             </div>
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/payment?trip_id={{ trip_id }}">Next</a>
+                <a class="expanded button" href="/booking/payment?trip_id={{ trip_id }}&adult={{ adult }}&children={{children}}&people={{people}}">Next</a>
             </div>
         </div> 
     </div>

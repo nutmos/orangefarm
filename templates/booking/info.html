@@ -22,6 +22,7 @@
 <body>
     {% include 'navbar.html' %}
     <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
+    <input type="hidden" name="people" id="people" value="{{people}}">
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -54,19 +55,20 @@
         </div>
     </section>
 
+    {% for i in p %}
     <section>
         <br>
         <div class="large-8 columns small-centered">
             <table>
                 <thead>
                     <tr>
-                        <th colspan="6">The first person information</th>
+                        <th colspan="6">person information #{{ i }}</th>
                     </tr>
                 </thead>
                 <tbody>
                 	<tr>
                 		<td width="5%"></td>
-                        <td>Full Name</td>
+                        <td width="14%">Full Name</td>
                 		<td>Title</td>
                 		<td>Firstname</td>
                 	 	<td>Lastname</td>
@@ -75,37 +77,17 @@
                     <tr>
                        	<td></td><td></td>
                         <td>
-                        	<select style="height:35px; width:80px">
-                            	<option value="mr." selected="selected">Mr.</option>
-                            	<option value="ms.">Ms.</option>
+                        	<select name="title" id="title{{i}}" style="height:35px; width:80px">
+                            	<option value="mr" selected="selected">Mr.</option>
+                            	<option value="ms">Ms.</option>
                             	<option value="miss">Miss</option>
                         	</select>
                         </td>
                         <td>
-                        	<form action="action_page.php"><input type="text" name="firstname" placeholder="First Name" required>
-							</form>
+                            <input type="text" name="firstname" placeholder="First Name" required>
                         </td>
                         <td>
-                        	<form action="action_page.php"><input type="text" name="lastname" placeholder="Last Name" required>
-							</form>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                    	<td></td><td></td><td></td>
-                    	<td>Firstname(Thai)</td>
-                    	<td>Lastname(Thai)</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                    	<td></td><td></td><td></td>
-                    	<td>
-                        	<form action="action_page.php"><input type="text" name="firstname" placeholder="ชื่อภาษาไทย" required>
-							</form>
-                        </td>
-                        <td>
-                        	<form action="action_page.php"><input type="text" name="lastname" placeholder="นามสกุลภาษาไทย" required>
-							</form>
+                            <input type="text" name="lastname" placeholder="Last Name" required>
                         </td>
                         <td></td>
                     </tr>
@@ -137,75 +119,21 @@
                             	<option value="korean">Korean</option>
                         	</select>
                         </td>
-                        <td></td><td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
                         <td>Thai Citizen ID (Thai only)</td>
                         <td>
-                        	<form action="action_page.php">
-                        		<input type="text" name="firstname" placeholder="Thai Citizen ID" required>
-							</form>
-						</td>
-                        <td></td><td></td><td></td>
-                    </tr>
-            	    <tr>
+                            <input type="text" name="firstname" placeholder="Thai Citizen ID" required>
+                        </td>
                         <td></td>
-                		<td>Passport Info</td>
+                    </tr>
+                    <tr>
+                        <td></td>
                 		<td>Passport No.</td>
-                		<td>Issuing Authority</td>
-                        <td></td><td></td>
+                        <td>
+                            <input type="text" name="passportNo" placeholder="Passport No." required>
+                        </td>
+                		<td></td><td></td><td></td>
                     </tr>
                	    <tr>
-                    	<td></td><td></td>
-                    	<td>
-                        	<form action="action_page.php"><input type="text" name="passportNo" placeholder="Passport No." required>
-							</form>
-                        </td>
-                        <td>
-                        	<form action="action_page.php"><input type="text" name="issue" placeholder="Issuing Authority" required>
-							</form>
-                        </td>
-                        <td></td><td></td>
-                    </tr>
-                    <tr>
-                		<td></td><td></td>
-                		<td>Date of Issue</td>
-                		<td>Date of Expiry</td>
-                        <td></td><td></td>
-                	</tr>
-                   	<tr>
-                    	<td></td><td></td>
-                    	<td>
-                        	<form action="action_page.php"><input type="text" name="dateIssue" placeholder="dd-mm-yyyy" required>
-							</form>
-                        </td>
-                        <td>
-                        	<form action="action_page.php"><input type="text" name="dateExpire" placeholder="dd-mm-yyyy" required>
-							</form>
-                        </td>
-                        <td></td><td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                		<td>VISA Info</td>
-                		<td>VISA No.</td>
-                		<td>Date of Expiry</td>
-                        <td></td><td></td>
-                	</tr>
-                	<tr>
-                    	<td></td><td></td>
-                    	<td>
-                        	<form action="action_page.php"><input type="text" name="visaNo" placeholder="VISA No." required>
-							</form>
-                        </td>
-                        <td>
-                        	<form action="action_page.php"><input type="text" name="dateExpireVisa" placeholder="mm-dd-yyyy" required>
-							</form>
-                        </td>
-                        <td></td><td></td>
-                    </tr>
-            	    <tr>
                         <td></td>
                 		<td>Contact Info</td>
                 		<td>Telephone</td>
@@ -216,35 +144,36 @@
                	    <tr>
                			<td></td><td></td>
                     	<td>
-                    		<form action="action_page.php"><input type="text" name="tel" placeholder="02-xxx-xxxx" required>
-							</form>
+                    		<input type="text" name="tel" placeholder="02-xxx-xxxx" required>
                     	</td>
                     	<td>
-                    		<form action="action_page.php"><input type="text" name="mobil" placeholder="08x-xxx-xxxx" required>
-							</form>
+                            <input type="text" name="mobil" placeholder="08x-xxx-xxxx" required>
                     	</td>
                     	<td>
-                        	<form action="action_page.php"><input type="text" name="email" placeholder="john@abc.com" required>
-							</form>
+                            <input type="text" name="email" placeholder="john@abc.com" required>
                         </td>
                         <td></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <br><br>
     </section>
+    {% endfor %}
 
+    <br><br>
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
                 <a class="expanded button" href="/booking?trip_id={{ trip_id }}">back</a>
             </div>
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/checking?trip_id={{ trip_id }}">Next</a>
+                <a class="expanded button" href="/booking/checking?trip_id={{ trip_id }}&adult={{adult}}&children={{children}}">Next</a>
             </div>
         </div> 
     </div>
+    <script>
+
+    </script>
     {% include 'footerbar.html' %}
 </body>
 </html>
