@@ -24,8 +24,7 @@
 ### ถ้าเกิด Conflict ตอน git pull
 
 1. ใช้คำสั่ง ```git status``` จากนั้นก็ดูว่าไฟล์ไหนแปลก ๆ บ้าง
-2. จากนั้นก็ add > commit > pull > push ตามปกติ
-
+2. จากนั้นใช้คำสั่งว่า ```git fetch``` และ ```git checkout origin/master <ชื่อไฟล์ที่ conflict>```
 
 #guideline การทำเว็บ, การใช้ไฟล์ และการวางไฟล์
 
