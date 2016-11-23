@@ -16,13 +16,17 @@ a, a:hover {
 </style>
 <body>
     {% include 'navbar.html' %}
+    <div class="row nav" style="margin-top: 1em; margin-left: 2em;">
+        <a href="/place/c/{{ url_point_to }}/related">Back to Related</a>
+    </div>
         <div class="row">
-        <div class="large-10 columns" style="margin-bottom: 2em;" >
+        <div class="large-10 columns small-centered" style="margin-bottom: 2em;" >
             <div class="row" style="margin-top: 2em">
-                <h1>Related to {{ name }}</h1>
+                <h3>Related to {{ name }}</h3>
             </div>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in place_list %}
+                <div class="row">Select related place to delete</div>
                 <div class="column" style="margin-bottom: 2em;">
                     <a onclick="handle_delete('{{ p.id }}')" row="button" aria-label="Thumbnail">
                         <div style="position: relative;">
@@ -43,7 +47,7 @@ a, a:hover {
 </body>
 <script>
 function handle_delete(str_a) {
-    var a = confirm("Are you sure to delete this image?");
+    var a = confirm("Are you sure to delete related place?");
     if (a == true) {
         window.location.href = "/place/c/{{ url_point_to }}/related/process-delete/?related_id=".concat(str_a);
     }

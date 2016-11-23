@@ -223,11 +223,11 @@ def edit_picture(request):
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
-        show_upload = False
-        if len(p1.photos) < 4:
-            show_upload = True
         try:
             p1 = Place.objects.get(id=place_id)
+            show_upload = False
+            if len(p1.photos) < 4:
+                show_upload = True
             template = loader.get_template('place/edit-image.html')
             pass_data = {
                 'place_id': place_id,
@@ -256,6 +256,7 @@ def handle_delete_picture(request):
         place_id = request.GET.get('place_id', '')
         try:
             pic1 = PlacePicture.objects.get(id=picture_id)
+            pic1.photo.delete()
             Place.objects(id=place_id).update_one(pull__photos=pic1)
             pic1.delete()
             return HttpResponseRedirect('/place/edit-picture/?place_id=' + place_id)
@@ -302,7 +303,7 @@ def show_related(request, place_name):
         'place_list': c1.related,
         'the_place': c1,
         'access_edit': access_edit,
-        'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> <a href="/place/?place_id=' + str(c1.id) + '">' + c1.name + '</a> -> related',
+        'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> <a href="/place/?place_id=' + str(c1.id) + '">' + c1.name + '</a> -> Related',
     }
     return HttpResponse(template.render(pass_data, request))
 
@@ -340,7 +341,7 @@ def process_delete_related(request, place_name):
         c1 = Place.objects.get(url_point_to=place_name)
         del_id = request.GET.get('related_id', '')
         try:
-            Place.objects(url_point_to=place_name).update_one(pull__related(Place.objects.find(id=del_id)))
+            Place.objects(url_point_to=place_name).update_one(pull__related=Place.objects.get(id=del_id))
             return HttpResponseRedirect("/place/c/" + place_name + "/related/delete")
         except:
             return HttpResponse("Not found")

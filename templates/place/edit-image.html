@@ -12,14 +12,14 @@
 
 <body>
     {% include 'navbar.html' %}
-    <div class="row" style="margin-top: 2em;">
-        <a style="color: black;" href="/place/c/{{ url_point_to }}">{{ name }}</a>
+    <div class="nav row" style="margin-top: 1em; margin-left: 2em;">
+        Back to <a style="color: black;" href="/place/c/{{ url_point_to }}">{{ name }}</a>
     </div>
-    <div class="row" style="margin-top: 2em">
-        <h3>Select Image To Delete</h3>
-    </div>
-    <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
-        <div class="large-10 columns small-centered">
+    <div class="large-10 columns small-centered">
+        <div class="row" style="margin-top: 2em">
+            <h3>Select Image To Delete</h3>
+        </div>
+        <div class="row">
             <div class="row large-up-3 project-overlay-inset">
                 {% for i in place_picture %}
                 <div class="column" style="margin-top: 2em;" ><a onclick="handle_delete('{{ i.id }}')"><img src="/place/picture/?place_picture_id={{ i.id }}"  style="width: 100%; height: 200px" /></a></div>
@@ -28,12 +28,12 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
     {% if show_upload_button %}
     {% include 'upload-image-template.html' with form_action="/place/handle-add-picture/" type="place_id" type_id=place_id %}
     {% else %}
     <div>Too many image. Please remove to upload the new one.</div>
     {% endif %}
+    </div>
     {% include 'footerbar.html' %}
 </body>
 <script>

@@ -74,10 +74,24 @@ def index(request):
                 return HttpResponse('trip is not available')
             template = loader.get_template('trip/index.html')
             company1 = Company.objects.get(id=c1.company_id)
+            tripplace_list = list(TripPlace.objects.aggregate(
+                {'$match': {'trip' : c1.id }},
+                    ))
+            place_list = [Place.objects.get(id=p['place']) for p in tripplace_list]
+            all_photos = list(Place.objects.aggregate(
+                    {'$match': {'_id': {'$in': [p['id'] for p in place_list]}}},
+                    {'$unwind': '$photos'},
+                    {'$project': {'photos': 1, '_id': 0}},
+                    {'$sample': {'size': 3}},
+                ))
+            print all_photos
+            photo_list = [PlacePicture.objects.get(id=p['photos']) for p in all_photos]
             pass_data = {
                 'this_trip': c1,
                 'company_name': company1.name,
                 'access_edit': access_edit,
+                'place_list': place_list,
+                'photo_list': photo_list,
                 }
             return HttpResponse(template.render(pass_data, request))
         except ValidationError:

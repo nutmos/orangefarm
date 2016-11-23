@@ -64,13 +64,15 @@ def city_name(request,city_name):
         c1 = City.objects.get(url_point_to=city_name)
         template = loader.get_template('city/index.html')
         country1 = Country.objects.get(id=c1.country_id)
-        other_city = City._get_collection().aggregate([{
-            '$sample': {'size': 3}
-            }])['result']
+        other_city = list(City.objects.aggregate(
+            {'$match': {'country_id': str(country1.id)}},
+            {'$sample': {'size': 3}},
+            ))
         for c in other_city: c['id'] = c.pop('_id')
-        popular_place = Place._get_collection().aggregate([{
-            '$sample': {'size': 3}
-            }])['result']
+        popular_place = list(Place.objects.aggregate(
+            {'$match': {'city_id': str(c1.id)}},
+            {'$sample': {'size': 3}},
+            ))
         for p in popular_place: p['id'] = p.pop('_id')
         pass_data = {
             'this_city': c1,
@@ -111,7 +113,6 @@ def edit(request):
             template = loader.get_template('city/edit.html')
             country_list = Country.objects.order_by('name')
             c1country = Country.objects.get(id=c1.country_id)
-            print country_list
             pass_data = {
                 'this_city': c1,
                 'host_country': c1country,
@@ -137,7 +138,6 @@ def process_edit(request):
         if (c1.id == ''):
             return HttpResponseRedirect('/city/edit/?city_id=' + city_id)
         country_id = request.GET.get('country_id', '')
-        print "country_id = " + country_id
         c1.country_id = country_id
         c1.description = request.GET.get('description', '')
         c1.save()
@@ -172,11 +172,10 @@ def get_city_by_country(request):
             c_json = {}
             for c in c1:
                 c_json[c.name] = str(c.id)
-            print c_json
             return JsonResponse(c_json)
         except:
             pass
-    return HttpResponse("Error")
+    return JsonResponse("Error")
 
 def show_image(request):
     if request.method == 'GET':
