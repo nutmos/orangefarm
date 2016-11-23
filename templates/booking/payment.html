@@ -60,54 +60,61 @@
     </section>
 
     <section>
+        <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
+        <input type="hidden" name="adult" id="adult" value="{{ adult }}">
+        <input type="hidden" name="children" id="children" value="{{ children }}">
         <br>
         <div class="large-7 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">Payment</h4>
-            <div style="background-color:white">
-                <h5 style="text-align:left">Name of Package Tour:</h5>
-                <h5 style="text-align:left">Package Tour ID:</h5>
-                <h5 style="text-align:left">Total Price:</h5>
-                <h5 style="text-align:left">Booking Fee:</h5>
-            </div>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3">Package Tour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>Name of Package Tour:</td>
+                        <td width="50%">{{ name }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Company:</td>
+                        <td>{{ company_name }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Total Price:</td>
+                        <td>{{ total_price }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <br><br>
         <div class="large-7 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">ช่องทาง: ชำระโดยการตัดบัตรเครดิต/เดบิต</h4>
-            <div style="background-color:white">
-                <div class="large-6 columns small-centered">
-                    <a class="expanded button" href="">Pay Total Price</a>
-                    <a class="expanded button" href="">Pay Booking Fee</a>
-                </div>
-                <p style="text-align:center">*การชำระบัตรผ่าน Payment Gateway จะมีค่าธรรมเนี่ยม 2.5% (ปัดเศษสตางค์ขึ้น)</p>
-                <p style="text-align:center">*รายการจะเสร็จสิ้นการชำระเงินจนกระทั่งทาง Payment Gateway ทำการ Redirect กลับมาที่ Wonderfulpackage.com</p>
-            </div>
-            </div>
-        </div>
-        <div class="large-7 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">ช่องทาง: LINE Pay</h4>
-            <div style="background-color:white">
-                 <div class="large-6 columns small-centered">
-                    <a class="expanded button" href="">Pay Total Price</a>
-                    <a class="expanded button" href="">Pay Booking Fee</a>
-                </div>
-                <p style="text-align:center">*การชำระบัตรผ่าน LINE Pay จะมีค่าธรรมเนี่ยม 2.5% (ปัดเศษสตางค์ขึ้น)</p>
-            </div>
-            </div>
-        </div>
-        <div class="large-7 columns small-centered">
-            <div style="background-color:#D5DBDB">
-                <h4 style="text-align:left">ช่องทาง: ชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล</h4>
-            <div style="background-color:white">
-                <div class="large-6 columns small-centered">
-                    <a class="expanded button" href="">ชำระ โดยการโอนเงิน/Bill PAYMENT ทุกช่องทาง</a>
-                    <a class="expanded button" href="">ชำระ โดยการชำระที่ธนาคารโดยตรง</a>
-                </div>
-                <p style="text-align:center">*การชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล จะมีการส่งคำสั่งไปยังทางเจ้าหน้าที่เพื่อยืนยันการสั่งซื้อและจะติดต่อกลับภายใน 24-48 ชม. ในเวลาทำการเพื่อเป็นการยืนยันการสั่งซื้อ</p>
-            </div>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3">ช่องทาง: ชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><td><td></td></td></td></tr>
+                    <tr>
+                        <td width="25%"></td>
+                        <td><a class="expanded button" href="">ชำระ โดยการโอนเงิน/Bill PAYMENT ทุกช่องทาง</a></td>
+                        <td width="25%"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a class="expanded button" href="">ชำระ โดยการชำระที่ธนาคารโดยตรง</a></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center">*การชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล จะมีการส่งคำสั่งไปยังทางเจ้าหน้าที่เพื่อยืนยันการสั่งซื้อและจะติดต่อกลับภายใน 24-48 ชม. ในเวลาทำการเพื่อเป็นการยืนยันการสั่งซื้อ</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <br>
     </section>
@@ -115,7 +122,7 @@
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/checking?trip_id={{ trip_id }}">Back</a>
+                <a class="expanded button" href="/booking/checking?trip_id={{ trip_id }}&adult={{adult}}&children={{children}}">Back</a>
             </div>
             <div class="large-4 columns"></div>
         </div>
