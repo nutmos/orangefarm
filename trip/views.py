@@ -164,10 +164,11 @@ def show_place(request):
     template = loader.get_template('trip/show-place.html')
     trip_id = request.GET.get('trip_id', '')
     c1 = Trip.objects.get(id=trip_id)
-    tripplace_list = c1.placelist
+    tripplace_list = TripPlace.objects(trip=c1)
     place_list = []
     for p in tripplace_list:
         place_list.append(p.place)
+    print c1.id
     pass_data = {
         'trip_id': str(c1.id),
         'trip_name': c1.name,
@@ -219,9 +220,6 @@ def process_add_place(request):
         place_id = request.GET.get('place-id', '')
         new_tripplace = TripPlace(trip=c1, place=Place.objects.get(id=place_id))
         new_tripplace.save()
-        c1.conditions = request.GET.get('conditions', '')
-        c1.placelist.append(new_tripplace)
-        c1.save()
         return HttpResponseRedirect('/trip/show-place?trip_id=' + str(c1.id))
     return HttpResponse('No GET Request')
 
@@ -238,12 +236,13 @@ def delete_place(request):
     try:
         trip_id = request.GET.get('trip_id', '')
         c1 = Trip.objects.get(id=trip_id)
-        place_list = c1.placelist
+        place_list = TripPlace.objects(trip=c1)
         template = loader.get_template('trip/delete-place.html')
         pass_data = {
             'place_list': place_list,
             'name': c1.name,
-            'trip_id': c1.id}
+            'trip_id': trip_id,
+            }
         return HttpResponse(template.render(pass_data, request))
     except DoesNotExist:
         return HttpResponse('Key error')
@@ -261,13 +260,10 @@ def process_delete_place(request):
             return HttpResponse(template.render({}, request))
         trip_id = request.GET.get('trip_id','')
         c1 = Trip.objects.get(id=trip_id)
-        del_id = request.GET.get('place_id', '')
-        for i in range(len(c1.placelist)):
-            if str(c1.placelist[i].id) == del_id:
-                del c1.placelist[i]
-                c1.save()
-                return HttpResponseRedirect('/trip/show-place?trip_id=' + str(c1.id))
-        return HttpResponse("Not found")
+        tripplace_id = request.GET.get('tripplace_id', '')
+        tripplace = TripPlace.objects.get(id=tripplace_id)
+        tripplace.delete()
+        return HttpResponseRedirect('/trip/show-place?trip_id=' + str(c1.id))
     return HttpResponse("Error")
 
 def featured_trip(request):

@@ -207,8 +207,7 @@ def handle_add_picture(request):
         p1 = PlacePicture()
         p1.photo.put(image, content_type='image/*')
         p1.save()
-        c1.photos.append(p1)
-        c1.save()
+        Place.objects(id=place_id).update_one(push__photos=p1)
         return HttpResponseRedirect('/place?place_id=' + place_id)
     return HttpResponse("Error")
 
@@ -224,6 +223,9 @@ def edit_picture(request):
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
         place_id = request.GET.get('place_id', '')
+        show_upload = False
+        if len(p1.photos) < 4:
+            show_upload = True
         try:
             p1 = Place.objects.get(id=place_id)
             template = loader.get_template('place/edit-image.html')
@@ -232,7 +234,7 @@ def edit_picture(request):
                 'place_picture': p1.photos,
                 'name': p1.name,
                 'url_point_to': p1.url_point_to,
-                'show_upload_button': len(p1.photos),
+                'show_upload_button': show_upload,
             }
             return HttpResponse(template.render(pass_data, request))
         except:
@@ -253,14 +255,10 @@ def handle_delete_picture(request):
         picture_id = request.GET.get('picture_id', '')
         place_id = request.GET.get('place_id', '')
         try:
-            p1 = Place.objects.get(id=place_id)
             pic1 = PlacePicture.objects.get(id=picture_id)
-            for i in range(len(p1.photos)):
-                if p1.photos[i].id == pic1.id:
-                    del p1.photos[i]
+            Place.objects(id=place_id).update_one(pull__photos=pic1)
             pic1.delete()
-            p1.save()
-            return HttpResponseRedirect('/place/delete-picture/?place_id=' + place_id)
+            return HttpResponseRedirect('/place/edit-picture/?place_id=' + place_id)
         except:
             pass
     return HttpResponse("Error")
@@ -341,12 +339,11 @@ def process_delete_related(request, place_name):
             return HttpResponse(template.render({}, request))
         c1 = Place.objects.get(url_point_to=place_name)
         del_id = request.GET.get('related_id', '')
-        for i in range(len(c1.related)):
-            if str(c1.related[i].id) == del_id:
-                del c1.related[i]
-                c1.save()
-                return HttpResponseRedirect("/place/c/" + place_name + "/related/delete")
-        return HttpResponse("Not found")
+        try:
+            Place.objects(url_point_to=place_name).update_one(pull__related(Place.objects.find(id=del_id)))
+            return HttpResponseRedirect("/place/c/" + place_name + "/related/delete")
+        except:
+            return HttpResponse("Not found")
     return HttpResponse("Error")
         
 
@@ -381,8 +378,7 @@ def process_add_related(request, place_name):
         return HttpResponse(template.render({}, request))
     c1 = Place.objects.get(url_point_to=place_name)
     related_place_id = request.GET.get('place-id', '')
-    c1.related.append(Place.objects.get(id=related_place_id))
-    c1.save()
+    Place.objects(url_point_to=place_name).update_one(push__related=Place.objects.get(id=related_place_id))
     return HttpResponseRedirect('/place/c/'+place_name+'/related/')
 
 def get_place_by_city(request):

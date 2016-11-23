@@ -7,10 +7,6 @@ from place.models import *
 
 # Create your models here.
 
-class TripPlace(Document):
-    place = ReferenceField('Place')
-    trip = ReferenceField('Trip')
-
 class Trip(Document):
     name = StringField()
     company_id = StringField(max_length=24, min_length=24)
@@ -24,4 +20,8 @@ class Trip(Document):
     travel_by = StringField()
     conditions = StringField()
     active = BooleanField()
-    placelist = ListField(ReferenceField('TripPlace'))
+
+class TripPlace(Document):
+    place = ReferenceField('Place', reverse_delete_rule=CASCADE)
+    trip = ReferenceField('Trip', reverse_delete_rule=CASCADE)
+

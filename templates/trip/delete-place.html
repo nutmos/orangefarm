@@ -46,7 +46,7 @@ a, a:hover {
 function handle_delete(str_a) {
     var a = confirm("Are you sure to delete this place?");
     if (a == true) {
-        window.location.href = "/trip/process-delete-place/?trip_id={{trip_id}}&place_id=".concat(str_a);
+        window.location.href = "/trip/process-delete-place/?trip_id={{trip_id}}&tripplace_id=".concat(str_a);
     }
 }
 </script>
