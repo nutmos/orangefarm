@@ -73,6 +73,12 @@ def place_name(request, place_name):
         #popular_place_list = Place.objects(city_id=str(city1.id))
         popular_place_list = list(Place.objects.aggregate({'$match': {'city_id': str(city1.id)}}, {'$sample': {'size': 3}}))
         for p in popular_place_list : p['id'] = p.pop('_id')
+        for p in c1.related:
+            try:
+                Place.objects.get(id=str(p.id))
+            except:
+                Place.objects(id=str(c1.id)).update_one(pull__related=p)
+        c1 = Place.objects.get(url_point_to=place_name)
         show_related = c1.related
         if len(show_related) > 3:
             import random
@@ -299,6 +305,12 @@ def show_related(request, place_name):
     c1 = Place.objects.get(url_point_to=place_name)
     city1 = City.objects.get(id=c1.city_id)
     country1 = Country.objects.get(id=city1.country_id)
+    for p in c1.related:
+        try:
+            Place.objects.get(id=str(p.id))
+        except:
+            Place.objects(url_point_to=place_name).update_one(pull__related=p)
+    c1 = Place.objects.get(url_point_to=place_name)
     pass_data = {
         'place_list': c1.related,
         'the_place': c1,
