@@ -8,8 +8,9 @@ from datetime import datetime
 # Create your models here.
 
 class Booking(Document):
-	user_id = StringField()
-	trip_id = StringField()
+	trip = ReferenceField('Trip')
+	user = ReferenceField('User')
+	company_name = StringField()
 	book_date = DateTimeField(default=datetime.now())
 	people = IntField()
 	adult = IntField()

@@ -34,6 +34,8 @@
                 <div class="row" style="padding:30px">
                     <h2> {{ this_trip.name }} </h2>
                     <p>by <a href="/company/?company_id={{ this_trip.company_id }}">{{ company_name }}</a></p>
+                    <h2 style="color:#A34E24"> {{ this_trip.name }} </h2>
+                    <p><a href="/company/?company_id={{ this_trip.company_id }}" style="color: black">by {{ company_name }}</a></p>
                 </div>
                 <div class="row">
                     <div class="large-4 columns">
@@ -71,7 +73,7 @@
                             <th>Price</th>
                         </tr>
                         <tr>
-                            <td><a href="/booking?trip_id={{ this_trip.id }}">Book</a></td>
+                            <td><a href="/trip/process-booking?trip_id={{ this_trip.id }}" style="color: black">book</a></td>
                             <td>{{ this_trip.remaining_people }}</td>
                             <td>{{ this_trip.start_date }} - {{ this_trip.end_date }}</td>
                             <td>{{ this_trip.travel_by }}</td>
