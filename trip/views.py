@@ -285,3 +285,20 @@ def featured_trip(request):
     pass_data = {
             'trip_list': all_trip,
             }
+
+def process_booking(request):
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+    except:
+        template = loader.get_template('login/index.html')
+        return HttpResponse(template.render({}, request))
+    try:
+        trip_id = request.GET.get('trip_id', '')
+        trip1 = Trip.objects.get(id=trip_id)
+        company1 = Company.objects.get(id=trip1.company_id)
+        booking = Booking(trip=trip1, user=user1, company_name=company1.name)
+        booking.save()
+        return HttpResponseRedirect('/booking?booking_id=' + str(booking.id))
+    except:
+        return HttpResponse("Error")

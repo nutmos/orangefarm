@@ -25,3 +25,11 @@ class TripPlace(Document):
     place = ReferenceField('Place', reverse_delete_rule=CASCADE)
     trip = ReferenceField('Trip', reverse_delete_rule=CASCADE)
 
+class Booking(Document):
+    trip = ReferenceField('Trip')
+    user = ReferenceField('User')
+    company_name = StringField()
+    book_date = DateTimeField(default=datetime.now())
+    people = IntField()
+    adult = IntField()
+    children = IntField()
