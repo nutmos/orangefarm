@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ username }}</title>
+    {% include 'essential.html' %}
+    <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="large-10 columns small-centered">
+        		<table align="center">
+                	<tr style="background-color:#6B7A8F;color:white">
+                        <th>Booking ID</th>
+                        <th>User Id</th>
+                        <th>User Name</th>
+                        <th>Trip Name</th>
+                        <th>Company</th>
+                        <th>Date of Booking</th>
+                        <th>Total booking people</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>{{ booking_id }}</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ trip_name }}</td>
+                        <td>{{ company_name }}</td>
+                        <td>{{ book_date }}</td>
+                        <td>{{ people }}</td>
+                        <td>{{ price }} THB</td>
+                        <td>
+                            <select name="status" id="status"style="height:35px; width:90px">
+                                <option value="Complete">Complete</option>
+                                <option value="OnGoing" selected="selected" >OnGoing</option>             
+                            </select>
+                        </td>
+                    </tr>
+            	</table>
+		</div>
+</body>
+    {% include 'footerbar.html' %}
+</body>
+</html>

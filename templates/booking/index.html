@@ -22,9 +22,6 @@
 </style>
 <body>
     {% include 'navbar.html' %}
-
-    <input type="hidden" name="booking_id" id="booking_id" value="{{ booking_id }}">
-
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -97,6 +94,8 @@
         <br><br>
     </section>
 
+    <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
+    <input type="hidden" name="remind_people" value="{{ remind_people }}">
     <div class="large-7 columns small-centered">
         <table>
             <thead>
@@ -150,10 +149,9 @@
                     alert("Over Seat Available");
                 }
                 else{
-                    var url = "/booking/process-index?booking_id={{booking_id}}&adult=".concat(a);
+                    var url = "/booking/process-index?trip_id={{trip_id}}&remaining_people={{remaining_people}}&adult=".concat(a);
                     var url2 = "&children=".concat(b);
                     window.location.href = url.concat(url2);
-                    //window.location.href = "/booking/process-index?booking_id={{booking_id}}"
                 }
         }
 

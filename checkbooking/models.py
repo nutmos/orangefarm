@@ -5,13 +5,10 @@ from mongoengine import *
 from trip.models import *
 from datetime import datetime
 
-# Create your models here.
 
-class Booking(Document):
+class Checkbooking(Document):
 	user_id = StringField()
 	trip_id = StringField()
 	book_date = DateTimeField(default=datetime.now())
 	people = IntField()
-	adult = IntField()
-	children = IntField()
-		
+	status = StringField()

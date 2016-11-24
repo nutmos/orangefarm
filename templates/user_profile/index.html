@@ -57,6 +57,29 @@
                 </div>
             </div>
         </div>
+        <div class="large-10 columns small-centered">
+        	<h2>History</h2>
+        		<table align="center">
+                	<tr style="background-color:#6B7A8F;color:white">
+                        <th>Booking ID</th>
+                        <th>Trip Name</th>
+                        <th>Company</th>
+                        <th>Date of Booking</th>
+                        <th>Total booking people</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>{{ booking_id }}</td>
+                        <td>{{ trip_name }}</td>
+                        <td>{{ company_name }}</td>
+                        <td>{{ book_date }}</td>
+                        <td>{{ people }}</td>
+                        <td>{{ price }} THB</td>
+                        <td>{{ status }}</td>
+                    </tr>
+            	</table>
+		</div>
     </div>
     {% include 'footerbar.html' %}
 </body>
