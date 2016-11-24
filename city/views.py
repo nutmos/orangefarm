@@ -221,3 +221,11 @@ def popular_place(request, city_name):
             'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(c1.id) + '">' +c1.name + '</a> -> Popular', 
             }
     return HttpResponse(template.render(pass_data, request))
+
+def all_city(request):
+    c1 = City.objects()
+    template = loader.get_template("city/all-city.html")
+    pass_data = {
+        'place_list': c1,
+        }
+    return HttpResponse(template.render(pass_data, request))

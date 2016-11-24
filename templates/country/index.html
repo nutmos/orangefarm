@@ -41,6 +41,20 @@
             </div>
             <a href="/country/all" style="color:black"><p style="text-align: right;">Show more</p></a>
             {% endif %}
+            {% if trip_list %}
+            <h3 style="margin-top: 2em;">Featured Trip</h3>
+            <div class="row large-up-3 project-overlay-inset">
+                {% for c in trip_list %}
+                <div class="row">
+                    <a href="/trip/?trip_id={{ c.id }}">
+                        {{ c.name }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="/country/all" style="color:black"><p style="text-align: right;">Show more</p></a>
+            {% endif %}
+
         </div>
     </div>
     {% if access_edit %}

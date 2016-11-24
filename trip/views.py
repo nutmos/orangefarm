@@ -84,7 +84,6 @@ def index(request):
                     {'$project': {'photos': 1, '_id': 0}},
                     {'$sample': {'size': 3}},
                 ))
-            print all_photos
             photo_list = [PlacePicture.objects.get(id=p['photos']) for p in all_photos]
             pass_data = {
                 'this_trip': c1,
@@ -259,7 +258,7 @@ def delete_place(request):
             }
         return HttpResponse(template.render(pass_data, request))
     except DoesNotExist:
-        return HttpResponse('Key error')
+        return HttpResponse('Cannot find trip')
 
 def process_delete_place(request):
     if request.method == 'GET':
@@ -282,6 +281,8 @@ def process_delete_place(request):
 
 def featured_trip(request):
     all_trip = Trip.objects(active=True)
+    template = loader.get_template('trip/featured.html')
     pass_data = {
-            'trip_list': all_trip,
-            }
+        'trip_list': all_trip,
+        }
+    return HttpResponse(template.render(pass_data, request))

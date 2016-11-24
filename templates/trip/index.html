@@ -32,8 +32,8 @@
         <div class="large-10 columns small-centered">
             <section>
                 <div class="row" style="padding:30px">
-                    <h2 style="color:#A34E24"> {{ this_trip.name }} </h2>
-                    <p><a href="/company/?company_id={{ this_trip.company_id }}" style="color: black">by {{ company_name }}</a></p>
+                    <h2> {{ this_trip.name }} </h2>
+                    <p>by <a href="/company/?company_id={{ this_trip.company_id }}">{{ company_name }}</a></p>
                 </div>
                 <div class="row">
                     <div class="large-4 columns">
@@ -61,7 +61,7 @@
             </section>
             <div class="row"style="padding:30px">
                 <div class="column">
-                    <h4 style="text-align:left">Booking:</h4>
+                    <h4 style="text-align:left">Booking Info <a class="button">Book Now</a></h4>
                     <table align="center">
                         <tr style="background-color:#6B7A8F;color:white">
                             <th>Booking</th>
@@ -71,7 +71,7 @@
                             <th>Price</th>
                         </tr>
                         <tr>
-                            <td><a href="/booking?trip_id={{ this_trip.id }}" style="color: black">book</a></td>
+                            <td><a href="/booking?trip_id={{ this_trip.id }}">Book</a></td>
                             <td>{{ this_trip.remaining_people }}</td>
                             <td>{{ this_trip.start_date }} - {{ this_trip.end_date }}</td>
                             <td>{{ this_trip.travel_by }}</td>
@@ -80,15 +80,13 @@
                     </table>
                 </div>
             </div>
-            <div class="row large-up-3" style="padding: 30px;">
-                <h4>Where you can go</h4>
+            <h4>Where you can go</h4>
+            <div class="row large-up-3">
                 {% for p in place_list %}
                 {% include 'thumbnail-template.html' with link_to="/place/?place_id=" object=p link_img="/place/picture/?place_id=" %}
                 {% endfor %}
             </div>
-            <div class="row">
-                <a href="show-place/?trip_id={{ this_trip.id }}" style="color:black"><p style="text-align: right;">Show more</p></a>
-            </div>
+            <a href="show-place/?trip_id={{ this_trip.id }}" style="color:black"><p style="text-align: right;">Show more</p></a>
             <div class="row" style="padding:30px">
                 <div class="column">
                     <h4 style="text-align:left">More Details</h4>

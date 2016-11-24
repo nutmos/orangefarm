@@ -394,4 +394,12 @@ def get_place_by_city(request):
             return JsonResponse(c_json)
         except:
             pass
-    return HttpResponse("Error")
+    return JsonResponse("Error")
+
+def all_place(request):
+    place_list = Place.objects()
+    template = loader.get_template('place/all-place.html')
+    pass_data = {
+        'place_list': place_list,
+        }
+    return HttpResponse(template.render(pass_data, request))
