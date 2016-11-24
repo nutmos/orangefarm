@@ -72,10 +72,28 @@ def info(request):
       p = []
       for i in range(1,int(booking.people)+1): p.append(i)
       pass_data = {
+         'booking_id': booking.id,
          'p': p
       }
       return HttpResponse(template.render(pass_data, request))
    except:
+      return HttpResponse('id info is not correct')
+   return HttpResponse('This page is not complete')
+
+def process_info(request):
+   try:
+      user_id = request.session['user_id']
+      user1 = User.objects.get(id=user_id)
+   except:
+      template = loader.get_template('login/index.html')
+      return HttpResponse(template.render({}, request))
+   if request.method == 'GET':
+      booking_id = request.GET.get('booking_id', '')
+      booking = Booking.objects.get(id=booking_id)
+      #for i in range(1,int(booking.people)+1):
+         #title = request.GET.get('title', '')
+         #print 'title: '+title
+         #tourist = Tourist(booking=booking, title=title)
       return HttpResponse('id info is not correct')
    return HttpResponse('This page is not complete')
 
