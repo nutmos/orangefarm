@@ -16,21 +16,21 @@ def index(request):
         request.session.set_expiry(3600)
     except KeyError:
         is_login = False
-    country_list = Country._get_collection().aggregate([{
-        '$sample': {'size': 6},
-        }])['result']
+    country_list = list(Country.objects.aggregate(
+            {'$sample': {'size': 6}}
+        ))
     for c in country_list: c['id'] = c.pop('_id')
-    city_list = City._get_collection().aggregate([{
+    city_list = list(City.objects.aggregate({
         '$sample': {'size': 6},
-        }])['result']
+        }))
     for c in city_list: c['id'] = c.pop('_id')
-    place_list = Place._get_collection().aggregate([{
+    place_list = list(Place.objects.aggregate({
         '$sample': {'size': 6},
-        }])['result']
+        }))
     for p in place_list: p['id'] = p.pop('_id')
-    trip_list = Trip._get_collection().aggregate([{
+    trip_list = list(Trip.objects.aggregate({
         '$sample': {'size': 6},
-        }])['result']
+        }))
     for t in trip_list: t['id'] = t.pop('_id')
     pass_data = {
         'country_list': country_list,

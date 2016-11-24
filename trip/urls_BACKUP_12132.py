@@ -14,6 +14,9 @@ urlpatterns = [
     url(r'^process-add-place/', views.process_add_place, name='process-add-place'),
     url(r'^delete-place/', views.delete_place, name='delete-place'),
     url(r'^process-delete-place/', views.process_delete_place, name='process-delete-place'),
+<<<<<<< HEAD
     url(r'^featured/', views.featured_trip, name='featured'),
+=======
     url(r'^process-booking/', views.process_booking, name='process-booking')
+>>>>>>> 246462d89e986e9720153afeb5a4a1f06802daf9
 ]

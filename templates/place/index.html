@@ -46,13 +46,13 @@
             <a href="related" style="color:black"><p style="text-align: right;">Show more</p></a>
             {% endif %}
             {% if related_trip %}
-            <h3 style="margin-top: 2em;">Related Trip</h3>
+            <h3 style="margin-top: 2em;">Featured Trip</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in related_trip %}
                 {% include 'thumbnail-template.html' with link_to="/trip/?trip_id=" link_img="/trip/picture/?trip_id=" object=p.trip %}
                 {% endfor %}
             </div>
-            <a href="related" style="color:black"><p style="text-align: right;">Show more</p></a>
+            <a href="featured-trip" style="color:black"><p style="text-align: right;">Show more</p></a>
             {% endif %}
         </div>
     </div>

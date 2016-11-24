@@ -15,5 +15,4 @@ urlpatterns = [
     url(r'^delete-place/', views.delete_place, name='delete-place'),
     url(r'^process-delete-place/', views.process_delete_place, name='process-delete-place'),
     url(r'^featured/', views.featured_trip, name='featured'),
-    url(r'^process-booking/', views.process_booking, name='process-booking')
 ]

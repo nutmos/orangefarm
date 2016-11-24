@@ -9,11 +9,13 @@ urlpatterns = [
     url(r'^process-add/', views.process_add, name='process-add'),
     url(r'^process-edit/', views.process_edit, name='process-edit'),
     url(r'^delete/', views.delete, name='delete'),
+    url(r'^all/', views.all_city, name='all-city'),
     url(r'^picture/', views.show_image, name='image'),
     url(r'^handle-change-picture/', views.handle_change_picture, name='handle-change-picture'),
     url(r'^get-city-by-country/',views.get_city_by_country, name='get-city-by-country'),
     url(r'^c/(?P<city_name>\w+)/', include ([
         url(r'^$', views.city_name, name='city_name'),
         url(r'^popular-place/', views.popular_place, name='popular-place'),
+        url(r'^featured-trip/', views.featured_trip, name='featured-trip'),
     ]))
 ]

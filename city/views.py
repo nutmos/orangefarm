@@ -4,6 +4,7 @@ from mongoengine import *
 from models import *
 from country.models import *
 from place.models import *
+from trip.models import *
 from django.template import loader
 from mongoengine.django.auth import User as MongoUser
 from user_profile.models import User
@@ -74,11 +75,22 @@ def city_name(request,city_name):
             {'$sample': {'size': 3}},
             ))
         for p in popular_place: p['id'] = p.pop('_id')
+        all_place = list(Place.objects.aggregate(
+                {'$match': {'city_id': str(c1.id)}}
+                ))
+        all_place_id = [a['_id'] for a in all_place]
+        tripplace_list = list(TripPlace.objects.aggregate(
+                {'$match': {'place': {'$in': all_place_id}}},
+                {'$group': {'_id': '$trip'}},
+                {'$sample': {'size': 3}},
+                ))
+        trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
         pass_data = {
             'this_city': c1,
             'host_country': country1,
             'other_city': other_city,
             'access_edit': access_edit,
+            'trip_list': trip_list,
             'popular_place': popular_place,
             'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> ' + c1.name,
             }
@@ -220,4 +232,29 @@ def popular_place(request, city_name):
             'place_list': place_list,
             'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(c1.id) + '">' +c1.name + '</a> -> Popular', 
             }
+    return HttpResponse(template.render(pass_data, request))
+
+def all_city(request):
+    c1 = City.objects()
+    template = loader.get_template("city/all-city.html")
+    pass_data = {
+        'place_list': c1,
+        }
+    return HttpResponse(template.render(pass_data, request))
+
+def featured_trip(request, city_name):
+    c1 = City.objects.get(url_point_to=city_name)
+    country1 = Country.objects.get(id=c1.country_id)
+    place_list = list(Place.objects(city_id=str(c1.id)))
+    tripplace_list = list(TripPlace.objects(place__in=place_list).aggregate(
+            {'$group': {'_id': '$trip'}}
+            ))
+    trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
+    pass_data = {
+        'trip_list': trip_list,
+        'the_place': c1,
+        'type': 'city',
+        'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(c1.id) + '">' + c1.name + '</a> Featured Trip'
+    }
+    template = loader.get_template('trip/featured-trip.html')
     return HttpResponse(template.render(pass_data, request))

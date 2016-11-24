@@ -259,7 +259,7 @@ def delete_place(request):
             }
         return HttpResponse(template.render(pass_data, request))
     except DoesNotExist:
-        return HttpResponse('Key error')
+        return HttpResponse('Cannot find trip')
 
 def process_delete_place(request):
     if request.method == 'GET':
@@ -282,6 +282,7 @@ def process_delete_place(request):
 
 def featured_trip(request):
     all_trip = Trip.objects(active=True)
+    template = loader.get_template('trip/featured.html')
     pass_data = {
             'trip_list': all_trip,
             }

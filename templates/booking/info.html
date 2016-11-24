@@ -21,8 +21,9 @@
 </style>
 <body>
     {% include 'navbar.html' %}
-    <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
-    <input type="hidden" name="people" id="people" value="{{people}}">
+
+    <input type="hidden" name="booking_id" id="booking_id" value="{{ booking_id }}">
+
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -56,7 +57,7 @@
     </section>
 
     {% for i in p %}
-    <section>
+    <form action="/booking/process-info/" method="get">
         <br>
         <div class="large-8 columns small-centered">
             <table>
@@ -77,14 +78,14 @@
                     <tr>
                        	<td></td><td></td>
                         <td>
-                        	<select name="title" id="title{{i}}" style="height:35px; width:80px">
+                        	<select name="title" id="title" style="height:35px; width:80px">
                             	<option value="mr" selected="selected">Mr.</option>
                             	<option value="ms">Ms.</option>
                             	<option value="miss">Miss</option>
                         	</select>
                         </td>
                         <td>
-                            <input type="text" name="firstname" placeholder="First Name" required>
+                            <input type="text" name="firstname" id="firstname" placeholder="First Name" required>
                         </td>
                         <td>
                             <input type="text" name="lastname" placeholder="Last Name" required>
@@ -136,38 +137,34 @@
                	    <tr>
                         <td></td>
                 		<td>Contact Info</td>
-                		<td>Telephone</td>
                 		<td>Mobile</td>
                 	 	<td>Email</td>
-                        <td></td>
+                        <td></td><td></td>
                     </tr>
                	    <tr>
                			<td></td><td></td>
-                    	<td>
-                    		<input type="text" name="tel" placeholder="02-xxx-xxxx" required>
-                    	</td>
                     	<td>
                             <input type="text" name="mobil" placeholder="08x-xxx-xxxx" required>
                     	</td>
                     	<td>
                             <input type="text" name="email" placeholder="john@abc.com" required>
                         </td>
-                        <td></td>
+                        <td></td><td></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </section>
+    </form>
     {% endfor %}
 
     <br><br>
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking?trip_id={{ trip_id }}">back</a>
+                <a class="expanded button" href="/booking?booking_id={{ booking_id }}">back</a>
             </div>
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/checking?trip_id={{ trip_id }}&adult={{adult}}&children={{children}}">Next</a>
+                <a class="expanded button" href="/booking/process-info?booking_id={{ booking_id }}">Next</a>
             </div>
         </div> 
     </div>

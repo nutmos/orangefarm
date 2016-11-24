@@ -15,7 +15,9 @@ urlpatterns = [
     url(r'^handle-delete-picture/', views.handle_delete_picture, name='handle-delete-picture'),
     url(r'^picture/', views.show_image, name='picture'),
     url(r'^get-place-by-city/', views.get_place_by_city, name='get-place-by-city'),
+    url(r'^all/', views.all_place, name='all-place'),
     url(r'^c/(?P<place_name>\w+)/', include([
+        url(r'^featured-trip/', views.featured_trip, name="featured-trip"),
         url(r'^related/', include([
             url(r'^delete/', views.delete_related, name="delete-related"),
             url(r'^process-delete/', views.process_delete_related, name="process-delete-related"),

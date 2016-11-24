@@ -5,6 +5,7 @@ from models import *
 from city.models import *
 from place.models import *
 from user_profile.models import *
+from trip.models import *
 from django.template import loader
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
@@ -60,38 +61,44 @@ def country_name(request, country_name):
         user1 = User.objects.get(id=user_id)
         if user1.is_staff == False:
             access_edit = False
-            print user1.name
     except:
         access_edit = False
     c1 = Country.objects.get(url_point_to=country_name)
     template = loader.get_template('country/index.html')
     city_list = City.objects(country_id=str(c1.id))
     city_list_id = [str(i.id) for i in city_list]
-    place_list= Place._get_collection().aggregate([
-        {'$match': {
-            'city_id': {'$in': city_list_id},
-            }},
+    place_list= list(Place.objects.aggregate(
+        {'$match': {'city_id': {'$in': city_list_id}}},
         {'$sample': {'size': 3}},
-    ])['result']
+    ))
     for p in place_list: p['id'] = p.pop('_id')
-    city_list = City._get_collection().aggregate([
-        {'$match': {'country_id': str(c1.id)}
-        },
-        {'$sample': {'size': 3},
-            }
-        ])['result']
-    print city_list
+    city_list = list(City.objects.aggregate(
+        {'$match': {'country_id': str(c1.id)}},
+        {'$sample': {'size': 3}}
+        ))
     for c in city_list: c['id'] = c.pop('_id')
-    country_list = Country._get_collection().aggregate([{
-        '$sample': {'size': 3},
-        }])['result']
+    country_list = list(Country.objects.aggregate(
+            {'$sample': {'size': 3}}
+        ))
     for c in country_list: c['id'] = c.pop('_id')
+    all_place = list(Place.objects.aggregate(
+            {'$match': {'city_id': {'$in': city_list_id}}}
+            ))
+    all_place_id = [a['_id'] for a in all_place]
+    tripplace_list = list(TripPlace.objects.aggregate(
+            {'$match': {'place': {'$in': all_place_id}}},
+            {'$group': {'_id': '$trip'}},
+            {'$sample': {'size': 3}},
+            ))
+    trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
     pass_data = {
             'this_country': c1,
         'access_edit': access_edit,
         'city_list': city_list,
         'country_list': country_list,
-        'place_list': place_list}
+        'place_list': place_list,
+        'trip_list': trip_list,
+        }
     return HttpResponse(template.render(pass_data, request))
 
 def edit(request):
@@ -217,7 +224,7 @@ def popular_place(request, country_name):
     city_list_id = [str(i.id) for i in city_list]
     print city_list_id
     place_list = []
-    all_place = Place.objects()
+    all_place = Place.objects().order_by('name')
     for p in all_place:
         if p.city_id in city_list_id:
             place_list.append(p)
@@ -226,4 +233,21 @@ def popular_place(request, country_name):
             'place_list': place_list,
             }
     template = loader.get_template('country/popular-place.html')
+    return HttpResponse(template.render(pass_data, request))
+
+def featured_trip(request, country_name):
+    c1 = Country.objects.get(url_point_to=country_name)
+    city_list = City.objects(country_id=str(c1.id))
+    place_list = list(Place.objects(city_id__in=[str(a.id) for a in city_list]))
+    tripplace_list = list(TripPlace.objects(place__in=place_list).aggregate(
+            {'$group': {'_id': '$trip'}}
+            ))
+    trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
+    pass_data = {
+        'trip_list': trip_list,
+        'the_place': c1,
+        'type': 'country',
+        'nav': '<a href="/country/?country_id=' + str(c1.id) + '">' + c1.name + '</a> -> Featured Trip'
+    }
+    template = loader.get_template('trip/featured-trip.html')
     return HttpResponse(template.render(pass_data, request))

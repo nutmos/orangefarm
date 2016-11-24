@@ -8,10 +8,16 @@ from datetime import datetime
 # Create your models here.
 
 class Booking(Document):
-	user_id = StringField()
-	trip_id = StringField()
+	trip = ReferenceField('Trip', reverse_delete_rule=CASCADE)
+	user = ReferenceField('User', reverse_delete_rule=CASCADE)
+	company_name = StringField()
 	book_date = DateTimeField(default=datetime.now())
 	people = IntField()
 	adult = IntField()
 	children = IntField()
 		
+class Tourist(Document):
+	booking = ReferenceField('Booking', reverse_delete_rule=CASCADE)
+	title = StringField()
+	firstname = StringField()
+	lastname = StringField()

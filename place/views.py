@@ -73,6 +73,12 @@ def place_name(request, place_name):
         #popular_place_list = Place.objects(city_id=str(city1.id))
         popular_place_list = list(Place.objects.aggregate({'$match': {'city_id': str(city1.id)}}, {'$sample': {'size': 3}}))
         for p in popular_place_list : p['id'] = p.pop('_id')
+        for p in c1.related:
+            try:
+                Place.objects.get(id=str(p.id))
+            except:
+                Place.objects(id=str(c1.id)).update_one(pull__related=p)
+        c1 = Place.objects.get(url_point_to=place_name)
         show_related = c1.related
         if len(show_related) > 3:
             import random
@@ -299,6 +305,12 @@ def show_related(request, place_name):
     c1 = Place.objects.get(url_point_to=place_name)
     city1 = City.objects.get(id=c1.city_id)
     country1 = Country.objects.get(id=city1.country_id)
+    for p in c1.related:
+        try:
+            Place.objects.get(id=str(p.id))
+        except:
+            Place.objects(url_point_to=place_name).update_one(pull__related=p)
+    c1 = Place.objects.get(url_point_to=place_name)
     pass_data = {
         'place_list': c1.related,
         'the_place': c1,
@@ -359,7 +371,7 @@ def add_related(request, place_name):
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     c1 = Place.objects.get(url_point_to=place_name)
-    place_list = Place.objects(city_id=c1.city_id)
+    place_list = Place.objects(city_id=c1.city_id).order_by('name')
     template = loader.get_template('place/add-related.html')
     pass_data = {
         'place_list': place_list,
@@ -394,4 +406,27 @@ def get_place_by_city(request):
             return JsonResponse(c_json)
         except:
             pass
-    return HttpResponse("Error")
+    return JsonResponse("Error")
+
+def all_place(request):
+    place_list = Place.objects().order_by('name')
+    template = loader.get_template('place/all-place.html')
+    pass_data = {
+        'place_list': place_list,
+        }
+    return HttpResponse(template.render(pass_data, request))
+
+def featured_trip(request, place_name):
+    c1 = Place.objects.get(url_point_to=place_name)
+    city1 = City.objects.get(id=c1.city_id)
+    country1 = Country.objects.get(id=city1.country_id)
+    tripplace_list = TripPlace.objects(place=c1)
+    trip_list = [Trip.objects.get(id=a['trip'].id) for a in tripplace_list]
+    pass_data = {
+        'trip_list': trip_list,
+        'the_place': c1,
+        'type': 'place',
+        'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(city1.id) + '">' + city1.name + '</a> -> <a href="/place/?place_id=' + str(c1.id) + '">' + c1.name + '</a> -> Featured Trip'
+    }
+    template = loader.get_template('trip/featured-trip.html')
+    return HttpResponse(template.render(pass_data, request))

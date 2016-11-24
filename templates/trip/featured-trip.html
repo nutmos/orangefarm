@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     {% include 'essential.html' %}
-    <title>Featured Trips</title>
+    <title>Featured Trip</title>
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
     <link rel="stylesheet" href={% static "css/place/styles.css" %}>
 </head>
 <body>
-    {% include 'show-more-place-template.html' with background_url_path="/place/picture/?place_id=" object=the_place place_list=place_list empty_message="No country found." list_link_to="/country/?country_id=" list_link_img="/country/picture/?country_id=" header="All Countries" background_url_point_to="/place/?place_id=" not_show_header=True %}
+    {% include 'show-more-place-template.html' with background_url_path="/"|add:type|add:"/picture/?"|add:type|add:"_id=" object=the_place place_list=trip_list empty_message="No trip found." list_link_to="/trip/?trip_id=" list_link_img="/trip/picture/?trip_id=" nav=nav header="Featured Trip" background_url_point_to="/"|add:type|add:"/?"|add:type|add:"_id=" %}
     {% include 'footerbar.html' %}
 </body>
 </html>
