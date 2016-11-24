@@ -88,8 +88,8 @@ def country_name(request, country_name):
     tripplace_list = list(TripPlace.objects.aggregate(
             {'$match': {'place': {'$in': all_place_id}}},
             {'$group': {'_id': '$trip'}},
+            {'$sample': {'size': 3}},
             ))
-    print tripplace_list
     trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
     pass_data = {
             'this_country': c1,
@@ -224,7 +224,7 @@ def popular_place(request, country_name):
     city_list_id = [str(i.id) for i in city_list]
     print city_list_id
     place_list = []
-    all_place = Place.objects()
+    all_place = Place.objects().order_by('name')
     for p in all_place:
         if p.city_id in city_list_id:
             place_list.append(p)
@@ -233,4 +233,21 @@ def popular_place(request, country_name):
             'place_list': place_list,
             }
     template = loader.get_template('country/popular-place.html')
+    return HttpResponse(template.render(pass_data, request))
+
+def featured_trip(request, country_name):
+    c1 = Country.objects.get(url_point_to=country_name)
+    city_list = City.objects(country_id=str(c1.id))
+    place_list = list(Place.objects(city_id__in=[str(a.id) for a in city_list]))
+    tripplace_list = list(TripPlace.objects(place__in=place_list).aggregate(
+            {'$group': {'_id': '$trip'}}
+            ))
+    trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
+    pass_data = {
+        'trip_list': trip_list,
+        'the_place': c1,
+        'type': 'country',
+        'nav': '<a href="/country/?country_id=' + str(c1.id) + '">' + c1.name + '</a> -> Featured Trip'
+    }
+    template = loader.get_template('trip/featured-trip.html')
     return HttpResponse(template.render(pass_data, request))

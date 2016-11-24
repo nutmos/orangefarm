@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^c/(?P<city_name>\w+)/', include ([
         url(r'^$', views.city_name, name='city_name'),
         url(r'^popular-place/', views.popular_place, name='popular-place'),
+        url(r'^featured-trip/', views.featured_trip, name='featured-trip'),
     ]))
 ]
