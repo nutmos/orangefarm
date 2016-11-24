@@ -30,7 +30,7 @@ def index(request):
       }
       return HttpResponse(template.render(pass_data, request))
    except:
-		return HttpResponse(' id is not correct')
+	return HttpResponse(' id is not correct')
    return HttpResponse('This page is not complete')
     
 def process_index(request):
