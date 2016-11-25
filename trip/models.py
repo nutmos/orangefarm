@@ -22,6 +22,7 @@ class Trip(Document):
     travel_by = StringField()
     conditions = StringField()
     active = BooleanField()
+    photo = ImageField()
 
 class TripPlace(Document):
     place = ReferenceField('Place', reverse_delete_rule=CASCADE)

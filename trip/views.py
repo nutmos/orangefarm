@@ -283,6 +283,7 @@ def featured_trip(request):
     pass_data = {
         'trip_list': all_trip,
         'type': 'trip',
+        'not_show_header': True,
         }
     return HttpResponse(template.render(pass_data, request))
 
@@ -302,3 +303,37 @@ def process_booking(request):
         return HttpResponseRedirect('/booking?booking_id=' + str(booking.id))
     except:
         return HttpResponse("Error")
+
+def show_image(request):
+    if request.method == 'GET':
+        trip_id = request.GET.get('trip_id', '')
+        try:
+            c1 = Trip.objects.get(id=trip_id)
+            binary_img = c1.photo.read()
+            if binary_img == None:
+                return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+            return HttpResponse(binary_img, 'image/*')
+        except:
+            pass
+    return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+
+def handle_change_picture(request):
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
+            template = loader.get_template('notpermitted.html')
+            return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
+    if request.method == 'POST':
+        trip_id = request.POST.get('trip_id', '')
+        c1 = Trip.objects.get(id=trip_id)
+        c1.photo.delete()
+        image = request.FILES.get('image-upload', '')
+        c1.photo.put(image, content_type='image/*')
+        c1.save()
+        return HttpResponseRedirect('/trip/?trip_id=' + trip_id)
+    return HttpResponse("Error")
+

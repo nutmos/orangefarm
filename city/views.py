@@ -107,7 +107,7 @@ def index(request):
             c1 = City.objects.get(id=city_id)
             return HttpResponseRedirect('/city/c/'+c1.url_point_to)
         except:
-            return HttpResponse('1city id is not correct')
+            return HttpResponse('city id is not correct')
     return HttpResponse('This page is not complete')
 
 def edit(request):
@@ -257,7 +257,7 @@ def featured_trip(request, city_name):
         'trip_list': trip_list,
         'the_place': c1,
         'type': 'city',
-        'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(c1.id) + '">' + c1.name + '</a> Featured Trip'
+        'nav': '<a href="/country/?country_id=' + str(country1.id) + '">' + country1.name + '</a> -> <a href="/city/?city_id=' + str(c1.id) + '">' + c1.name + '</a> -> Featured Trip'
     }
     template = loader.get_template('trip/featured-trip.html')
     return HttpResponse(template.render(pass_data, request))

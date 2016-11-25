@@ -197,7 +197,7 @@ def show_image(request):
                 return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
             return HttpResponse(binary_img, 'image/*')
         except:
-            return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
+            pass
     return HttpResponseRedirect(static('pictures/Airplane-Wallpaper.jpg'))
 
 def show_city(request, country_name):

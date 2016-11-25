@@ -43,17 +43,9 @@
                 </div>
                 <div class="row">
                     <div class="large-4 columns">
-                        <div class="orbit" role="region" aria-label="Country Pictures" data-orbit>
-                                <ul class="orbit-container">
-                                    <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                                    <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-                                    {% for p in photo_list %}
-                                    <li class="orbit-slide">
-                                        <img class="orbit-image" src="/place/picture/?place_picture_id={{ p.id }}">
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
+                        <div class="row">
+                            <img src="/trip/picture/?trip_id={{ this_trip.id }}" />
+                        </div>
                     </div>
                     <div class="large-8 columns" style="padding:10px">
                         <h4>Highlight:</h4>
@@ -65,6 +57,9 @@
                     </div>
                 </div>
             </section>
+            <div class="row">
+            {% include 'upload-image-template.html' with form_action="/trip/handle-change-picture/" type="trip_id" type_id=this_trip.id %}
+            </div>
             <div class="row"style="padding:30px">
                 <div class="column">
                     <h4 style="text-align:left">Booking Info <a class="button" href="process-booking/?trip_id={{ this_trip.id }}">Book Now</a></h4>
