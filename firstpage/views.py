@@ -20,14 +20,15 @@ def index(request):
             {'$sample': {'size': 6}}
         ))
     for c in country_list: c['id'] = c.pop('_id')
-    city_list = list(City.objects.aggregate({
+    city_aggregate = list(City.objects.aggregate(
+        {'$sample': {'size': 6}},
+        {'$project': {'country': '$country'}}
+        ))
+    city_list = City.objects(id__in=[a['_id'] for a in city_aggregate])
+    place_aggregate = list(Place.objects.aggregate({
         '$sample': {'size': 6},
         }))
-    for c in city_list: c['id'] = c.pop('_id')
-    place_list = list(Place.objects.aggregate({
-        '$sample': {'size': 6},
-        }))
-    for p in place_list: p['id'] = p.pop('_id')
+    place_list = Place.objects(id__in=[a['_id'] for a in place_aggregate])
     trip_list = list(Trip.objects.aggregate({
         '$sample': {'size': 6},
         }))
