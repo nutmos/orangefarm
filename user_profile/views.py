@@ -14,14 +14,15 @@ def index(request):
         request.session.set_expiry(3600)
         template = loader.get_template('user_profile/index.html')
         booking = Booking.objects.filter(user=user_id)
-       # for o in booking:
-        pass_data = {'test': 'hello'}
-        pass_data += {'username': user1.username,
+        book = []
+        for o in booking:
+            book.append(o)
+        pass_data = {'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
             'name': user1.name,
             'user_id': user_id}
-        print pass_data
+        pass_data['book'] = book
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))

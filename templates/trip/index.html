@@ -11,10 +11,16 @@
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
 <style>
-    th, td {
-        border: 1px solid black;
+    td {
         text-align: center;
+        background-color: white;
         table-layout: auto;
+        border: 1px solid black;
+    }
+    th {
+        background-color: #6B7A8F;
+        color: white;
+        border: 1px solid black;
     }
     .tabs a, .tabs a:hover {
         color: #fff;
@@ -63,7 +69,7 @@
                 <div class="column">
                     <h4 style="text-align:left">Booking Info <a class="button" href="process-booking/?trip_id={{ this_trip.id }}">Book Now</a></h4>
                     <table align="center">
-                        <tr style="background-color:#6B7A8F;color:white">
+                        <tr>
                             <th>Seat Available</th>
                             <th>Date</th>
                             <th>Travel by</th>
