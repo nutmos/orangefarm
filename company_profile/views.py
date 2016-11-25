@@ -157,11 +157,11 @@ def process_edit_logo(request):
     if request.method == 'POST':
         company_id = request.POST.get('company_id', '')
         c1 = Company.objects.get(id=company_id)
-        c1.photo.delete()
+        c1.logo.delete()
         image = request.FILES.get('image-upload', '')
-        c1.photo.put(image, content_type='image/*')
+        c1.logo.put(image, content_type='image/*')
         c1.save()
-        return HttpResponseRedirect('/company/?company_id=' + city_id)
+        return HttpResponseRedirect('/company/?company_id=' + company_id)
     return HttpResponse("Error")
 
 def show_logo(request):
@@ -169,7 +169,7 @@ def show_logo(request):
         try:
             company_id = request.GET.get('company_id', '')
             c1 = Company.objects.get(id=company_id)
-            binary_img = c1.photo.read()
+            binary_img = c1.logo.read()
             if binary_img == None:
                 return HttpResponseRedirect('http://placehold.it/300x300')
             return HttpResponse(binary_img, 'image/*')

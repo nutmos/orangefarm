@@ -52,7 +52,7 @@ def process_add(request):
         description = request.GET.get('description', '')
         travel_by = request.GET.get('travel_by', '')
         conditions = request.GET.get('conditions', '')
-        c1 = Trip(name=name, company_id=company_id, price=price, start_date=start_date, end_date=end_date, max_people=max_people, remaining_people=remaining_people, highlight=highlight, description=description, travel_by=travel_by, conditions=conditions, active=True)
+        c1 = Trip(name=name, company_id=company_id, price=price, start_date=start_date, end_date=end_date, max_people=max_people, remaining_people=remaining_people, highlight=highlight, description=description, travel_by=travel_by, conditions=conditions, active=True, company=Company.objects.get(id=company_id))
         c1.save()
         return HttpResponseRedirect('/trip/?trip_id=' + str(c1.id))
     return HttpResponse('No GET Request')
