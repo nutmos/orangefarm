@@ -33,7 +33,7 @@
        <h3>Country</h3>
         <div class="row large-up-3 project-overlay-inset">
             {% for c in country_list %}
-            {% include 'thumbnail-template.html' with link_to="/country/?country_id=" object=c link_img="/country/picture/?country_id=" %}
+            {% include 'thumbnail-template.html' with link_to="/country/?country_id=" object=c link_img="/country/picture/?country_id=" display_class=1 %}
             {% endfor %}
         </div>
         <a href="/country/all/" style="color:black"><p style="text-align: right;">Show more</p></a>
@@ -42,7 +42,7 @@
         <h3>City</h3>
         <div class="row large-up-3 project-overlay-inset">
             {% for c in city_list %}
-            {% include 'thumbnail-template.html' with link_to="/city/?city_id=" object=c link_img="/city/picture/?city_id=" %}
+            {% include 'thumbnail-template.html' with link_to="/city/?city_id=" object=c link_img="/city/picture/?city_id=" display_class=2 %}
             {% endfor %}
         </div>
         <a href="/city/all/" style="color:black"><p style="text-align: right;">Show more</p></a>
@@ -51,7 +51,7 @@
         <h3>Place</h3>
         <div class="row large-up-3 project-overlay-inset">
             {% for c in place_list %}
-            {% include 'thumbnail-template.html' with link_to="/place/?place_id=" object=c link_img="/place/picture/?place_id=" %}
+            {% include 'thumbnail-template.html' with link_to="/place/?place_id=" object=c link_img="/place/picture/?place_id=" display_class=3 %}
             {% endfor %}
         </div>
         <a href="/place/all/" style="color:black"><p style="text-align: right;">Show more</p></a>

@@ -5,7 +5,7 @@
             <div class="overlay">
                 {% if display_class == 3 %}
                 <div class="overlay-text" style="color: white">{{ object.name }}<br>{{ object.city.name }}, {{object.city.country.name }}</div>
-                {% else if display_class == 2 %}
+                {% elif display_class == 2 %}
                 <div class="overlay-text" style="color: white">{{ object.name }}<br>{{ object.country.name }}</div>
                 {% else %}
                 <div class="overlay-text" style="color: white">{{ object.name }}</div>
