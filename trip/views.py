@@ -73,7 +73,6 @@ def index(request):
             if c1.active == False:
                 return HttpResponse('trip is not available')
             template = loader.get_template('trip/index.html')
-            company1 = Company.objects.get(id=c1.company_id)
             tripplace_list = list(TripPlace.objects.aggregate(
                 {'$match': {'trip' : c1.id }},
                     ))
@@ -84,11 +83,9 @@ def index(request):
                     {'$project': {'photos': 1, '_id': 0}},
                     {'$sample': {'size': 3}},
                 ))
-            print all_photos
             photo_list = [PlacePicture.objects.get(id=p['photos']) for p in all_photos]
             pass_data = {
                 'this_trip': c1,
-                'company_name': company1.name,
                 'access_edit': access_edit,
                 'place_list': place_list,
                 'photo_list': photo_list,
@@ -282,10 +279,12 @@ def process_delete_place(request):
 
 def featured_trip(request):
     all_trip = Trip.objects(active=True)
-    template = loader.get_template('trip/featured.html')
+    template = loader.get_template('trip/featured-trip.html')
     pass_data = {
-            'trip_list': all_trip,
-            }
+        'trip_list': all_trip,
+        'type': 'trip',
+        }
+    return HttpResponse(template.render(pass_data, request))
 
 def process_booking(request):
     try:

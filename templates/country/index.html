@@ -45,11 +45,7 @@
             <h3 style="margin-top: 2em;">Featured Trip</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for c in trip_list %}
-                <div class="row">
-                    <a href="/trip/?trip_id={{ c.id }}">
-                        {{ c.name }}
-                    </a>
-                </div>
+                {% include 'thumbnail-template.html' with object=c link_to="/trip/?trip_id=" link_img="/trip/picture/?trip_id=" display_class=1 %}
                 {% endfor %}
             </div>
             <a href="featured-trip" style="color:black"><p style="text-align: right;">Show more</p></a>

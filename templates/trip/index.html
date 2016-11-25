@@ -39,7 +39,7 @@
             <section>
                 <div class="row" style="padding:30px">
                     <h2> {{ this_trip.name }} </h2>
-                    <p>by <a href="/company/?company_id={{ this_trip.company_id }}">{{ company_name }}</a></p>
+                    <p>by <a href="/company/?company_id={{ this_trip.company.id }}">{{ this_trip.company.name }}</a></p>
                 </div>
                 <div class="row">
                     <div class="large-4 columns">

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href={% static "css/place/styles.css" %}>
 </head>
 <body>
-    {% include 'show-more-place-template.html' with background_url_path="/place/picture/?city_id=" object=the_place place_list=place_list empty_message="No city found." list_link_to="/city/?city_id=" list_link_img="/city/picture/?city_id=" header="All Cities" background_url_point_to="/place/?place_id=" not_show_header=True %}
+    {% include 'show-more-place-template.html' with background_url_path="/place/picture/?city_id=" object=the_place place_list=place_list empty_message="No city found." list_link_to="/city/?city_id=" list_link_img="/city/picture/?city_id=" header="All Cities" background_url_point_to="/place/?place_id=" not_show_header=True display_class=2 %}
     {% include 'footerbar.html' %}
 </body>
 </html>
