@@ -49,7 +49,7 @@ def process_add(request):
         description = request.GET.get('description', '')
         c1 = City(name=name, country_id=country_id, description=description, country=country1)
         c1.save()
-        c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_')
+        c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_'),replace('-', '_')
         c1.save()
         return HttpResponseRedirect('/city?city_id=' + str(c1.id))
     return HttpResponse('No GET Request')

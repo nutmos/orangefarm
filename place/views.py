@@ -42,7 +42,7 @@ def process_add(request):
         city1 = City.objects.get(id=city_id)
         c1 = Place(name=name, city_id=city_id, description=description, city=city1)
         c1.save()
-        c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_')
+        c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_').replace('-', '_')
         c1.save()
         return HttpResponseRedirect('/place?place_id=' + str(c1.id))
     return HttpResponse('No GET Request')

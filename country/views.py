@@ -37,7 +37,7 @@ def process_add(request):
         return HttpResponse(template.render({}, request))
     if request.method == 'GET':
         name = request.GET.get('name','')
-        url = name.lower().replace(' ', '_')
+        url = name.lower().replace(' ', '_').replace('-', '_')
         description = request.GET.get('description','')
         c1 = Country(name=name, description=description, url_point_to=url)
         c1.save()
