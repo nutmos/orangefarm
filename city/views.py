@@ -40,12 +40,14 @@ def process_add(request):
     if request.method == 'GET':
         name = request.GET.get('name', '')
         country_id = request.GET.get('country_id', '')
+        country1 = None
         try:
             co1 = Country.objects.get(id=country_id)
+            country1 = co1
         except:
             return HttpResponseRedirect('/city/add')
         description = request.GET.get('description', '')
-        c1 = City(name=name, country_id=country_id, description=description)
+        c1 = City(name=name, country_id=country_id, description=description, country=country1)
         c1.save()
         c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_')
         c1.save()
@@ -151,6 +153,7 @@ def process_edit(request):
             return HttpResponseRedirect('/city/edit/?city_id=' + city_id)
         country_id = request.GET.get('country_id', '')
         c1.country_id = country_id
+        c1.country = Country.objects.get(id=country_id)
         c1.description = request.GET.get('description', '')
         c1.save()
         return HttpResponseRedirect('/city?city_id=' + str(c1.id))

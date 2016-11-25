@@ -26,20 +26,21 @@ def add_place(request):
     return HttpResponse(template.render({'country_list': country_list}, request))
 
 def process_add(request):
-    if request.method == 'GET':
-        try:
-            user_id = request.session['user_id']
-            user1 = User.objects.get(id=user_id)
-            if user1.is_staff == False:
-                template = loader.get_template('notpermitted.html')
-                return HttpResponse(template.render({}, request))
-        except:
+    try:
+        user_id = request.session['user_id']
+        user1 = User.objects.get(id=user_id)
+        if user1.is_staff == False:
             template = loader.get_template('notpermitted.html')
             return HttpResponse(template.render({}, request))
+    except:
+        template = loader.get_template('notpermitted.html')
+        return HttpResponse(template.render({}, request))
+    if request.method == 'GET':
         name = request.GET.get('name', '')
         city_id = request.GET.get('city_id', '')
         description = request.GET.get('description', '')
-        c1 = Place(name=name, city_id=city_id, description=description)
+        city1 = City.objects.get(id=city_id)
+        c1 = Place(name=name, city_id=city_id, description=description, city=city1)
         c1.save()
         c1.url_point_to = str(c1.id)[-5:] + '_' + name.lower().replace(' ', '_')
         c1.save()
@@ -148,6 +149,7 @@ def process_edit(request):
         if new_city_id != c1.city_id:
             c1.city_id = new_city_id
             del c1.related[:]
+            c1.city = City.objects.get(id=new_city_id)
         c1.description = request.GET.get('description', '')
         c1.save()
         return HttpResponseRedirect('/place?place_id=' + str(c1.id))
