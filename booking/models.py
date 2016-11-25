@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from mongoengine import *
+from user_profile.models import *
 from trip.models import *
 from datetime import datetime
 

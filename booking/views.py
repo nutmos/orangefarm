@@ -89,11 +89,21 @@ def process_info(request):
       return HttpResponse(template.render({}, request))
    if request.method == 'GET':
       booking_id = request.GET.get('booking_id', '')
+      print booking_id
       booking = Booking.objects.get(id=booking_id)
-      #for i in range(1,int(booking.people)+1):
-         #title = request.GET.get('title', '')
-         #print 'title: '+title
-         #tourist = Tourist(booking=booking, title=title)
+      for i in range(1,int(booking.people)+1):
+         title = request.GET.get('title-'+str(i), '')
+         firstname = request.GET.get('firstname-'+str(i), '')
+         lastname = request.GET.get('lastname-'+str(i), '')
+         gender = request.GET.get('gender-'+str(i), '')
+         bday = request.GET.get('bday-' + str(i) ,'')
+         nation = request.GET.get('nation-'+str(i), '')
+         citizenid = request.GET.get('citizenid-'+str(i), '')
+         passportno = request.GET.get('passportno-'+str(i),'')
+         mobile = request.GET.get('mobile-'+str(i), '')
+         email = request.GET.get('email-'+str(i), '')
+         print title, firstname, lastname, gender
+         tourist = Tourist(booking=booking, title=title)
       return HttpResponse('id info is not correct')
    return HttpResponse('This page is not complete')
 
