@@ -7,8 +7,5 @@ from datetime import datetime
 
 
 class Checkbooking(Document):
-	user_id = StringField()
-	trip_id = StringField()
-	book_date = DateTimeField(default=datetime.now())
-	people = IntField()
+
 	status = StringField()

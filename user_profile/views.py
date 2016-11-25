@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine.django.auth import User as MongoUser
 from user_profile.models import *
 from django.template import loader
+from booking.models import *
 
 # Create your views here.
 
@@ -12,11 +13,16 @@ def index(request):
         user1 = User.objects.get(id=user_id)
         request.session.set_expiry(3600)
         template = loader.get_template('user_profile/index.html')
+        booking = Booking.objects.filter(user=user_id)
+        book = []
+        for o in booking:
+            book.append(o)
         pass_data = {'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
             'name': user1.name,
             'user_id': user_id}
+        pass_data['book'] = book
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
@@ -25,6 +31,7 @@ def index(request):
         return HttpResponse(template.render({}, request))
     except DoesNotExist:
         return HttpResponse('User Not Found')
+    return HttpResponse('noooooo')
 
 def other_user_profile(request, user=""):
     try:
@@ -97,7 +104,7 @@ def change_password(request):
                 if user1.check_password(password1):
                     user1.set_password(password2)
                     template = loader.get_template('user_profile/index.html')
-                    return HttpResponseRedirect('/profile/')
+                    return HttpResponse('Your password was successfully changed.')
                 else:
                     return HttpResponse('The current password was not correct')
             else:
