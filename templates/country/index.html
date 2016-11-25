@@ -18,7 +18,7 @@
             <h3>City</h3>
             <div class="row large-up-3 project-overlay-inset">
             {% for c in city_list %}
-            {% include 'thumbnail-template.html' with object=c link_to="/city/?city_id=" link_img="/city/picture/?city_id=" %}
+            {% include 'thumbnail-template.html' with object=c link_to="/city/?city_id=" link_img="/city/picture/?city_id=" display_class=2 %}
             {% endfor %}
             </div>
             <a href="city" style="color:black"><p style="text-align: right;">Show more</p></a>
@@ -27,7 +27,7 @@
             <h3 style="margin-top: 2em;">Popular Place</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in place_list %}
-                {% include 'thumbnail-template.html' with object=p link_to="/place/?place_id=" link_img="/place/picture/?place_id=" %}
+                {% include 'thumbnail-template.html' with object=p link_to="/place/?place_id=" link_img="/place/picture/?place_id=" display_class=3 %}
                 {% endfor %}
             </div>
             <a href="popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
@@ -36,7 +36,7 @@
             <h3 style="margin-top: 2em;">Other Country</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for c in country_list %}
-                {% include 'thumbnail-template.html' with object=c link_to="/country/?country_id=" link_img="/country/picture/?country_id=" %}
+                {% include 'thumbnail-template.html' with object=c link_to="/country/?country_id=" link_img="/country/picture/?country_id=" display_class=1 %}
                 {% endfor %}
             </div>
             <a href="/country/all" style="color:black"><p style="text-align: right;">Show more</p></a>

@@ -97,7 +97,7 @@ def change_password(request):
                 if user1.check_password(password1):
                     user1.set_password(password2)
                     template = loader.get_template('user_profile/index.html')
-                    return HttpResponse('Your password was successfully changed.')
+                    return HttpResponseRedirect('/profile/')
                 else:
                     return HttpResponse('The current password was not correct')
             else:

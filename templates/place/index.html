@@ -31,7 +31,7 @@
             <h3>Popular Place in {{ host_city.name }}</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in popular_place_list %}
-                {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p %}
+                {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p display_class=3 %}
                 {% endfor %}
             </div>
             <a href="/city/c/{{ host_city.url_point_to }}/popular-place" style="color:black"><p style="text-align: right;">Show more</p></a>
@@ -40,7 +40,7 @@
             <h3 style="margin-top: 2em;">Related</h3>
             <div class="row large-up-3 project-overlay-inset">
                 {% for p in related_place %}
-                {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p %}
+                {% include 'thumbnail-template.html' with link_to="/place/?place_id=" link_img="/place/picture/?place_id=" object=p display_class=3 %}
                 {% endfor %}
             </div>
             <a href="related" style="color:black"><p style="text-align: right;">Show more</p></a>

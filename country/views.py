@@ -67,18 +67,20 @@ def country_name(request, country_name):
     template = loader.get_template('country/index.html')
     city_list = City.objects(country_id=str(c1.id))
     city_list_id = [str(i.id) for i in city_list]
-    place_list= list(Place.objects.aggregate(
+    place_aggregate = list(Place.objects.aggregate(
         {'$match': {'city_id': {'$in': city_list_id}}},
         {'$sample': {'size': 3}},
+        {'$project': {'city': '$city'}},
     ))
-    for p in place_list: p['id'] = p.pop('_id')
-    city_list = list(City.objects.aggregate(
+    place_list = Place.objects(id__in=[p['_id'] for p in place_aggregate])
+    city_aggregate = list(City.objects.aggregate(
         {'$match': {'country_id': str(c1.id)}},
-        {'$sample': {'size': 3}}
+        {'$sample': {'size': 3}},
+        {'$project': {'country': '$country'}},
         ))
-    for c in city_list: c['id'] = c.pop('_id')
+    city_list = City.objects(id__in=[p['_id'] for p in city_aggregate])
     country_list = list(Country.objects.aggregate(
-            {'$sample': {'size': 3}}
+            {'$sample': {'size': 3}},
         ))
     for c in country_list: c['id'] = c.pop('_id')
     all_place = list(Place.objects.aggregate(

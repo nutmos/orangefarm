@@ -71,9 +71,12 @@ def place_name(request, place_name):
         template = loader.get_template('place/index.html')
         city1 = City.objects.get(id=c1.city_id)
         country1 = Country.objects.get(id=city1.country_id)
-        #popular_place_list = Place.objects(city_id=str(city1.id))
-        popular_place_list = list(Place.objects.aggregate({'$match': {'city_id': str(city1.id)}}, {'$sample': {'size': 3}}))
-        for p in popular_place_list : p['id'] = p.pop('_id')
+        popular_place_list_agg = list(Place.objects.aggregate(
+            {'$match': {'city_id': str(city1.id), '_id': {'$ne': c1.id}}},
+            {'$sample': {'size': 3}},
+            {'$project': {'city': '$city'}},
+            ))
+        popular_place_list = Place.objects(id__in=[a['_id'] for a in popular_place_list_agg])
         for p in c1.related:
             try:
                 Place.objects.get(id=str(p.id))
