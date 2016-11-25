@@ -19,15 +19,3 @@ def index(request):
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     template = loader.get_template('checkbooking/index.html')
-    return HttpResponse(template.render({}, request))
-
-#def process_index(request):
-#   	if request.method == 'GET':
-#      	try:
-#         	status = request.GET.get('status', '')
-#         	pass_data = {
-#         		'status': status
-#         	}
-#      		return HttpResponse(template.render(pass_data, request))
-#    	except:
-#   	return HttpResponse('no')

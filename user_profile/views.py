@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from mongoengine.django.auth import User as MongoUser
 from user_profile.models import *
 from django.template import loader
+from booking.models import *
 
 # Create your views here.
 
@@ -12,11 +13,15 @@ def index(request):
         user1 = User.objects.get(id=user_id)
         request.session.set_expiry(3600)
         template = loader.get_template('user_profile/index.html')
-        pass_data = {'username': user1.username,
+        booking = Booking.objects.filter(user=user_id)
+       # for o in booking:
+        pass_data = {'test': 'hello'}
+        pass_data += {'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
             'name': user1.name,
             'user_id': user_id}
+        print pass_data
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))
@@ -25,6 +30,7 @@ def index(request):
         return HttpResponse(template.render({}, request))
     except DoesNotExist:
         return HttpResponse('User Not Found')
+    return HttpResponse('noooooo')
 
 def other_user_profile(request, user=""):
     try:
