@@ -26,7 +26,7 @@
 </style>
 <body>
     {% include 'navbar.html' %}
-    <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
+    <input type='hidden' id='booking_id' name='booking_id' value="{{ booking_id }}">
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -60,9 +60,7 @@
     </section>
 
     <section>
-        <input type="hidden" name="trip_id" id="trip_id" value="{{ trip_id }}">
-        <input type="hidden" name="adult" id="adult" value="{{ adult }}">
-        <input type="hidden" name="children" id="children" value="{{ children }}">
+        <input type='hidden' id='booking_id' name='booking_id' value="{{ booking_id }}">
         <br>
         <div class="large-7 columns small-centered">
             <h4>Checking</h4>
@@ -152,10 +150,10 @@
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/info?trip_id={{trip_id}}&adult={{ adult }}&children={{children}}&people={{people}}">back</a>
+                <a class="expanded button" href="/booking/info?booking_id={{ booking_id }}">back</a>
             </div>
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/payment?trip_id={{ trip_id }}&adult={{ adult }}&children={{children}}&people={{people}}">Next</a>
+                <a class="expanded button" href="/booking/payment?booking_id={{ booking_id }}">Next</a>
             </div>
         </div> 
     </div>

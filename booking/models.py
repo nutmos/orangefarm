@@ -8,6 +8,19 @@ from datetime import datetime
 
 # Create your models here.
 
+class Tourist(Document):
+	booking = ReferenceField('Booking', reverse_delete_rule=CASCADE)
+	title = StringField()
+	firstname = StringField()
+	lastname = StringField()
+	gender = StringField()
+	bday = DateTimeField(default=datetime.now())
+	nation = StringField()
+	citizenid = StringField()
+	passportno = StringField()
+	mobile = StringField()
+	email = StringField()
+
 class Booking(Document):
 	trip = ReferenceField('Trip', reverse_delete_rule=CASCADE)
 	user = ReferenceField('User', reverse_delete_rule=CASCADE)
@@ -16,9 +29,6 @@ class Booking(Document):
 	people = IntField()
 	adult = IntField()
 	children = IntField()
-		
-class Tourist(Document):
-	booking = ReferenceField('Booking', reverse_delete_rule=CASCADE)
-	title = StringField()
-	firstname = StringField()
-	lastname = StringField()
+	member = ListField(ReferenceField('Tourist'))
+	total_price = IntField()
+	status = BooleanField()
