@@ -70,31 +70,30 @@ def country_name(request, country_name):
     place_aggregate = list(Place.objects.aggregate(
         {'$match': {'city_id': {'$in': city_list_id}}},
         {'$sample': {'size': 3}},
-        {'$project': {'city': '$city'}},
+        {'$project': {'city': 1}},
     ))
     place_list = Place.objects(id__in=[p['_id'] for p in place_aggregate])
     city_aggregate = list(City.objects.aggregate(
-        {'$match': {'country_id': str(c1.id)}},
+        {'$match': {'country': c1.id}},
         {'$sample': {'size': 3}},
-        {'$project': {'country': '$country'}},
-        ))
+        {'$project': {'country': 1}},
+    ))
     city_list = City.objects(id__in=[p['_id'] for p in city_aggregate])
     country_list = list(Country.objects.aggregate(
-            {'$sample': {'size': 3}},
-        ))
+        {'$match': {'_id': {'$ne': c1.id}}},
+        {'$sample': {'size': 3}},
+    ))
     for c in country_list: c['id'] = c.pop('_id')
-    all_place = list(Place.objects.aggregate(
-            {'$match': {'city_id': {'$in': city_list_id}}}
-            ))
-    all_place_id = [a['_id'] for a in all_place]
+    all_place = Place.objects(city_id__in=city_list_id)
+    all_place_id = [a.id for a in all_place]
     tripplace_list = list(TripPlace.objects.aggregate(
-            {'$match': {'place': {'$in': all_place_id}}},
-            {'$group': {'_id': '$trip'}},
-            {'$sample': {'size': 3}},
-            ))
+        {'$match': {'place': {'$in': all_place_id}}},
+        {'$group': {'_id': '$trip'}},
+        {'$sample': {'size': 3}},
+        ))
     trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
     pass_data = {
-            'this_country': c1,
+        'this_country': c1,
         'access_edit': access_edit,
         'city_list': city_list,
         'country_list': country_list,

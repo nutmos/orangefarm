@@ -68,26 +68,24 @@ def city_name(request,city_name):
         template = loader.get_template('city/index.html')
         country1 = Country.objects.get(id=c1.country_id)
         other_city_aggregate = list(City.objects.aggregate(
-            {'$match': {'country_id': str(country1.id)}},
+            {'$match': {'country': country1.id, '_id': {'$ne': c1.id}}},
             {'$sample': {'size': 3}},
-            {'$project': {'country': '$country'}},
+            {'$project': {'country': 1}},
             ))
         other_city = City.objects(id__in=[a['_id'] for a in other_city_aggregate])
         popular_place_agg = list(Place.objects.aggregate(
-            {'$match': {'city_id': str(c1.id)}},
+            {'$match': {'city': c1.id}},
             {'$sample': {'size': 3}},
-            {'$project': {'city': '$city'}},
+            {'$project': {'city': 1}},
             ))
         popular_place = Place.objects(id__in=[a['_id'] for a in popular_place_agg])
-        all_place = list(Place.objects.aggregate(
-                {'$match': {'city_id': str(c1.id)}}
-                ))
-        all_place_id = [a['_id'] for a in all_place]
+        all_place = Place.objects(city=c1)
+        all_place_id = [a.id for a in all_place]
         tripplace_list = list(TripPlace.objects.aggregate(
-                {'$match': {'place': {'$in': all_place_id}}},
-                {'$group': {'_id': '$trip'}},
-                {'$sample': {'size': 3}},
-                ))
+            {'$match': {'place': {'$in': all_place_id}}},
+            {'$group': {'_id': '$trip'}},
+            {'$sample': {'size': 3}},
+            ))
         trip_list = [Trip.objects.get(id=a['_id']) for a in tripplace_list]
         pass_data = {
             'this_city': c1,
