@@ -59,44 +59,31 @@
         <input type='hidden' id='booking_id' name='booking_id' value="{{ booking_id }}">
 
         <br>
+       
+
         <div class="large-7 columns small-centered">
-            <table>
-                <thead>
-                    <tr>
-                        <th colspan="3">Package Tour</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td>Name of Package Tour:</td>
-                        <td width="50%">{{ name }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Company:</td>
-                        <td>{{ company_name }}</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Total Price:</td>
-                        <td>{{ total_price }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <table>
+            <h4 style="text-align: center;">Thank You!</h4>
+            <h5 style="text-align: center;">We will confirm your payment within 24-48 hours(exclude weekends or holidays)</h5>
+        </table>
         </div>
         <br>
     </section>
 
     <div class="row">
-        <div class="large-7 columns small-centered">
-            <div class="large-4 columns">
-                <a class="expanded button" href="/booking/checking?booking_id={{ booking_id }}">Back</a>
+        <div class="large-6 columns small-centered">
+            <div class="large-12 columns center">
+                <a class="expanded button" href="/">OK</a>
             </div>
-            <div class="large-4 columns"></div>
         </div>
     </div>
-
-    {% include 'footerbar.html' %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% include 'footerbar.html' %}
 </body>
 </html>

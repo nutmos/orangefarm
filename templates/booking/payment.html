@@ -90,19 +90,19 @@
             <table>
                 <thead>
                     <tr>
-                        <th colspan="3">ช่องทาง: ชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล</th>
+                        <th colspan="3">Payment Method: ชำระโดยการโอนเงิน/โดยตรงหน้าเคาท์เตอร์/บิล</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr><td><td><td></td></td></td></tr>
                     <tr>
-                        <td width="25%"></td>
-                        <td><a class="expanded button" href="">ชำระ โดยการโอนเงิน/Bill PAYMENT ทุกช่องทาง</a></td>
-                        <td width="25%"></td>
+                        <td></td>
+                        <td><img src="/static/pictures/bank.png"></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><a class="expanded button" href="">ชำระ โดยการชำระที่ธนาคารโดยตรง</a></td>
+                        <td><a class="button" onclick="handle_click()"" style="margin-left: 18em">ชำระ โดยการชำระที่ธนาคารโดยตรง</a></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -117,12 +117,23 @@
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/checking?booking_id={{ booking_id }}">Back</a>
+                <a class="expanded button" href="/booking/checking?booking_id={{ booking_id }}" style="margin-left: 14em">Back</a>
             </div>
-            <div class="large-4 columns"></div>
         </div>
     </div>
 
     {% include 'footerbar.html' %}
+    <script>
+        function handle_click() {
+            var a = parseInt({{people}});
+            var b = parseInt({{remaining_people}});
+            if( a > b ){
+                alert("Over Seat Available");
+            }
+            else{
+                window.location.href = "/booking/process-payment?booking_id={{ booking_id }}";
+            }
+        }
+    </script>
 </body>
 </html>

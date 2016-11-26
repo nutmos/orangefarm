@@ -435,3 +435,43 @@ def featured_trip(request, place_name):
     }
     template = loader.get_template('trip/featured-trip.html')
     return HttpResponse(template.render(pass_data, request))
+
+def add_review(request):
+    user_id = request.session['user_id']
+    user = User.objects.get(id=user_id)
+    comment = request.GET.get('comment', '')
+    rating = request.GET.get('rating', '')
+    user = User.objects.get(id=user_id)
+    place_id = request.GET.get('place_id', '')
+    place = Place.objects.get(id=place_id)
+    try:
+        a = ReviewPlace(comment=comment, user=user, rating=rating, place=place)
+        a.save()
+        return HttpResponseRedirect('/place/?place_id=' + str(place.id))
+    except:
+        return HttpResponse('Invalid Data')
+    return HttpResponse("Invalid Data")
+
+def delete_review(request):
+    user_id = request.session['user_id']
+    review_id = request.GET.get('review_id','')
+    review = ReviewPlace.objects.get(id=review_id)
+    if str(review.user.id) == user_id:
+	try:
+            review.delete()
+            return HttpResponse('Delete Complete')
+        except DoesNotExist:
+            return HttpResponse('Wrong Key')
+    return HttpResponse("Invalid Data")
+        
+
+def edit_review(request):
+    user_id = request.session['user_id']
+    review_id = request.GET.get('review_id','')
+    review = ReviewPlace.objects.get(id=review_id)
+    if str(review.user.id) == user_id:
+	review.comment = request.GET.get('comment', '')
+        review.rating = request.GET.get('rating', '')
+	review.save()
+        return HttpResponseRedirect('/place/?place_id=' + str(review.place.id))
+    return HttpResponse("Invalid Data")
