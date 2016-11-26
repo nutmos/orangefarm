@@ -3,41 +3,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ username }}</title>
+    <title>Check Booking</title>
     {% include 'essential.html' %}
     <link rel="stylesheet" href={% static "css/user_profile/styles.css" %}>
 </head>
+<style>
+    td {
+        text-align: center;
+        table-layout: auto;
+    }
+    th {
+        background-color: #6B7A8F;
+        color: white;
+    }
+</style>
 <body>
     {% include 'navbar.html' %}
-    <div class="large-10 columns small-centered">
+    <br><br>
+    <div class="large-11 columns small-centered">
+        <h4> Check Booking </h4>
         		<table align="center">
                 	<tr style="background-color:#6B7A8F;color:white">
-                        <th>Booking ID</th>
-                        <th>User Id</th>
-                        <th>User Name</th>
+                        <th>Username</th>
                         <th>Trip Name</th>
                         <th>Company</th>
                         <th>Date of Booking</th>
-                        <th>Total booking people</th>
+                        <th>Total people</th>
                         <th>Total Price</th>
                         <th>Status</th>
+                        <th>Payment</th>
                     </tr>
+                    {% for b in book %}
                     <tr>
-                        <td>{{ booking_id }}</td>
+                        <td>{{ b.user.username }}</td>
+                        <td>{{ b.trip.name }}</td>
+                        <td>{{ b.company_name }}</td>
+                        <td>{{ b.book_date }}</td>
+                        <td>{{ b.people }}</td>
+                        <td>{{ b.total_price }} THB</td>
+                        {% if b.status == True %}
+                        <td>Confirm</td>
                         <td></td>
-                        <td></td>
-                        <td>{{ trip_name }}</td>
-                        <td>{{ company_name }}</td>
-                        <td>{{ book_date }}</td>
-                        <td>{{ people }}</td>
-                        <td>{{ price }} THB</td>
+                        {% else %}
+                        <td>OnGoing</td>
                         <td>
-                            <select name="status" id="status"style="height:35px; width:90px">
-                                <option value="Complete">Complete</option>
-                                <option value="OnGoing" selected="selected" >OnGoing</option>             
-                            </select>
+                            <a class="button" href="/checkbooking/process_confirm/?booking_id={{ b.id }}">Confirm</a>
                         </td>
-                    </tr>
+                        {% endif %}
+                    {% endfor %}
             	</table>
 		</div>
 </body>

@@ -169,3 +169,7 @@ def payment(request):
    except:
       return HttpResponse(' id is not correct')
    return HttpResponse('This page is not complete')
+
+def finish(request):
+   template = loader.get_template('booking/finish.html')
+   return HttpResponse(template.render({'foo': 'bar'}, request))

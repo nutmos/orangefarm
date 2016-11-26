@@ -17,12 +17,14 @@ def index(request):
         book = []
         for o in booking:
             book.append(o)
-        pass_data = {'username': user1.username,
+        pass_data = {
+            'username': user1.username,
             'email': user1.email,
             'bio': user1.bio,
             'name': user1.name,
-            'user_id': user_id}
-        pass_data['book'] = book
+            'user_id': user_id,
+            'book': book
+            }
         if user1.email == None:
             pass_data['email'] = ''
         return HttpResponse(template.render(pass_data, request))

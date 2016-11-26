@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^process-info/', views.process_info, name='process-info'),
     url(r'^checking/', views.checking, name='checking'),
     url(r'^payment/', views.payment, name='payment'),
+    url(r'^finish/', views.finish, name='finish')
 ]
