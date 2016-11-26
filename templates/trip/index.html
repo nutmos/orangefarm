@@ -68,12 +68,14 @@
                     <table align="center">
                         <tr>
                             <th>Seat Available</th>
+                            <th>Seat Maximun</th>
                             <th>Date</th>
                             <th>Travel by</th>
                             <th>Price</th>
                         </tr>
                         <tr>
                             <td>{{ this_trip.remaining_people }}</td>
+                            <td>{{ this_trip.max_people }}
                             <td>{{ this_trip.start_date }} - {{ this_trip.end_date }}</td>
                             <td>{{ this_trip.travel_by }}</td>
                             <td>{{ this_trip.price }} THB</td>
