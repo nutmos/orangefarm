@@ -30,6 +30,7 @@ def index(request):
                 'review': review,
                 'username' : user1,
                 'all_trip': com_trip,
+                'count': '0',
                 }, request))
     except:
         return HttpResponse('The page does not complete')

@@ -60,7 +60,7 @@
                 </div>
             </div>
             {% if com1.photos %}
-            <div class="orbit" role="region" aria-label="Country Pictures" data-orbit style="margin-top: 2em;" data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
+            <div class="orbit" role="region" aria-label="Country Pictures" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
                   <ul class="orbit-container">
                       <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
                       <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
@@ -71,52 +71,40 @@
                       {% endfor %}
                   </ul>
             </div>
-            {% else %}
-            <div class="orbit" role="region" aria-label="Country Pictures" data-orbit style="margin-top: 2em;">
-                  <ul class="orbit-container">
-                      <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                      <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-                      <li class="is-active orbit-slide">
-                          <img class="orbit-image" src={% static "pictures/thailand-grand-palace.jpg" %} alt="Space">
-                          <figcaption class="orbit-caption">Grand Palace.</figcaption>
-                      </li>
-                      <li class="orbit-slide">
-                          <img class="orbit-image" src={% static "pictures/pattaya.jpg" %}>
-                           <figcaption class="orbit-caption">Pattaya</figcaption>
-                      </li>
-                      <li class="orbit-slide">
-                          <img class="orbit-image" src={% static "pictures/pai.jpg" %} alt="Space">
-                          <figcaption class="orbit-caption">Pai</figcaption>
-                      </li>
-                      <li class="orbit-slide">
-                          <img class="orbit-image" src={% static "pictures/plearn-wan.jpg" %} alt="Space">
-                          <figcaption class="orbit-caption">Plearn Wan</figcaption>
-                      </li>
-                  </ul>
-                  
-            </div>
             {% endif %}
             {% if allow_edit %}
             {% include 'upload-image-template.html' with form_action="/company/process-add-photo/" type="company_id" type_id=com1.id %}
             {% endif %}
             <div class="row">
-                <br>
-                <br>
-                <br>
+                <h3 style="margin-top: 2em;">Featured Trip</h3>
+                {% if all_trip %}
+                <div class="row large-up-3 project-overlay-inset">
+                {% for t in all_trip %}
+                    {% include 'thumbnail-template.html' with link_to="/trip/?trip_id=" link_img="/trip/picture/?trip_id=" object=t display_class=1 %}
+                {% endfor %}
+                </div>
+                <a href="featured-trip/?company_id={{ com1.id }}" style="color:black"><p style="text-align: right;">Show more</p></a>
+                {% else %}
+                No trip found.
+                {% endif %}
+            </div>
+            <div class="row">
                 <h4>Review</h4>
             </div>
             <div class="row">
                 {% for r in review %}
                     <div class="box04_head">
-                        <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #b</h5>
+                        <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #{{ forloop.counter }}</h5>
                     </div>
                     <div class="box04_page" style="margin-left: 2em ; margin-right: 2em; margin-top: 2em;">
                         <p>{{r.comment}}</p>
-                        <p style="float: right">{{username}} | {{r.timestamp}}</p>
+                        <p style="float: right"><a href="/profile/user/{{r.user.username}}">{{r.user.username}}</a> | {{r.timestamp}}</p>
                         <div style="float: right;margin-right:1em">
+                            {% with count=''|center:r.rating %}
+                            {% for i in count %}
                             <div class="column small-1" style="float: right"><label class="star"></label></div>
-                            <div class="column small-1" style="float: right"><label class="star"></label></div>
-                            <div class="column small-1" style="float: right"><label class="star"></label></div>
+                            {% endfor %}
+                            {% endwith %}
                         </div>
                         <br><br>
                     </div>
