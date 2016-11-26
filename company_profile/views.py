@@ -1,32 +1,38 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from models import *
 from user_profile.models import *
+from trip.models import *
 
 # Create your views here.
 
 def index(request):
-    allow_edit = True
     try:
+        allow_edit = True
         user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
-        if user1.is_staff == False:
+        try:
+            if user1.is_staff == False:
+                allow_edit = False
+        except:
             allow_edit = False
+        if request.method == 'GET':
+            com_id = request.GET.get('company_id', '')
+            com1 = Company.objects.get(id=com_id)
+            com_trip = Trip.objects(company=com1, active=True).limit(3)
+            template = loader.get_template('company_profile/index.html')
+            review = ReviewCompany.objects(company=com1)
+            return HttpResponse(template.render({
+                'com1': com1,
+                'allow_edit': allow_edit,
+                'review': review,
+                'username' : user1,
+                'all_trip': com_trip,
+                }, request))
     except:
-        allow_edit = False
-    if request.method == 'GET':
-        com_id = request.GET.get('company_id', '')
-        com1 = Company.objects.get(id=com_id)
-        template = loader.get_template('company_profile/index.html')
-        review = ReviewCompany.objects(company=com1)
-        return HttpResponse(template.render({
-            'com1': com1,
-            'allow_edit': allow_edit,
-            'review': review,
-            'username' : user1,
-            }, request))
-    return HttpResponse('The page does not complete')
+        return HttpResponse('The page does not complete')
 
 def add(request):
     try:
@@ -216,3 +222,19 @@ def edit_review(request):
     if str(review.user.id) == user_id:
 	review.comment = request.GET.get('comment', '')
         review.rating = request.GET.get('rating', '')
+
+def featured_trip(request):
+    if request.method == 'GET':
+        company_id = request.GET.get('company_id','')
+        com1 = Company.objects.get(id=company_id)
+        all_trip = Trip.objects(company=com1, active=True)
+        pass_data = {
+            'trip_list': all_trip,
+            'the_place': com1,
+            'type': 'company',
+            'nav': '<a href="/company/?company_id=' + str(com1.id) + '">' + com1.name + '</a> -> Featured Trip',
+        }
+        template = loader.get_template('trip/featured-trip.html')
+        return HttpResponse(template.render(pass_data, request))
+    return HttpResponse("No Request")
+
