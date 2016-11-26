@@ -1,8 +1,21 @@
 {% load static %}
 {% include 'jquery-essential.html' %}
-<footer class="footer" style="background-color: orange; padding: 7px;">
-    <img style="width: 60px; height: auto;" src={% static 'logo/orange-farm-logo-white-transparent.png' %}/>
-    <div class="top-bar-right align-self-middle">
-        <a href="/aboutus/">About us</a>
+<footer class="footer-container" style="background-color: #6b7a8f; color: white;">
+    <div class="footer large-10 columns small-centered" style="background-color: 6b7a8f; padding: 2em;">
+        <div class="row" style="margin-bottom: 2em;">
+            <div class="large-8 columns">
+                <div class="row">
+                    <img style="height: 60px; margin-top: 1em; margin-bottom: 1em;" src="{% static 'logo/LOGO2-Transparent-white.png' %}"/>
+                </div>
+                <div class="row">
+                    Trip Finder is developed by Orange Farm<br>
+                    If you want to know more about company, please visit <a href="/aboutus/">About Us</a>.
+                </div>
+            </div>
+            <div class="large-4 columns">
+                © 2016 Orange Farm Co.,Ltd<br>
+                All Rights Reserved
+            </div>
+        </div>
     </div>
 </footer>

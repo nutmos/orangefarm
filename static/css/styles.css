@@ -36,3 +36,7 @@ nav a, nav a:hover, footer a, footer a:hover {
     text-decoration: none;
     color: white;
 }
+
+footer .footer .row .columns .row a:hover {
+    text-decoration: underline;
+}
