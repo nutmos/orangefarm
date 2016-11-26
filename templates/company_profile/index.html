@@ -10,32 +10,23 @@
     <link rel="stylesheet" href={% static "css/styles.css" %}>
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 </head>
 <style>
-.box04_head {
-    background: #687A8F;
-    color: white;
-}
-.orbit-image{
-    width: 100%;
-    height: 500px;
-}
-.rating { 
-  border: none;
-  float: right;
-   color: #ddd; 
-}
-.rating > label:before { 
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: FontAwesome;
-  display: inline-block;
-  content: "\f005";
-}
-.rating > label { 
-  color: #ddd; 
- float: right; 
-}
+    .box04_head {
+        background: #687A8F;
+        color: white;
+    }
+    .orbit-image{
+        width: 100%;
+        height: 500px;
+    }
+    
+    label.star:before {
+        content: '\f005';
+        font-family: FontAwesome;
+        color: orange;
+    }
 </style>
 <body>
     {% include "navbar.html" %}
@@ -120,16 +111,13 @@
                         <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #b</h5>
                     </div>
                     <div class="box04_page" style="margin-left: 2em ; margin-right: 2em; margin-top: 2em;">
-
-                    <fieldset class="rating">
-                        <label class = "full" for="star5" ></label>
-                        <label class = "full" for="star4" ></label>
-                        <label class = "full" for="star3" ></label>
-                        <label class = "full" for="star2" ></label>
-                        <label class = "full" for="star1" ></label>
-                    </fieldset>
                         <p>{{r.comment}}</p>
                         <p style="float: right">{{username}} | {{r.timestamp}}</p>
+                        <div style="float: right;margin-right:1em">
+                            <div class="column small-1" style="float: right"><label class="star"></label></div>
+                            <div class="column small-1" style="float: right"><label class="star"></label></div>
+                            <div class="column small-1" style="float: right"><label class="star"></label></div>
+                        </div>
                         <br><br>
                     </div>
                 {% endfor %}
