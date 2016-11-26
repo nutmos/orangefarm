@@ -216,3 +216,6 @@ def edit_review(request):
     if str(review.user.id) == user_id:
 	review.comment = request.GET.get('comment', '')
         review.rating = request.GET.get('rating', '')
+	review.save()
+        return HttpResponseRedirect('/company/?company_id=' + str(review.company.id))
+    return HttpResponse("Invalid Data")
