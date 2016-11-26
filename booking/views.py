@@ -108,7 +108,7 @@ def process_info(request):
          mobile = request.GET.get('mobile-'+str(i), '')
          email = request.GET.get('email-'+str(i), '')
          print title, firstname, lastname, gender
-         tourist = Tourist(booking=booking, title=title, firstname=firstname, lastname=lastname, gender=gender, bday=bday, nation=nation, citizenid=citizenid, passportno=passportno, mobile=mobile, email=email)
+         tourist = Tourist(title=title, firstname=firstname, lastname=lastname, gender=gender, bday=bday, nation=nation, citizenid=citizenid, passportno=passportno, mobile=mobile, email=email)
          tourist.save()
          Booking.objects(id=booking_id).update_one(push__member=tourist)
       return HttpResponseRedirect('/booking/checking?booking_id=' + str(booking.id))
@@ -126,24 +126,14 @@ def checking(request):
       booking_id = request.GET.get('booking_id', '')
       booking = Booking.objects.get(id=booking_id)
       trip1 = booking.trip
-      company1 = Company.objects.get(id=trip1.company_id)
+      company1 = trip1.company
       people = int(booking.people)
       total_price = people * int(trip1.price)
       booking.total_price = total_price
       booking.save()
       pass_data = {
-         'booking_id': booking.id,
-         'name': trip1.name,
-         'company_name': company1.name,
-         'start_date': trip1.start_date,
-         'end_date': trip1.end_date,
-         'travel_by': trip1.travel_by,
-         'remaining_people': trip1.remaining_people,
-         'price': trip1.price,
-         'adult': adult,
-         'children': children,
-         'total_price': total_price,
-         'people': people
+        'this_booking': booking,
+        'total_price': total_price,
       }
       return HttpResponse(template.render(pass_data, request))
    except:

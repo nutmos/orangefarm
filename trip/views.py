@@ -10,7 +10,7 @@ from user_profile.models import *
 from company_profile.models import *
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.http import JsonResponse
-
+from booking.models import *
 
 # Create your views here.
 

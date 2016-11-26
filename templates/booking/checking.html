@@ -26,7 +26,7 @@
 </style>
 <body>
     {% include 'navbar.html' %}
-    <input type='hidden' id='booking_id' name='booking_id' value="{{ booking_id }}">
+    <input type='hidden' id='booking_id' name='booking_id' value="{{ this_booking.id }}">
     <section>
         <div class="large-6 columns small-centered">
             <div class="progress">
@@ -60,7 +60,7 @@
     </section>
 
     <section>
-        <input type='hidden' id='booking_id' name='booking_id' value="{{ booking_id }}">
+        <input type='hidden' id='booking_id' name='booking_id' value="{{ this_booking.id }}">
         <br>
         <div class="large-7 columns small-centered">
             <h4>Checking</h4>
@@ -74,27 +74,27 @@
                     <tr>
                         <td width="10%"></td>
                         <td>Name of Package Tour:</td>
-                        <td width="50%">{{ name }}</td>
+                        <td width="50%">{{ this_booking.trip.name }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Company:</td>
-                        <td>{{ company_name }}</td>
+                        <td>{{ this_booking.trip.company.name }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Depart date:</td>
-                        <td>{{ start_date }}</td>
+                        <td>{{ this_booking.trip.start_date }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Return date:</td>
-                        <td>{{ end_date }}</td>
+                        <td>{{ this_booking.trip.end_date }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Travel by:</td>
-                        <td>{{ travel_by }}</td>
+                        <td>{{ this_booking.trip.travel_by }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -111,12 +111,12 @@
                     <tr>
                         <td width="10%"></td>
                         <td>Adult:</td>
-                        <td width="50%">{{ adult }}</td>
+                        <td width="50%">{{ this_booking.adult }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Children:</td>
-                        <td>{{ children }}</td>
+                        <td>{{ this_booking.children }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -137,9 +137,9 @@
                     <th>Total Price</th>
                 </tr>
                 <tr text-align="center">
-                    <td style="text-align:center">{{ name }}</td>
-                    <td style="text-align:center">{{ price }} THB</td>
-                    <td style="text-align:center">{{ people }}</td>
+                    <td style="text-align:center">{{ this_booking.trip.name }}</td>
+                    <td style="text-align:center">{{ this_booking.trip.price }} THB</td>
+                    <td style="text-align:center">{{ this_booking.people }}</td>
                     <td style="text-align:center">{{ total_price }} THB</td>
                 </tr>
             </table>
@@ -150,10 +150,10 @@
     <div class="row">
         <div class="large-7 columns small-centered">
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/info?booking_id={{ booking_id }}">back</a>
+                <a class="expanded button" href="/booking/info?booking_id={{ this_booking.id }}">Back</a>
             </div>
             <div class="large-4 columns">
-                <a class="expanded button" href="/booking/payment?booking_id={{ booking_id }}">Next</a>
+                <a class="expanded button" href="/booking/payment?booking_id={{ this_booking.id }}">Confirm</a>
             </div>
         </div> 
     </div>

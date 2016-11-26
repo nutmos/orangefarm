@@ -9,7 +9,6 @@ from datetime import datetime
 # Create your models here.
 
 class Tourist(Document):
-	booking = ReferenceField('Booking', reverse_delete_rule=CASCADE)
 	title = StringField()
 	firstname = StringField()
 	lastname = StringField()
