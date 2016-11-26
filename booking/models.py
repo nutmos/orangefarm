@@ -30,4 +30,5 @@ class Booking(Document):
 	children = IntField()
 	member = ListField(ReferenceField('Tourist'))
 	total_price = IntField()
-	status = BooleanField()
+	status = BooleanField(default='False')
+	confirm = BooleanField(default='False')
