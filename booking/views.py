@@ -51,6 +51,7 @@ def process_index(request):
          booking.children = children
          booking.people = people
          booking.status = False
+         booking.confirm = False
          booking.save()
          #trip1.remaining_people -= people
          return HttpResponseRedirect('/booking/info?booking_id=' + str(booking.id))
@@ -73,6 +74,7 @@ def info(request):
       p = []
       for i in range(1,int(booking.people)+1): p.append(i)
       pass_data = {
+         'name': booking.trip.name,
          'booking_id': booking.id,
          'p': p
       }
