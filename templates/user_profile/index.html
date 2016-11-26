@@ -86,8 +86,12 @@
                         <td>{{ b.company_name }}</td>
                         <td>{{ b.book_date }}</td>
                         <td>{{ b.people }}</td>
-                        <td>{{ price }} THB</td>
-                        <td>{{ status }}</td>
+                        <td>{{ b.total_price }} THB</td>
+                        {% if {{b.status}} == True %}
+                        <td>Confirm</td>
+                        {% else %}
+                        <td>Not pay</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </table>
