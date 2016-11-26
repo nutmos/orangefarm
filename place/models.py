@@ -4,6 +4,7 @@ from django.db import models
 from mongoengine import *
 from city.models import *
 
+
 # Create your models here.
 
 class PlacePicture(Document):
@@ -17,3 +18,5 @@ class Place(Document):
     photos = ListField(ReferenceField('PlacePicture'))
     related = ListField(ReferenceField('self'))
     url_point_to = StringField(unique=True)
+
+
