@@ -82,8 +82,8 @@
                 </tr>
                 {% for b in book %}
                     <tr>
-                        <td>{{ b.trip.name }}</td>
-                        <td>{{ b.company_name }}</td>
+                        <td><a href="/trip/?trip_id={{ b.trip.id }}">{{ b.trip.name }}</a></td>
+                        <td><a href="/company/?company_id={{ b.trip.company.id }}">{{ b.company_name }}</a></td>
                         <td>{{ b.book_date }}</td>
                         <td>{{ b.people }}</td>
                         <td>{{ b.total_price }} THB</td>
