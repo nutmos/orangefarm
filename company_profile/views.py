@@ -195,29 +195,3 @@ def add_review(request):
     except:
         return HttpResponse('Invalid Data')
     return HttpResponse("Invalid Data")
-
-def delete_review(request):
-    user_id = request.session['user_id']
-    review_id = request.GET.get('review_id','')
-    review = ReviewCompany.objects.get(id=review_id)
-    if str(review.user.id) == user_id:
-	try:
-            review.delete()
-            return HttpResponse('Delete Complete')
-        except DoesNotExist:
-            return HttpResponse('Wrong Key')
-    return HttpResponse("Invalid Data")
-        
-
-def edit_review(request):
-    user_id = request.session['user_id']
-    review_id = request.GET.get('review_id','')
-    review = ReviewCompany.objects.get(id=review_id)
-    if str(review.user.id) == user_id:
-	review.comment = request.GET.get('comment', '')
-        review.rating = request.GET.get('rating', '')
-	review.save()
-        return HttpResponseRedirect('/company/?company_id=' + str(company.id))
-    return HttpResponse("Invalid Data")
-
-
