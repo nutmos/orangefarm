@@ -10,6 +10,26 @@
     <link rel="stylesheet" href={% static "css/styles.css" %}>
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
+
+<style>
+.box06 {
+    width: 180px;
+    height: 33px;
+    float: right;
+    background: white repeat;
+}
+.box04 {
+    width: 835px;
+    border-radius: 6px 6px 0 0;
+    background: white repeat;
+    margin-top: 25px;
+}
+h2, .box04_head {
+    background: #687A8F 
+}
+
+</style>
+
 <body>
     {% include "navbar.html" %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
@@ -88,6 +108,25 @@
             {% endif %}
             <div class="row">
                 <h1>User Review</h1>
+            </div>
+            
+            <div class="box04 box05_left">
+              <div class="box04_head">
+                <h5 class="box04_head02">Comment #1</h5>
+              </div>
+
+            <div class="box04_page ">
+ 
+              <p>"สุดยอดนิยายที่น่าติดตามที่สุดตั้งแต่อ่านนิยายมาเลย"</p>
+
+              <p>ตัวเอกและการดำเนินเรื่องเหมือนกับว่าผู้แต่งได้เข้าไปอยู่ในหัวของผู้อ่าน แล้วดึงสิ่งที่ผู้อ่านชอบออกมาได้ทั้งหมด สุดยอดจริงๆ แนวคิดของตัวเอกเรื่องนี้ไม่ได้สวยหรู หรือมีคุณธรรมมากนักเหมือนเรื่องอื่นๆ แต่กลับกันเป็นตัวเอกที่มีความเจ้าคิดเจ้าแค้นสูงมาก ใครทำอะไรไว้กับคนที่มันรักต้องได้รับการเอาคืนจนถึงที่สุด และวิธีการแก้แค้นของตัวเอกนี่ ช่างสาสมแก่ใจผู้อ่านยิ่งนัก ทั้ง โหด สะใจ มัน ถึงเลือด ถึงเนื้อ สุดๆไปเลย</p>
+             
+              <div class="box06">
+                <p>Tsuboo | 30 ม.ค. 59</p>
+              </div>
+            </div>
+
+            </div>
             </div>
             <div class="row">
                 <form action="add-review" id='review' name='review' method='get'>
