@@ -205,12 +205,20 @@ def add_review(request):
 
 def delete_review(request):
     user_id = request.session['user_id']
+    user = User.objects.get(id=user_id)
     review_id = request.GET.get('review_id','')
+    company_id = request.GET.get('company_id', '')
     review = ReviewCompany.objects.get(id=review_id)
     if str(review.user.id) == user_id:
 	try:
             review.delete()
-            return HttpResponse('Delete Complete')
+            return HttpResponseRedirect('/company/?company_id='+company_id)
+        except DoesNotExist:
+            return HttpResponse('Wrong Key')
+    elif user.is_staff:
+	try:
+            review.delete()
+            return HttpResponseRedirect('/company/?company_id='+company_id)
         except DoesNotExist:
             return HttpResponse('Wrong Key')
     return HttpResponse("Invalid Data")

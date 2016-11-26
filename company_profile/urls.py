@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^process-edit-logo/', views.process_edit_logo, name='process-edit-logo'),
     url(r'^add-review/', views.add_review, name='add-review'),
     url(r'^featured-trip/',views.featured_trip, name='featured-trip'),
+    url(r'^delete-review/',views.delete_review, name='delete-review'),
 ]

@@ -27,6 +27,14 @@
         font-family: FontAwesome;
         color: orange;
     }
+    a.whitelink {
+        text-decoration: none;
+        color: white;
+    }
+    a:hover.whitelink {
+        text-decoration: underline;
+        color: white;
+    }
 </style>
 <body>
     {% include "navbar.html" %}
@@ -89,12 +97,16 @@
                 {% endif %}
             </div>
             <div class="row">
-                <h4>Review</h4>
+                <h3>Review</h3>
             </div>
             <div class="row">
                 {% for r in review %}
                     <div class="box04_head">
-                        <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #{{ forloop.counter }}</h5>
+                        <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #{{ forloop.counter }}
+                            {% if allow_edit or request.session.user_id == r.user.id %} | 
+                            <a href="delete-review/?review_id={{ r.id }}&company_id={{ com1.id }}" class="whitelink">Delete</a>
+                            {% endif %}
+                        </h5>
                     </div>
                     <div class="box04_page" style="margin-left: 2em ; margin-right: 2em; margin-top: 2em;">
                         <p>{{r.comment}}</p>
