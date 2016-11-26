@@ -25,8 +25,6 @@ def index(request):
             'allow_edit': allow_edit,
             'review': review,
             'username' : user1,
-            'useremail' : user1.email,
-        
             }, request))
     return HttpResponse('The page does not complete')
 
