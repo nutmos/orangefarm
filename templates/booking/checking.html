@@ -95,6 +95,7 @@
                 </tbody>
             </table>
         </div>
+
         <br><br>
         <div class="large-7 columns small-centered">
             <table>
@@ -116,13 +117,74 @@
                     </tr>
                 </tbody>
             </table>
-        </div>        
+        </div>  
+
+        {% for t in this_booking.member %}
         <br><br>
+        <div class="large-7 columns small-centered">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="6">person information</th>
+                    </tr>
+                </thead>
+                <tbody>                
+                    <tr>
+                        <td width="5%"></td>
+                        <td width="20%">Full Name</td>
+                        <td>{{ t.title }}</td>
+                        <td>{{ t.firstname }}</td>
+                        <td width="20%">{{ t.lastname }}<td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Gender</td>
+                        <td>{{ t.gender }}</td>
+                        <td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Date of Birth</td>
+                        <td>{{ t.bday }}</td>
+                        <td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Nationality</td>
+                        <td>{{ t.nation }}</td>
+                        <td>Thai Citizen ID</td>
+                        <td>{{ t.citizenid }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Passport No.</td>
+                        <td>{{ t.passportno }}</td>
+                        <td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Contact Info</td>
+                        <td>Mobile</td>
+                        <td>{{ t.mobile }}</td>
+                        <td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Email</td>
+                        <td>{{ t.email }}</td>
+                        <td></td><td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
     </section>
 
 
-
     <section>
+        <br>
         <div class="large-7 columns small-centered">
             <h4>Price(Bath)</h4>
             <table text-align="center">

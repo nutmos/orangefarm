@@ -16,6 +16,9 @@
         background-color: #6B7A8F;
         color: white;
     }
+    a:hover.blacklink {
+        text-decoration: underline;
+    }
 </style>
 <body>
     {% include 'navbar.html' %}
@@ -82,8 +85,8 @@
                 </tr>
                 {% for b in book %}
                     <tr>
-                        <td style="color:black"><a href="/trip/?trip_id={{ b.trip.id }}">{{ b.trip.name }}</a></td>
-                        <td style="color:black"><a href="/company/?company_id={{ b.trip.company.id }}">{{ b.company_name }}</a></td>
+                        <td><a class="blacklink" href="/trip/?trip_id={{ b.trip.id }}" style="color:black;">{{ b.trip.name }}</a></td>
+                        <td><a class="blacklink" href="/company/?company_id={{ b.trip.company.id }}" style="color:black">{{ b.company_name }}</a></td>
                         <td>{{ b.book_date }}</td>
                         <td>{{ b.people }}</td>
                         <td>{{ b.total_price }} THB</td>
