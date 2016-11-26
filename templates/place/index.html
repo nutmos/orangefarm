@@ -75,6 +75,48 @@
         </div>
     </div>
     {% endif %}
+
+     <div class="row">
+                <h3>Review</h3>
+            </div>
+            <div class="row">
+                {% for r in review %}
+                    <div class="box04_head">
+                        <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #{{ forloop.counter }}
+                            {% if allow_edit or request.session.user_id == r.user.id %} | 
+                            <a href="delete-review/?review_id={{ r.id }}&company_id={{ com1.id }}" class="whitelink">Delete</a>
+                            {% endif %}
+                        </h5>
+                    </div>
+                    <div class="box04_page" style="margin-left: 2em ; margin-right: 2em; margin-top: 2em;">
+                        <p>{{r.comment}}</p>
+                        <p style="float: right"><a href="/profile/user/{{r.user.username}}">{{r.user.username}}</a> | {{r.timestamp}}</p>
+                        <div style="float: right;margin-right:1em">
+                            {% with count=''|center:r.rating %}
+                            {% for i in count %}
+                            <div class="column small-1" style="float: right"><label class="star"></label></div>
+                            {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <br><br>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <form action="add-review" id='review' name='review' method='get'>
+                    <input type="hidden" value='{{ com1.id }}' id='company_id' name='company_id'>
+                    <fieldset>
+                        <input type="radio" name="rating" value='1' id='one'><label for="one">1</label>
+                        <input type="radio" name="rating" value='2' id='one'><label for="one">2</label>
+                        <input type="radio" name="rating" value='3' id='one'><label for="one">3</label>
+                        <input type="radio" name="rating" value='4' id='one'><label for="one">4</label>
+                        <input type="radio" name="rating" value='5' id='one' checked><label for="one">5</label>
+                    </fieldset>
+                    <textarea id="comment" name="comment" rows="4" placeholder="Write your review here"></textarea>
+                    <input type="submit" class="button" value="Save">
+                </form>
+            </div>
+    
     {% include 'footerbar.html' %}
     <script>
         $(document).foundation();
