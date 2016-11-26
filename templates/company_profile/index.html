@@ -94,18 +94,28 @@
             <div class="row">
                 <h1>User Review</h1>
             </div>
+<<<<<<< HEAD
+=======
+            <div class="row">
+                <form action="add-review" id='review' name='review' method='get'>
+                    <input type="hidden" value='{{ com1.id }}' id='company_id' name='company_id'>
+                    <fieldset>
+                        <input type="radio" name="rating" value='1' id='one'><label for="one">1</label>
+                        <input type="radio" name="rating" value='2' id='one'><label for="one">2</label>
+                        <input type="radio" name="rating" value='3' id='one'><label for="one">3</label>
+                        <input type="radio" name="rating" value='4' id='one'><label for="one">4</label>
+                        <input type="radio" name="rating" value='5' id='one' checked><label for="one">5</label>
+                    </fieldset>
+                    <textarea id="comment" name="comment" rows="4" placeholder="Write your review here"></textarea>
+                    <input type="submit" class="button" value="Save">
+                </form>
+            </div>
+        </div>
+>>>>>>> 7b6ac1ef961d069aa4b740396c33aedb7347f35d
     </div>
     {% include "footerbar.html" %}
     <script>
         $(document).foundation();
     </script>
 </body>
-<script>
-var data = { user_id: "{{ request.session.user_id }}",
-logo: "{% static 'logo/orange-farm-logo-white-transparent.png' %}"
-};
-//window.alert(userInfo.user_id);
-</script>
-<script src={% static "js/navbar.js" %} type="text/babel"></script>
-<script src={% static "js/footerbar.js" %} type="text/babel"></script>
 </html>

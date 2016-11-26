@@ -19,9 +19,11 @@ def index(request):
         com_id = request.GET.get('company_id', '')
         com1 = Company.objects.get(id=com_id)
         template = loader.get_template('company_profile/index.html')
+        review = ReviewCompany.objects(company=com1)
         return HttpResponse(template.render({
             'com1': com1,
             'allow_edit': allow_edit,
+            'review': review,
             }, request))
     return HttpResponse('The page does not complete')
 
@@ -176,3 +178,19 @@ def show_logo(request):
         except:
             pass
     return HttpResponseRedirect('http://placehold.it/300x300')
+
+def add_review(request):
+    user_id = request.session['user_id']
+    user = User.objects.get(id=user_id)
+    comment = request.GET.get('comment', '')
+    rating = request.GET.get('rating', '')
+    user = User.objects.get(id=user_id)
+    company_id = request.GET.get('company_id', '')
+    company = Company.objects.get(id=company_id)
+    try:
+        a = ReviewCompany(comment=comment, user=user, rating=rating, company=company)
+        a.save()
+        return HttpResponseRedirect('/company/?company_id=' + str(company.id))
+    except:
+        return HttpResponse('Invalid Data')
+    return HttpResponse("Invalid Data")
