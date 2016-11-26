@@ -13,7 +13,7 @@ def index(request):
         user1 = User.objects.get(id=user_id)
         request.session.set_expiry(3600)
         template = loader.get_template('user_profile/index.html')
-        booking = Booking.objects.filter(user=user_id)
+        booking = Booking.objects(user=user_id,confirm=True)
         book = []
         for o in booking:
             book.append(o)

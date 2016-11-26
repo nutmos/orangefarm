@@ -10,6 +10,7 @@
     <link rel="stylesheet" href={% static "css/styles.css" %}>
     <link rel="stylesheet" href={% static "css/firstpage/styles.css" %}>
 </head>
+<<<<<<< HEAD
 
 <style>
 .box06 {
@@ -30,6 +31,14 @@ h2, .box04_head {
 
 </style>
 
+=======
+<style>
+    .orbit-image{
+        width: 100%;
+        height: 500px;
+    }
+</style>
+>>>>>>> be116c9eb9844d4fbb42144b4158df855ad98ed4
 <body>
     {% include "navbar.html" %}
     <div class="row" style="margin-top: 2em; margin-bottom: 2em;">
@@ -40,7 +49,7 @@ h2, .box04_head {
                 </h1>
             </div>
             <div class="row">
-                <div class="large-6 columns">
+                <div class="large-6 columns" style="width:300px;height:300px">
                     <img src="/company/logo/?company_id={{ com1.id }}" />
             {% if allow_edit %}
             {% include 'upload-image-template.html' with form_action="/company/process-edit-logo/" type="company_id" type_id=com1.id %}
@@ -61,19 +70,23 @@ h2, .box04_head {
                     {% endif %}
                 </div>
             </div>
-            {% if com1.photos %}
-            <div class="orbit" role="region" aria-label="Country Pictures" data-orbit style="margin-top: 2em;" data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
-                  <ul class="orbit-container">
-                      <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                      <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-                      {% for p in com1.photos %}
-                      <li class="orbit-slide">
-                          <img class="orbit-image" src="/company/picture/?company_picture_id={{ p.id }}">
-                      </li>
-                      {% endfor %}
-                  </ul>
+        </div>
+        {% if com1.photos %}
+            <div class="large-8 columns small-centered">
+                <div class="orit" role="region" aria-label="Country Pictures" data-orbit style="margin-top: 2em;" data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
+                    <ul class="orbit-container">
+                        <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+                        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+                        {% for p in com1.photos %}
+                        <li class="orbit-slide">
+                            <img class="orbit-image" src="/company/picture/?company_picture_id={{ p.id }}">
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
             {% else %}
+            <div class="large-8 columns small-centered">
             <div class="orbit" role="region" aria-label="Country Pictures" data-orbit style="margin-top: 2em;">
                   <ul class="orbit-container">
                       <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
@@ -95,20 +108,16 @@ h2, .box04_head {
                           <figcaption class="orbit-caption">Plearn Wan</figcaption>
                       </li>
                   </ul>
-                  <nav class="orbit-bullets">
-                      <button class="is-active" data-slide="0" ><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-                      <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-                      <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
-                      <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
-                  </nav>
             </div>
             {% endif %}
             {% if allow_edit %}
             {% include 'upload-image-template.html' with form_action="/company/process-add-photo/" type="company_id" type_id=com1.id %}
             {% endif %}
+            </div>
             <div class="row">
                 <h1>User Review</h1>
             </div>
+<<<<<<< HEAD
             
             <div class="box04 box05_left">
               <div class="box04_head">
@@ -128,6 +137,10 @@ h2, .box04_head {
 
             </div>
             </div>
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> be116c9eb9844d4fbb42144b4158df855ad98ed4
             <div class="row">
                 <form action="add-review" id='review' name='review' method='get'>
                     <input type="hidden" value='{{ com1.id }}' id='company_id' name='company_id'>
@@ -143,6 +156,7 @@ h2, .box04_head {
                 </form>
             </div>
         </div>
+>>>>>>> 7b6ac1ef961d069aa4b740396c33aedb7347f35d
     </div>
     {% include "footerbar.html" %}
     <script>
