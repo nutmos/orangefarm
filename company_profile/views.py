@@ -5,31 +5,46 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from models import *
 from user_profile.models import *
 from trip.models import *
+from booking.models import *
 
 # Create your views here.
 
 def index(request):
     try:
-        allow_edit = True
-        user_id = request.session['user_id']
-        user1 = User.objects.get(id=user_id)
+        access_edit = True
+        user_id=''
         try:
+            user_id = request.session['user_id']
+            user1 = User.objects.get(id=user_id)
             if user1.is_staff == False:
-                allow_edit = False
+                access_edit = False
         except:
-            allow_edit = False
+            access_edit = False
         if request.method == 'GET':
             com_id = request.GET.get('company_id', '')
             com1 = Company.objects.get(id=com_id)
             com_trip = Trip.objects(company=com1, active=True).limit(3)
             template = loader.get_template('company_profile/index.html')
             review = ReviewCompany.objects(company=com1)
+            allow_review = False
+            allow_delete_review = []
+            try:
+                user1 = User.objects.get(id=user_id)
+                for i in range(len(review)):
+                    if review[i].user.id == user1.id:
+                        allow_delete_review.append(i)
+                print allow_delete_review
+                if Booking.objects(company=com1, user=user1).count() > 0:
+                    allow_comment = True
+            except:
+                pass
             return HttpResponse(template.render({
                 'com1': com1,
-                'allow_edit': allow_edit,
+                'allow_edit': access_edit,
                 'review': review,
-                'username' : user1,
                 'all_trip': com_trip,
+                'allow_delete_review': allow_delete_review,
+                'allow_review': allow_review,
                 }, request))
     except:
         return HttpResponse('The page does not complete')

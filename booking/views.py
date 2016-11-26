@@ -22,7 +22,7 @@ def index(request):
       pass_data = {
          'name': booking.trip.name,
          'booking_id': booking.id,
-         'company_name': booking.company_name,
+         'company_name': booking.company.name,
          'start_date': booking.trip.start_date,
          'end_date': booking.trip.end_date,
          'travel_by': booking.trip.travel_by,

@@ -298,7 +298,7 @@ def process_booking(request):
         trip_id = request.GET.get('trip_id', '')
         trip1 = Trip.objects.get(id=trip_id)
         company1 = Company.objects.get(id=trip1.company_id)
-        booking = Booking(trip=trip1, user=user1, company_name=company1.name)
+        booking = Booking(trip=trip1, user=user1, company=company1)
         booking.save()
         return HttpResponseRedirect('/booking?booking_id=' + str(booking.id))
     except:

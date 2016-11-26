@@ -5,6 +5,7 @@ from mongoengine import *
 from user_profile.models import *
 from trip.models import *
 from datetime import datetime
+from company_profile import *
 
 # Create your models here.
 
@@ -21,9 +22,9 @@ class Tourist(Document):
 	email = StringField()
 
 class Booking(Document):
-	trip = ReferenceField('Trip', reverse_delete_rule=CASCADE)
+	trip = ReferenceField('Trip')
 	user = ReferenceField('User', reverse_delete_rule=CASCADE)
-	company_name = StringField()
+        company = ReferenceField('Company')
 	book_date = DateTimeField(default=datetime.now())
 	people = IntField()
 	adult = IntField()
