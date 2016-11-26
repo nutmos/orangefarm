@@ -20,8 +20,8 @@ def index(request):
         template = loader.get_template('notpermitted.html')
         return HttpResponse(template.render({}, request))
     template = loader.get_template('checkbooking/index.html')
-    #booking = Booking.objects(confirm=True)
-    booking = Booking.objects()
+    booking = Booking.objects(confirm=True)
+    #booking = Booking.objects()
     book = []
     for o in booking:
         book.append(o)
