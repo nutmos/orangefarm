@@ -24,7 +24,7 @@
                     {% csrf_token %}
                     {% include 'register/input-group.html' with image="fi-torso-female" type="text" name="username" placeholder="Choose your username" %}
                     {% include 'register/input-group.html' with image="fi-mail" type="email" name="email" placeholder="Enter your email address" %}
-                    {% include 'register/input-group.html' with image="fi-torso-female" type="password" name="password" placeholder="Set your password" %}
+                    {% include 'register/input-group.html' with image="fi-lock" type="password" name="password" placeholder="Set your password" %}
                     <div class="footer" style="margin-bottom: 1em;">Have an account? <a href="/login">Login</a>
                     </div>
                     <div class="footer">
