@@ -461,7 +461,6 @@ def delete_review(request):
             return HttpResponse('Delete Complete')
         except DoesNotExist:
             return HttpResponse('Wrong Key')
-    return HttpResponse('No Request GET')
     return HttpResponse("Invalid Data")
         
 
