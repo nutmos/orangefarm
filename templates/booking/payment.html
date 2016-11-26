@@ -102,7 +102,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><a class="expanded button" href="/booking/finish?booking_id={{ booking_id }}">ชำระ โดยการชำระที่ธนาคารโดยตรง</a></td>
+                        <td><a class="expanded button" onclick="handle_click()"">ชำระ โดยการชำระที่ธนาคารโดยตรง</a></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -123,5 +123,17 @@
     </div>
 
     {% include 'footerbar.html' %}
+    <script>
+        function handle_click() {
+            var a = parseInt({{people}});
+            var b = parseInt({{remaining_people}});
+            if( a > b ){
+                alert("Over Seat Available");
+            }
+            else{
+                window.location.href = "/booking/process-payment?booking_id={{ booking_id }}";
+            }
+        }
+    </script>
 </body>
 </html>

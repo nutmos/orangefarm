@@ -170,6 +170,28 @@ def payment(request):
       return HttpResponse(' id is not correct')
    return HttpResponse('This page is not complete')
 
+def process_payment(request):
+      try:
+         user_id = request.session['user_id']
+         user1 = User.objects.get(id=user_id)
+      except:
+         template = loader.get_template('login/index.html')
+         return HttpResponse(template.render({}, request))
+      if request.method == 'GET':
+         try:
+            booking_id = request.GET.get('booking_id', '')
+            booking = Booking.objects.get(id=booking_id)
+            trip1 = booking.trip
+            people = booking.people
+            trip1.remaining_people -= people
+            trip1.save()
+            booking.confirm = True
+            booking.save()
+            return HttpResponseRedirect('/booking/finish?booking_id=' + str(booking.id))
+         except:
+            return HttpResponse('id is not correct')
+      return HttpResponse('no')
+
 def finish(request):
    template = loader.get_template('booking/finish.html')
    return HttpResponse(template.render({'foo': 'bar'}, request))
