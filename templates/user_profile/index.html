@@ -86,7 +86,7 @@
                 {% for b in book %}
                     <tr>
                         <td><a class="blacklink" href="/trip/?trip_id={{ b.trip.id }}" style="color:black;">{{ b.trip.name }}</a></td>
-                        <td><a class="blacklink" href="/company/?company_id={{ b.trip.company.id }}" style="color:black">{{ b.company_name }}</a></td>
+                        <td><a class="blacklink" href="/company/?company_id={{ b.trip.company.id }}" style="color:black">{{ b.company.name }}</a></td>
                         <td>{{ b.book_date }}</td>
                         <td>{{ b.people }}</td>
                         <td>{{ b.total_price }} THB</td>

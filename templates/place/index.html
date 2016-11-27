@@ -79,23 +79,21 @@
             </div>
             <a href="featured-trip" style="color:black"><p style="text-align: right;">Show more</p></a>
             {% endif %}
-        </div>
-    </div>
-    {% if access_edit %}
-    <div class="row">
-        <div class="large-4 columns">
-            <a class="expanded button" href="/place/edit?place_id={{ this_place.id }}">Edit Place</a>
-        </div>
-        <div class="large-4 columns">
-            <a class="expanded button" href="/place/delete?place_id={{ this_place.id }}">Delete Place</a>
-        </div>
-        <div class="large-4 columns">
-            <a class="expanded button" href="/place/edit-picture?place_id={{ this_place.id }}">Edit Image</a>
-        </div>
-    </div>
-    {% endif %}
-
-     <div class="row">
+        
+            {% if access_edit %}
+            <div class="row">
+                <div class="large-4 columns">
+                    <a class="expanded button" href="/place/edit?place_id={{ this_place.id }}">Edit Place</a>
+                </div>
+                <div class="large-4 columns">
+                    <a class="expanded button" href="/place/delete?place_id={{ this_place.id }}">Delete Place</a>
+                </div>
+                <div class="large-4 columns">
+                    <a class="expanded button" href="/place/edit-picture?place_id={{ this_place.id }}">Edit Image</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row" style="margin-top: 5em">
                 <h3>Review</h3>
             </div>
             <div class="row">
@@ -123,7 +121,7 @@
             </div>
             <div class="row" style="margin-top: 5em">
                 <form action="add-review" id='review' name='review' method='get'>
-                    <input type="hidden" value='{{ com1.id }}' id='company_id' name='company_id'>
+                    <input type="hidden" value='{{ this_place.id }}' id='place_id' name='place_id'>
                     <fieldset style="display: inline-block">
                         <input class="star" type="radio" name="rating" value='5' id='five'>
                         <label class="star" for="five"></label>
@@ -140,7 +138,8 @@
                     <input type="submit" class="button" value="Save">
                 </form>
             </div>
-    
+        </div>
+    </div>    
     {% include 'footerbar.html' %}
     <script>
         $(document).foundation();

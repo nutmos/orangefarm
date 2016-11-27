@@ -25,7 +25,7 @@
         		<table align="center">
                 	<tr style="background-color:#6B7A8F;color:white">
                         <th>Username</th>
-                        <th>Trip Name</th>
+                        <th width="20%">Trip Name</th>
                         <th>Company</th>
                         <th>Date of Booking</th>
                         <th>Total people</th>
@@ -37,7 +37,7 @@
                     <tr>
                         <td>{{ b.user.username }}</td>
                         <td>{{ b.trip.name }}</td>
-                        <td>{{ b.company_name }}</td>
+                        <td>{{ b.company.name }}</td>
                         <td>{{ b.book_date }}</td>
                         <td>{{ b.people }}</td>
                         <td>{{ b.total_price }} THB</td>

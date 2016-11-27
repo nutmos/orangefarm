@@ -24,7 +24,7 @@ class Tourist(Document):
 class Booking(Document):
 	trip = ReferenceField('Trip')
 	user = ReferenceField('User', reverse_delete_rule=CASCADE)
-        company = ReferenceField('Company')
+	company = ReferenceField('Company')
 	book_date = DateTimeField(default=datetime.now())
 	people = IntField()
 	adult = IntField()

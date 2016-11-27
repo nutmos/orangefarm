@@ -441,7 +441,7 @@ def add_review(request):
     user = User.objects.get(id=user_id)
     comment = request.GET.get('comment', '')
     rating = request.GET.get('rating', '')
-    user = User.objects.get(id=user_id)
+    #user = User.objects.get(id=user_id)
     place_id = request.GET.get('place_id', '')
     place = Place.objects.get(id=place_id)
     try:
