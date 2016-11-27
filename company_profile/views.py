@@ -264,3 +264,10 @@ def featured_trip(request):
         return HttpResponse(template.render(pass_data, request))
     return HttpResponse("No Request")
 
+def all_company(request):
+    c1 = Company.objects.order_by('name')
+    template = loader.get_template('company_profile/all-company.html')
+    pass_data = {
+            'place_list': c1,
+            }
+    return HttpResponse(template.render(pass_data, request))
