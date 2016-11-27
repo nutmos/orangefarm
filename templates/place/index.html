@@ -118,7 +118,7 @@
                     <div class="box04_head">
                         <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #{{ forloop.counter }}
                             {% if access_edit or forloop.counter0 in allow_delete_review %} | 
-                            <a href="/place/delete-review/?review_id={{ r.id }}&company_id={{ com1.id }}" class="whitelink">Delete</a>
+                            <a href="/place/delete-review/?review_id={{ r.id }}" class="whitelink">Delete</a>
                             {% endif %}
                         </h5>
                     </div>

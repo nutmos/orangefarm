@@ -22,7 +22,7 @@ def index(request):
     for c in country_list: c['id'] = c.pop('_id')
     city_aggregate = list(City.objects.aggregate(
         {'$sample': {'size': 6}},
-        {'$project': {'country': '$country'}}
+        {'$project': {'country': 1}}
         ))
     city_list = City.objects(id__in=[a['_id'] for a in city_aggregate])
     place_aggregate = list(Place.objects.aggregate({
@@ -33,11 +33,16 @@ def index(request):
         '$sample': {'size': 6},
         }))
     for t in trip_list: t['id'] = t.pop('_id')
+    company_list = list(Company.objects.aggregate(
+        {'$sample': {'size': 8}}
+        ))
+    for t in company_list: t['id'] = t.pop('_id')
     pass_data = {
         'country_list': country_list,
         'city_list': city_list,
         'place_list': place_list,
         'trip_list': trip_list,
+        'company_list': company_list,
     }
     return HttpResponse(template.render(pass_data, request))
 

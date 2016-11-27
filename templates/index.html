@@ -56,8 +56,13 @@
         <a href="/place/all/" style="color:black"><p style="text-align: right;">Show more</p></a>
     </div>
     <div class="large-10 columns small-centered" style="margin-top: 2em; margin-bottom: 2em;">
-            <h3>Company </h3>
-            <a href="/company/all/" style="color:black"><p style="text-align: left; margin-left: 2em">Show all company</p></a>
+        <h3>Company </h3>
+        <div class="row large-up-4 project-overlay-inset">
+            {% for c in company_list %}
+            {% include 'thumbnail-template.html' with link_to="/company/?company_id=" object=c link_img="/company/logo/?company_id=" display_class=1 %}
+            {% endfor %}
+        </div>
+        <a href="/company/all/" style="color:black"><p style="text-align: right;">Show more</p></a>
     </div>
     {% include 'footerbar.html' %}
 </body>

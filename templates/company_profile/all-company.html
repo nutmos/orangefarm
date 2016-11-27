@@ -9,7 +9,22 @@
     <link rel="stylesheet" href={% static "css/place/styles.css" %}>
 </head>
 <body>
-    {% include 'show-more-place-template.html' with background_url_path="/place/picture/?place_id=" object=the_place place_list=place_list empty_message="No company found." list_link_to="/company/?company_id=" list_link_img="/company/logo/?company_id=" header="All Company" background_url_point_to="/place/?place_id=" not_show_header=True %}
+    {% include 'navbar.html' %}
+    <div class="row nav" style="margin-top: 1em; margin-left: 2em;">{{ nav|safe }}</div>
+        <div class="row" style="margin-bottom: 2em;" >
+        <div class="large-10 columns small-centered">
+            <div class="row" style="margin-top: 2em">
+                <h3>All Company</h3>
+            </div>
+            <div class="row large-up-4 project-overlay-inset">
+                {% for p in place_list %}
+                {% include 'thumbnail-template.html' with link_to="/company/?company_id=" object=p link_img="/company/logo/?company_id=" %}
+                {% empty %}
+                No Company Found
+                {% endfor %}
+            </div>
+        </div>
+        </div>
     {% include 'footerbar.html' %}
 </body>
 </html>
