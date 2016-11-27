@@ -15,6 +15,10 @@
         width: 100%;
         height: 500px;
     }
+    .box04_head {
+        background: #687A8F;
+        color: white;
+    }
     input.star { display: none; }
     label.star {
         float: right;
@@ -32,6 +36,14 @@
     label.star:before {
         content: '\f006';
         font-family: FontAwesome;
+    }
+    a.whitelink {
+        text-decoration: none;
+        color: white;
+    }
+    a:hover.whitelink {
+        text-decoration: underline;
+        color: white;
     }
 </style>
 <body>
@@ -100,8 +112,8 @@
                 {% for r in review %}
                     <div class="box04_head">
                         <h5 class="box04_head02" style="padding: 10px ;  margin-left: 1em ">Comment #{{ forloop.counter }}
-                            {% if allow_edit or request.session.user_id == r.user.id %} | 
-                            <a href="delete-review/?review_id={{ r.id }}&company_id={{ com1.id }}" class="whitelink">Delete</a>
+                            {% if access_edit or forloop.counter0 in allow_delete_review %} | 
+                            <a href="/place/delete-review/?review_id={{ r.id }}&company_id={{ com1.id }}" class="whitelink">Delete</a>
                             {% endif %}
                         </h5>
                     </div>
@@ -120,7 +132,7 @@
                 {% endfor %}
             </div>
             <div class="row" style="margin-top: 5em">
-                <form action="add-review" id='review' name='review' method='get'>
+                <form action="/place/add-review/" id='review' name='review' method='get'>
                     <input type="hidden" value='{{ this_place.id }}' id='place_id' name='place_id'>
                     <fieldset style="display: inline-block">
                         <input class="star" type="radio" name="rating" value='5' id='five'>

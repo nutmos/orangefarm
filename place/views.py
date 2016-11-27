@@ -59,6 +59,7 @@ def index(request):
 
 def place_name(request, place_name):
     access_edit = True
+    user_id = ''
     try:
         user_id = request.session['user_id']
         user1 = User.objects.get(id=user_id)
@@ -72,9 +73,9 @@ def place_name(request, place_name):
         city1 = City.objects.get(id=c1.city_id)
         country1 = Country.objects.get(id=city1.country_id)
         popular_place_list_agg = list(Place.objects.aggregate(
-            {'$match': {'city_id': str(city1.id), '_id': {'$ne': c1.id}}},
+            {'$match': {'city': city1.id, '_id': {'$ne': c1.id}}},
             {'$sample': {'size': 3}},
-            {'$project': {'city': '$city'}},
+            {'$project': {'city': 1}},
             ))
         popular_place_list = Place.objects(id__in=[a['_id'] for a in popular_place_list_agg])
         for p in c1.related:
@@ -89,6 +90,17 @@ def place_name(request, place_name):
             num_list = random.sample(range(len(show_related)), 3)
             show_related = [show_related[num_list[i]] for i in range(3)]
         related_trip = TripPlace.objects(place=c1)
+        review = ReviewPlace.objects(place=c1)
+        allow_delete_review = []
+        try:
+            user1 = User.objects.get(id=user_id)
+            for i in range(len(review)):
+                if review[i].user.id == user1.id:
+                    allow_delete_review.append(i)
+            if Booking.objects(company=com1, user=user1).count() > 0:
+                allow_comment = True
+        except:
+            pass
         pass_data = {
             'this_place': c1,
             'host_city': city1,
@@ -100,6 +112,8 @@ def place_name(request, place_name):
             'background_url': '/place/picture/?place_id=' + str(c1.id),
             'related_place': show_related,
             'related_trip': related_trip,
+            'allow_delete_review': allow_delete_review,
+            'review': review,
             }
         return HttpResponse(template.render(pass_data, request))
     except ValidationError, DoesNotExist:
@@ -437,11 +451,14 @@ def featured_trip(request, place_name):
     return HttpResponse(template.render(pass_data, request))
 
 def add_review(request):
-    user_id = request.session['user_id']
+    user_id = ''
+    try:
+        user_id = request.session['user_id']
+    except:
+        return HttpResponse('Please login')
     user = User.objects.get(id=user_id)
     comment = request.GET.get('comment', '')
     rating = request.GET.get('rating', '')
-    #user = User.objects.get(id=user_id)
     place_id = request.GET.get('place_id', '')
     place = Place.objects.get(id=place_id)
     try:
@@ -456,10 +473,11 @@ def delete_review(request):
     user_id = request.session['user_id']
     review_id = request.GET.get('review_id','')
     review = ReviewPlace.objects.get(id=review_id)
+    place = review.place
     if str(review.user.id) == user_id:
 	try:
             review.delete()
-            return HttpResponse('Delete Complete')
+            return HttpResponseRedirect('/place/?place_id=' + str(place.id))
         except DoesNotExist:
             return HttpResponse('Wrong Key')
     return HttpResponse("Invalid Data")

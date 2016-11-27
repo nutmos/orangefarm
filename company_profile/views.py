@@ -33,7 +33,6 @@ def index(request):
                 for i in range(len(review)):
                     if review[i].user.id == user1.id:
                         allow_delete_review.append(i)
-                print allow_delete_review
                 if Booking.objects(company=com1, user=user1).count() > 0:
                     allow_comment = True
             except:

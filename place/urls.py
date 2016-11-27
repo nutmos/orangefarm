@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^picture/', views.show_image, name='picture'),
     url(r'^get-place-by-city/', views.get_place_by_city, name='get-place-by-city'),
     url(r'^all/', views.all_place, name='all-place'),
+    url(r'^add-review/', views.add_review, name='add-review'),
+    url(r'^delete-review', views.delete_review, name='delete-review'),
     url(r'^c/(?P<place_name>\w+)/', include([
         url(r'^featured-trip/', views.featured_trip, name="featured-trip"),
         url(r'^related/', include([
