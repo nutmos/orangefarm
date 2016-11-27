@@ -45,6 +45,11 @@
         text-decoration: underline;
         color: white;
     }
+    label.rate:before {
+        content: '\f005';
+        font-family: FontAwesome;
+        color: orange;
+    }
 </style>
 <body>
     {% include 'place-info.html' with background_url_path="/place/picture/?place_id=" object=this_place navigation=nav|safe %}
@@ -123,7 +128,7 @@
                         <div style="float: right;margin-right:1em">
                             {% with count=''|center:r.rating %}
                             {% for i in count %}
-                            <div class="column small-1" style="float: right"><label class="star"></label></div>
+                            <div class="column small-1" style="float: right"><label class="rate"></label></div>
                             {% endfor %}
                             {% endwith %}
                         </div>
