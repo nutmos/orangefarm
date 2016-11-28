@@ -34,7 +34,7 @@ def index(request):
                     if review[i].user.id == user1.id:
                         allow_delete_review.append(i)
                 if Booking.objects(company=com1, user=user1).count() > 0:
-                    allow_comment = True
+                    allow_review = True
             except:
                 pass
             print [r.timestamp for r in review]
