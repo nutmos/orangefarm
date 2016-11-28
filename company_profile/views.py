@@ -6,11 +6,11 @@ from models import *
 from user_profile.models import *
 from trip.models import *
 from booking.models import *
+from datetime import *
 
 # Create your views here.
 
 def index(request):
-    try:
         access_edit = True
         user_id=''
         try:
@@ -37,6 +37,9 @@ def index(request):
                     allow_comment = True
             except:
                 pass
+            print [r.timestamp for r in review]
+            for r in review: r.timestamp = r.timestamp + timedelta(hours=7)
+            print [r.timestamp for r in review]
             return HttpResponse(template.render({
                 'com1': com1,
                 'allow_edit': access_edit,
@@ -45,7 +48,6 @@ def index(request):
                 'allow_delete_review': allow_delete_review,
                 'allow_review': allow_review,
                 }, request))
-    except:
         return HttpResponse('The page does not complete')
 
 def add(request):

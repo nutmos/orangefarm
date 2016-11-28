@@ -128,7 +128,7 @@
                     </div>
                     <div class="box04_page" style="margin-left: 2em ; margin-right: 2em; margin-top: 2em;">
                         <p>{{r.comment}}</p>
-                        <p style="float: right"><a href="/profile/user/{{r.user.username}}">{{r.user.username}}</a> | {{r.timestamp}}</p>
+                        <p style="float: right"><a href="/profile/user/{{r.user.username}}">{{r.user.username}}</a> | {{ r.timestamp }}</p>
                         <div style="float: right;margin-right:1em">
                             {% with count=''|center:r.rating %}
                             {% for i in count %}
